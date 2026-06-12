@@ -1,13 +1,9 @@
-# Estructura actual — slep_categoria_desempeno
+ESCANEO DE ESTRUCTURA — slep_categoria_desempeno
+Raiz   : /Users/tomgc/Projects/slep_categoria_desempeno
+Fecha  : 2026-06-12 09:28:01
+Totales: 13 carpetas, 62 archivos
+Nota   : todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
-- **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-12 09:29:09
-- **Totales:** 13 carpetas, 62 archivos
-- **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
-
-## Arbol
-
-```
 slep_categoria_desempeno/
 ├── 10_utils/
 │   ├── 10_utils.R  (1.8K)
@@ -62,10 +58,10 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
+│   │   ├── 20260611_233324_estructura.md  (1.67K)
+│   │   ├── 20260611_233324_estructura.txt  (1.64K)
 │   │   ├── 20260612_092742_estructura.md  (3.69K)
 │   │   ├── 20260612_092742_estructura.txt  (3.73K)
-│   │   ├── 20260612_092801_estructura.md  (3.69K)
-│   │   ├── 20260612_092801_estructura.txt  (3.73K)
 │   │   ├── estructura_actual.md  (3.69K)
 │   │   └── estructura_actual.txt  (3.73K)
 │   ├── traspasos/
@@ -84,21 +80,17 @@ slep_categoria_desempeno/
 ├── CLAUDE.md  (4.6K)
 ├── README.md  (2.29K)
 └── slep_categoria_desempeno.Rproj  (220)
-```
 
-## Conteo por extension
-
-| Extension | Archivos |
-|---|---|
-| md | 13 |
-| (sin extension) | 11 |
-| xlsx | 10 |
-| r | 8 |
-| parquet | 6 |
-| pdf | 4 |
-| txt | 3 |
-| html | 2 |
-| js | 2 |
-| csv | 1 |
-| doc | 1 |
-| rproj | 1 |
+Conteo por extension:
+  md                 13
+  (sin extension)    11
+  xlsx               10
+  r                  8
+  parquet            6
+  pdf                4
+  txt                3
+  html               2
+  js                 2
+  csv                1
+  doc                1
+  rproj              1
