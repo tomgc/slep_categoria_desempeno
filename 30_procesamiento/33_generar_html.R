@@ -1,9 +1,7 @@
 # 33_generar_html.R
-# Copyright 2026 Tomás Ignacio González Cifuentes — SLEP Costa Central
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#     http://www.apache.org/licenses/LICENSE-2.0
+# Copyright (c) 2026 Tomás Ignacio González Cifuentes — Servicio Local de Educación Pública Costa Central
+# Distribuido bajo la Licencia MIT. Ver el archivo LICENSE en la raíz del repositorio.
+# La licencia cubre el código; NO cubre los datos (Agencia de Calidad). Ver LICENSE.
 #
 # ----------------------------------------------------------------------------
 # Construye el producto final: motor_categoria.html standalone.
@@ -16,7 +14,9 @@
 #   - comunas_chile.parquet          (catálogo de comunas con región)
 #   - sleps_chile.parquet            (catálogo de SLEPs × RBD)
 #
-# Salida: 40_salidas/motor_categoria.html
+# Salidas:
+#   - 40_salidas/motor_categoria.html  (producto canónico, fuente de verdad)
+#   - docs/index.html                  (copia para publicación en GitHub Pages)
 #
 # Flujo:
 #   1. Lee los 6 parquets.
@@ -24,7 +24,7 @@
 #      (territorial, sin_vigente, rbd).
 #   3. Comprime gzip + base64; el template descomprime en cliente con pako.
 #   4. Reemplaza placeholders __D3_INLINE__, __PAKO_INLINE__, __JSON_DATA__.
-#   5. Escribe 40_salidas/motor_categoria.html (UTF-8).
+#   5. Escribe 40_salidas/motor_categoria.html (UTF-8) y lo copia a docs/index.html.
 #
 # Decisiones metodológicas (sesión 3):
 #   - Sin ponderación por matrícula, sin GSE: agregación = conteo de EE.
@@ -353,6 +353,18 @@ tamano_kb <- file.info(ruta_salida)$size / 1024
 message(sprintf("    OK: %s (%.0f KB)",
                 fs::path_rel(ruta_salida, here::here()), tamano_kb))
 
+# --- Publicación: copia a docs/index.html para GitHub Pages ---
+# docs/ es la carpeta servida por Pages (modelo B). El producto canónico vive
+# en 40_salidas/; docs/index.html es una copia derivada, regenerada en cada
+# corrida. Mantener una sola fuente de verdad evita divergencias.
+dir_docs <- here::here("docs")
+if (!dir.exists(dir_docs)) dir.create(dir_docs, recursive = TRUE)
+ruta_pages <- file.path(dir_docs, "index.html")
+ok_copia <- file.copy(ruta_salida, ruta_pages, overwrite = TRUE)
+if (!ok_copia) stop("No se pudo copiar el HTML a docs/index.html")
+message(sprintf("    OK: %s (copia para GitHub Pages)",
+                fs::path_rel(ruta_pages, here::here())))
+
 # Liberar objetos grandes antes del GC (json_str/html pueden superar varios MB).
 rm(json_str, json_gzip, json_b64, html, d3_code, pako_code, plantilla)
 gc(verbose = FALSE)
@@ -376,5 +388,5 @@ message(sprintf("  A\u00f1os:          %s", paste(meta$anios, collapse = ", ")))
 message(sprintf("  A\u00f1o vigente:   %d", meta$anio_vigente))
 message(sprintf("  Peso HTML:     %.0f KB", tamano_kb))
 message("")
-message(sprintf("33_generar_html.R: OK. Producto en %s",
+message(sprintf("33_generar_html.R: OK. Producto en %s, copia en docs/index.html",
                 fs::path_rel(ruta_salida, here::here())))
