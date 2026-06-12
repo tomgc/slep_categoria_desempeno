@@ -1,7 +1,7 @@
 # Estructura actual — slep_categoria_desempeno
 
 - **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-12 12:37:42
+- **Fecha:** 2026-06-12 12:41:27
 - **Totales:** 16 carpetas, 68 archivos
 - **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
@@ -68,12 +68,12 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260612_092909_estructura.md  (3.69K)
-│   │   ├── 20260612_092909_estructura.txt  (3.73K)
 │   │   ├── 20260612_123657_estructura.md  (4.07K)
 │   │   ├── 20260612_123657_estructura.txt  (4.12K)
-│   │   ├── estructura_actual.md  (4.07K)
-│   │   └── estructura_actual.txt  (4.12K)
+│   │   ├── 20260612_123742_estructura.md  (4.04K)
+│   │   ├── 20260612_123742_estructura.txt  (4.09K)
+│   │   ├── estructura_actual.md  (4.04K)
+│   │   └── estructura_actual.txt  (4.09K)
 │   ├── traspasos/
 │   │   ├── .gitkeep  (0)
 │   │   ├── traspaso_cierre_v01.md  (17.6K)
