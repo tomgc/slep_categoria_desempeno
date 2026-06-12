@@ -1,57 +1,84 @@
 # slep_categoria_desempeno
 
-Motor de comparación interactivo (React 18 + D3 v7, HTML autocontenido) de la
-**Categoría de Desempeño** de los establecimientos educacionales
-(Alto / Medio / Medio-Bajo / Insuficiente), clasificación integral de la Agencia
-de Calidad de la Educación. Compara territorios (comuna, SLEP, región, Chile,
-grupos personalizados) y establecimientos del SLEP Costa Central a lo largo del
-tiempo. Publicado en GitHub Pages.
+Motor de comparación interactivo de la **Categoría de Desempeño** de los
+establecimientos educacionales (clasificación de la Agencia de Calidad de la
+Educación: Alto / Medio / Medio-Bajo / Insuficiente), entre comunas, SLEPs,
+regiones y el nivel nacional, separando educación básica y media.
 
-Proyecto hermano de [`slep_simce_adecuado`](https://github.com/tomgc/slep_simce_adecuado).
+Producto final: un archivo HTML autocontenido publicado en GitHub Pages.
 
-## Qué lo distingue del proyecto madre
+**Sitio publicado:** https://tomgc.github.io/slep_categoria_desempeno/
 
-Donde el madre mide un porcentaje continuo ponderado por estudiantes y segmentado
-por GSE, este proyecto trabaja una **etiqueta categórica por establecimiento**:
+Proyecto del Área de Monitoreo y Seguimiento del Servicio Local de Educación
+Pública Costa Central (Región de Valparaíso). Proyecto hermano de
+`slep_simce_adecuado`: comparte arquitectura y patrones de UI.
 
-- **Unidad = establecimiento** (una categoría por RBD por año), no un porcentaje.
-- **Agregación por conteo**: la vista territorial es la distribución de
-  establecimientos por categoría, no un promedio.
-- **Sin segmentación GSE**: la categoría ya integra el contexto socioeconómico
-  en su construcción (decisión metodológica documentada en
-  `50_documentacion/activa/decisiones/`).
+## Qué hace
 
-## Estructura
+Lee los archivos de Categoría de Desempeño publicados por la Agencia de Calidad,
+los normaliza y agrega a nivel territorial (comuna, SLEP, región, nacional), y
+genera un motor visual interactivo que muestra la distribución de
+establecimientos por categoría, con la trayectoria histórica de cada
+establecimiento.
 
-Estructura canónica por decenas según
-[`POLITICA_PROYECTO.md`](50_documentacion/activa/POLITICA_PROYECTO.md):
+Decisiones metodológicas que gobiernan el diseño:
 
-```
-00_build.R                 Orquestador del pipeline
-00_escanear_proyecto.R     Escáner de estructura (auto-poda: retiene 2 sellos)
-10_utils/                  Funciones transversales (bootstrapping)
-20_insumos/                Datos crudos (CDB20XX.xlsx) y auxiliares — públicos
-30_procesamiento/          Lectura, normalización, conteo territorial, motor HTML
-40_salidas/                Parquets intermedios y producto final HTML
-50_documentacion/          Activa, traspasos, andamios, estructura
-tests/                     Tests (testthat)
-```
+- **Unidad = establecimiento**, dato categórico (una etiqueta por RBD por año).
+- **Agregación = conteo de establecimientos** por categoría. No hay ponderación
+  por matrícula ni promedio de porcentajes.
+- **Sin segmentación por GSE:** la Categoría de Desempeño ya integra el contexto
+  socioeconómico en su construcción.
+- **Básica y media nunca se mezclan** en una cifra agregada.
 
 ## Cómo correr el pipeline
 
+Requiere R 4.5.x. El orquestador ejecuta el pipeline completo de principio a fin:
+
 ```r
-source("00_build.R")
+source("00_run_all.R")
+run_all()
 ```
 
-(Pendiente: el pipeline está en scaffold; los pasos se agregan por sesión.)
+Etapas (carpeta `30_procesamiento/`):
+
+1. `30_construir_auxiliares.R` — catálogos territoriales y de establecimientos.
+2. `31_leer_normalizar.R` — lectura multi-año y normalización de la categoría.
+3. `32_agregar_territorial.R` — agregación territorial (conteo de EE).
+4. `33_generar_html.R` — construye `40_salidas/motor_categoria.html` y copia a
+   `docs/index.html` para publicación.
+
+El motor HTML requiere `10_utils/d3.min.js` y `10_utils/pako.min.js`
+(versionados en el repo).
+
+## Estructura
+
+Sigue la convención canónica de carpetas numeradas por flujo de ejecución
+(`10_utils`, `20_insumos`, `30_procesamiento`, `40_salidas`, `50_documentacion`),
+documentada en `50_documentacion/activa/POLITICA_PROYECTO.md`.
 
 ## Datos
 
-Todos los datos son **públicos** (Agencia de Calidad de la Educación) y se
-versionan en el repo. La Categoría de Desempeño por establecimiento es pública
-por diseño (portal "Localiza tu colegio"). Este repositorio no contiene datos
-personales ni por estudiante.
+Los datos provienen de la **Agencia de Calidad de la Educación** de Chile
+(archivos `CDB`/`CDM` de Categoría de Desempeño, directorio oficial de
+establecimientos). Son información **pública** y se versionan directamente en
+este repositorio (`20_insumos/`).
 
-## Fuente
+Este proyecto **no** maneja, en ningún punto, datos por estudiante, RUT ni
+información personal de terceros. Ver `50_documentacion/activa/gobernanza_datos.md`
+para la base de esta clasificación.
 
-Bases de Categoría de Desempeño (CDB), Agencia de Calidad de la Educación, Chile.
+## Publicación (GitHub Pages)
+
+El sitio se sirve desde la carpeta `docs/` en la rama `main` (modelo de archivo
+único). `docs/index.html` es una copia derivada de `40_salidas/motor_categoria.html`,
+regenerada automáticamente en cada corrida del paso 33. La fuente de verdad es
+`40_salidas/`; `docs/` no se edita a mano.
+
+Para activar Pages: Settings → Pages → Source: Deploy from a branch → Branch:
+`main` / carpeta `/docs`.
+
+## Licencia
+
+Código bajo licencia **MIT** (ver `LICENSE`). La licencia cubre el código del
+repositorio; **no** cubre los datos, que se rigen por las condiciones de uso de
+la Agencia de Calidad de la Educación.
