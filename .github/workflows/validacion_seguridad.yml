@@ -1,0 +1,65 @@
+# Validación de seguridad en cada push y pull request.
+# Bloquea el merge/push si detecta tokens, RUT hardcodeados o archivos de datos
+# con extensiones no permitidas fuera de las carpetas de insumos/salidas.
+# Proyecto Rama A (datos públicos): los .xlsx/.parquet de 20_insumos y
+# 40_salidas/intermedios son legítimos y NO se reportan.
+
+name: validacion-seguridad
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  escaneo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detectar tokens y credenciales
+        run: |
+          # Patrones de tokens reales (GitHub PAT, AWS, claves genéricas en código).
+          # Se excluyen carpetas de documentación de protocolo y el propio workflow,
+          # que mencionan estos términos como texto, no como secretos.
+          PATRON='ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}'
+          if grep -rEn "$PATRON" . \
+              --include='*.R' --include='*.r' --include='*.qmd' \
+              --include='*.js' --include='*.html' --include='*.json' \
+              --exclude-dir='.git' --exclude-dir='10_utils'; then
+            echo "::error::Posible token/credencial detectado. Revisar y purgar."
+            exit 1
+          fi
+          echo "Sin tokens detectados."
+
+      - name: Detectar RUT hardcodeados
+        run: |
+          # RUT chileno en archivos de código (no en datos públicos versionados).
+          # Solo se escanean fuentes, no los .xlsx/.parquet/.csv de datos.
+          PATRON='\b[0-9]{1,2}\.?[0-9]{3}\.?[0-9]{3}-[0-9kK]\b'
+          if grep -rEn "$PATRON" . \
+              --include='*.R' --include='*.r' --include='*.qmd' \
+              --include='*.js' --include='*.html' \
+              --exclude-dir='.git'; then
+            echo "::error::Posible RUT hardcodeado en código. Revisar."
+            exit 1
+          fi
+          echo "Sin RUT en código."
+
+      - name: Verificar que no haya datos fuera de las carpetas permitidas
+        run: |
+          # Archivos de datos (.parquet/.rds/.feather) solo pueden vivir en
+          # 20_insumos/ o 40_salidas/. Cualquier otro lado es un accidente.
+          FUERA=$(find . -type f \
+            \( -name '*.parquet' -o -name '*.rds' -o -name '*.feather' \) \
+            -not -path './20_insumos/*' \
+            -not -path './40_salidas/*' \
+            -not -path './.git/*' || true)
+          if [ -n "$FUERA" ]; then
+            echo "::error::Archivos de datos fuera de 20_insumos/ o 40_salidas/:"
+            echo "$FUERA"
+            exit 1
+          fi
+          echo "Sin datos fuera de las carpetas permitidas."
