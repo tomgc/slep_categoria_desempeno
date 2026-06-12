@@ -1,0 +1,1768 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Motor de comparación — Categoría de Desempeño de los establecimientos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A3A5C'/%3E%3Crect x='8' y='15' width='4' height='9' rx='1' fill='%23FFF6E0'/%3E%3Crect x='14' y='10' width='4' height='14' rx='1' fill='%23FFF6E0'/%3E%3Crect x='20' y='6' width='4' height='18' rx='1' fill='%23C45A3E'/%3E%3C/svg%3E" />
+<style>
+/* ============================================================
+   SLEP Costa Central — colores y tipografía (sin @font-face;
+   los .otf gobCL/Museo Sans no están versionados, así que se
+   usa el stack system como fallback).
+   ============================================================ */
+
+:root {
+  /* Mark colors */
+  --mark-red:    #EE2D49;
+  --mark-pink:   #F8A0AE;
+  --mark-yellow: #FFC92E;
+  --mark-green:  #9BC93E;
+  --mark-blue:   #2A8FD9;
+
+  /* Brand palette */
+  --plum:        #4A2746;
+  --cream:       #FFF6E0;
+  --ocean:       #0062A0;
+  --slate:       #747474;
+  --olive:       #75924E;
+  --sand:        #BCA493;
+  --coral:       #E88663;
+
+  /* Neutrals derivados */
+  --ink:         #1C1212;
+  --ink-2:       #2E2230;
+  --paper:       #FFFFFF;
+  --cream-50:    #FFFBEF;
+  --cream-200:   #F4E9CC;
+  --line:        #E7DFC9;
+  --line-strong: #C8BDA0;
+  --plum-80:     #66394F;
+  --plum-20:     #EEDCE5;
+  --ocean-80:    #00558A;
+  --ocean-20:    #D4E4F1;
+
+  /* Semánticos */
+  --fg-1: var(--ink);
+  --fg-2: var(--ink-2);
+  --fg-3: var(--slate);
+  --fg-on-dark: var(--cream);
+  --fg-on-plum: var(--cream);
+  --fg-link: var(--ocean);
+  --bg-1: var(--cream);
+  --bg-2: var(--paper);
+  --bg-3: var(--cream-50);
+  --bg-inverse: var(--plum);
+  --accent: var(--coral);
+  --success: var(--olive);
+  --info: var(--ocean);
+  --warning: var(--mark-yellow);
+  --danger: var(--mark-red);
+  --border-1: var(--line);
+  --border-2: var(--line-strong);
+  --border-strong: var(--plum);
+
+  /* Spacing */
+  --space-0: 0;     --space-1: 4px;   --space-2: 8px;   --space-3: 12px;
+  --space-4: 16px;  --space-5: 24px;  --space-6: 32px;  --space-7: 48px;
+  --space-8: 64px;  --space-9: 96px;
+
+  /* Radii */
+  --radius-0: 0; --radius-1: 2px; --radius-2: 4px; --radius-3: 8px;
+  --radius-full: 9999px;
+
+  /* Elevation */
+  --shadow-1: 0 1px 0 rgba(28, 18, 18, 0.05);
+  --shadow-2: 0 2px 8px rgba(74, 39, 70, 0.08);
+  --shadow-3: 0 8px 24px rgba(74, 39, 70, 0.12);
+
+  /* Type families — fallback al stack system. Cuando se versionen los
+     .otf de gobCL/Museo Sans, agregar @font-face antes y usarlos arriba. */
+  --font-display: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body:    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    ui-monospace, "SF Mono", "Menlo", monospace;
+
+  /* Type scale */
+  --fs-display-1: clamp(48px, 6vw, 88px);
+  --fs-display-2: clamp(36px, 4.5vw, 64px);
+  --fs-h1: clamp(32px, 3.4vw, 44px);
+  --fs-h2: 28px;
+  --fs-h3: 22px;
+  --fs-h4: 18px;
+  --fs-body: 16px;
+  --fs-body-lg: 18px;
+  --fs-caption: 14px;
+  --fs-overline: 12px;
+
+  --lh-tight: 1.05;
+  --lh-snug: 1.2;
+  --lh-normal: 1.5;
+  --lh-loose: 1.65;
+
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.06em;
+  --tracking-overline: 0.12em;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg-1);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--mark-yellow); color: var(--ink); }
+
+/* ============================================================
+   App layout
+   ============================================================ */
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+.app.is-comfy   { font-size: 15px; }
+
+/* Header */
+.app-header {
+  background: #0A3A5C;
+  color: var(--fg-on-plum);
+  padding: 28px 40px 26px;
+}
+.app-header-inner {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px; max-width: 1600px; margin: 0 auto;
+}
+.app-header-left { min-width: 0; }
+.app-header-right { display: flex; align-items: center; gap: 8px; }
+.brand-lockup { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.brand-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: var(--tracking-overline);
+  color: var(--cream);
+  opacity: 0.9;
+}
+.brand-eyebrow-muted { opacity: 0.6; font-weight: 400; }
+.brand-divider { color: var(--cream); opacity: 0.4; }
+.app-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: -0.005em;
+  color: var(--cream);
+  line-height: 1.1;
+  margin: 0 0 6px 0;
+}
+.app-title-sub { font-weight: 400; font-size: 22px; color: var(--cream); opacity: 0.78; }
+.app-subtitle {
+  font-family: var(--font-body);
+  color: var(--cream); opacity: 0.75;
+  margin: 0; font-size: 13px; line-height: 1.5;
+}
+.app-objective {
+  font-family: var(--font-body);
+  color: var(--cream); opacity: 0.82;
+  margin: 8px 0 0 0; font-size: 12px; line-height: 1.6;
+  max-width: 820px;
+}
+.app-objective strong { font-weight: 700; opacity: 1; }
+
+/* Main */
+.app-main { flex: 1; max-width: 1600px; margin: 0 auto; width: 100%; }
+
+/* Controles */
+.controls-bar {
+  display: flex; align-items: center; gap: 28px;
+  padding: 18px 40px;
+  background: var(--paper);
+  border-top: 4px solid var(--coral);
+  border-bottom: 1px solid var(--border-1);
+  flex-wrap: wrap;
+  position: sticky; top: 0; z-index: 50;
+}
+.control-group { display: flex; align-items: center; gap: 12px; }
+.control-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: var(--tracking-overline);
+  color: var(--fg-3);
+}
+.segmented {
+  display: inline-flex;
+  background: var(--cream-200);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-2);
+  padding: 2px;
+}
+.segmented-btn {
+  background: transparent; border: 0;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--fg-2);
+  border-radius: var(--radius-1);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+.segmented-btn:hover { color: var(--fg-1); }
+.segmented-btn.is-active {
+  background: var(--paper);
+  color: var(--plum);
+  font-weight: 700;
+  box-shadow: var(--shadow-1);
+}
+.select, .input {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--fg-1);
+  background: var(--paper);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-2);
+  padding: 6px 28px 6px 10px;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23747474' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 14px 14px;
+  cursor: pointer;
+  min-width: 140px;
+}
+.select:focus, .input:focus {
+  outline: 2px solid var(--ocean);
+  outline-offset: 1px;
+  border-color: var(--ocean);
+}
+.input {
+  background-image: none; padding-right: 10px;
+  cursor: text; min-width: 0; width: 100%;
+}
+.controls-spacer { flex: 1; }
+.loading-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 12px;
+  background: var(--ocean-20); color: var(--ocean-80);
+  border-radius: var(--radius-full);
+  font-size: 12px; font-weight: 500;
+}
+.loading-dot {
+  width: 6px; height: 6px; border-radius: 999px;
+  background: var(--ocean);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* Entities */
+.entities-bar {
+  padding: 20px 40px 22px;
+  background: var(--bg-3);
+  border-bottom: 1px solid var(--border-1);
+}
+.entities-head {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 12px;
+}
+.entities-reset { align-self: center; color: var(--fg-3); flex: none; }
+.entities-reset:hover { color: var(--fg-1); }
+.section-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: var(--tracking-overline);
+  color: var(--fg-3);
+  margin: 0;
+}
+.entities-count { font-size: 12px; color: var(--fg-3); font-weight: 500; }
+.entities-list { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.entity-chip {
+  display: inline-flex; align-items: flex-start; gap: 8px;
+  padding: 6px 8px 6px 10px;
+  background: var(--paper);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-2);
+  transition: border-color 120ms ease;
+  max-width: 340px; flex: 0 1 auto;
+}
+.entity-chip:hover { border-color: var(--plum); }
+.entity-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+.entity-text { display: flex; flex-direction: column; line-height: 1.1; }
+.entity-name {
+  font-family: var(--font-body);
+  font-weight: 700; font-size: 13px; color: var(--fg-1);
+}
+.entity-meta { font-size: 11px; color: var(--fg-3); margin-top: 2px; font-weight: 500; }
+.entity-btn {
+  background: transparent; border: 0;
+  padding: 4px; color: var(--fg-3); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-1);
+}
+.entity-btn:hover { background: var(--cream-200); color: var(--fg-1); }
+.entity-btn-remove:hover { background: #fce7e7; color: var(--mark-red); }
+.entity-btn .icon { width: 14px; height: 14px; }
+.entities-actions {
+  display: inline-flex; align-items: center; gap: 8px; margin-left: 4px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid transparent;
+  padding: 7px 14px;
+  border-radius: var(--radius-2);
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 13px;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease, transform 80ms ease;
+  text-decoration: none;
+}
+.btn:active { transform: translateY(1px); }
+.btn .icon { width: 14px; height: 14px; }
+.btn-small { padding: 5px 10px; font-size: 12px; }
+.btn-icon-only { padding: 6px; }
+.btn-icon-only .icon { width: 16px; height: 16px; }
+.btn-toggle { color: var(--fg-2); }
+.btn-toggle.is-active {
+  background: var(--ocean); color: var(--cream); border-color: var(--ocean);
+}
+.btn-toggle.is-active:hover { background: var(--ocean-80); border-color: var(--ocean-80); }
+.btn-primary { background: var(--ocean); color: var(--cream); border-color: var(--ocean); }
+.btn-primary:hover { background: var(--ocean-80); border-color: var(--ocean-80); }
+.btn-ghost { background: transparent; color: var(--fg-1); border-color: var(--border-2); }
+.btn-ghost:hover { background: var(--cream-200); border-color: var(--plum); }
+.app-header-right .btn-ghost {
+  background: rgba(255,246,224,0.06);
+  color: var(--cream);
+  border-color: rgba(255,246,224,0.2);
+}
+.app-header-right .btn-ghost:hover {
+  background: rgba(255,246,224,0.12);
+  border-color: rgba(255,246,224,0.4);
+}
+.icon-btn {
+  background: transparent; border: 0;
+  padding: 6px; cursor: pointer;
+  color: var(--fg-2); border-radius: var(--radius-1);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.icon-btn:hover { background: var(--cream-200); color: var(--fg-1); }
+.icon-btn .icon { width: 18px; height: 18px; }
+.icon { display: inline-block; vertical-align: middle; }
+
+/* Results */
+.results-section { padding: 28px 40px 8px; }
+.empty-board {
+  margin: 28px 40px; padding: 56px 32px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 10px;
+  border: 1px dashed var(--border-2); border-radius: var(--radius-2);
+  background: var(--cream-200);
+}
+.empty-board-text { font-size: 16px; color: var(--fg-2); margin: 0; max-width: 520px; line-height: 1.5; }
+.results-head {
+  display: flex; flex-direction: column; align-items: stretch;
+  gap: 14px; margin-bottom: 18px;
+}
+.results-head-top { display: flex; flex-direction: column; gap: 2px; }
+/* Fila única bajo el título: controles a la izquierda, leyenda a la
+   derecha (mockup). En pantallas angostas envuelve sin romperse. */
+.results-head-controls {
+  display: flex; align-items: center; justify-content: flex-start;
+  gap: 16px 24px; flex-wrap: wrap;
+}
+.section-actions {
+  display: flex; align-items: center; gap: 14px;
+  flex-wrap: wrap; justify-content: flex-start;
+}
+/* La cabecera de la tabla conserva el layout horizontal (título a la
+   izquierda, controles a la derecha). */
+.table-head { justify-content: space-between; }
+.table-head .section-actions { justify-content: flex-end; }
+.icon-export {
+  display: inline-flex; align-items: center; gap: 0;
+  height: 32px; padding: 0 8px;
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-2);
+  color: var(--fg-2); cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 13px;
+  overflow: hidden; max-width: 36px; white-space: nowrap;
+  transition: max-width 240ms ease, background 120ms ease, color 120ms ease, border-color 120ms ease, gap 240ms ease;
+}
+.icon-export:hover, .icon-export:focus-visible {
+  max-width: 220px; gap: 8px;
+  background: var(--paper); border-color: #0A3A5C; color: #0A3A5C;
+}
+.icon-export .icon { width: 16px; height: 16px; flex-shrink: 0; }
+.icon-export-label {
+  opacity: 0; transform: translateX(-4px);
+  transition: opacity 200ms ease 80ms, transform 200ms ease 80ms;
+}
+.icon-export:hover .icon-export-label,
+.icon-export:focus-visible .icon-export-label {
+  opacity: 1; transform: translateX(0);
+}
+
+.chart-hints {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 14px; font-size: 12px;
+}
+.hint-item { display: inline-flex; align-items: center; gap: 6px; color: var(--fg-1); }
+.hint-muted { color: var(--fg-3); font-size: 11px; }
+.hint-box {
+  display: inline-block; width: 14px; height: 12px;
+  border: 1px solid rgba(0,0,0,0.12); border-radius: 1px;
+}
+.hint-low-n {
+  display: inline-block; width: 14px; height: 12px;
+  background: #0A3A5C; opacity: 0.45; border-radius: 1px;
+}
+.hint-asterisk {
+  display: inline-flex; align-items: center;
+  font-weight: 900; color: var(--ocean); font-size: 15px;
+  line-height: 0.6; width: 14px; justify-content: center;
+}
+
+.supergrid { display: grid; gap: 10px 12px; align-items: stretch; }
+.supergrid-entity-head {
+  display: flex; flex-direction: column;
+  gap: 4px; padding: 4px 4px 6px;
+  border-bottom: 2px solid var(--border-strong);
+}
+.supergrid-entity-head .entity-swatch { width: 16px; height: 16px; border-radius: 2px; }
+.sg-ent-name {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 17px;
+  color: var(--fg-1);
+  letter-spacing: -0.005em; line-height: 1.1;
+}
+.sg-ent-meta { font-size: 11px; color: var(--fg-3); font-weight: 500; }
+.supergrid-gse-label {
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 6px 6px 6px 0;
+  border-right: 1px solid var(--border-1);
+}
+.sg-gse-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 10px;
+  letter-spacing: var(--tracking-overline);
+  color: var(--fg-3);
+}
+.sg-gse-name {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 18px;
+  color: #0A3A5C;
+  letter-spacing: -0.005em; line-height: 1.1; margin-top: 2px;
+}
+
+.chart-cell {
+  background: var(--paper);
+  border: 1px solid var(--border-1);
+  /* Un estilo inline sobrescribe el borde completo con el color de la
+     entidad (1px), rodeando la ficha para identificar la columna. */
+  border-radius: var(--radius-3);
+  padding: 10px 10px 6px;
+  box-shadow: var(--shadow-1);
+  display: flex; flex-direction: column;
+  gap: 4px; min-width: 0;
+}
+.chart-cell-head { display: flex; align-items: baseline; gap: 5px; margin-bottom: 2px; }
+.chart-cell-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 9px;
+  letter-spacing: var(--tracking-overline);
+  color: var(--fg-3);
+}
+.chart-cell-title {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 13px;
+  letter-spacing: -0.005em;
+  color: #0A3A5C;
+}
+.sub-section { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+.sub-section-bars { padding-top: 6px; margin-top: 2px; border-top: 1px dashed var(--border-1); }
+.sub-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 9px;
+  letter-spacing: var(--tracking-overline);
+  color: var(--fg-3);
+  padding-left: 2px; margin-bottom: 2px;
+}
+.sparkline-svg, .bars-svg, .chart-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.results-title {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 24px;
+  letter-spacing: -0.005em;
+  color: var(--fg-1);
+  margin: 4px 0 0 0; line-height: 1.2;
+}
+.results-title-year { color: var(--ocean); }
+
+/* Tooltip */
+.tooltip {
+  position: absolute; pointer-events: none; z-index: 9999;
+  background: var(--paper); color: var(--fg-1);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-3);
+  padding: 10px 12px;
+  font-size: 12px;
+  min-width: 200px; max-width: 280px;
+}
+.tooltip.is-pinned {
+  pointer-events: auto;
+  border-color: var(--ocean);
+  box-shadow: var(--shadow-3), 0 0 0 2px var(--ocean-20);
+}
+.tt-row { display: flex; align-items: center; gap: 6px; }
+.tt-head { margin-bottom: 4px; }
+.tt-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.tt-ent {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 12px;
+  letter-spacing: 0.01em; color: var(--plum);
+}
+.tt-gse { font-size: 11px; color: var(--fg-3); margin-bottom: 6px; }
+.tt-pct {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 20px;
+  color: var(--ink); line-height: 1;
+  letter-spacing: -0.01em; margin-bottom: 6px;
+}
+.tt-segments {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 6px 0; margin-bottom: 4px;
+  border-bottom: 1px solid var(--border-1);
+}
+.tt-seg {
+  display: grid; grid-template-columns: 10px 1fr auto;
+  gap: 6px; align-items: center; font-size: 12px;
+}
+.tt-seg-sw { width: 10px; height: 10px; border-radius: 2px; }
+.tt-seg-lbl { color: var(--fg-2); }
+.tt-seg-val {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 13px;
+  color: var(--ink); letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.tt-meta {
+  display: flex; flex-direction: column; gap: 2px;
+  font-size: 11px; color: var(--fg-2);
+  padding-top: 6px; border-top: 1px solid var(--border-1);
+}
+.tt-meta b { font-weight: 700; color: var(--ink); }
+.tt-warn {
+  margin-top: 6px; padding: 4px 6px;
+  background: var(--cream-200); color: var(--ink-2);
+  font-size: 10px;
+  border-radius: var(--radius-1);
+  border-left: 2px solid var(--coral);
+}
+.tt-estab-link {
+  display: block; width: 100%;
+  margin-top: 8px; padding: 5px 8px;
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-1);
+  color: var(--ocean); font-size: 11px; font-weight: 600;
+  text-align: left; cursor: pointer;
+  font-family: var(--font-body);
+  transition: background 100ms ease, border-color 100ms ease;
+}
+.tt-estab-link:hover { background: var(--ocean-20); border-color: var(--ocean); }
+
+/* Tabla */
+.table-section { padding: 28px 40px; }
+.table-head {
+  display: flex; align-items: baseline; gap: 16px;
+  margin-bottom: 6px; flex-wrap: wrap;
+}
+.table-head-titles { display: flex; flex-direction: column; gap: 2px; }
+.table-title {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 24px;
+  letter-spacing: -0.005em;
+  color: var(--fg-1); margin: 0; line-height: 1.2;
+}
+.table-meta { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.table-meta-item { font-size: 12px; color: var(--fg-3); }
+.table-wrap {
+  background: var(--paper);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-3);
+  overflow: auto;
+  box-shadow: var(--shadow-1);
+  position: relative;
+}
+.data-table {
+  border-collapse: collapse; width: 100%;
+  font-size: 13px; min-width: 1000px;
+}
+.data-table thead th {
+  position: sticky; top: 0; z-index: 3;
+  background: var(--cream-200);
+  color: var(--fg-1);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 11px;
+  letter-spacing: var(--tracking-overline);
+  text-align: right;
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--border-2);
+  white-space: nowrap;
+}
+.data-table thead th.th-ent,
+.data-table thead th.th-gse { text-align: left; }
+.data-table thead th.th-ent { left: 0; z-index: 4; min-width: 200px; }
+.data-table thead th.th-gse { left: 200px; z-index: 4; min-width: 110px; }
+.data-table thead th.th-prelim { color: var(--ocean-80); }
+.prelim-mark { color: var(--ocean); font-weight: 900; }
+.badge-traspaso {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 8px;
+  background: rgba(0,98,160,0.10);
+  color: var(--ocean);
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.slep-disclaimer {
+  grid-column: 1 / -1;
+  display: flex; gap: 8px; align-items: flex-start;
+  padding: 10px 12px;
+  border: 1px solid rgba(0,98,160,0.25);
+  border-radius: var(--radius-2);
+  background: rgba(0,98,160,0.06);
+  color: var(--fg-2);
+  font-size: 12.5px; line-height: 1.45;
+}
+.slep-disclaimer .icon { width: 16px; height: 16px; color: var(--ocean); flex: none; margin-top: 1px; }
+.slep-disclaimer.is-compact { font-size: 11.5px; padding: 8px 10px; }
+.entity-slep-note {
+  display: inline-flex; gap: 4px; align-items: flex-start;
+  margin-top: 3px;
+  font-size: 10.5px; line-height: 1.3; font-weight: 600;
+  color: var(--ocean);
+  white-space: normal;
+}
+.entity-slep-note .icon { width: 12px; height: 12px; flex: none; margin-top: 1px; }
+.data-table tbody td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-1);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.data-table tbody td.td-ent,
+.data-table tbody td.td-gse { text-align: left; }
+.data-table tbody td.td-ent {
+  position: sticky; left: 0; z-index: 2;
+  background: var(--paper);
+  min-width: 200px;
+  border-right: 1px solid var(--border-1);
+}
+.data-table tbody td.td-gse {
+  position: sticky; left: 200px; z-index: 2;
+  background: var(--paper); min-width: 110px;
+  border-right: 1px solid var(--border-1);
+  color: var(--fg-2);
+}
+.data-table tbody tr.row-ent-start td { border-top: 2px solid var(--border-2); }
+.data-table tbody tr.row-ent-start:first-child td { border-top: 0; }
+.data-table tbody td.td-cell { position: relative; }
+.data-table tbody tr:hover td:not(.td-ent):not(.td-gse) {
+  outline: 1px solid var(--plum); outline-offset: -1px;
+}
+.ent-cell { display: inline-flex; align-items: center; gap: 8px; }
+.ent-name { font-weight: 700; color: var(--fg-1); }
+.td-pct { font-family: var(--font-body); font-weight: 700; color: var(--fg-1); }
+.td-n { font-size: 11px; color: var(--fg-3); margin-left: 2px; }
+.td-empty { color: var(--border-2); }
+.td-prelim { background: rgba(0,98,160,0.04); }
+.td-prelim .td-pct { color: var(--ocean-80); }
+.td-prelim .td-pct::after { content: " *"; color: var(--ocean); font-weight: 900; }
+.td-alert-dot {
+  display: inline-block; margin-left: 6px;
+  font-size: 9px; color: var(--mark-red);
+  font-weight: 900; vertical-align: middle;
+}
+.td-alert .td-pct { color: #8B1A1A; }
+
+.heat-legend {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.2fr) minmax(320px, 1.6fr);
+  gap: 24px; align-items: center;
+  margin: 6px 0 16px;
+  padding: 16px 20px;
+  background: var(--paper);
+  border: 1px solid var(--border-1);
+  border-left: 3px solid var(--coral);
+  border-radius: var(--radius-2);
+}
+@media (max-width: 900px) { .heat-legend { grid-template-columns: 1fr; } }
+.heat-legend-text { min-width: 0; }
+.heat-legend-title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 13px;
+  color: var(--fg-1); margin-bottom: 4px;
+}
+.heat-legend-text p { margin: 0; font-size: 12.5px; color: var(--fg-2); line-height: 1.5; max-width: 56ch; }
+.heat-legend-scale { display: flex; flex-direction: column; gap: 6px; }
+.heat-scale-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-end; gap: 6px;
+  font-size: 11px; color: var(--fg-2);
+}
+.heat-tick { display: flex; flex-direction: column; gap: 1px; }
+.heat-tick b { font-size: 12px; font-weight: 700; }
+.heat-tick small { font-size: 10.5px; color: var(--fg-3); line-height: 1.3; }
+.heat-tick-left { text-align: left; }
+.heat-tick-left b { color: #8B1A1A; }
+.heat-tick-mid { text-align: center; }
+.heat-tick-mid b { color: var(--fg-2); }
+.heat-tick-right { text-align: right; }
+.heat-tick-right b { color: var(--ocean-80); }
+.heat-ramp {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 10px; border-radius: 2px;
+  overflow: hidden; border: 1px solid var(--border-1);
+}
+.heat-ramp-bar { width: 100%; height: 100%; }
+.heat-ramp-coral { background: linear-gradient(to right, rgba(232,134,99,0.55), rgba(232,134,99,0)); }
+.heat-ramp-mid { background: var(--cream-50); }
+.heat-ramp-ocean { background: linear-gradient(to right, rgba(10,58,92,0), rgba(10,58,92,0.55)); }
+
+/* Footer */
+.app-footer { padding: 18px 40px 48px; margin-top: 20px; }
+.notes-toggle {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-2);
+  padding: 10px 14px;
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 12px;
+  letter-spacing: var(--tracking-overline);
+  color: var(--fg-1); cursor: pointer;
+}
+.notes-toggle:hover { background: var(--cream-200); border-color: var(--plum); }
+.notes-toggle .icon { width: 16px; height: 16px; }
+.notes-toggle .chev { margin-left: 4px; transition: transform 200ms ease; }
+.notes-toggle .chev .icon { width: 14px; height: 14px; }
+.notes-toggle.is-open .chev { transform: rotate(180deg); }
+.notes-body {
+  margin-top: 14px;
+  background: var(--paper);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-3);
+  padding: 28px; box-shadow: var(--shadow-1);
+}
+.notes-grid { columns: 3 280px; column-gap: 36px; }
+.notes-grid .note { break-inside: avoid; margin-bottom: 24px; display: inline-block; width: 100%; }
+.note-stack { display: contents; }
+@media (max-width: 900px) { .notes-grid { columns: 1; } }
+.note h4 {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 13px;
+  letter-spacing: var(--tracking-overline);
+  color: var(--plum); margin: 0 0 8px;
+}
+.note p { font-size: 13px; color: var(--fg-2); line-height: 1.55; margin: 0 0 8px; max-width: 60ch; }
+.note p b { color: var(--ink); font-weight: 700; }
+.formula {
+  display: inline-block;
+  background: var(--cream-200);
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-size: 12px; margin: 4px 0 8px;
+  border-radius: var(--radius-1);
+}
+.notes-sources {
+  margin-top: 20px; padding-top: 16px;
+  border-top: 1px solid var(--border-1);
+  font-size: 12px; color: var(--fg-3);
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(28, 18, 18, 0.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10000; padding: 20px;
+  animation: fadeIn 140ms ease-out;
+}
+.modal {
+  background: var(--paper);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-3);
+  width: 100%; max-width: 540px; max-height: 88vh;
+  display: flex; flex-direction: column; overflow: hidden;
+  animation: lift 180ms cubic-bezier(.2,.7,.2,1);
+}
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes lift { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border-1);
+}
+.modal-title {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 18px;
+  letter-spacing: -0.005em; margin: 0; color: var(--plum);
+}
+.modal-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-1);
+  padding: 0 22px;
+}
+.modal-tab {
+  background: transparent; border: 0;
+  padding: 12px 0; margin-right: 24px;
+  font-family: var(--font-body);
+  font-weight: 500; font-size: 13px;
+  color: var(--fg-3); cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.modal-tab:hover { color: var(--fg-1); }
+.modal-tab.is-active {
+  color: var(--plum); font-weight: 700;
+  border-bottom-color: var(--ocean);
+}
+.modal-body { padding: 22px; overflow-y: auto; flex: 1; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field-full { grid-column: 1 / -1; }
+.field-label {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 11px;
+  letter-spacing: var(--tracking-overline);
+  color: var(--fg-3);
+  display: flex; justify-content: space-between;
+}
+.field-hint { font-weight: 500; font-size: 11px; color: var(--ocean); }
+.input-search { background-image: none; margin-bottom: 8px; }
+.color-preview {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px;
+  background: var(--cream-50);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-2);
+}
+.color-preview .entity-swatch { width: 16px; height: 16px; }
+.color-note { font-size: 12px; color: var(--fg-3); }
+.comuna-checklist {
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-2);
+  max-height: 220px; overflow-y: auto;
+  background: var(--cream-50);
+}
+.check-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-1);
+}
+.check-row:last-child { border-bottom: 0; }
+.check-row:hover { background: var(--cream-200); }
+.check-row input[type="checkbox"] { accent-color: var(--ocean); }
+.check-row.is-disabled { opacity: 0.45; }
+.check-row.is-disabled:hover { background: transparent; }
+.multiselect-hint { display: block; font-size: 11.5px; color: var(--fg-3); margin: 2px 0 4px; }
+.check-name { font-size: 13px; font-weight: 500; color: var(--fg-1); flex: 1; }
+.check-region { font-size: 11px; color: var(--fg-3); }
+.empty-state { padding: 16px; text-align: center; color: var(--fg-3); font-size: 13px; }
+.modal-footer {
+  display: flex; justify-content: flex-end; gap: 8px;
+  padding: 14px 22px;
+  border-top: 1px solid var(--border-1);
+  background: var(--cream-50);
+}
+
+code {
+  font-family: var(--font-mono);
+  background: var(--cream-200);
+  padding: 1px 5px; border-radius: var(--radius-1);
+  font-size: 0.92em;
+}
+/* Popup establecimientos */
+.estab-popup-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: transparent; border: 1px solid var(--border-1);
+  border-radius: var(--radius-1); padding: 3px 8px;
+  font-size: 11px; color: var(--fg-3); cursor: pointer;
+  font-family: var(--font-body); font-weight: 500;
+  transition: border-color 120ms, color 120ms, background 120ms;
+}
+.estab-popup-btn:hover { border-color: var(--ocean); color: var(--ocean); background: var(--ocean-20); }
+.estab-popup {
+  position: fixed; z-index: 9000;
+  background: var(--paper); border: 1px solid var(--border-2);
+  border-radius: var(--radius-3); box-shadow: var(--shadow-3);
+  padding: 16px 20px; min-width: 280px; max-width: 420px; max-height: 400px;
+  display: flex; flex-direction: column; gap: 8px;
+  animation: lift 160ms cubic-bezier(.2,.7,.2,1);
+}
+.estab-popup-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 8px; border-bottom: 1px solid var(--border-1);
+}
+.estab-popup-title {
+  font-family: var(--font-display); font-weight: 800; font-size: 13px;
+  color: var(--plum); letter-spacing: var(--tracking-overline);
+}
+.estab-popup-list {
+  overflow-y: auto; flex: 1;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.estab-popup-item {
+  display: flex; align-items: baseline; gap: 8px;
+  font-size: 12px; padding: 3px 0;
+  border-bottom: 1px solid var(--cream-200);
+}
+.estab-popup-rbd { font-family: var(--font-mono); font-size: 10px; color: var(--fg-3); min-width: 40px; }
+.estab-popup-nom { color: var(--fg-1); font-weight: 500; }
+.estab-popup-com { font-size: 10px; color: var(--fg-3); margin-left: auto; }
+
+/* Filtro GSE */
+.gse-filter {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--fg-3);
+}
+.gse-filter-label { font-weight: 600; font-size: 11px; letter-spacing: 0.06em; }
+.gse-filter select {
+  font-family: var(--font-body); font-size: 12px; font-weight: 500;
+  color: var(--fg-1); background: var(--paper);
+  border: 1px solid var(--border-2); border-radius: var(--radius-1);
+  padding: 4px 22px 4px 8px; cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23747474' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat; background-position: right 5px center; background-size: 12px;
+}
+
+/* ============================================================
+   Vista de Categoría de Desempeño (grilla de 4 columnas)
+   ============================================================ */
+.app-main { flex: 1; padding: 0 24px 64px; max-width: 1380px; margin: 0 auto; width: 100%; }
+
+/* Barra de resumen del territorio seleccionado */
+.terr-summary {
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  padding: 18px 0 14px;
+}
+.terr-summary-name {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 26px; letter-spacing: -0.01em; color: var(--plum);
+}
+.terr-summary-meta { font-size: 13px; color: var(--fg-3); }
+.terr-summary-meta strong { color: var(--fg-1); font-weight: 700; }
+.terr-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 600; color: var(--fg-3);
+  background: var(--cream-50); border: 1px solid var(--border-1);
+  border-radius: var(--radius-full); padding: 3px 10px;
+}
+
+/* Grilla de 4 columnas */
+.cat-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  align-items: start;
+}
+@media (max-width: 980px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .cat-grid { grid-template-columns: 1fr; } }
+
+.cat-col {
+  background: var(--bg-2); border: 1px solid var(--border-1);
+  border-radius: var(--radius-3); overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.cat-col-head {
+  padding: 12px 14px; color: #fff;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.cat-col-title {
+  font-family: var(--font-display); font-weight: 800; font-size: 15px;
+  letter-spacing: 0.01em;
+}
+.cat-col-stat { font-size: 12px; font-weight: 600; opacity: 0.92; }
+.cat-col-stat strong { font-weight: 800; }
+.cat-col-bar {
+  height: 4px; width: 100%; background: rgba(255,255,255,0.28);
+}
+.cat-col-bar-fill { height: 100%; background: rgba(255,255,255,0.9); }
+.cat-col-list {
+  list-style: none; margin: 0; padding: 8px;
+  display: flex; flex-direction: column; gap: 10px;
+  max-height: 620px; overflow-y: auto;
+}
+.cat-col-empty { padding: 16px 12px; text-align: center; color: var(--fg-3); font-size: 12px; }
+
+/* Fila de establecimiento */
+.ee-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 12px; border-radius: var(--radius-2);
+  border: 1px solid var(--border-1); background: var(--paper);
+}
+.ee-row:hover { border-color: var(--ocean); box-shadow: var(--shadow-1); }
+.ee-row-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.ee-row-name {
+  font-size: 12.5px; font-weight: 600; color: var(--fg-1);
+  line-height: 1.3;             /* nombre completo, sin truncar */
+}
+.ee-row-meta {
+  font-size: 10.5px; color: var(--fg-3);
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.ee-row-rbd { font-family: var(--font-mono); }
+.ee-row-sep { opacity: 0.5; }
+
+/* Trayectoria: año (rótulo) arriba, marca de color abajo; reciente -> antiguo */
+.traj { display: inline-flex; gap: 6px; flex-shrink: 0; align-items: flex-end; }
+.traj-year { display: inline-flex; flex-direction: column; align-items: center; gap: 3px; }
+.traj-year-lbl {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+  color: var(--fg-3); letter-spacing: -0.01em;
+}
+.traj-year-lbl.is-vigente { color: var(--ocean); font-weight: 800; }
+.traj-mark {
+  width: 18px; height: 18px; border-radius: var(--radius-1);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.traj-mark.is-si {
+  background: var(--cream-200);
+  border: 1px dashed var(--line-strong);
+}
+.traj-mark.is-vigente {
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 3.5px var(--ocean);
+}
+
+/* Sección sin categoría vigente */
+.sin-vigente {
+  margin-top: 28px; padding: 18px 20px;
+  background: var(--cream-50); border: 1px solid var(--border-1);
+  border-radius: var(--radius-3);
+}
+.sin-vigente-title {
+  font-family: var(--font-display); font-weight: 800; font-size: 15px;
+  color: var(--plum); margin: 0 0 4px;
+}
+.sin-vigente-sub { font-size: 12px; color: var(--fg-3); margin: 0 0 14px; }
+.sin-vigente-motivos { display: flex; gap: 28px; flex-wrap: wrap; }
+.sin-vigente-motivo { display: flex; flex-direction: column; gap: 2px; }
+.sin-vigente-n {
+  font-family: var(--font-display); font-weight: 800; font-size: 24px; color: var(--fg-1);
+}
+.sin-vigente-lbl { font-size: 12px; color: var(--fg-3); }
+
+/* Selector de entidad (botón principal) */
+.entity-select-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg-2); border: 1px solid var(--border-2);
+  border-radius: var(--radius-2); padding: 8px 14px;
+  font-family: var(--font-body); font-weight: 600; font-size: 14px;
+  color: var(--plum); cursor: pointer;
+}
+.entity-select-btn:hover { border-color: var(--plum); }
+
+/* Filtros de chips (comuna, dependencia) */
+.chip-filter {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 10px 0;
+}
+.chip-filter + .chip-filter { padding-top: 0; }
+.chip-filter-title {
+  font-family: var(--font-display); font-weight: 700; font-size: 11px;
+  letter-spacing: var(--tracking-overline); color: var(--fg-3);
+  text-transform: uppercase; min-width: 96px; flex-shrink: 0;
+}
+.chip-filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.filter-chip {
+  background: var(--bg-2); border: 1px solid var(--border-2);
+  border-radius: var(--radius-full); padding: 4px 12px;
+  font-family: var(--font-body); font-size: 12px; font-weight: 500;
+  color: var(--fg-3); cursor: pointer;
+  transition: background 120ms, color 120ms, border-color 120ms;
+}
+.filter-chip:hover { border-color: var(--ocean); }
+.filter-chip.is-on {
+  background: var(--ocean); border-color: var(--ocean); color: #fff;
+}
+
+/* Leyenda de trayectoria (destacada) */
+.traj-legend {
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  margin: 16px 0 18px; padding: 14px 18px;
+  background: var(--bg-2); border: 1px solid var(--border-1);
+  border-radius: var(--radius-3);
+}
+.traj-legend-head {
+  font-family: var(--font-display); font-weight: 800; font-size: 15px;
+  color: var(--plum); letter-spacing: -0.005em;
+}
+.traj-legend-items { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.traj-legend-item {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13px; font-weight: 500; color: var(--fg-2);
+}
+.traj-legend-sw {
+  width: 16px; height: 16px; border-radius: var(--radius-1);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.traj-legend-sw.is-si {
+  background: var(--cream-200); border: 1px dashed var(--line-strong);
+}
+
+/* Foco año en tabla */
+.data-table.has-year-focus td.td-cell:not(.td-focused-year) { opacity: 0.25; }
+.data-table.has-year-focus th.th-year:not(.th-focused-year) { opacity: 0.35; }
+.data-table.has-year-focus td.td-ent,
+.data-table.has-year-focus td.td-gse { opacity: 1 !important; }
+
+/* Celda vacía GSE: sin recuadro, fondo transparente */
+.chart-cell.is-empty {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Heatmap fijo */
+.heat-band-1 { background: rgba(180,30,30,0.18); }
+.heat-band-2 { background: rgba(232,134,99,0.22); }
+.heat-band-3 { background: rgba(255,201,46,0.18); }
+.heat-band-4 { background: transparent; }
+
+/* Entities-bar: selector nueva estructura */
+.entity-selector-bar {
+  padding: 20px 40px 22px;
+  background: var(--bg-3);
+  border-bottom: 1px solid var(--border-1);
+}
+.entity-selector-inner {
+  display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap;
+}
+.entity-selector-field { display: flex; flex-direction: column; gap: 5px; }
+.entity-selector-field .control-label { margin-bottom: 0; }
+.entity-selector-divider {
+  width: 1px; height: 36px; background: var(--border-1); margin: 0 4px; align-self: flex-end;
+}
+.entity-selector-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.entities-chips { padding: 12px 40px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.entities-chips-inner {
+  background: var(--bg-3);
+  border-bottom: 1px solid var(--border-1);
+  padding: 0 40px 16px;
+}
+.entities-chips-head {
+  display: flex; align-items: baseline; gap: 12px; padding: 16px 0 10px;
+}
+
+/* Estab popup trigger en entidad chip */
+.entity-estab-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10px; color: var(--fg-3); cursor: pointer;
+  background: transparent; border: 0; padding: 0;
+  font-family: var(--font-body);
+}
+.entity-estab-btn:hover { color: var(--ocean); text-decoration: underline; }
+
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <div id="global-tooltip" class="tooltip" style="display:none"></div>
+  <div id="tooltip-overlay" style="display:none;position:fixed;inset:0;z-index:9998;"></div>
+
+  <!-- React + Babel desde CDN — builds production + SRI (auditoría B4, s13).
+       Hashes sha384 calculados desde los tarballs oficiales de npm
+       (identicos a lo servido por unpkg para la version fijada). Si se
+       cambia la version, recalcular: openssl dgst -sha384 -binary | base64 -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"
+          integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z"
+          crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"
+          integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1"
+          crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+          integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+          crossorigin="anonymous"></script>
+
+  <!-- D3 inline -->
+  <script>__D3_INLINE__</script>
+
+  <!-- pako inline (descompresión gzip del JSON embebido) -->
+  <script>__PAKO_INLINE__</script>
+
+  <!-- Datos reales del pipeline R (gzip + base64, descomprimidos en cliente) -->
+  <script>
+    const DATA = JSON.parse(pako.inflate(
+      Uint8Array.from(atob("__JSON_DATA__"), c => c.charCodeAt(0)),
+      { to: "string" }
+    ));
+  </script>
+
+  <!-- Aplicación React (JSX, compilado por Babel en el cliente) -->
+  <script type="text/babel" data-presets="env,react">
+    "use strict";
+
+    // ============================================================
+    // CatData — adaptador de datos de Categoría de Desempeño.
+    // Sin ponderación por matrícula, sin GSE: agregación = conteo de EE.
+    // ============================================================
+    const CatData = (function () {
+      const M = DATA.meta;
+      const YEARS = M.anios.slice().sort((a, b) => a - b);
+      const ANIO_VIGENTE = M.anio_vigente;
+      const CATEGORIAS = M.categorias.slice();          // orden semántico Insuf -> Alto
+      const CAT_COLORS = M.cat_colors;
+      const CAT_LABELS = M.cat_labels;
+      const NIVELES = M.niveles;                          // {basica, media}
+      const MOTIVOS = M.motivos;
+      const DEPE_LABELS = M.depe_labels || {};
+
+      // ---- Catálogos territoriales ----
+      const COMUNA_BY_COD = new Map(DATA.comunas.map(c => [String(c.cod), c]));
+
+      const REGIONES = (function () {
+        const nomReg = {};
+        DATA.regiones.forEach(r => { nomReg[String(r.cod)] = r.nom; });
+        const byReg = new Map();
+        DATA.comunas.forEach(c => {
+          const k = String(c.cod_reg);
+          if (!byReg.has(k)) byReg.set(k, { cod: k, nom: nomReg[k] || c.nom_reg || ("Región " + k), comunas: [] });
+          byReg.get(k).comunas.push({ cod: String(c.cod), nom: c.nom });
+        });
+        return Array.from(byReg.values())
+          .sort((a, b) => parseInt(a.cod) - parseInt(b.cod))
+          .map(r => ({ ...r, comunas: r.comunas.sort((a, b) => a.nom.localeCompare(b.nom, "es")) }));
+      })();
+
+      const SLEPS = (function () {
+        if (!DATA.sleps) return [];
+        const by = new Map();
+        DATA.sleps.forEach(r => {
+          const k = String(r.cod_slep);
+          if (!by.has(k)) by.set(k, { cod: k, nom: r.nombre_slep, anio_traspaso: r.anio_traspaso });
+        });
+        return Array.from(by.values()).sort((a, b) => a.nom.localeCompare(b.nom, "es"));
+      })();
+
+      // ---- Índice territorial: (tipo|cod|nivel|anio) -> {categoria: {n_ee, pct}, total} ----
+      const T = DATA.territorial;
+      const TER_IX = new Map();
+      for (let i = 0; i < T.rows; i++) {
+        const k = T.tipo_entidad[i] + "|" + T.cod_entidad[i] + "|" + T.nivel[i] + "|" + T.anio[i];
+        if (!TER_IX.has(k)) TER_IX.set(k, { cats: {}, total: 0 });
+        const o = TER_IX.get(k);
+        o.cats[T.categoria[i]] = { n_ee: T.n_ee[i], pct: T.pct[i] };
+        o.total = T.n_categorizados[i];   // mismo denominador en todas las filas de la celda
+      }
+
+      // Distribución de un territorio en un nivel/año: 4 categorías + total.
+      function getDistribucion(tipo, cod, nivel, anio) {
+        const k = tipo + "|" + String(cod) + "|" + nivel + "|" + anio;
+        const o = TER_IX.get(k);
+        const out = { total: o ? o.total : 0, cats: {} };
+        CATEGORIAS.forEach(c => {
+          const v = o && o.cats[c] ? o.cats[c] : { n_ee: 0, pct: 0 };
+          out.cats[c] = v;
+        });
+        return out;
+      }
+
+      // ---- Índice sin_vigente: (tipo|cod|nivel|anio) -> {motivo: n_ee} ----
+      const SV = DATA.sin_vigente;
+      const SV_IX = new Map();
+      for (let i = 0; i < SV.rows; i++) {
+        const k = SV.tipo_entidad[i] + "|" + SV.cod_entidad[i] + "|" + SV.nivel[i] + "|" + SV.anio[i];
+        if (!SV_IX.has(k)) SV_IX.set(k, {});
+        SV_IX.get(k)[SV.motivo[i]] = SV.n_ee[i];
+      }
+      function getSinVigente(tipo, cod, nivel, anio) {
+        const k = tipo + "|" + String(cod) + "|" + nivel + "|" + anio;
+        return SV_IX.get(k) || {};
+      }
+
+      // ---- Índice por establecimiento: rbd|nivel -> [{anio, categoria}] (trayectoria) ----
+      const R = DATA.rbd;
+      const RBD_TRAJ = new Map();   // rbd|nivel -> Map(anio -> categoria)
+      const RBD_META = new Map();   // rbd -> {nom, cod_com, cod_reg, cod_depe2}
+      for (let i = 0; i < R.rows; i++) {
+        const rbd = R.rbd[i], niv = R.nivel[i];
+        const k = rbd + "|" + niv;
+        if (!RBD_TRAJ.has(k)) RBD_TRAJ.set(k, new Map());
+        RBD_TRAJ.get(k).set(R.anio[i], R.categoria[i]);
+        if (!RBD_META.has(rbd)) RBD_META.set(rbd, {
+          nom: R.nom_rbd[i], cod_com: String(R.cod_com_rbd[i]),
+          cod_reg: String(R.cod_reg_rbd[i]), cod_depe2: String(R.cod_depe2[i]),
+          nom_com: (COMUNA_BY_COD.get(String(R.cod_com_rbd[i])) || {}).nom || null
+        });
+      }
+
+      // RBDs que pertenecen a un territorio (para listar EE de la grilla).
+      function rbdsDeEntidad(entity) {
+        const set = new Set();
+        if (entity.kind === "establecimiento") {
+          set.add(String(entity.cod));
+        } else if (entity.kind === "region") {
+          RBD_META.forEach((m, rbd) => { if (m.cod_reg === String(entity.cod)) set.add(rbd); });
+        } else if (entity.kind === "comuna") {
+          RBD_META.forEach((m, rbd) => { if (m.cod_com === String(entity.cod)) set.add(rbd); });
+        } else if (entity.kind === "slep") {
+          (entity.rbds || []).forEach(r => set.add(String(r)));
+        }
+        return set;
+      }
+
+      // Catálogo de establecimientos para el buscador (los que tienen alguna medición).
+      const ESTAB_CAT = (function () {
+        const out = [];
+        RBD_META.forEach((m, rbd) => {
+          out.push({ rbd, nom: m.nom || ("RBD " + rbd), nom_com: m.nom_com, cod_depe2: m.cod_depe2 });
+        });
+        return out.sort((a, b) => a.nom.localeCompare(b.nom, "es"));
+      })();
+
+      // Lista de EE de una entidad en un nivel, con categoría vigente y trayectoria.
+      // Solo EE que tienen alguna medición en ese nivel.
+      function getEstablecimientos(entity, nivel) {
+        const rbds = rbdsDeEntidad(entity);
+        const out = [];
+        rbds.forEach(rbd => {
+          const traj = RBD_TRAJ.get(rbd + "|" + nivel);
+          if (!traj) return;   // este EE no rinde este nivel
+          const m = RBD_META.get(rbd);
+          const serie = YEARS.map(y => ({ anio: y, categoria: traj.has(y) ? traj.get(y) : null }));
+          const vigente = traj.has(ANIO_VIGENTE) ? traj.get(ANIO_VIGENTE) : null;
+          out.push({ rbd, nom: m.nom || ("RBD " + rbd), nom_com: m.nom_com, cod_com: m.cod_com, cod_depe2: m.cod_depe2, vigente, serie });
+        });
+        return out.sort((a, b) => a.nom.localeCompare(b.nom, "es"));
+      }
+
+      // Distribución calculada desde una lista de EE ya filtrada (n_ee por categoría).
+      // Útil para entidad = establecimiento y para reflejar filtros activos.
+      function distribucionDesdeEE(listaEE) {
+        const cats = {};
+        CATEGORIAS.forEach(c => { cats[c] = { n_ee: 0, pct: 0 }; });
+        let total = 0;
+        listaEE.forEach(ee => {
+          if (ee.vigente && cats[ee.vigente]) { cats[ee.vigente].n_ee += 1; total += 1; }
+        });
+        CATEGORIAS.forEach(c => { cats[c].pct = total > 0 ? cats[c].n_ee / total : 0; });
+        return { total, cats };
+      }
+
+      return {
+        YEARS, ANIO_VIGENTE, CATEGORIAS, CAT_COLORS, CAT_LABELS, NIVELES, MOTIVOS, DEPE_LABELS,
+        REGIONES, SLEPS, COMUNA_BY_COD, ESTAB_CAT,
+        getDistribucion, getSinVigente, getEstablecimientos, distribucionDesdeEE,
+      };
+    })();
+
+    // ============================================================
+    // Utilidades de formato chileno
+    // ============================================================
+    function fmtPct1(v) {
+      if (v == null) return "—";
+      return (v * 100).toFixed(1).replace(".", ",") + "%";
+    }
+    function fmtInt(v) {
+      if (v == null) return "—";
+      return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // ============================================================
+    // Header
+    // ============================================================
+    function Header() {
+      return (
+        <header className="app-header">
+          <div className="app-header-inner">
+            <div className="app-header-left">
+              <h1 className="app-title">
+                Categoría de Desempeño
+                <span className="app-title-sub"> — distribución de establecimientos</span>
+              </h1>
+              <p className="app-subtitle">
+                Datos 2016–2019 · Clasificación de la Agencia de Calidad de la Educación
+              </p>
+              <p className="app-objective">
+                Herramienta de análisis interno del <strong>SLEP Costa Central</strong> para visualizar
+                cómo se distribuyen los establecimientos según su <strong>Categoría de Desempeño</strong>
+                {" "}(Alto, Medio, Medio-Bajo, Insuficiente), comparando comunas, SLEPs, regiones o un
+                establecimiento individual. A diferencia del Simce por estudiante, la Categoría es una <strong>etiqueta por
+                establecimiento</strong> que la Agencia construye integrando el contexto socioeconómico, por
+                lo que <strong>no se segmenta por GSE</strong>. La distribución se calcula sobre los
+                establecimientos efectivamente categorizados; los sin categoría vigente se reportan aparte.
+              </p>
+            </div>
+          </div>
+        </header>
+      );
+    }
+
+    function Segmented({ value, options, onChange }) {
+      const opts = options.map(o => typeof o === "string" ? { value: o, label: o } : o);
+      return (
+        <div className="segmented" role="tablist">
+          {opts.map(o => (
+            <button key={o.value} role="tab" aria-selected={value === o.value}
+              className={"segmented-btn" + (value === o.value ? " is-active" : "")}
+              onClick={() => onChange(o.value)}>{o.label}</button>
+          ))}
+        </div>
+      );
+    }
+
+    // ============================================================
+    // Selector de entidad (modal: comuna / SLEP / región / establecimiento)
+    // ============================================================
+    function EntityModal({ onSelect, onCancel }) {
+      const [tab, setTab] = React.useState("comuna");
+      const [q, setQ] = React.useState("");
+      const ql = q.trim().toLowerCase();
+
+      let list = [];
+      if (tab === "comuna") {
+        list = DATA.comunas
+          .filter(c => !ql || c.nom.toLowerCase().includes(ql))
+          .map(c => ({ kind: "comuna", cod: String(c.cod), nom: c.nom, sub: c.nom_reg }));
+      } else if (tab === "slep") {
+        list = CatData.SLEPS
+          .filter(s => !ql || s.nom.toLowerCase().includes(ql))
+          .map(s => ({ kind: "slep", cod: s.cod, nom: s.nom,
+                       rbds: DATA.sleps.filter(r => String(r.cod_slep) === s.cod).map(r => String(r.rbd)),
+                       sub: "Traspaso " + s.anio_traspaso }));
+      } else if (tab === "region") {
+        list = CatData.REGIONES
+          .filter(r => !ql || r.nom.toLowerCase().includes(ql))
+          .map(r => ({ kind: "region", cod: r.cod, nom: r.nom, sub: r.comunas.length + " comunas" }));
+      } else {
+        // establecimiento: requiere búsqueda (catálogo grande); limitar resultados.
+        list = ql
+          ? CatData.ESTAB_CAT
+              .filter(e => e.nom.toLowerCase().includes(ql) || String(e.rbd).includes(ql))
+              .slice(0, 60)
+              .map(e => ({ kind: "establecimiento", cod: e.rbd, nom: e.nom,
+                           sub: (e.nom_com || "") + " · RBD " + e.rbd }))
+          : [];
+      }
+
+      const tabs = [["comuna", "Comuna"], ["slep", "SLEP"], ["region", "Región"], ["establecimiento", "Establecimiento"]];
+
+      return (
+        <div className="modal-backdrop" onClick={onCancel}>
+          <div className="modal" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2 className="modal-title">Seleccionar territorio</h2>
+            </div>
+            <div className="modal-tabs">
+              {tabs.map(([k, lbl]) => (
+                <button key={k} className={"modal-tab" + (tab === k ? " is-active" : "")}
+                  onClick={() => { setTab(k); setQ(""); }}>{lbl}</button>
+              ))}
+            </div>
+            <div className="modal-body">
+              <input className="input-search"
+                placeholder={tab === "establecimiento" ? "Buscar por nombre o RBD…" : "Buscar…"}
+                value={q} onChange={e => setQ(e.target.value)} autoFocus
+                style={{ width: "100%", padding: "8px 10px", marginBottom: 10,
+                         border: "1px solid var(--border-2)", borderRadius: "var(--radius-2)",
+                         fontFamily: "var(--font-body)", fontSize: 13 }} />
+              <div className="comuna-checklist" style={{ maxHeight: 320 }}>
+                {list.length === 0 && (
+                  <div className="empty-state">
+                    {tab === "establecimiento" && !ql ? "Escribe para buscar un establecimiento" : "Sin resultados"}
+                  </div>
+                )}
+                {list.map(item => (
+                  <div key={item.kind + item.cod} className="check-row" onClick={() => onSelect(item)}>
+                    <span className="check-name">{item.nom}</span>
+                    <span className="check-region">{item.sub}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="estab-popup-btn" onClick={onCancel}>Cancelar</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ============================================================
+    // Trayectoria (año arriba, marca de color abajo; reciente -> antiguo)
+    // ============================================================
+    function Trayectoria({ serie }) {
+      // Orden descendente: el año más reciente primero.
+      const ordenada = serie.slice().sort((a, b) => b.anio - a.anio);
+      return (
+        <span className="traj">
+          {ordenada.map((p, idx) => {
+            const esSi = p.categoria == null || p.categoria === "s/i";
+            const color = esSi ? null : CatData.CAT_COLORS[p.categoria];
+            const esVigente = p.anio === CatData.ANIO_VIGENTE;
+            return (
+              <span key={p.anio} className="traj-year">
+                <span className={"traj-year-lbl" + (esVigente ? " is-vigente" : "")}>{p.anio}</span>
+                <span
+                  className={"traj-mark" + (esSi ? " is-si" : "") + (esVigente ? " is-vigente" : "")}
+                  style={esSi ? null : { background: color }}
+                  title={p.anio + ": " + (esSi ? "Sin categoría" : CatData.CAT_LABELS[p.categoria])
+                         + (esVigente ? " (vigente)" : "")} />
+              </span>
+            );
+          })}
+        </span>
+      );
+    }
+
+    // ============================================================
+    // Columna de categoría
+    // ============================================================
+    function CatColumn({ categoria, stat, establecimientos }) {
+      const color = CatData.CAT_COLORS[categoria];
+      const label = CatData.CAT_LABELS[categoria];
+      // pct autoritativo desde el territorial (n_ee/n_categorizados ya calculado en R).
+      const pct = (stat.pct != null) ? stat.pct
+                : (stat.total > 0 ? stat.n_ee / stat.total : 0);
+      return (
+        <div className="cat-col">
+          <div className="cat-col-head" style={{ background: color }}>
+            <span className="cat-col-title">{label}</span>
+            <span className="cat-col-stat">
+              <strong>{fmtInt(stat.n_ee)}</strong> establec. · {fmtPct1(pct)}
+            </span>
+          </div>
+          <div className="cat-col-bar">
+            <div className="cat-col-bar-fill" style={{ width: (pct * 100).toFixed(1) + "%" }} />
+          </div>
+          {establecimientos.length === 0
+            ? <div className="cat-col-empty">Sin establecimientos en esta categoría</div>
+            : (
+              <ul className="cat-col-list">
+                {establecimientos.map(ee => (
+                  <li key={ee.rbd} className="ee-row">
+                    <span className="ee-row-main">
+                      <span className="ee-row-name">{ee.nom}</span>
+                      <span className="ee-row-meta">
+                        {ee.nom_com && <span>{ee.nom_com}</span>}
+                        {ee.nom_com && <span className="ee-row-sep">·</span>}
+                        <span>{CatData.DEPE_LABELS[ee.cod_depe2] || "Dependencia s/i"}</span>
+                        <span className="ee-row-sep">·</span>
+                        <span className="ee-row-rbd">RBD {ee.rbd}</span>
+                      </span>
+                    </span>
+                    <Trayectoria serie={ee.serie} />
+                  </li>
+                ))}
+              </ul>
+            )}
+        </div>
+      );
+    }
+
+    // ============================================================
+    // Sección sin categoría vigente
+    // ============================================================
+    function SinVigente({ sv }) {
+      const motivos = Object.keys(sv);
+      if (motivos.length === 0) return null;
+      const total = motivos.reduce((a, m) => a + sv[m], 0);
+      return (
+        <div className="sin-vigente">
+          <h3 className="sin-vigente-title">Sin categoría vigente</h3>
+          <p className="sin-vigente-sub">
+            {fmtInt(total)} establecimientos sin categoría en {CatData.ANIO_VIGENTE}.
+            No entran en la distribución de las cuatro categorías.
+          </p>
+          <div className="sin-vigente-motivos">
+            {motivos.map(m => (
+              <div key={m} className="sin-vigente-motivo">
+                <span className="sin-vigente-n">{fmtInt(sv[m])}</span>
+                <span className="sin-vigente-lbl">{CatData.MOTIVOS[m] || m}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // ============================================================
+    // Filtro de chips multi-select (comuna, dependencia); todas activas por defecto.
+    // ============================================================
+    function ChipFilter({ titulo, items, activas, onToggle }) {
+      if (items.length <= 1) return null;   // sin filtro si hay un solo valor
+      return (
+        <div className="chip-filter">
+          <span className="chip-filter-title">{titulo}</span>
+          <div className="chip-filter-chips">
+            {items.map(it => {
+              const on = activas.has(it.cod);
+              return (
+                <button key={it.cod}
+                  className={"filter-chip" + (on ? " is-on" : "")}
+                  onClick={() => onToggle(it.cod)}>
+                  {it.nom}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+
+    // ============================================================
+    // App
+    // ============================================================
+    function App() {
+      const nivelOpts = Object.entries(CatData.NIVELES).map(([k, v]) => ({ value: k, label: v }));
+      const [entity, setEntity] = React.useState(() => {
+        // Semilla: SLEP Costa Central si existe; si no, el primer SLEP.
+        const cc = CatData.SLEPS.find(s => s.nom === "Costa Central") || CatData.SLEPS[0];
+        return { kind: "slep", cod: cc.cod, nom: cc.nom,
+                 rbds: DATA.sleps.filter(r => String(r.cod_slep) === cc.cod).map(r => String(r.rbd)) };
+      });
+      const [nivel, setNivel] = React.useState("basica");
+      const [modal, setModal] = React.useState(false);
+      const [comunasOff, setComunasOff] = React.useState(() => new Set());
+      const [depesOff, setDepesOff] = React.useState(() => new Set());
+
+      const sv = CatData.getSinVigente(entity.kind, entity.cod, nivel, CatData.ANIO_VIGENTE);
+      const establecimientos = CatData.getEstablecimientos(entity, nivel);
+
+      // Comunas presentes en la entidad (para el filtro).
+      const comunasEntidad = React.useMemo(() => {
+        const map = new Map();
+        establecimientos.forEach(ee => {
+          if (ee.cod_com && !map.has(ee.cod_com)) map.set(ee.cod_com, ee.nom_com || ee.cod_com);
+        });
+        return Array.from(map.entries())
+          .map(([cod, nom]) => ({ cod, nom }))
+          .sort((a, b) => a.nom.localeCompare(b.nom, "es"));
+      }, [establecimientos]);
+
+      // Dependencias presentes en la entidad (para el filtro).
+      const depesEntidad = React.useMemo(() => {
+        const set = new Set();
+        establecimientos.forEach(ee => { if (ee.cod_depe2) set.add(ee.cod_depe2); });
+        return Array.from(set)
+          .map(cod => ({ cod, nom: CatData.DEPE_LABELS[cod] || ("Dependencia " + cod) }))
+          .sort((a, b) => a.cod.localeCompare(b.cod));
+      }, [establecimientos]);
+
+      // Al cambiar de entidad o nivel, resetear ambos filtros (todo activo).
+      React.useEffect(() => { setComunasOff(new Set()); setDepesOff(new Set()); }, [entity, nivel]);
+
+      const comActivas = new Set(comunasEntidad.map(c => c.cod).filter(c => !comunasOff.has(c)));
+      const depActivas = new Set(depesEntidad.map(d => d.cod).filter(d => !depesOff.has(d)));
+      const eeVisibles = establecimientos.filter(ee =>
+        (!ee.cod_com || comActivas.has(ee.cod_com)) &&
+        (!ee.cod_depe2 || depActivas.has(ee.cod_depe2)));
+
+      // Distribución del header desde los EE visibles (refleja filtros).
+      const dist = CatData.distribucionDesdeEE(eeVisibles);
+
+      // Agrupar EE visibles por categoría vigente.
+      const porCat = {};
+      CatData.CATEGORIAS.forEach(c => { porCat[c] = []; });
+      eeVisibles.forEach(ee => {
+        if (ee.vigente && porCat[ee.vigente]) porCat[ee.vigente].push(ee);
+      });
+
+      const toggle = (setter) => (cod) => setter(prev => {
+        const next = new Set(prev);
+        if (next.has(cod)) next.delete(cod); else next.add(cod);
+        return next;
+      });
+
+      return (
+        <div className="app is-comfy">
+          <Header />
+          <section className="controls-bar">
+            <div className="control-group">
+              <span className="control-label">Territorio</span>
+              <button className="entity-select-btn" onClick={() => setModal(true)}>
+                {entity.nom} ▾
+              </button>
+            </div>
+            <div className="control-group">
+              <span className="control-label">Nivel</span>
+              <Segmented value={nivel} options={nivelOpts} onChange={setNivel} />
+            </div>
+          </section>
+
+          <main className="app-main">
+            <div className="terr-summary">
+              <span className="terr-summary-name">{entity.nom}</span>
+              <span className="terr-summary-meta">
+                <strong>{fmtInt(dist.total)}</strong> establecimientos categorizados ·
+                {" "}{CatData.NIVELES[nivel]} · año {CatData.ANIO_VIGENTE}
+              </span>
+            </div>
+
+            <ChipFilter titulo="Comuna" items={comunasEntidad}
+              activas={comActivas} onToggle={toggle(setComunasOff)} />
+            <ChipFilter titulo="Dependencia" items={depesEntidad}
+              activas={depActivas} onToggle={toggle(setDepesOff)} />
+
+            <div className="traj-legend">
+              <span className="traj-legend-head">
+                Trayectoria {CatData.YEARS[0]}–{CatData.YEARS[CatData.YEARS.length - 1]}
+              </span>
+              <div className="traj-legend-items">
+                {CatData.CATEGORIAS.map(c => (
+                  <span key={c} className="traj-legend-item">
+                    <span className="traj-legend-sw" style={{ background: CatData.CAT_COLORS[c] }} />
+                    {CatData.CAT_LABELS[c]}
+                  </span>
+                ))}
+                <span className="traj-legend-item">
+                  <span className="traj-legend-sw is-si" />
+                  Sin categoría
+                </span>
+              </div>
+            </div>
+
+            <div className="cat-grid">
+              {CatData.CATEGORIAS.map(c => (
+                <CatColumn key={c} categoria={c}
+                  stat={dist.cats[c]} establecimientos={porCat[c]} />
+              ))}
+            </div>
+
+            <SinVigente sv={sv} />
+          </main>
+
+          {modal && (
+            <EntityModal
+              onSelect={item => { setEntity(item); setModal(false); }}
+              onCancel={() => setModal(false)} />
+          )}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
