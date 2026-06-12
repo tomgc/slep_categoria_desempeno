@@ -1,8 +1,8 @@
 # Estructura actual — slep_categoria_desempeno
 
 - **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-11 20:24:46
-- **Totales:** 13 carpetas, 39 archivos
+- **Fecha:** 2026-06-11 23:14:18
+- **Totales:** 13 carpetas, 55 archivos
 - **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 ## Arbol
@@ -14,12 +14,17 @@ slep_categoria_desempeno/
 ├── 20_insumos/
 │   ├── auxiliares/
 │   │   ├── .gitkeep  (0)
+│   │   ├── 202602_Listado_SLEP_2026_vf.xlsx  (55.5K)
+│   │   ├── caracterizacion_establecimientos.xlsx  (16.5K)
 │   │   ├── condiciones_uso_bd.doc  (738K)
+│   │   ├── diccionario_territorios.xlsx  (16.8K)
+│   │   ├── directorio_oficial_ee.csv  (3.6M)
+│   │   ├── glosas_directorio_oficial_ee.pdf  (457K)
 │   │   ├── prompt_nuevo_proyecto_categoria_desempeno.md  (7.71K)
 │   │   ├── rex_1440.pdf  (995K)
 │   │   ├── rex_1459.pdf  (3.16M)
 │   │   └── rex_589.pdf  (2.68M)
-│   ├── .DS_Store  (6K)
+│   ├── .DS_Store  (8K)
 │   ├── cdb_2016.xlsx  (398K)
 │   ├── cdb_2017.xlsx  (344K)
 │   ├── cdb_2018.xlsx  (390K)
@@ -28,10 +33,19 @@ slep_categoria_desempeno/
 │   ├── cdm_2018.xlsx  (155K)
 │   └── cdm_2019.xlsx  (151K)
 ├── 30_procesamiento/
-│   └── .gitkeep  (0)
+│   ├── .gitkeep  (0)
+│   ├── 30_construir_auxiliares.R  (12.7K)
+│   ├── 31_leer_normalizar.R  (11.9K)
+│   └── 32_agregar_territorial.R  (13.8K)
 ├── 40_salidas/
 │   └── intermedios/
-│       └── .gitkeep  (0)
+│       ├── .gitkeep  (0)
+│       ├── categoria_rbd.parquet  (361K)
+│       ├── categoria_sin_vigente.parquet  (13.6K)
+│       ├── categoria_territorial.parquet  (40.4K)
+│       ├── comunas_chile.parquet  (7.18K)
+│       ├── establecimientos_chile.parquet  (261K)
+│       └── sleps_chile.parquet  (58.7K)
 ├── 50_documentacion/
 │   ├── activa/
 │   │   ├── decisiones/
@@ -42,15 +56,16 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260611_202438_estructura.md  (2.49K)
-│   │   ├── 20260611_202438_estructura.txt  (2.49K)
+│   │   ├── 20260611_230926_estructura.md  (3.32K)
+│   │   ├── 20260611_230926_estructura.txt  (3.34K)
 │   │   ├── 20260611_233324_estructura.md  (1.67K)
 │   │   ├── 20260611_233324_estructura.txt  (1.64K)
-│   │   ├── estructura_actual.md  (2.49K)
-│   │   └── estructura_actual.txt  (2.49K)
+│   │   ├── estructura_actual.md  (3.32K)
+│   │   └── estructura_actual.txt  (3.34K)
 │   ├── traspasos/
 │   │   ├── .gitkeep  (0)
-│   │   └── traspaso_cierre_v01.md  (17.6K)
+│   │   ├── traspaso_cierre_v01.md  (17.6K)
+│   │   └── traspaso_cierre_v02.md  (18.3K)
 │   └── .DS_Store  (6K)
 ├── tests/
 │   └── .gitkeep  (0)
@@ -58,6 +73,7 @@ slep_categoria_desempeno/
 ├── .gitignore  (362)
 ├── 00_build.R  (1.25K)
 ├── 00_escanear_proyecto.R  (8.98K)
+├── 00_run_all.R  (6.59K)
 ├── CLAUDE.md  (4.6K)
 ├── README.md  (2.29K)
 └── slep_categoria_desempeno.Rproj  (220)
@@ -67,11 +83,13 @@ slep_categoria_desempeno/
 
 | Extension | Archivos |
 |---|---|
-| md | 11 |
+| md | 12 |
 | (sin extension) | 10 |
-| xlsx | 7 |
-| pdf | 3 |
-| r | 3 |
+| xlsx | 10 |
+| r | 7 |
+| parquet | 6 |
+| pdf | 4 |
 | txt | 3 |
+| csv | 1 |
 | doc | 1 |
 | rproj | 1 |
