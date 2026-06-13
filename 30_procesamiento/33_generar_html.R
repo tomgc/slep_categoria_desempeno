@@ -76,6 +76,29 @@ DEPE_LABELS <- list(
   "5" = "Servicio Local (SLEP)"
 )
 
+# Etiquetas de tipo de ensenanza (cod_ense2, Anexo III MINEDUC). Gobiernan el
+# render de matricula por tipo en la ficha del establecimiento.
+ENSE2_LABELS <- list(
+  "1" = "Parvularia",
+  "2" = "B\u00e1sica",
+  "3" = "B\u00e1sica adultos",
+  "4" = "Educaci\u00f3n especial",
+  "5" = "Media HC",
+  "6" = "Media adultos",
+  "7" = "Media TP",
+  "8" = "Media TP adultos"
+)
+
+# Mapa cod_ense2 -> nivel del motor de categoria. Solo basica (2) y media (5,7)
+# tienen categoria; el resto es matricula de contexto, sin categoria asociada.
+# media = 5 + 7 sumados (la Agencia categoriza "media" como nivel unico, no
+# separa HC de TP): ambos codigos mapean al mismo nivel "media".
+ENSE2_A_NIVEL <- list(
+  "2" = "basica",
+  "5" = "media",
+  "7" = "media"
+)
+
 # Redondeo de pct para el JSON (4 decimales: precisión suficiente para %).
 PCT_DIGITS <- 4
 
@@ -95,6 +118,19 @@ df_estab <- arrow::read_parquet(ruta_int("establecimientos_chile.parquet"))
 df_com   <- arrow::read_parquet(ruta_int("comunas_chile.parquet"))
 df_slep  <- arrow::read_parquet(ruta_int("sleps_chile.parquet"))
 
+# Matricula por rbd x anio x cod_ense2 (insumo agregado externo, foto historica;
+# grano distinto al de categoria, por eso no se fusiona: viaja como bloque propio).
+ruta_matricula <- here::here("20_insumos", "matricula_rbd_ense.parquet")
+if (!file.exists(ruta_matricula)) {
+  stop("Falta 20_insumos/matricula_rbd_ense.parquet. ",
+       "Generarlo en slep_analisis_matricula (03_generar_matricula_rbd_ense.R) y copiarlo aqui.")
+}
+df_mat <- arrow::read_parquet(ruta_matricula) |>
+  dplyr::mutate(
+    rbd       = as.character(rbd),
+    cod_ense2 = as.character(cod_ense2)
+  )
+
 message(sprintf("    categoria_territorial: %d filas", nrow(df_ter)))
 message(sprintf("    categoria_sin_vigente: %d filas", nrow(df_sv)))
 message(sprintf("    categoria_rbd:         %d filas", nrow(df_rbd)))
@@ -102,6 +138,9 @@ message(sprintf("    establecimientos:      %d EE", nrow(df_estab)))
 message(sprintf("    comunas:               %d", nrow(df_com)))
 message(sprintf("    sleps:                 %d filas (%d SLEPs)",
                 nrow(df_slep), dplyr::n_distinct(df_slep$cod_slep)))
+message(sprintf("    matricula_rbd_ense:    %d filas (%d RBD, anios %s)",
+                nrow(df_mat), dplyr::n_distinct(df_mat$rbd),
+                paste(sort(unique(df_mat$anio)), collapse = ",")))
 
 
 # ============================================================================
@@ -126,7 +165,9 @@ meta <- list(
   cat_labels = CAT_LABELS,
   cat_colors = CAT_COLORS,
   motivos    = MOTIVO_LABELS,
-  depe_labels = DEPE_LABELS
+  depe_labels = DEPE_LABELS,
+  ense2_labels = ENSE2_LABELS,
+  ense2_a_nivel = ENSE2_A_NIVEL
 )
 
 # --- Catálogo de comunas ---
@@ -237,6 +278,27 @@ rbd_lst <- list(
   motivo      = df_rbd_ord$motivo_sin_categoria  # solo poblado en filas s/i (NA -> null)
 )
 
+# --- Matrícula por establecimiento × año × tipo de enseñanza ---
+# Grano distinto al de categoría (cod_ense2, no nivel). El cliente cruza este
+# bloque con rbd_lst: cod_ense2 2 -> categoría básica; 5,7 -> categoría media
+# (sumados); el resto es matrícula de contexto sin categoría. matricula_total_ee
+# es el tamaño completo del EE (todos los cod_ense2), constante por rbd×anio.
+df_mat_ord <- df_mat |>
+  dplyr::mutate(
+    rbd       = as.character(rbd),
+    cod_ense2 = as.character(cod_ense2)
+  ) |>
+  dplyr::arrange(rbd, anio, cod_ense2)
+
+matricula_lst <- list(
+  rows               = nrow(df_mat_ord),
+  rbd                = df_mat_ord$rbd,
+  anio               = as.integer(df_mat_ord$anio),
+  cod_ense2          = df_mat_ord$cod_ense2,
+  matricula          = as.integer(df_mat_ord$matricula),
+  matricula_total_ee = as.integer(df_mat_ord$matricula_total_ee)
+)
+
 
 # ============================================================================
 # Bloque 4 — Validación de integridad del JSON (C.8)
@@ -260,6 +322,19 @@ stopifnot(
   rbd_lst$rows         == nrow(df_rbd)
 )
 
+# Control del bloque matrícula: filas calzan, cod_ense2 en el dominio esperado,
+# total del EE constante dentro de rbd×anio (no debe mezclar niveles).
+stopifnot(
+  "matricula sin filas" = matricula_lst$rows > 0,
+  "matricula: filas no calzan con el parquet" = matricula_lst$rows == nrow(df_mat),
+  "cod_ense2 fuera del dominio 1..8" =
+    all(unique(matricula_lst$cod_ense2) %in% as.character(1:8))
+)
+chk_total_ee <- df_mat_ord |>
+  dplyr::summarise(n_tot = dplyr::n_distinct(matricula_total_ee), .by = c(rbd, anio)) |>
+  dplyr::filter(n_tot > 1)
+stopifnot("matricula_total_ee no es constante dentro de rbd×anio" = nrow(chk_total_ee) == 0)
+
 
 # ============================================================================
 # Bloque 5 — Serializar y comprimir
@@ -273,7 +348,8 @@ json_root <- list(
   establecimientos = establecimientos_lst,
   territorial      = territorial_lst,
   sin_vigente      = sin_vigente_lst,
-  rbd              = rbd_lst
+  rbd              = rbd_lst,
+  matricula        = matricula_lst
 )
 
 json_str <- jsonlite::toJSON(
@@ -380,6 +456,8 @@ message("=== Resumen ===")
 message(sprintf("  Territorial:   %d filas", territorial_lst$rows))
 message(sprintf("  Sin vigente:   %d filas", sin_vigente_lst$rows))
 message(sprintf("  Por EE (rbd):  %d filas", rbd_lst$rows))
+message(sprintf("  Matricula:     %d filas (%d RBD)",
+                matricula_lst$rows, dplyr::n_distinct(matricula_lst$rbd)))
 message(sprintf("  Comunas:       %d", nrow(comunas_lst)))
 message(sprintf("  Regiones:      %d", nrow(regiones_lst)))
 message(sprintf("  SLEPs:         %d (%d RBDs)",
