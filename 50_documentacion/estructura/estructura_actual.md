@@ -1,8 +1,8 @@
 # Estructura actual — slep_categoria_desempeno
 
 - **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-12 21:26:30
-- **Totales:** 16 carpetas, 71 archivos
+- **Fecha:** 2026-06-12 22:01:00
+- **Totales:** 16 carpetas, 76 archivos
 - **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 ## Arbol
@@ -43,8 +43,8 @@ slep_categoria_desempeno/
 │   ├── 30_construir_auxiliares.R  (12.7K)
 │   ├── 31_leer_normalizar.R  (11.9K)
 │   ├── 32_agregar_territorial.R  (13.8K)
-│   ├── 33_generar_html.R  (15K)
-│   └── 33_motor_template.html  (93.3K)
+│   ├── 33_generar_html.R  (15.1K)
+│   └── 33_motor_template.html  (98.2K)
 ├── 40_salidas/
 │   ├── intermedios/
 │   │   ├── .gitkeep  (0)
@@ -55,13 +55,18 @@ slep_categoria_desempeno/
 │   │   ├── establecimientos_chile.parquet  (261K)
 │   │   └── sleps_chile.parquet  (58.7K)
 │   ├── .DS_Store  (6K)
-│   └── motor_categoria.html  (954K)
+│   └── motor_categoria.html  (968K)
 ├── 50_documentacion/
 │   ├── activa/
 │   │   ├── decisiones/
 │   │   │   ├── 20260611_decision_nombres_establecimientos.md  (2K)
 │   │   │   ├── 20260611_decision_sin_gse.md  (2.25K)
-│   │   │   └── 20260612_auditoria_migracion_github.md  (5.84K)
+│   │   │   ├── 20260612_auditoria_migracion_github.md  (5.84K)
+│   │   │   ├── 20260612_decision_cobertura_temporal.md  (2.17K)
+│   │   │   ├── 20260612_decision_licencia.md  (1.89K)
+│   │   │   ├── 20260612_decision_modelo_pages.md  (1.76K)
+│   │   │   ├── 20260612_decision_paleta_categorias.md  (1.99K)
+│   │   │   └── 20260612_decision_visibilidad_repo.md  (1.97K)
 │   │   ├── .DS_Store  (6K)
 │   │   ├── gobernanza_datos.md  (3.04K)
 │   │   ├── POLITICA_PROYECTO.md  (29.7K)
@@ -69,29 +74,29 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260612_123742_estructura.md  (4.04K)
-│   │   ├── 20260612_123742_estructura.txt  (4.09K)
-│   │   ├── 20260612_124127_estructura.md  (4.04K)
-│   │   ├── 20260612_124127_estructura.txt  (4.09K)
-│   │   ├── estructura_actual.md  (4.04K)
-│   │   └── estructura_actual.txt  (4.09K)
+│   │   ├── 20260612_212630_estructura.md  (4.17K)
+│   │   ├── 20260612_212630_estructura.txt  (4.23K)
+│   │   ├── 20260612_215139_estructura.md  (4.5K)
+│   │   ├── 20260612_215139_estructura.txt  (4.56K)
+│   │   ├── estructura_actual.md  (4.5K)
+│   │   └── estructura_actual.txt  (4.56K)
 │   ├── traspasos/
 │   │   ├── .gitkeep  (0)
 │   │   ├── traspaso_cierre_v01.md  (17.6K)
 │   │   ├── traspaso_cierre_v02.md  (18.3K)
 │   │   ├── traspaso_cierre_v03.md  (25K)
 │   │   ├── traspaso_cierre_v04.md  (25.1K)
-│   │   └── traspaso_cierre_v05.md  (28.6K)
+│   │   ├── traspaso_cierre_v05.md  (28.6K)
+│   │   └── traspaso_cierre_v06.md  (24.2K)
 │   └── .DS_Store  (6K)
 ├── docs/
-│   └── index.html  (954K)
+│   └── index.html  (968K)
 ├── tests/
 │   └── .gitkeep  (0)
 ├── .DS_Store  (10K)
 ├── .gitignore  (362)
-├── 00_build.R  (1.25K)
 ├── 00_escanear_proyecto.R  (8.98K)
-├── 00_run_all.R  (6.59K)
+├── 00_run_all.R  (6.9K)
 ├── CLAUDE.md  (4.6K)
 ├── LICENSE  (1.75K)
 ├── README.md  (3.4K)
@@ -102,10 +107,10 @@ slep_categoria_desempeno/
 
 | Extension | Archivos |
 |---|---|
-| md | 17 |
+| md | 23 |
 | (sin extension) | 14 |
 | xlsx | 10 |
-| r | 8 |
+| r | 7 |
 | parquet | 6 |
 | pdf | 4 |
 | html | 3 |
