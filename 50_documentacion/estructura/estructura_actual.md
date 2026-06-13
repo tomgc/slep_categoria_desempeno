@@ -1,8 +1,8 @@
 # Estructura actual — slep_categoria_desempeno
 
 - **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-13 10:07:51
-- **Totales:** 16 carpetas, 78 archivos
+- **Fecha:** 2026-06-13 11:31:24
+- **Totales:** 16 carpetas, 80 archivos
 - **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 ## Arbol
@@ -66,20 +66,22 @@ slep_categoria_desempeno/
 │   │   │   ├── 20260612_decision_licencia.md  (1.89K)
 │   │   │   ├── 20260612_decision_modelo_pages.md  (1.76K)
 │   │   │   ├── 20260612_decision_paleta_categorias.md  (1.99K)
-│   │   │   └── 20260612_decision_visibilidad_repo.md  (1.97K)
+│   │   │   ├── 20260612_decision_visibilidad_repo.md  (1.97K)
+│   │   │   └── informe_escaneo_matricula.docx  (22.5K)
 │   │   ├── .DS_Store  (6K)
 │   │   ├── gobernanza_datos.md  (3.04K)
 │   │   ├── POLITICA_PROYECTO.md  (29.7K)
 │   │   └── SETTINGS_Y_PROMPTS_OPERACIONALES.md  (24.7K)
 │   ├── andamios/
+│   │   ├── .DS_Store  (6K)
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260612_220100_estructura.md  (4.55K)
-│   │   ├── 20260612_220100_estructura.txt  (4.61K)
 │   │   ├── 20260612_222236_estructura.md  (4.61K)
 │   │   ├── 20260612_222236_estructura.txt  (4.66K)
-│   │   ├── estructura_actual.md  (4.61K)
-│   │   └── estructura_actual.txt  (4.66K)
+│   │   ├── 20260613_100751_estructura.md  (4.66K)
+│   │   ├── 20260613_100751_estructura.txt  (4.71K)
+│   │   ├── estructura_actual.md  (4.66K)
+│   │   └── estructura_actual.txt  (4.71K)
 │   ├── traspasos/
 │   │   ├── .gitkeep  (0)
 │   │   ├── traspaso_cierre_v01.md  (17.6K)
@@ -110,7 +112,7 @@ slep_categoria_desempeno/
 | Extension | Archivos |
 |---|---|
 | md | 25 |
-| (sin extension) | 14 |
+| (sin extension) | 15 |
 | xlsx | 10 |
 | r | 7 |
 | parquet | 6 |
@@ -120,5 +122,6 @@ slep_categoria_desempeno/
 | js | 2 |
 | csv | 1 |
 | doc | 1 |
+| docx | 1 |
 | rproj | 1 |
 | yml | 1 |
