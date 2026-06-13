@@ -3,20 +3,23 @@
 # Orquestador del pipeline slep_categoria_desempeno (punto de entrada unico).
 #
 # Ejecuta en orden los pasos de 30_procesamiento/:
-#   1. 30_construir_auxiliares.R  catalogos territoriales desde el directorio
-#   2. 31_leer_normalizar.R       lee 7 xlsx, normaliza categoria, cruza RBD
-#   3. 32_agregar_territorial.R   conteo de EE por territorio x nivel x anio
-#   4. 33_generar_html.R          motor HTML autocontenido (PENDIENTE sesion 3)
+#   30. 30_construir_auxiliares.R  catalogos territoriales desde el directorio
+#   31. 31_leer_normalizar.R       lee 7 xlsx, normaliza categoria, cruza RBD
+#   32. 32_agregar_territorial.R   conteo de EE por territorio x nivel x anio
+#   33. 33_generar_html.R          motor HTML autocontenido (producto final)
 #
 # Solo orquesta: cero logica de negocio, no modifica scripts de estacion,
 # sin cache automatico por timestamp (saltar pasos es decision explicita).
 #
+# Los ids de paso coinciden con el prefijo del script, de modo que el numero
+# del archivo es el numero del paso (run_all(only = 33) regenera el HTML).
+#
 # Uso:
 #   source(here::here("00_run_all.R"))
-#   run_all()                  # todos los pasos disponibles
-#   run_all(skip = c(1, 2))    # omite auxiliares y normalizacion
-#   run_all(from = 3)          # desde el paso 3 en adelante
-#   run_all(only = 2)          # solo el paso 2
+#   run_all()                   # todos los pasos disponibles
+#   run_all(skip = c(30, 31))   # omite auxiliares y normalizacion
+#   run_all(from = 32)          # desde el paso 32 en adelante
+#   run_all(only = 33)          # solo el motor HTML
 # ----------------------------------------------------------------------------
 
 # ---- Anclaje de raiz (criterios .Rproj / .git / .here) ---------------------
@@ -39,18 +42,18 @@ instalar_si_falta(c(
 # ============================================================================
 # Definicion de pasos
 # ============================================================================
-# Cada paso: id (entero), etiqueta (descriptiva), ruta (relativa a la raiz).
-# El paso 4 esta declarado pero su script aun no existe (sesion 3): se valida
-# su presencia en tiempo de ejecucion, no al definir PASOS.
+# Cada paso: id (entero, coincide con el prefijo del script), etiqueta
+# (descriptiva), ruta (relativa a la raiz). Los cuatro scripts existen; su
+# presencia se valida en tiempo de ejecucion, no al definir PASOS.
 
 PASOS <- list(
-  list(id = 1L, etiqueta = "Construir auxiliares (catalogos territoriales)",
+  list(id = 30L, etiqueta = "Construir auxiliares (catalogos territoriales)",
        ruta = file.path("30_procesamiento", "30_construir_auxiliares.R")),
-  list(id = 2L, etiqueta = "Leer y normalizar categoria (7 xlsx -> RBD)",
+  list(id = 31L, etiqueta = "Leer y normalizar categoria (7 xlsx -> RBD)",
        ruta = file.path("30_procesamiento", "31_leer_normalizar.R")),
-  list(id = 3L, etiqueta = "Agregar territorial (conteo de EE)",
+  list(id = 32L, etiqueta = "Agregar territorial (conteo de EE)",
        ruta = file.path("30_procesamiento", "32_agregar_territorial.R")),
-  list(id = 4L, etiqueta = "Generar motor HTML autocontenido",
+  list(id = 33L, etiqueta = "Generar motor HTML autocontenido",
        ruta = file.path("30_procesamiento", "33_generar_html.R"))
 )
 
@@ -60,6 +63,8 @@ PASOS <- list(
 # ============================================================================
 
 #' Ejecutar el pipeline completo o un subconjunto de pasos.
+#'
+#' Los pasos se identifican por su numero de prefijo (30, 31, 32, 33).
 #'
 #' @param from Integer. Primer paso a ejecutar (default: el menor disponible).
 #' @param to Integer. Ultimo paso a ejecutar (default: el mayor disponible).
@@ -165,7 +170,8 @@ run_all <- function(from = NULL, to = NULL, only = NULL, skip = NULL) {
 # ============================================================================
 # Ejemplos de uso (comentados)
 # ============================================================================
-# run_all()                  # todos los pasos disponibles, en orden
-# run_all(skip = c(1, 2))    # omite auxiliares y normalizacion (reusa parquets)
-# run_all(from = 3)          # desde el paso 3 (solo agregacion + motor)
-# run_all(only = 2)          # exactamente el paso 2
+# run_all()                   # todos los pasos disponibles, en orden
+# run_all(skip = c(30, 31))   # omite auxiliares y normalizacion (reusa parquets)
+# run_all(from = 32)          # desde el paso 32 (agregacion + motor)
+# run_all(only = 31)          # exactamente el paso 31
+# run_all(only = 33)          # solo regenera el motor HTML desde el template
