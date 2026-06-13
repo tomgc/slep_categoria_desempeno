@@ -131,7 +131,7 @@ body {
 /* ============================================================
    App layout
    ============================================================ */
-.app { min-height: 100vh; display: flex; flex-direction: column; }
+.app { min-height: 100vh; display: flex; flex-direction: column; max-width: 1320px; margin: 0 auto; }
 .app.is-comfy   { font-size: var(--fs-lg); }
 
 /* Header */
@@ -142,7 +142,7 @@ body {
 }
 .app-header-inner {
   display: flex; align-items: flex-end; justify-content: space-between;
-  gap: 24px; max-width: 1600px; margin: 0 auto;
+  gap: 24px;
 }
 .app-header-left { min-width: 0; }
 .app-header-right { display: flex; align-items: center; gap: 8px; }
@@ -993,7 +993,7 @@ code {
 /* ============================================================
    Vista de Categoría de Desempeño (grilla de 4 columnas)
    ============================================================ */
-.app-main { flex: 1; padding: 0 24px 64px; max-width: 1380px; margin: 0 auto; width: 100%; }
+.app-main { flex: 1; padding: 0 40px 64px; width: 100%; }
 
 /* Barra de resumen del territorio seleccionado */
 .terr-summary {
@@ -1006,6 +1006,37 @@ code {
 }
 .terr-summary-meta { font-size: var(--fs-base); color: var(--fg-3); }
 .terr-summary-meta strong { color: var(--fg-1); font-weight: var(--fw-bold); }
+.terr-narrativa {
+  background: var(--bg-2);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-3);
+  padding: 22px 26px;
+  margin: 20px -26px 0;
+}
+.terr-narrativa-name {
+  margin: 0 0 14px;
+  font-family: var(--font-display); font-weight: var(--fw-heavy);
+  font-size: var(--fs-h1); letter-spacing: -0.01em; color: var(--plum);
+  line-height: 1.1;
+}
+.terr-narrativa-p {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--fg-1);
+}
+.terr-narrativa-p:last-child { margin-bottom: 0; }
+.dato-destacado {
+  display: inline-block;
+  background: var(--cream-50);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-2);
+  padding: 0 6px;
+  font-weight: var(--fw-bold);
+  color: var(--plum);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
 .terr-pill {
   display: inline-flex; align-items: center; gap: 5px;
   font-size: var(--fs-xs); font-weight: var(--fw-medium); color: var(--fg-3);
@@ -1016,7 +1047,7 @@ code {
 /* Grilla de 4 columnas */
 .cat-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-  align-items: start;
+  align-items: start; margin-top: 20px;
 }
 @media (max-width: 980px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .cat-grid { grid-template-columns: 1fr; } }
@@ -1090,7 +1121,7 @@ code {
 
 /* Sección sin categoría vigente */
 .sin-vigente {
-  margin-top: 28px; padding: 18px 20px;
+  margin-top: 20px; padding: 18px 20px;
   background: var(--cream-50); border: 1px solid var(--border-1);
   border-radius: var(--radius-3);
 }
@@ -1145,13 +1176,30 @@ code {
 }
 .ee-detail-ense-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
 .ee-ense-item {
-  display: flex; justify-content: space-between; gap: 12px;
+  display: flex; flex-direction: column;
   font-size: var(--fs-xs); color: var(--fg-2);
   padding: 1px 0;
 }
+.ee-ense-head { display: flex; justify-content: space-between; gap: 12px; }
 .ee-ense-item.has-cat { color: var(--fg-1); font-weight: var(--fw-medium); }
-.ee-ense-label { flex: 1; }
+.ee-ense-label { flex: 1; display: flex; align-items: baseline; gap: 4px; }
 .ee-ense-mat { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.ee-ense-toggle {
+  border: none; background: none; cursor: pointer; padding: 0;
+  font-size: var(--fs-xs); color: var(--fg-3); line-height: 1;
+  width: 12px; text-align: center;
+}
+.ee-grado-list {
+  list-style: none; margin: 2px 0 4px 0; padding: 0 0 0 16px;
+  display: flex; flex-direction: column; gap: 1px;
+  border-left: 1px solid var(--border-1);
+}
+.ee-grado-item {
+  display: flex; justify-content: space-between; gap: 12px;
+  font-size: var(--fs-xs); color: var(--fg-3); font-weight: var(--fw-regular);
+  padding-left: 8px;
+}
+.ee-grado-mat { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .ee-detail-ense-total {
   display: flex; justify-content: space-between; gap: 12px;
   font-size: var(--fs-xs); color: var(--fg-1); font-weight: var(--fw-bold);
@@ -1205,14 +1253,15 @@ code {
 
 /* Filtros de chips (comuna, dependencia) */
 .chip-filter {
-  display: flex; align-items: baseline; gap: 12px;
-  padding: 10px 0;
+  display: block;
+  padding: 0;
 }
-.chip-filter + .chip-filter { padding-top: 0; }
+.chip-filter:first-of-type { margin-top: 18px; }
+.chip-filter + .chip-filter { margin-top: 12px; }
 .chip-filter-title {
-  font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-xs);
+  display: block; margin-bottom: 8px;
+  font-family: var(--font-display); font-weight: var(--fw-bold); font-size: var(--fs-sm);
   letter-spacing: var(--tracking-overline); color: var(--fg-3);
- min-width: 96px; flex-shrink: 0;
 }
 .chip-filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .filter-chip {
@@ -1371,7 +1420,7 @@ code {
 /* Leyenda de trayectoria (destacada) */
 .traj-legend {
   display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
-  margin: 16px 0 18px; padding: 14px 18px;
+  margin: 20px 0 0; padding: 14px 18px;
   background: var(--bg-2); border: 1px solid var(--border-1);
   border-radius: var(--radius-3);
 }
@@ -1492,6 +1541,9 @@ code {
       const M = DATA.meta;
       const YEARS = M.anios.slice().sort((a, b) => a - b);
       const ANIO_VIGENTE = M.anio_vigente;
+      // Anio vigente de matricula (tamano), separado del de categoria. La tarjeta
+      // de tamano de la fila de EE usa este; la trayectoria/serie usan ANIO_VIGENTE.
+      const ANIO_MAT_VIGENTE = M.anio_matricula_vigente || M.anio_vigente;
       const CATEGORIAS = M.categorias.slice();          // orden semántico Insuf -> Alto
       const CAT_COLORS = M.cat_colors;
       const CAT_LABELS = M.cat_labels;
@@ -1500,6 +1552,7 @@ code {
       const DEPE_LABELS = M.depe_labels || {};
       const ENSE2_LABELS = M.ense2_labels || {};
       const ENSE2_A_NIVEL = M.ense2_a_nivel || {};
+      const GRADO_LABELS = M.grado_labels || {};   // {cod_ense2: {cod_grado: glosa}}
 
       // ---- Catálogos territoriales ----
       const COMUNA_BY_COD = new Map(DATA.comunas.map(c => [String(c.cod), c]));
@@ -1650,6 +1703,45 @@ code {
         return out.sort((a, b) => a.cod_ense2.localeCompare(b.cod_ense2));
       }
 
+      // ---- Índice de matrícula por grado: rbd -> anio -> cod_ense2 -> Map(grado->mat) ----
+      // Grano más fino que MAT_IX (añade el grado dentro del tipo de enseñanza).
+      // Solo contiene 2/5/7 (filtrado en R). Detalle opcional de la ficha.
+      const MATG = DATA.matricula_grado || null;
+      const MATG_IX = new Map();   // rbd -> Map(anio -> Map(cod_ense2 -> Map(grado->mat)))
+      if (MATG) {
+        for (let i = 0; i < MATG.rows; i++) {
+          const rbd = MATG.rbd[i], anio = MATG.anio[i], ense = MATG.cod_ense2[i];
+          if (!MATG_IX.has(rbd)) MATG_IX.set(rbd, new Map());
+          const porAnio = MATG_IX.get(rbd);
+          if (!porAnio.has(anio)) porAnio.set(anio, new Map());
+          const porEnse = porAnio.get(anio);
+          if (!porEnse.has(ense)) porEnse.set(ense, new Map());
+          porEnse.get(ense).set(MATG.cod_grado[i], MATG.matricula[i]);
+        }
+      }
+
+      // Desglose por grado de un rbd×año×cod_ense2, ordenado por grado numérico.
+      // Cada item: {cod_grado, label, matricula}. [] si no hay dato (un cod_ense2
+      // sin desglose ese año muestra solo su cifra agregada, sin sub-lista).
+      function matriculaPorGrado(rbd, cod_ense2, anio) {
+        const porAnio = MATG_IX.get(rbd);
+        if (!porAnio) return [];
+        const porEnse = porAnio.get(anio);
+        if (!porEnse) return [];
+        const g = porEnse.get(cod_ense2);
+        if (!g) return [];
+        const labels = GRADO_LABELS[cod_ense2] || {};
+        const out = [];
+        g.forEach((mat, grado) => {
+          out.push({
+            cod_grado: grado,
+            label: (labels[grado] || ("Grado " + grado)),
+            matricula: mat
+          });
+        });
+        return out.sort((a, b) => (+a.cod_grado) - (+b.cod_grado));
+      }
+
       // Serie de matrícula del nivel (básica|media) a lo largo de todos los años
       // disponibles, ascendente. Cada item: {anio, mat} (mat puede ser null si el EE
       // no tiene ese nivel ese año). Insumo para la evolución de tamaño en la ficha.
@@ -1700,8 +1792,8 @@ code {
           out.push({
             rbd, nom: m.nom || ("RBD " + rbd), nom_com: m.nom_com, cod_com: m.cod_com,
             cod_depe2: m.cod_depe2, vigente, serie, nivel,
-            mat_nivel_vig: matriculaNivel(rbd, nivel, ANIO_VIGENTE),
-            mat_total_vig: matriculaTotalEE(rbd, ANIO_VIGENTE)
+            mat_nivel_vig: matriculaNivel(rbd, nivel, ANIO_MAT_VIGENTE),
+            mat_total_vig: matriculaTotalEE(rbd, ANIO_MAT_VIGENTE)
           });
         });
         return out.sort((a, b) => a.nom.localeCompare(b.nom, "es"));
@@ -1728,11 +1820,11 @@ code {
       }
 
       return {
-        YEARS, ANIO_VIGENTE, CATEGORIAS, CAT_COLORS, CAT_LABELS, NIVELES, MOTIVOS, DEPE_LABELS,
+        YEARS, ANIO_VIGENTE, ANIO_MAT_VIGENTE, CATEGORIAS, CAT_COLORS, CAT_LABELS, NIVELES, MOTIVOS, DEPE_LABELS,
         ENSE2_LABELS, ENSE2_A_NIVEL,
         REGIONES, SLEPS, COMUNA_BY_COD, ESTAB_CAT,
         getDistribucion, getSinVigente, getEstablecimientos, distribucionDesdeEE,
-        matriculaNivel, matriculaTotalEE, matriculaDesglose, matriculaSerieNivel,
+        matriculaNivel, matriculaTotalEE, matriculaDesglose, matriculaSerieNivel, matriculaPorGrado,
       };
     })();
 
@@ -1746,6 +1838,123 @@ code {
     function fmtInt(v) {
       if (v == null) return "—";
       return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // ============================================================
+    // Narrativa territorial — arma el párrafo de resumen por composición.
+    // Devuelve frases como arrays de fragmentos JSX (datos dinámicos en
+    // <strong>). Maneja casos borde: categorías con 0 EE se omiten; el sujeto
+    // cambia según el tipo de entidad. La matrícula contrasta desempeño "Medio
+    // o Alto" vs "Insuficiente" (Medio-Bajo se omite del párrafo de matrícula);
+    // anclada a la matrícula vigente (2025), la categoría sigue siendo 2019.
+    // Los porcentajes de matrícula se calculan sobre el total del nivel, así que
+    // al omitir Medio-Bajo los dos tramos no suman 100% (queda implícito).
+    // ============================================================
+    function narrativaTerritorial(entity, nivel, dist, porCat) {
+      const nivelLbl = (CatData.NIVELES[nivel] || nivel);
+      const anioCat = CatData.ANIO_VIGENTE;       // 2019
+      const anioMat = CatData.ANIO_MAT_VIGENTE;   // 2025
+      const total = dist.total;
+      let kk = 0;
+      const b = (txt) => <span key={"b" + (kk++)} className="dato-destacado">{txt}</span>;   // dato dinámico
+
+      // Sujeto según tipo de entidad (el nombre va en negrita).
+      const sujetoPre = (function () {
+        if (entity.kind === "slep") return "El SLEP ";
+        if (entity.kind === "comuna") return "La comuna de ";
+        if (entity.kind === "region") return "La región de ";
+        if (entity.kind === "establecimiento") return "El establecimiento ";
+        return "";
+      })();
+
+      // Frase 1: cuántos EE categorizados.
+      if (total === 0) {
+        return {
+          frases: [[
+            sujetoPre, b(entity.nom), " no tiene establecimientos con " + nivelLbl +
+            " categorizados al año ", b(anioCat),
+            " para la selección actual."
+          ]],
+          vacio: true
+        };
+      }
+      const eeLbl = (total === 1) ? "establecimiento" : "establecimientos";
+      const frase1 = [
+        sujetoPre, b(entity.nom), " tiene ", b(fmtInt(total)), " " + eeLbl + " con " +
+        nivelLbl + " " + (total === 1 ? "categorizado" : "categorizados") + " al año ",
+        b(anioCat), ", el año más reciente para el cual existe una clasificación."
+      ];
+
+      // Frase 2: distribución por categoría, omitiendo las de 0 EE.
+      // "Un X% de estos establecimientos está en nivel de desempeño Alto, un Y%
+      //  en Medio, ...". Orden de presentación Alto -> Insuficiente.
+      const ordenPresenta = ["ALTO", "MEDIO", "MEDIO-BAJO", "INSUFICIENTE"];
+      const presentes = ordenPresenta.filter(c => dist.cats[c] && dist.cats[c].n_ee > 0);
+      let frase2 = null;
+      if (presentes.length === 1) {
+        const c = presentes[0];
+        frase2 = ["Todos están en nivel de desempeño ", b(CatData.CAT_LABELS[c] || c), "."];
+      } else if (presentes.length > 1) {
+        const segs = [];
+        presentes.forEach((c, i) => {
+          const pct = b(fmtPct1(dist.cats[c].pct));
+          const lbl = (CatData.CAT_LABELS[c] || c);
+          if (i === 0) {
+            segs.push("Un ", pct, " de estos establecimientos está en nivel de desempeño " + lbl);
+          } else {
+            const sep = (i === presentes.length - 1) ? " y un " : ", un ";
+            segs.push(sep, pct, " en " + lbl);
+          }
+        });
+        segs.push(".");
+        frase2 = segs;
+      }
+
+      // Frase 3: matrícula. Contraste Medio+Alto vs Insuficiente (B2). Suma
+      // mat_nivel_vig (2025); denominador = matrícula total del nivel
+      // categorizado (incluye Medio-Bajo, aunque no se nombre).
+      const sumaMat = (cats) => cats.reduce((acc, c) =>
+        acc + (porCat[c] || []).reduce((a, e) => a + (e.mat_nivel_vig || 0), 0), 0);
+      const matMedioAlto = sumaMat(["ALTO", "MEDIO"]);
+      const matInsuf = sumaMat(["INSUFICIENTE"]);
+      const matTotalNivel = sumaMat(["ALTO", "MEDIO", "MEDIO-BAJO", "INSUFICIENTE"]);
+
+      let frase3 = null;
+      if (matTotalNivel > 0) {
+        const segs = ["Considerando la matrícula ", b(anioMat), ", "];
+        const tramos = [];
+        if (matMedioAlto > 0) {
+          tramos.push([
+            b(fmtInt(matMedioAlto)), " " +
+            (matMedioAlto === 1 ? "estudiante asiste" : "estudiantes asisten") +
+            " a un establecimiento de desempeño Medio o Alto (",
+            b(fmtPct1(matMedioAlto / matTotalNivel)), " de la matrícula del nivel)"
+          ]);
+        }
+        if (matInsuf > 0) {
+          tramos.push([
+            b(fmtInt(matInsuf)), " " +
+            (matInsuf === 1 ? "asiste" : "asisten") +
+            " a uno de desempeño Insuficiente (",
+            b(fmtPct1(matInsuf / matTotalNivel)), ")"
+          ]);
+        }
+        tramos.forEach((t, i) => {
+          if (i > 0) segs.push(", y ");
+          t.forEach(x => segs.push(x));
+        });
+        segs.push(".");
+        frase3 = segs;
+      }
+
+      // Frase de cierre (transición a la tabla); formato normal.
+      const cierre = ["A continuación se presenta el detalle de los establecimientos y su " +
+        "registro histórico de categorizaciones, junto con aquellos sin categoría vigente."];
+
+      return {
+        frases: [frase1, frase2, frase3, cierre].filter(Boolean),
+        vacio: false
+      };
     }
 
     // ============================================================
@@ -1958,6 +2167,43 @@ code {
     // ============================================================
     // Fila de establecimiento (clickeable: despliega trayectoria en texto)
     // ============================================================
+    // Item de un tipo de enseñanza en el desglose de la ficha. Si el tipo tiene
+    // desglose por grado (básica 2, media 5/7), muestra un control colapsable con
+    // el reparto por grado; colapsado por defecto. Si no hay grado, solo la cifra.
+    function EnseItem({ d, di, rbd, anio }) {
+      const [abierto, setAbierto] = React.useState(false);
+      const grados = CatData.matriculaPorGrado(rbd, d.cod_ense2, anio);
+      const tieneGrado = grados.length > 0;
+      return (
+        <li className={"ee-ense-item" + (d.nivel ? " has-cat" : "")}>
+          <div className="ee-ense-head">
+            <span className="ee-ense-label">
+              {tieneGrado && (
+                <button className="ee-ense-toggle" onClick={() => setAbierto(v => !v)}
+                        aria-expanded={abierto}>
+                  {abierto ? "▾" : "▸"}
+                </button>
+              )}
+              {d.label + ":"}
+            </span>
+            <span className="ee-ense-mat">
+              {fmtInt(d.matricula)}{di === 0 ? " estudiantes" : ""}
+            </span>
+          </div>
+          {tieneGrado && abierto && (
+            <ul className="ee-grado-list">
+              {grados.map(g => (
+                <li key={g.cod_grado} className="ee-grado-item">
+                  <span className="ee-grado-label">{g.label}</span>
+                  <span className="ee-grado-mat">{fmtInt(g.matricula)}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      );
+    }
+
     function EeRow({ ee }) {
       const [open, setOpen] = React.useState(false);
       const serieDesc = ee.serie.slice().sort((a, b) => b.anio - a.anio);
@@ -1981,7 +2227,7 @@ code {
                   <React.Fragment>
                     <span className="ee-row-sep">·</span>
                     <span className="ee-row-matricula">
-                      {"Matrícula " + CatData.ANIO_VIGENTE + ": " + fmtInt(ee.mat_nivel_vig) +
+                      {"Matrícula " + CatData.ANIO_MAT_VIGENTE + ": " + fmtInt(ee.mat_nivel_vig) +
                         " en " + (CatData.NIVELES[ee.nivel] || ee.nivel)}
                       {ee.mat_total_vig != null && ee.mat_total_vig !== ee.mat_nivel_vig &&
                         " · " + fmtInt(ee.mat_total_vig) + " en total"}
@@ -2029,13 +2275,8 @@ code {
                           <span className="ee-detail-ense-title">Matrícula por tipo de enseñanza</span>
                           <ul className="ee-detail-ense-list">
                             {desglose.map((d, di) => (
-                              <li key={d.cod_ense2}
-                                  className={"ee-ense-item" + (d.nivel ? " has-cat" : "")}>
-                                <span className="ee-ense-label">{d.label + ":"}</span>
-                                <span className="ee-ense-mat">
-                                  {fmtInt(d.matricula)}{di === 0 ? " estudiantes" : ""}
-                                </span>
-                              </li>
+                              <EnseItem key={d.cod_ense2} d={d} di={di}
+                                        rbd={ee.rbd} anio={p.anio} />
                             ))}
                           </ul>
                           {totalEE != null && (
@@ -2695,17 +2936,16 @@ code {
 
           {hoja === "territorio" ? (
             <main className="app-main">
-              <div className="terr-summary">
-                <span className="terr-summary-name">{entity.nom}</span>
-                <span className="terr-summary-meta">
-                  <strong>{fmtInt(dist.total)}</strong> establecimientos categorizados ·
-                  {" "}{CatData.NIVELES[nivel]} · año {CatData.ANIO_VIGENTE}
-                </span>
+              <div className="terr-narrativa">
+                <h2 className="terr-narrativa-name">{entity.nom}</h2>
+                {narrativaTerritorial(entity, nivel, dist, porCat).frases.map((f, i) => (
+                  <p key={i} className="terr-narrativa-p">{f}</p>
+                ))}
               </div>
 
-              <ChipFilter titulo="Comuna" items={comunasEntidad}
+              <ChipFilter titulo="Filtra por comuna:" items={comunasEntidad}
                 activas={comActivas} onToggle={toggle(setComunasOff)} />
-              <ChipFilter titulo="Dependencia" items={depesEntidad}
+              <ChipFilter titulo="Filtra por dependencia:" items={depesEntidad}
                 activas={depActivas} onToggle={toggle(setDepesOff)} />
 
               <div className="traj-legend">
