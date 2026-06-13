@@ -1201,6 +1201,13 @@ code {
 }
 .cmp-add-btn:hover { opacity: 0.88; }
 .cmp-add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.cmp-clear-btn {
+  background: transparent; border: 1px solid var(--border-2);
+  border-radius: var(--radius-full); padding: 5px 14px;
+  font-family: var(--font-body); font-size: 12.5px; font-weight: 600;
+  color: var(--fg-2); cursor: pointer; transition: opacity 120ms;
+}
+.cmp-clear-btn:hover { opacity: 0.7; }
 .cmp-hint { font-size: 13px; color: var(--fg-3); }
 
 .cmp-table-wrap {
@@ -1652,7 +1659,7 @@ code {
         if (yaSet.has(k)) return;                 // ya está en la comparativa
         setSel(prev => {
           if (prev.some(p => claveDe(p) === k)) return prev.filter(p => claveDe(p) !== k);
-          if (prev.length >= cupo) return prev;   // respeta el tope de 4
+          if (prev.length >= cupo) return prev;   // respeta el tope de 10
           return [...prev, item];
         });
       };
@@ -1888,11 +1895,12 @@ code {
     // ============================================================
     // Sección sin categoría vigente
     // ============================================================
-    function SinVigente({ sv, listaEE }) {
+    function SinVigente({ sv, listaEE, listaSinMedicion }) {
       const motivos = Object.keys(sv);
       const total = motivos.reduce((a, m) => a + sv[m], 0);
       const lista = listaEE || [];
-      if (motivos.length === 0 && lista.length === 0) return null;
+      const listaSM = listaSinMedicion || [];
+      if (motivos.length === 0 && lista.length === 0 && listaSM.length === 0) return null;
       return (
         <div className="sin-vigente">
           <h3 className="sin-vigente-title">Sin categoría vigente</h3>
@@ -1917,6 +1925,16 @@ code {
               </span>
               <ul className="cat-col-list sin-vigente-ul">
                 {lista.map(ee => <EeRow key={ee.rbd} ee={ee} />)}
+              </ul>
+            </div>
+          )}
+          {listaSM.length > 0 && (
+            <div className="sin-vigente-lista">
+              <span className="sin-vigente-lista-head">
+                Sin categoría de desempeño en {CatData.ANIO_VIGENTE} ({fmtInt(listaSM.length)}) · click para ver su trayectoria
+              </span>
+              <ul className="cat-col-list sin-vigente-ul">
+                {listaSM.map(ee => <EeRow key={ee.rbd} ee={ee} />)}
               </ul>
             </div>
           )}
@@ -2012,7 +2030,7 @@ code {
           for (const it of nuevos) {
             const k = clave(it);
             if (vistos.has(k)) continue;          // sin duplicados
-            if (acc.length >= LIMITE) break;       // respeta el tope de 4
+            if (acc.length >= LIMITE) break;       // respeta el tope de 10
             acc.push(it); vistos.add(k);
           }
           return acc;
@@ -2079,6 +2097,9 @@ code {
             ))}
             <button className="cmp-add-btn" disabled={entidades.length >= LIMITE}
               onClick={() => setPicker(true)}>+ Agregar</button>
+            {entidades.length > 0 && (
+              <button className="cmp-clear-btn" onClick={() => setEntidades([])}>Limpiar</button>
+            )}
             <span className="cmp-hint">
               {entidades.length >= LIMITE
                 ? "Máximo " + LIMITE + " territorios (favorece la comparabilidad)"
@@ -2364,9 +2385,13 @@ code {
       });
 
       // EE evaluados pero sin categoría en el año vigente (s/i), respetando filtros.
-      // Población coherente con el conteo del parquet; los EE sin medición en 2019
-      // (vigente null) son otro bucket y no se listan aquí.
+      // Población coherente con el conteo del parquet.
       const sinVigenteEE = eeVisibles.filter(ee => ee.vigente === "s/i");
+
+      // EE sin medición en el año vigente (vigente null: no tienen fila 2019 en su
+      // trayectoria). Bucket distinto de "s/i"; no entra en el conteo del parquet
+      // ni en la distribución de las cuatro categorías. Solo navegación.
+      const sinMedicionEE = eeVisibles.filter(ee => ee.vigente === null);
 
       const toggle = (setter) => (cod) => setter(prev => {
         const next = new Set(prev);
@@ -2439,7 +2464,7 @@ code {
                 ))}
               </div>
 
-              <SinVigente sv={sv} listaEE={sinVigenteEE} />
+              <SinVigente sv={sv} listaEE={sinVigenteEE} listaSinMedicion={sinMedicionEE} />
             </main>
           ) : (
             <main className="app-main">
