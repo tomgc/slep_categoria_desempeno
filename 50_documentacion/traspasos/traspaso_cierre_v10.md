@@ -145,14 +145,183 @@ limpios con invariantes intactos (10.945 EE, 41.244 filas RBD, 85.594 matricula,
   de forma perceptible.
 
 ## 5. Backlog acumulativo
-[Copiar integro el backlog de v09 y agregar al final los cambios 49-54. Total
-cronologico pasa de 48 a 54. Categorias afectadas: "Diseno UI — Modo
-establecimiento" (51, 52, 53), "Diseno UI — Hoja comparativa" (50), "Diseno UI —
-Modo territorio" o la que aplique (49), "Diseno UI — Motor base y diseno" (54). El
-objetivo del proyecto y la nota metodologica no cambian. Nota v10: la ficha
-enriquece la presentacion de matricula (tarjetas con %, comparador con tooltip,
-evolucion 2016-2019), se reformatea el panel y se estandariza la tipografia; la
-matricula sigue siendo contexto, sin entrar en agregaciones de categoria.]
+
+### Objetivo del proyecto
+slep_categoria_desempeno es un motor interactivo (R + HTML autocontenido) que
+compara la distribucion de establecimientos por Categoria de Desempeno (Alto /
+Medio / Medio-Bajo / Insuficiente) de la Agencia de Calidad, entre comunas,
+SLEPs, regiones y el nivel nacional, separando basica y media. Pipeline en R
+(xlsx → parquet → JSON embebido → HTML), publicado en GitHub Pages. Para el
+equipo de Monitoreo del SLEP Costa Central, desde 2026. Datos publicos.
+
+(Nota v03: la opcion "nacional" del selector se elimino en la sesion 3 por
+volumen de EE; se agrego seleccion de establecimiento individual. El objetivo
+permanente del proyecto no cambia.)
+
+(Nota v04: el proyecto quedo publicado en GitHub Pages en
+`https://tomgc.github.io/slep_categoria_desempeno/`. El objetivo permanente no
+cambia.)
+
+(Nota v05: se agrego una segunda hoja de comparacion entre territorios. El
+objetivo permanente no cambia.)
+
+(Nota v06: el modo EE se rediseño con trayectoria detallada al click y lista de
+establecimientos sin categoria vigente; se consolido la orquestacion en un unico
+punto de entrada. El objetivo permanente no cambia.)
+
+(Nota v07: el modo territorio muestra ahora los establecimientos sin medicion 2019
+como bucket visible aparte; la hoja comparativa gana un boton de limpieza. El
+objetivo permanente no cambia.)
+
+(Nota v08: el panel de notas metodologicas se alineo con la caracterizacion oficial
+de la Agencia (definiciones por grado, ponderacion 67/33). El objetivo permanente no
+cambia.)
+
+(Nota v09: la ficha del establecimiento incorpora matricula por tipo de ensenanza
+(cifra del nivel vigente en la fila + desglose completo por anio en el panel
+expandido), a partir de un insumo agregado nuevo. La matricula es dato de contexto
+del EE, no entra en ninguna agregacion de categoria. El objetivo permanente no
+cambia.)
+
+(Nota v10: la ficha enriquece la presentacion de matricula (tarjetas de modo
+territorio con estudiantes y %, comparador con N EE y tooltip, evolucion de
+matricula 2016-2019 en el panel expandido), se reformatea el panel a dos lineas, se
+aclara el texto de matricula en la fila colapsada, y se estandariza toda la
+tipografia del motor por tokens. La matricula sigue siendo contexto aditivo, sin
+entrar en agregaciones de categoria. El objetivo permanente no cambia.)
+
+### Nota metodologica del conteo
+Un "cambio" es una solicitud distinguible del titular, no las acciones tecnicas
+que la implementan. No cuentan los errores del asistente corregidos de
+inmediato; si cuentan los bugfixes reportados por el titular. Clasificacion por
+intencion primaria. Fuentes: registro de la sesion.
+
+### Clasificacion tematica
+
+| Categoria | N | % | Descripcion |
+|---|---|---|---|
+| Diseno UI — Motor base y diseno | 11 | 20 | Grillas (v01); motor HTML paso 33 + iteraciones UI (v03); tarjetas de modo territorio con estudiantes + % (v10, c.49); estandarizacion tipografica por tokens (v10, c.54) |
+| Scaffold inicial | 9 | 17 | Estructura, scaffold, repo, decisiones v01 |
+| Diseno UI — Modo establecimiento | 9 | 17 | Trayectoria EE detallada + lista sin-vigente (v06); comentario tope, bucket sin-medicion (v07); cifra de matricula vigente y panel expandido enriquecido (v09); evolucion de matricula 2016-2019, panel a dos lineas, aclaracion de texto de matricula (v10, c.51-53) |
+| Diseno UI — Hoja comparativa | 7 | 13 | Comparativa, multi-seleccion, limites, lotes visuales (v05); N EE + tooltip de estudiantes/% (v10, c.50) |
+| Migracion y publicacion / DevOps | 5 | 9 | Auditoria seguridad, gobernanza, LICENSE, CI, README migracion (v04) |
+| Pipeline R | 4 | 7 | Pasos 30-32 de procesamiento; integracion de matricula al generador (v09) |
+| Documentacion de proyecto | 3 | 6 | 5 archivos de decision v03/v04 (v06); reconciliacion de taxonomia (v07); decision taxonomia-meta (v08) |
+| Datos y normalizacion | 2 | 4 | Esquema xlsx, normalizacion categoria; insumo de matricula por tipo de ensenanza (v09) |
+| Documentacion (en producto) | 2 | 4 | Panel de notas metodologicas (v05); alineacion con fuente oficial (v08) |
+| Orquestacion | 2 | 4 | 00_run_all.R (v02); consolidacion paso 33 + archivado de stub (v06) |
+
+(Nota de conteo: el detalle cronologico es la fuente de verdad y tiene 54 entradas
+(1-54). La tabla tematica suma 54, cuadrando con el cronologico. Las seis entradas
+nuevas de v10 son los cambios 49 y 54 (Diseno UI — Motor base y diseno: tarjetas de
+territorio con estudiantes/% y estandarizacion tipografica), 50 (Diseno UI — Hoja
+comparativa: N EE + tooltip), y 51-53 (Diseno UI — Modo establecimiento: evolucion
+de matricula, panel a dos lineas, aclaracion de texto). El cambio 49 (tarjetas de
+modo territorio) se absorbe en "Motor base y diseno" en vez de abrir una categoria
+"Modo territorio" propia: una sola entrada quedaria en ~1,9%, bajo el umbral de
+absorcion del 2%. El cambio 54 (tipografia) se asigna a "Motor base y diseno" como
+sistema de diseno transversal del motor, sin crear categoria nueva por la misma
+regla. No se reescriben entradas previas; los % se recalculan sobre 54 y ninguna
+categoria supera el 25%.)
+
+### Resumen estadistico por sesion
+| Sesion | Traspasos | N cambios | Modelo | Foco |
+|---|---|---|---|---|
+| 1 | v01 | 11 | (v01) | Scaffold y diseno |
+| 2 | v02 | 4 | Opus 4.8 | Pipeline R 30-32 + orquestador |
+| 3 | v03 | 6 | Opus 4.8 | Motor HTML (paso 33) + iteraciones UI |
+| 4 | v04 | 6 | Opus 4.8 | Migracion a GitHub + Pages |
+| 5 | v05 | 8 | Opus 4.8 | Hoja comparativa + notas + pulido visual |
+| 6 | v06 | 3 | Opus 4.8 | Orquestacion + decisiones + trayectoria EE |
+| 7 | v07 | 4 | Opus 4.8 | Comentario tope + bucket sin-medicion + boton limpiar + taxonomia |
+| 8 | v08 | 2 | Opus 4.8 | Alineacion panel con fuente oficial + decision taxonomia-meta |
+| 9 | v09 | 4 | Opus 4.8 | Matricula por tipo de ensenanza en la ficha (insumo + generador + ficha 2 capas) |
+| 10 | v10 | 6 | Opus 4.8 | Matricula en tarjetas/comparador/ficha + panel a dos lineas + tipografia por tokens |
+| **Total** | | **54** | | |
+
+### Detalle cronologico
+- **Sesion 1 (cambios 1-11):** ver traspaso v01 (scaffold, repo, diseno de
+  datos y UI, decisiones 1-3).
+- **Sesion 2 (cambios 12-15):** 12 auxiliares; 13 leer/normalizar; 14
+  agregacion territorial; 15 orquestador + archivo de stub.
+- **Sesion 3 (cambios 16-21):** 16 generador `33_generar_html.R`; 17 template
+  base; 18 iteracion UI tanda 1; 19 tanda 2 (azul institucional); 20 tanda 3
+  (trayectoria rediseñada, filtro comuna, fix pct); 21 tanda 4 (selector EE,
+  filtro dependencia, leyenda, distribucion desde EE).
+- **Sesion 4 (cambios 22-27):** 22 auditoria de seguridad; 23 `gobernanza_datos.md`;
+  24 `LICENSE` (MIT con clausula de datos) + header del generador; 25 workflow CI;
+  26 publicacion Pages (modelo B); 27 README de migracion.
+- **Sesion 5 (cambios 28-35):** 28 hoja comparativa; 29 panel de notas
+  metodologicas (P2); 30 multi-seleccion con checkboxes; 31 limite a 7; 32 limite
+  a 10; 33 lote visual 1; 34 formato "% (n)" + tabla tarjeta; 35 heatmap por
+  categoria + hover gris.
+- **Sesion 6 (cambios 36-38):** 36 orquestacion del paso 33 (IDs 30-33, stub
+  `00_build.R` archivado, comentarios stale limpiados); 37 documentacion de 5
+  decisiones (cobertura_temporal, paleta_categorias, visibilidad_repo,
+  modelo_pages, licencia); 38 rediseno del modo EE (motivo en rbd_lst del
+  generador; `EeRow` clickeable con trayectoria en texto; `SinVigente` con lista
+  de EE; indice `RBD_MOTIVO`).
+- **Sesion 7 (cambios 39-42):** 39 correccion del comentario stale "tope de 4" →
+  "tope de 10" en dos ubicaciones (L1655, L2015); 40 bucket de establecimientos
+  sin medicion 2019 (`sinMedicionEE` en `App`, segunda lista en `SinVigente`
+  rotulada "Sin categoria de desempeno en 2019"; solo-template, el dato ya viajaba
+  via L1555); 41 boton "Limpiar" en la hoja comparativa (`cmp-clear-btn`,
+  `setEntidades([])`); 42 reconciliacion de la taxonomia del backlog.
+- **Sesion 8 (cambios 43-44):** 43 alineacion del panel metodologico con la
+  caracterizacion oficial de la Agencia (4 definiciones reescritas al fraseo por
+  grado, parrafo de ponderacion 67/33, nota de conteo declarada como eleccion
+  deliberada, nota de cobertura temporal con los tres vacios 2019/2020-2021/2022;
+  solo-template); 44 decision P-taxonomia-meta: no se crea categoria "Meta /
+  backlog" (1 entrada meta = 2%, bajo el umbral de absorcion).
+- **Sesion 9 (cambios 45-48):** 45 insumo agregado de matricula por tipo de
+  ensenanza (`matricula_rbd_ense.parquet`, grano rbd x anio x cod_ense2,
+  2016-2019, generado en `slep_analisis_matricula` via one-off de analisis con
+  DuckDB; depositado en `20_insumos/`); 46 integracion al generador
+  `33_generar_html.R` (carga del parquet, diccionarios ENSE2_LABELS/ENSE2_A_NIVEL,
+  bloque columnar `matricula_lst`, validaciones de dominio y total constante); 47
+  cifra de matricula del nivel vigente en la fila colapsada de la ficha (indice
+  `MAT_IX`, helpers matriculaNivel/matriculaTotalEE/matriculaDesglose, total del
+  EE entre parentesis condicional); 48 panel expandido enriquecido (categoria +
+  matricula del nivel + desglose por tipo de ensenanza por anio + total del EE;
+  CSS nuevo; media = 5+7 sumados bajo la categoria de media).
+- **Sesion 10 (cambios 49-54):** 49 estudiantes por categoria + % en las tarjetas
+  de modo territorio (`distribucionDesdeEE` devuelve `matTotalNivel`; `CatColumn`
+  suma `mat_nivel_vig`, calcula `matPct = matNivel/matTotal`; denominador de
+  categorizados para que coincida con el universo del % de EE y los 4 % sumen 100;
+  D15); 50 "N EE" + tooltip de estudiantes y % en cada celda del comparador
+  (`distEntidadComparativa` acumula `cats[c].mat` y `matTotalNivel`; celda
+  "XX,X% · n EE"; `<td>` con `title` "M estudiantes en N establecimientos · XX,X%
+  de la matricula de [nivel]"; tooltip nativo sin estado); 51 evolucion de
+  matricula del nivel 2016-2019 en el panel expandido de la ficha (helper
+  `matriculaSerieNivel(rbd, nivel)`; bloque "Evolucion de la matricula en [nivel]"
+  con cifra por anio + variacion primer→ultimo anio con dato; se oculta con <2
+  anios con dato; tendencia en `--ocean`/`--cat-insuf`; diseno textual, no SVG;
+  D16); 52 reformateo del panel expandido (encabezado del anio en dos lineas con
+  categoria arriba y matricula del nivel debajo como bloque indentado
+  `.ee-detail-matnivel`; desglose por tipo de ensenanza con dos puntos y
+  "estudiantes" solo en la primera fila; "Total establecimiento:" con dos puntos);
+  53 aclaracion del texto de matricula en la fila colapsada ("Matricula 2019: 58
+  (68)" → "Matricula 2019: 58 en Educacion Basica · 68 en total", con el total
+  condicionado a `mat_total_vig !== mat_nivel_vig`; L1980-1990); 54 estandarizacion
+  tipografica por tokens (19 tamanios literales 9-30px → 8 tokens `--fs-*` con piso
+  11px en minusculas y 10px solo en overlines mayuscula; 6 pesos 400-900 → 4 tokens
+  `--fw-*`; 3 familias → 2 con `--font-display`/`--font-body` unificadas en
+  `--font-sans` como alias y `--font-mono` intacta; 2 estilos inline JSX migrados;
+  cero literales salvo un `0.92em` relativo intencional; D17, A15).
+
+### Delta del backlog
+6 entradas nuevas (49-54). "Diseno UI — Motor base y diseno" 9→11 (incluye 49, 54);
+"Diseno UI — Hoja comparativa" 6→7 (incluye 50); "Diseno UI — Modo establecimiento"
+6→9 (incluye 51, 52, 53). Total cronologico 48→54. La tabla tematica recalcula
+porcentajes sobre 54 (los enteros se mantienen; los % se ajustan por el nuevo
+denominador) y sigue cuadrando con el cronologico; ninguna categoria supera el 25%.
+Decision de taxonomia: el cambio 49 (tarjetas de modo territorio) no abre una
+categoria "Modo territorio" propia (1 entrada = ~1,9%, bajo el umbral de absorcion
+del 2%), se absorbe en "Motor base y diseno"; el cambio 54 (tipografia) se asigna a
+la misma categoria como sistema de diseno transversal, sin categoria nueva. No se
+crean ni reescriben categorias. P-matricula-ficha ya quedo cerrado en v09; en v10
+no se cierra ningun pendiente de codigo nuevo (los pendientes de matricula actual y
+por grado quedan documentados con alcance, bloqueados por dato).
 
 ## 6. Bugs de la sesion
 No aplica: no hubo bugs de codigo en el proyecto. Si hubo una falla tecnica de
