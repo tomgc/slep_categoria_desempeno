@@ -1107,9 +1107,11 @@ code {
   display: block; margin-bottom: 6px;
   font-size: 10.5px; font-weight: 700; color: var(--fg-3);
 }
-.ee-detail-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-.ee-detail-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--fg-1); }
-.ee-detail-row.is-vigente { font-weight: 700; }
+.ee-detail-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.ee-detail-row { display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: var(--fg-1); }
+.ee-detail-row.is-vigente .ee-detail-head { font-weight: 700; }
+.ee-detail-row + .ee-detail-row { border-top: 1px solid var(--border-1); padding-top: 10px; }
+.ee-detail-head { display: flex; align-items: center; gap: 8px; }
 .ee-detail-year {
   font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); min-width: 92px;
 }
@@ -1119,6 +1121,28 @@ code {
 }
 .ee-detail-mark[data-si="1"] { background: var(--cream-200); border: 1px dashed var(--line-strong); }
 .ee-detail-cat { flex: 1; }
+.ee-detail-matnivel { font-weight: 400; color: var(--fg-3); }
+.ee-detail-ense { margin-left: 100px; }
+.ee-detail-ense-title {
+  display: block; margin-bottom: 4px;
+  font-size: 9.5px; font-weight: 700; color: var(--fg-3);
+  text-transform: none;
+}
+.ee-detail-ense-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.ee-ense-item {
+  display: flex; justify-content: space-between; gap: 12px;
+  font-size: 11.5px; color: var(--fg-2);
+  padding: 1px 0;
+}
+.ee-ense-item.has-cat { color: var(--fg-1); font-weight: 600; }
+.ee-ense-label { flex: 1; }
+.ee-ense-mat { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.ee-detail-ense-total {
+  display: flex; justify-content: space-between; gap: 12px;
+  font-size: 11.5px; color: var(--fg-1); font-weight: 700;
+  margin-top: 4px; padding-top: 4px; border-top: 1px solid var(--border-1);
+}
+.ee-row-matricula { font-variant-numeric: tabular-nums; }
 
 /* Lista de EE dentro del bloque sin categoría vigente */
 .sin-vigente-lista { margin-top: 16px; }
@@ -1433,6 +1457,8 @@ code {
       const NIVELES = M.niveles;                          // {basica, media}
       const MOTIVOS = M.motivos;
       const DEPE_LABELS = M.depe_labels || {};
+      const ENSE2_LABELS = M.ense2_labels || {};
+      const ENSE2_A_NIVEL = M.ense2_a_nivel || {};
 
       // ---- Catálogos territoriales ----
       const COMUNA_BY_COD = new Map(DATA.comunas.map(c => [String(c.cod), c]));
@@ -1520,6 +1546,69 @@ code {
         });
       }
 
+      // ---- Índice de matrícula: rbd -> anio -> {ense2: {cod->matricula}, total} ----
+      // Grano cod_ense2 (tipo de enseñanza), distinto al de categoría (nivel).
+      // ENSE2_A_NIVEL mapea los tipos con categoría (2->básica, 5/7->media); el
+      // resto es matrícula de contexto. total_ee = tamaño completo del EE.
+      const MAT = DATA.matricula || null;
+      const MAT_IX = new Map();   // rbd -> Map(anio -> {porEnse2: Map(cod->mat), total})
+      if (MAT) {
+        for (let i = 0; i < MAT.rows; i++) {
+          const rbd = MAT.rbd[i], anio = MAT.anio[i];
+          if (!MAT_IX.has(rbd)) MAT_IX.set(rbd, new Map());
+          const porAnio = MAT_IX.get(rbd);
+          if (!porAnio.has(anio)) porAnio.set(anio, { porEnse2: new Map(), total: MAT.matricula_total_ee[i] });
+          porAnio.get(anio).porEnse2.set(MAT.cod_ense2[i], MAT.matricula[i]);
+        }
+      }
+
+      // Matrícula de un nivel del motor (básica|media) para un rbd×año.
+      // media = suma de cod_ense2 5 y 7; básica = cod_ense2 2. null si no hay dato.
+      function matriculaNivel(rbd, nivel, anio) {
+        const porAnio = MAT_IX.get(rbd);
+        if (!porAnio) return null;
+        const reg = porAnio.get(anio);
+        if (!reg) return null;
+        const e = reg.porEnse2;
+        if (nivel === "basica") {
+          return e.has("2") ? e.get("2") : null;
+        }
+        if (nivel === "media") {
+          let s = null;
+          if (e.has("5")) s = (s || 0) + e.get("5");
+          if (e.has("7")) s = (s || 0) + e.get("7");
+          return s;
+        }
+        return null;
+      }
+
+      // Matrícula total del EE (todos los tipos de enseñanza) en un año. null si no hay dato.
+      function matriculaTotalEE(rbd, anio) {
+        const porAnio = MAT_IX.get(rbd);
+        if (!porAnio) return null;
+        const reg = porAnio.get(anio);
+        return reg ? reg.total : null;
+      }
+
+      // Desglose completo por tipo de enseñanza de un rbd×año, ordenado por cod_ense2.
+      // Cada item: {cod_ense2, label, matricula, nivel} (nivel = básica|media|null).
+      function matriculaDesglose(rbd, anio) {
+        const porAnio = MAT_IX.get(rbd);
+        if (!porAnio) return [];
+        const reg = porAnio.get(anio);
+        if (!reg) return [];
+        const out = [];
+        reg.porEnse2.forEach((mat, cod) => {
+          out.push({
+            cod_ense2: cod,
+            label: (ENSE2_LABELS[cod] || ("Tipo " + cod)),
+            matricula: mat,
+            nivel: ENSE2_A_NIVEL[cod] || null
+          });
+        });
+        return out.sort((a, b) => a.cod_ense2.localeCompare(b.cod_ense2));
+      }
+
       // RBDs que pertenecen a un territorio (para listar EE de la grilla).
       function rbdsDeEntidad(entity) {
         const set = new Set();
@@ -1560,7 +1649,12 @@ code {
             motivo: (mtraj && mtraj.has(y)) ? mtraj.get(y) : null
           }));
           const vigente = traj.has(ANIO_VIGENTE) ? traj.get(ANIO_VIGENTE) : null;
-          out.push({ rbd, nom: m.nom || ("RBD " + rbd), nom_com: m.nom_com, cod_com: m.cod_com, cod_depe2: m.cod_depe2, vigente, serie });
+          out.push({
+            rbd, nom: m.nom || ("RBD " + rbd), nom_com: m.nom_com, cod_com: m.cod_com,
+            cod_depe2: m.cod_depe2, vigente, serie, nivel,
+            mat_nivel_vig: matriculaNivel(rbd, nivel, ANIO_VIGENTE),
+            mat_total_vig: matriculaTotalEE(rbd, ANIO_VIGENTE)
+          });
         });
         return out.sort((a, b) => a.nom.localeCompare(b.nom, "es"));
       }
@@ -1580,8 +1674,10 @@ code {
 
       return {
         YEARS, ANIO_VIGENTE, CATEGORIAS, CAT_COLORS, CAT_LABELS, NIVELES, MOTIVOS, DEPE_LABELS,
+        ENSE2_LABELS, ENSE2_A_NIVEL,
         REGIONES, SLEPS, COMUNA_BY_COD, ESTAB_CAT,
         getDistribucion, getSinVigente, getEstablecimientos, distribucionDesdeEE,
+        matriculaNivel, matriculaTotalEE, matriculaDesglose,
       };
     })();
 
@@ -1826,13 +1922,23 @@ code {
                 <span>{CatData.DEPE_LABELS[ee.cod_depe2] || "Dependencia s/i"}</span>
                 <span className="ee-row-sep">·</span>
                 <span className="ee-row-rbd">RBD {ee.rbd}</span>
+                {ee.mat_nivel_vig != null && (
+                  <React.Fragment>
+                    <span className="ee-row-sep">·</span>
+                    <span className="ee-row-matricula">
+                      {"Matrícula " + CatData.ANIO_VIGENTE + ": " + fmtInt(ee.mat_nivel_vig)}
+                      {ee.mat_total_vig != null && ee.mat_total_vig !== ee.mat_nivel_vig &&
+                        " (" + fmtInt(ee.mat_total_vig) + ")"}
+                    </span>
+                  </React.Fragment>
+                )}
               </span>
             </span>
             <Trayectoria serie={ee.serie} />
           </div>
           {open && (
             <div className="ee-detail">
-              <span className="ee-detail-title">Trayectoria por año</span>
+              <span className="ee-detail-title">Trayectoria y matrícula por año</span>
               <ul className="ee-detail-list">
                 {serieDesc.map(p => {
                   const sinMedicion = p.categoria == null;
@@ -1844,13 +1950,44 @@ code {
                   else if (p.categoria === "s/i")
                     txt = "Sin categoría" + (p.motivo ? " · " + (CatData.MOTIVOS[p.motivo] || p.motivo) : "");
                   else txt = CatData.CAT_LABELS[p.categoria];
+
+                  const matNivel = CatData.matriculaNivel(ee.rbd, ee.nivel, p.anio);
+                  const desglose = CatData.matriculaDesglose(ee.rbd, p.anio);
+                  const totalEE = CatData.matriculaTotalEE(ee.rbd, p.anio);
+
                   return (
                     <li key={p.anio} className={"ee-detail-row" + (esVigente ? " is-vigente" : "")}>
-                      <span className="ee-detail-year">{p.anio}{esVigente ? " (vigente)" : ""}</span>
-                      <span className="ee-detail-mark"
-                        style={color ? { background: color } : null}
-                        data-si={esSi ? "1" : null} />
-                      <span className="ee-detail-cat">{txt}</span>
+                      <div className="ee-detail-head">
+                        <span className="ee-detail-year">{p.anio}{esVigente ? " (vigente)" : ""}</span>
+                        <span className="ee-detail-mark"
+                          style={color ? { background: color } : null}
+                          data-si={esSi ? "1" : null} />
+                        <span className="ee-detail-cat">
+                          {txt}
+                          {matNivel != null &&
+                            <span className="ee-detail-matnivel"> · {fmtInt(matNivel)} matriculados en {CatData.NIVELES[ee.nivel] || ee.nivel}</span>}
+                        </span>
+                      </div>
+                      {desglose.length > 0 && (
+                        <div className="ee-detail-ense">
+                          <span className="ee-detail-ense-title">Matrícula por tipo de enseñanza</span>
+                          <ul className="ee-detail-ense-list">
+                            {desglose.map(d => (
+                              <li key={d.cod_ense2}
+                                  className={"ee-ense-item" + (d.nivel ? " has-cat" : "")}>
+                                <span className="ee-ense-label">{d.label}</span>
+                                <span className="ee-ense-mat">{fmtInt(d.matricula)}</span>
+                              </li>
+                            ))}
+                          </ul>
+                          {totalEE != null && (
+                            <div className="ee-detail-ense-total">
+                              <span className="ee-ense-label">Total establecimiento</span>
+                              <span className="ee-ense-mat">{fmtInt(totalEE)}</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </li>
                   );
                 })}
