@@ -1094,6 +1094,40 @@ code {
 }
 .sin-vigente-lbl { font-size: 12px; color: var(--fg-3); }
 
+/* Fila de EE clickeable + detalle de trayectoria en texto */
+.ee-row-li { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.ee-row { cursor: pointer; }
+.ee-row.is-open { border-color: var(--ocean); box-shadow: var(--shadow-1); }
+.ee-detail {
+  padding: 10px 12px; margin-left: 2px;
+  background: var(--cream-50); border: 1px solid var(--border-1);
+  border-radius: var(--radius-2);
+}
+.ee-detail-title {
+  display: block; margin-bottom: 6px;
+  font-size: 10.5px; font-weight: 700; color: var(--fg-3);
+}
+.ee-detail-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.ee-detail-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--fg-1); }
+.ee-detail-row.is-vigente { font-weight: 700; }
+.ee-detail-year {
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); min-width: 92px;
+}
+.ee-detail-mark {
+  width: 12px; height: 12px; border-radius: var(--radius-1);
+  border: 1px solid rgba(0,0,0,0.08); flex-shrink: 0;
+}
+.ee-detail-mark[data-si="1"] { background: var(--cream-200); border: 1px dashed var(--line-strong); }
+.ee-detail-cat { flex: 1; }
+
+/* Lista de EE dentro del bloque sin categoría vigente */
+.sin-vigente-lista { margin-top: 16px; }
+.sin-vigente-lista-head {
+  display: block; margin-bottom: 8px;
+  font-size: 11.5px; font-weight: 700; color: var(--fg-2);
+}
+.sin-vigente-ul { max-height: none; overflow: visible; padding: 0; }
+
 /* Selector de entidad (botón principal) */
 .entity-select-btn {
   display: inline-flex; align-items: center; gap: 8px;
@@ -1459,12 +1493,19 @@ code {
       // ---- Índice por establecimiento: rbd|nivel -> [{anio, categoria}] (trayectoria) ----
       const R = DATA.rbd;
       const RBD_TRAJ = new Map();   // rbd|nivel -> Map(anio -> categoria)
+      const RBD_MOTIVO = new Map(); // rbd|nivel -> Map(anio -> motivo) (solo s/i)
       const RBD_META = new Map();   // rbd -> {nom, cod_com, cod_reg, cod_depe2}
+      const R_MOT = R.motivo || null;  // presente solo si el generador exporta motivo
       for (let i = 0; i < R.rows; i++) {
         const rbd = R.rbd[i], niv = R.nivel[i];
         const k = rbd + "|" + niv;
         if (!RBD_TRAJ.has(k)) RBD_TRAJ.set(k, new Map());
         RBD_TRAJ.get(k).set(R.anio[i], R.categoria[i]);
+        const mot = R_MOT ? R_MOT[i] : null;
+        if (mot) {
+          if (!RBD_MOTIVO.has(k)) RBD_MOTIVO.set(k, new Map());
+          RBD_MOTIVO.get(k).set(R.anio[i], mot);
+        }
         if (!RBD_META.has(rbd)) RBD_META.set(rbd, {
           nom: R.nom_rbd[i], cod_com: String(R.cod_com_rbd[i]),
           cod_reg: String(R.cod_reg_rbd[i]), cod_depe2: String(R.cod_depe2[i]),
@@ -1504,8 +1545,13 @@ code {
         rbds.forEach(rbd => {
           const traj = RBD_TRAJ.get(rbd + "|" + nivel);
           if (!traj) return;   // este EE no rinde este nivel
+          const mtraj = RBD_MOTIVO.get(rbd + "|" + nivel) || null;
           const m = RBD_META.get(rbd);
-          const serie = YEARS.map(y => ({ anio: y, categoria: traj.has(y) ? traj.get(y) : null }));
+          const serie = YEARS.map(y => ({
+            anio: y,
+            categoria: traj.has(y) ? traj.get(y) : null,
+            motivo: (mtraj && mtraj.has(y)) ? mtraj.get(y) : null
+          }));
           const vigente = traj.has(ANIO_VIGENTE) ? traj.get(ANIO_VIGENTE) : null;
           out.push({ rbd, nom: m.nom || ("RBD " + rbd), nom_com: m.nom_com, cod_com: m.cod_com, cod_depe2: m.cod_depe2, vigente, serie });
         });
@@ -1740,12 +1786,71 @@ code {
                 <span
                   className={"traj-mark" + (esSi ? " is-si" : "") + (esVigente ? " is-vigente" : "")}
                   style={esSi ? null : { background: color }}
-                  title={p.anio + ": " + (esSi ? "Sin categoría" : CatData.CAT_LABELS[p.categoria])
+                  title={p.anio + ": " + (esSi
+                           ? ("Sin categoría" + (p.motivo ? " — " + (CatData.MOTIVOS[p.motivo] || p.motivo) : ""))
+                           : CatData.CAT_LABELS[p.categoria])
                          + (esVigente ? " (vigente)" : "")} />
               </span>
             );
           })}
         </span>
+      );
+    }
+
+    // ============================================================
+    // Fila de establecimiento (clickeable: despliega trayectoria en texto)
+    // ============================================================
+    function EeRow({ ee }) {
+      const [open, setOpen] = React.useState(false);
+      const serieDesc = ee.serie.slice().sort((a, b) => b.anio - a.anio);
+      return (
+        <li className="ee-row-li">
+          <div className={"ee-row" + (open ? " is-open" : "")}
+            role="button" tabIndex={0} aria-expanded={open}
+            onClick={() => setOpen(o => !o)}
+            onKeyDown={e => {
+              if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpen(o => !o); }
+            }}>
+            <span className="ee-row-main">
+              <span className="ee-row-name">{ee.nom}</span>
+              <span className="ee-row-meta">
+                {ee.nom_com && <span>{ee.nom_com}</span>}
+                {ee.nom_com && <span className="ee-row-sep">·</span>}
+                <span>{CatData.DEPE_LABELS[ee.cod_depe2] || "Dependencia s/i"}</span>
+                <span className="ee-row-sep">·</span>
+                <span className="ee-row-rbd">RBD {ee.rbd}</span>
+              </span>
+            </span>
+            <Trayectoria serie={ee.serie} />
+          </div>
+          {open && (
+            <div className="ee-detail">
+              <span className="ee-detail-title">Trayectoria por año</span>
+              <ul className="ee-detail-list">
+                {serieDesc.map(p => {
+                  const sinMedicion = p.categoria == null;
+                  const esSi = sinMedicion || p.categoria === "s/i";
+                  const color = esSi ? null : CatData.CAT_COLORS[p.categoria];
+                  const esVigente = p.anio === CatData.ANIO_VIGENTE;
+                  let txt;
+                  if (sinMedicion) txt = "Sin medición";
+                  else if (p.categoria === "s/i")
+                    txt = "Sin categoría" + (p.motivo ? " · " + (CatData.MOTIVOS[p.motivo] || p.motivo) : "");
+                  else txt = CatData.CAT_LABELS[p.categoria];
+                  return (
+                    <li key={p.anio} className={"ee-detail-row" + (esVigente ? " is-vigente" : "")}>
+                      <span className="ee-detail-year">{p.anio}{esVigente ? " (vigente)" : ""}</span>
+                      <span className="ee-detail-mark"
+                        style={color ? { background: color } : null}
+                        data-si={esSi ? "1" : null} />
+                      <span className="ee-detail-cat">{txt}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </li>
       );
     }
 
@@ -1773,21 +1878,7 @@ code {
             ? <div className="cat-col-empty">Sin establecimientos en esta categoría</div>
             : (
               <ul className="cat-col-list">
-                {establecimientos.map(ee => (
-                  <li key={ee.rbd} className="ee-row">
-                    <span className="ee-row-main">
-                      <span className="ee-row-name">{ee.nom}</span>
-                      <span className="ee-row-meta">
-                        {ee.nom_com && <span>{ee.nom_com}</span>}
-                        {ee.nom_com && <span className="ee-row-sep">·</span>}
-                        <span>{CatData.DEPE_LABELS[ee.cod_depe2] || "Dependencia s/i"}</span>
-                        <span className="ee-row-sep">·</span>
-                        <span className="ee-row-rbd">RBD {ee.rbd}</span>
-                      </span>
-                    </span>
-                    <Trayectoria serie={ee.serie} />
-                  </li>
-                ))}
+                {establecimientos.map(ee => <EeRow key={ee.rbd} ee={ee} />)}
               </ul>
             )}
         </div>
@@ -1797,25 +1888,38 @@ code {
     // ============================================================
     // Sección sin categoría vigente
     // ============================================================
-    function SinVigente({ sv }) {
+    function SinVigente({ sv, listaEE }) {
       const motivos = Object.keys(sv);
-      if (motivos.length === 0) return null;
       const total = motivos.reduce((a, m) => a + sv[m], 0);
+      const lista = listaEE || [];
+      if (motivos.length === 0 && lista.length === 0) return null;
       return (
         <div className="sin-vigente">
           <h3 className="sin-vigente-title">Sin categoría vigente</h3>
           <p className="sin-vigente-sub">
-            {fmtInt(total)} establecimientos sin categoría en {CatData.ANIO_VIGENTE}.
+            {fmtInt(total)} establecimientos sin categoría en {CatData.ANIO_VIGENTE} (conteo oficial).
             No entran en la distribución de las cuatro categorías.
           </p>
-          <div className="sin-vigente-motivos">
-            {motivos.map(m => (
-              <div key={m} className="sin-vigente-motivo">
-                <span className="sin-vigente-n">{fmtInt(sv[m])}</span>
-                <span className="sin-vigente-lbl">{CatData.MOTIVOS[m] || m}</span>
-              </div>
-            ))}
-          </div>
+          {motivos.length > 0 && (
+            <div className="sin-vigente-motivos">
+              {motivos.map(m => (
+                <div key={m} className="sin-vigente-motivo">
+                  <span className="sin-vigente-n">{fmtInt(sv[m])}</span>
+                  <span className="sin-vigente-lbl">{CatData.MOTIVOS[m] || m}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          {lista.length > 0 && (
+            <div className="sin-vigente-lista">
+              <span className="sin-vigente-lista-head">
+                Establecimientos identificados ({fmtInt(lista.length)}) · click para ver su trayectoria
+              </span>
+              <ul className="cat-col-list sin-vigente-ul">
+                {lista.map(ee => <EeRow key={ee.rbd} ee={ee} />)}
+              </ul>
+            </div>
+          )}
         </div>
       );
     }
@@ -2259,6 +2363,11 @@ code {
         if (ee.vigente && porCat[ee.vigente]) porCat[ee.vigente].push(ee);
       });
 
+      // EE evaluados pero sin categoría en el año vigente (s/i), respetando filtros.
+      // Población coherente con el conteo del parquet; los EE sin medición en 2019
+      // (vigente null) son otro bucket y no se listan aquí.
+      const sinVigenteEE = eeVisibles.filter(ee => ee.vigente === "s/i");
+
       const toggle = (setter) => (cod) => setter(prev => {
         const next = new Set(prev);
         if (next.has(cod)) next.delete(cod); else next.add(cod);
@@ -2330,7 +2439,7 @@ code {
                 ))}
               </div>
 
-              <SinVigente sv={sv} />
+              <SinVigente sv={sv} listaEE={sinVigenteEE} />
             </main>
           ) : (
             <main className="app-main">

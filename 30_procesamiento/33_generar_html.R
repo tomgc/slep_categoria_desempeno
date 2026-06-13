@@ -233,7 +233,8 @@ rbd_lst <- list(
   nom_rbd     = df_rbd_ord$nom_rbd,
   cod_com_rbd = df_rbd_ord$cod_com_rbd,
   cod_reg_rbd = df_rbd_ord$cod_reg_rbd,
-  cod_depe2   = df_rbd_ord$cod_depe2
+  cod_depe2   = df_rbd_ord$cod_depe2,
+  motivo      = df_rbd_ord$motivo_sin_categoria  # solo poblado en filas s/i (NA -> null)
 )
 
 
