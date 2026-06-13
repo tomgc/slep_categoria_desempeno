@@ -1,7 +1,7 @@
 ESCANEO DE ESTRUCTURA — slep_categoria_desempeno
 Raiz   : /Users/tomgc/Projects/slep_categoria_desempeno
-Fecha  : 2026-06-12 22:01:00
-Totales: 16 carpetas, 76 archivos
+Fecha  : 2026-06-13 10:07:51
+Totales: 16 carpetas, 78 archivos
 Nota   : todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 slep_categoria_desempeno/
@@ -40,7 +40,7 @@ slep_categoria_desempeno/
 │   ├── 31_leer_normalizar.R  (11.9K)
 │   ├── 32_agregar_territorial.R  (13.8K)
 │   ├── 33_generar_html.R  (15.1K)
-│   └── 33_motor_template.html  (98.2K)
+│   └── 33_motor_template.html  (101K)
 ├── 40_salidas/
 │   ├── intermedios/
 │   │   ├── .gitkeep  (0)
@@ -51,7 +51,7 @@ slep_categoria_desempeno/
 │   │   ├── establecimientos_chile.parquet  (261K)
 │   │   └── sleps_chile.parquet  (58.7K)
 │   ├── .DS_Store  (6K)
-│   └── motor_categoria.html  (968K)
+│   └── motor_categoria.html  (970K)
 ├── 50_documentacion/
 │   ├── activa/
 │   │   ├── decisiones/
@@ -70,12 +70,12 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260612_212630_estructura.md  (4.17K)
-│   │   ├── 20260612_212630_estructura.txt  (4.23K)
-│   │   ├── 20260612_215139_estructura.md  (4.5K)
-│   │   ├── 20260612_215139_estructura.txt  (4.56K)
-│   │   ├── estructura_actual.md  (4.5K)
-│   │   └── estructura_actual.txt  (4.56K)
+│   │   ├── 20260612_220100_estructura.md  (4.55K)
+│   │   ├── 20260612_220100_estructura.txt  (4.61K)
+│   │   ├── 20260612_222236_estructura.md  (4.61K)
+│   │   ├── 20260612_222236_estructura.txt  (4.66K)
+│   │   ├── estructura_actual.md  (4.61K)
+│   │   └── estructura_actual.txt  (4.66K)
 │   ├── traspasos/
 │   │   ├── .gitkeep  (0)
 │   │   ├── traspaso_cierre_v01.md  (17.6K)
@@ -83,13 +83,15 @@ slep_categoria_desempeno/
 │   │   ├── traspaso_cierre_v03.md  (25K)
 │   │   ├── traspaso_cierre_v04.md  (25.1K)
 │   │   ├── traspaso_cierre_v05.md  (28.6K)
-│   │   └── traspaso_cierre_v06.md  (24.2K)
+│   │   ├── traspaso_cierre_v06.md  (24.2K)
+│   │   ├── traspaso_cierre_v07.md  (25.4K)
+│   │   └── traspaso_cierre_v08.md  (29K)
 │   └── .DS_Store  (6K)
 ├── docs/
-│   └── index.html  (968K)
+│   └── index.html  (970K)
 ├── tests/
 │   └── .gitkeep  (0)
-├── .DS_Store  (10K)
+├── .DS_Store  (12K)
 ├── .gitignore  (362)
 ├── 00_escanear_proyecto.R  (8.98K)
 ├── 00_run_all.R  (6.9K)
@@ -99,7 +101,7 @@ slep_categoria_desempeno/
 └── slep_categoria_desempeno.Rproj  (220)
 
 Conteo por extension:
-  md                 23
+  md                 25
   (sin extension)    14
   xlsx               10
   r                  7
