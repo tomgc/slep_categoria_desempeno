@@ -93,30 +93,29 @@ primaria. Fuentes: registro de cada sesión.
 |---|---|---|---|
 | Diseño UI — Motor base y diseño | 13 | 19 | Diseño de visualización (v01, c.11); motor HTML paso 33 base + iteraciones UI 1-4 (v03, c.17-21); publicación Pages en el generador (v04, c.26); tarjetas de modo territorio con estudiantes + % (v10, c.49); estandarización tipográfica por tokens (v10, c.54); convivencia año de matrícula (v12, c.59); desglose por grado en motor (v12, c.61); bloque narrativo territorial parcial (v12, c.62); D21 template regenerado desde referencia UI (v13, c.63) |
 | Scaffold e inicialización | 12 | 17 | Estructura, scaffold, utils, escáner, gitignore, rproj/readme, protocolo, decisiones, git (v01, c.1-9 salvo orquestación); auditoría seguridad, gobernanza, LICENSE, CI, README migración (v04, c.22-25,27) |
-| Diseño UI — Hoja comparativa | 9 | 13 | Comparativa, multi-selección, límites, lotes visuales (v05, c.28,30-35); botón limpiar (v07, c.41); N EE + tooltip de estudiantes/% (v10, c.50) |
-| Diseño UI — Modo establecimiento | 8 | 12 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53) |
-| Datos y normalización | 6 | 9 | Inspección de datos (v01, c.10); esquema xlsx, normalización categoría (v02, c.12-13); insumo de matrícula por tipo de enseñanza (v09, c.45); ampliación cobertura 2016-2025 (v11, c.57); parquet de grado (v12, c.60) |
-| Documentación de proyecto | 6 | 9 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67) |
-| Pipeline R | 4 | 6 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58) |
-| Orquestación | 4 | 6 | Stub 00_build.R (v01, c.2); 00_run_all.R (v02, c.15); consolidación paso 33 + archivado de stub (v06, c.36); alias regenerar_motor (v13, c.65) |
+| Diseño UI — Hoja comparativa | 9 | 12 | Comparativa, multi-selección, límites, lotes visuales (v05, c.28,30-35); botón limpiar (v07, c.41); N EE + tooltip de estudiantes/% (v10, c.50) |
+| Documentación de proyecto | 9 | 12 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73) |
+| Diseño UI — Modo establecimiento | 8 | 11 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53) |
+| Datos y normalización | 6 | 8 | Inspección de datos (v01, c.10); esquema xlsx, normalización categoría (v02, c.12-13); insumo de matrícula por tipo de enseñanza (v09, c.45); ampliación cobertura 2016-2025 (v11, c.57); parquet de grado (v12, c.60) |
+| Pipeline R | 4 | 5 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58) |
+| Orquestación | 4 | 5 | Stub 00_build.R (v01, c.2); 00_run_all.R (v02, c.15); consolidación paso 33 + archivado de stub (v06, c.36); alias regenerar_motor (v13, c.65) |
+| Validación / integridad | 3 | 4 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68); spot-check parametrizado a múltiples celdas ancla, DT-spot-check-cobertura (v15, c.71) |
 | Documentación (en producto) | 2 | 3 | Panel de notas metodológicas (v05, c.29); alineación con fuente oficial (v08, c.43) |
 | Migración y publicación / DevOps | 2 | 3 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69) |
-| Validación / integridad | 2 | 3 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68) |
-| Calidad de código / pipeline | 1 | 2 | Warning de readLines silenciado de raíz (v13, c.64) |
+| Calidad de código / pipeline | 1 | 1 | Warning de readLines silenciado de raíz (v13, c.64) |
 
-(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 69 entradas
-(1-69). La tabla temática suma 69, cuadrando con el cronológico, con asignación por
+(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 73 entradas
+(1-73). La tabla temática suma 73, cuadrando con el cronológico, con asignación por
 intención primaria verificada entrada por entrada. La categoría líder, "Diseño UI —
-Motor base y diseño", queda en 19% (13/69), bajo el umbral de subdivisión del 25%.
-Las tres familias nuevas de v13 (validación, calidad de pipeline, DevOps) crecen con
-el v14: "Validación / integridad" sube a 2 (auditoría de cifras, c.68) y "Migración y
-publicación / DevOps" a 2 (higiene de Git, c.69); "Calidad de código / pipeline"
-queda en 1. "Documentación de proyecto" sube a 6 (backlog in extenso, c.67). Se
-unifican "Scaffold inicial" (v10) y la inicialización de v04 bajo "Scaffold e
-inicialización" (12), criterio consistente con la sección 4 de los traspasos de
-origen; las entradas de naturaleza de orquestación del scaffold (c.2, stub) se
-imputan a "Orquestación" por intención primaria. No se reescribe ni renumera ninguna
-entrada del detalle cronológico.)
+Motor base y diseño", queda en 18% (13/73), bajo el umbral de subdivisión del 25%.
+El v15 suma cuatro entradas: "Documentación de proyecto" sube a 9 (consolidación y
+renombre del backlog c.70, nota de verificación en README c.72, suite de documentación
+con suitedoc c.73) y "Validación / integridad" a 3 (spot-check multi-celda, c.71). Sin
+categorías nuevas. Se mantienen los criterios de v14: "Scaffold inicial" (v10) y la
+inicialización de v04 unificadas bajo "Scaffold e inicialización" (12); las entradas de
+naturaleza de orquestación del scaffold (c.2, stub) imputadas a "Orquestación" por
+intención primaria. No se reescribe ni renumera ninguna entrada del detalle
+cronológico.)
 
 ## Resumen estadístico por sesión
 
@@ -136,7 +135,8 @@ entrada del detalle cronológico.)
 | 12 | v12 | 4 | Opus 4.8 | Convivencia matrícula 2025 + grano de grado + narrativa territorial (parcial) |
 | 13 | v13 | 4 | Opus 4.8 | D21 resuelto (referencia UI) + warning + alias + check 6.5 |
 | 14 | v14 | 3 | Opus 4.8 | Backlog consolidado in extenso + auditoría de cifras (4.5) + higiene Git |
-| **Total** | | **69** | | |
+| 15 | v15 | 4 | Opus 4.8 | Cierre P1-P3 (backlog 67-73 + spot-check multi-celda + nota README) + suite de documentación (suitedoc) |
+| **Total** | | **73** | | |
 
 ## Detalle cronológico
 
@@ -535,6 +535,43 @@ entrada del detalle cronológico.)
     del proyecto. Verificación: `git status --short` vacío al cierre. Commits `2a5d0c0`
     (escáner) y `b6e0634` (ignore).
 
+### Sesión 15 (cambios 70-73) — Cierre P1-P3 (backlog + spot-check + nota README) + suite de documentación
+
+70. **Consolidación del backlog 67-69 + renombre sin rango (DT-backlog-renombre)** —
+    se agregaron las entradas 67-69 al backlog in extenso y se renombró
+    `backlog_consolidado_1-66.md` → `backlog_consolidado.md` (sin rango en el nombre,
+    para crecer por delta sin renombrar cada sesión). Tabla temática y estadístico
+    recalculados sobre 69. El nombre con rango obligaba a renombrar en cada
+    consolidación; el documento vivo estable lo evita. Verificación: numeración
+    continua 1-69 sin huecos, tabla temática suma 69. Commits `d2d8ecc` (consolidación
+    67-69) y `28f500c` (eliminación del archivo con rango).
+71. **Spot-check parametrizado a múltiples celdas ancla (DT-spot-check-cobertura)** —
+    `tests/spot_check_publicado.R`: `SPOT_CELDAS` pasa de una celda única a una lista
+    de 6 celdas ancla (ambos niveles, extremos del rango temporal, varias categorías),
+    cada una evaluada de extremo a extremo (crudo vs JSON embebido en
+    `docs/index.html`) sobre una sola descompresión. Cierra el tramo JSON→HTML en
+    varios puntos, complementando la auditoría F1-F4 a nivel parquet. Corrección: la
+    celda media/2016/INSUFICIENTE no existe en el territorial publicado (media no tiene
+    2016) y hacía fallar el script; se reemplazó por media/2019/INSUFICIENTE.
+    Verificación: 6/6 celdas OK. Commit `56b308b`.
+72. **Nota de verificación de cifras en el README (D23)** — `README.md`: nueva sección
+    "Verificación de cifras antes de publicar", entre "Cómo correr el pipeline" y
+    "Estructura". Documenta el doble cálculo (`auditar_cifras.R` +
+    `spot_check_publicado.R`), recomienda correrlo tras cada regeneración del motor y
+    antes de `git push`, y aclara que NO es parte de `run_all()` por diseño. Mitiga el
+    riesgo de que la auditoría no se corra antes de publicar sin contradecir D23 (cierra
+    la nota menor DT-auditoria-no-integrada del v14). Commit `8432417`.
+73. **Suite de documentación generada con suitedoc (4 HTML + documentar.R)** —
+    `documentar.R` (raíz, nuevo) construye la `cfg` del proyecto desde cero (sin partir
+    de `cfg_ejemplo()`, para garantizar cero residuos del proyecto hermano) y llama a
+    `suitedoc::generar_suite(verificar = TRUE)`, generando 4 HTML en
+    `50_documentacion/suite/` + el tema (CSS, fonts, assets). Documentación autónoma:
+    arquitectura técnica, manual del proyecto, arquitectura general y guía general, con
+    contenido anclado en las decisiones y los scripts reales del pipeline. Las
+    decisiones del `cfg` van sin numeración (id vacío) para no referenciar números
+    inexistentes en `decisiones/`. Verificación: genera sin abortar (verificar=TRUE),
+    cero residuos, tildes UTF-8 correctas y `<meta charset>` presente. Commit `51b5159`.
+
 ## Delta del backlog
 
 **Consolidación v13 → documento in extenso (v14, cierre de DT-backlog-documental).**
@@ -553,3 +590,11 @@ publicación / DevOps" 1→2. La categoría líder baja a 19% (13/69), bajo el u
 subdivisión. El documento pasó a nombre sin rango (`backlog_consolidado.md`,
 DT-backlog-renombre) para crecer por delta sin renombrarse. Tabla temática reverificada:
 suma 69, cuadra con el cronológico.
+
+**Delta v15 (69 → 73).** Cuatro entradas nuevas de la sesión 15: 70 (consolidación
+67-69 + renombre del backlog, "Documentación de proyecto"), 71 (spot-check multi-celda,
+"Validación / integridad"), 72 (nota de verificación en README, "Documentación de
+proyecto"), 73 (suite de documentación con suitedoc, "Documentación de proyecto"). Sin
+categorías nuevas: "Documentación de proyecto" 6→9, "Validación / integridad" 2→3. La
+categoría líder baja a 18% (13/73), bajo el umbral de subdivisión. Tabla temática
+reverificada: suma 73, cuadra con el cronológico.
