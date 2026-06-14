@@ -488,9 +488,9 @@ if (!file.exists(pako_path)) {
        "https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js -o 10_utils/pako.min.js")
 }
 
-plantilla <- paste(readLines(plantilla_path, encoding = "UTF-8"), collapse = "\n")
-d3_code   <- paste(readLines(d3_path,        encoding = "UTF-8"), collapse = "\n")
-pako_code <- paste(readLines(pako_path,      encoding = "UTF-8"), collapse = "\n")
+plantilla <- paste(readLines(plantilla_path, encoding = "UTF-8", warn = FALSE), collapse = "\n")
+d3_code   <- paste(readLines(d3_path,        encoding = "UTF-8", warn = FALSE), collapse = "\n")
+pako_code <- paste(readLines(pako_path,      encoding = "UTF-8", warn = FALSE), collapse = "\n")
 
 message(sprintf("    Plantilla: %d caracteres", nchar(plantilla)))
 message(sprintf("    D3:        %.0f KB", nchar(d3_code) / 1024))

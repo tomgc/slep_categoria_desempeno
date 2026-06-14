@@ -167,6 +167,19 @@ run_all <- function(from = NULL, to = NULL, only = NULL, skip = NULL) {
 }
 
 
+#' Regenerar solo el motor HTML (atajo de conveniencia).
+#'
+#' Equivale a run_all(only = 33). Util durante la iteracion sobre el
+#' template, cuando los parquets de las etapas previas ya estan construidos
+#' y solo cambia 33_motor_template.html o 33_generar_html.R. No reemplaza a
+#' run_all(): el pipeline reproducible de cero sigue siendo run_all().
+#'
+#' @return Invisible NULL. Emite log de progreso y resumen final.
+regenerar_motor <- function() {
+  run_all(only = 33L)
+}
+
+
 # ============================================================================
 # Ejemplos de uso (comentados)
 # ============================================================================
@@ -175,3 +188,4 @@ run_all <- function(from = NULL, to = NULL, only = NULL, skip = NULL) {
 # run_all(from = 32)          # desde el paso 32 (agregacion + motor)
 # run_all(only = 31)          # exactamente el paso 31
 # run_all(only = 33)          # solo regenera el motor HTML desde el template
+# regenerar_motor()           # atajo equivalente a run_all(only = 33)
