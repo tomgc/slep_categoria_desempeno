@@ -298,6 +298,25 @@ if (any(nac_check$dif != 0)) {
   message("    OK: nacional cuadra con conteo directo (dif = 0).")
 }
 
+# 6.5 — Particion territorial: la suma de EE categorizados de las comunas
+# por nivel x anio no puede exceder el total nacional. Las comunas son una
+# particion PARCIAL (solo EE con cod_com_rbd no NA; los sin match entran solo
+# en nacional), de modo que la suma comunal puede ser menor o igual al
+# nacional, jamas mayor. n_categorizados es constante por celda comunal, por
+# eso se toma distinct antes de sumar (evita multiplicar por las 4 categorias).
+suma_comunal <- df_comuna |>
+  dplyr::distinct(cod_entidad, nivel, anio, n_categorizados) |>
+  dplyr::summarise(n_sub = sum(n_categorizados), .by = c(nivel, anio))
+part_check <- suma_comunal |>
+  dplyr::left_join(control_nac, by = c("nivel", "anio")) |>
+  dplyr::mutate(exceso = .data$n_sub - .data$n_control)
+if (any(part_check$exceso > 0)) {
+  warning("Suma comunal de EE excede el total nacional (particion imposible).")
+  print(dplyr::filter(part_check, .data$exceso > 0))
+} else {
+  message("    OK: suma comunal <= nacional por nivel x anio (particion valida).")
+}
+
 
 # ============================================================================
 # Bloque 7 — EE sin categoria vigente (seccion aparte del motor)
