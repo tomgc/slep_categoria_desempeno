@@ -1,14 +1,15 @@
 ESCANEO DE ESTRUCTURA — slep_categoria_desempeno
 Raiz   : /Users/tomgc/Projects/slep_categoria_desempeno
-Fecha  : 2026-06-13 23:07:02
-Totales: 17 carpetas, 99 archivos
+Fecha  : 2026-06-14 14:13:27
+Totales: 21 carpetas, 110 archivos
 Nota   : todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 slep_categoria_desempeno/
+├── .claude/
+│   └── settings.local.json  (704)
 ├── .github/
-│   ├── workflows/
-│   │   └── validacion_seguridad.yml  (2.61K)
-│   └── .DS_Store  (6K)
+│   └── workflows/
+│       └── validacion_seguridad.yml  (2.61K)
 ├── 10_utils/
 │   ├── 10_utils.R  (1.8K)
 │   ├── d3.min.js  (273K)
@@ -26,7 +27,6 @@ slep_categoria_desempeno/
 │   │   ├── rex_1440.pdf  (995K)
 │   │   ├── rex_1459.pdf  (3.16M)
 │   │   └── rex_589.pdf  (2.68M)
-│   ├── .DS_Store  (8K)
 │   ├── cdb_2016.xlsx  (398K)
 │   ├── cdb_2017.xlsx  (344K)
 │   ├── cdb_2018.xlsx  (390K)
@@ -52,7 +52,6 @@ slep_categoria_desempeno/
 │   │   ├── comunas_chile.parquet  (7.18K)
 │   │   ├── establecimientos_chile.parquet  (261K)
 │   │   └── sleps_chile.parquet  (58.7K)
-│   ├── .DS_Store  (6K)
 │   └── motor_categoria.html  (2.68M)
 ├── 50_documentacion/
 │   ├── activa/
@@ -68,23 +67,38 @@ slep_categoria_desempeno/
 │   │   │   ├── 20260613_decision_cobertura_matricula_2025.md  (3.7K)
 │   │   │   ├── 20260613_decision_granularidad_matricula.docx  (22.5K)
 │   │   │   └── 20260613_decision_procedencia_insumo_matricula.md  (4.94K)
-│   │   ├── .DS_Store  (6K)
-│   │   ├── backlog_consolidado_1-66.md  (35.5K)
+│   │   ├── backlog_consolidado.md  (39.5K)
 │   │   ├── gobernanza_datos.md  (3.04K)
 │   │   ├── P-matricula-actual_alcance.md  (3.08K)
 │   │   ├── P-matricula-grado_alcance.md  (4.85K)
 │   │   ├── POLITICA_PROYECTO.md  (29.7K)
 │   │   └── SETTINGS_Y_PROMPTS_OPERACIONALES.md  (24.7K)
 │   ├── andamios/
-│   │   ├── .DS_Store  (6K)
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260613_222906_estructura.md  (5.42K)
-│   │   ├── 20260613_222906_estructura.txt  (5.49K)
-│   │   ├── 20260613_223325_estructura.md  (5.48K)
-│   │   ├── 20260613_223325_estructura.txt  (5.54K)
-│   │   ├── estructura_actual.md  (5.48K)
-│   │   └── estructura_actual.txt  (5.54K)
+│   │   ├── 20260613_230702_estructura.md  (5.84K)
+│   │   ├── 20260613_230702_estructura.txt  (5.91K)
+│   │   ├── 20260614_133903_estructura.md  (5.63K)
+│   │   ├── 20260614_133903_estructura.txt  (5.69K)
+│   │   ├── estructura_actual.md  (5.63K)
+│   │   └── estructura_actual.txt  (5.69K)
+│   ├── suite/
+│   │   ├── assets/
+│   │   │   ├── logo-color-stacked.png  (126K)
+│   │   │   ├── logo-mark-cc.png  (118K)
+│   │   │   └── logo-white-stacked.png  (143K)
+│   │   ├── fonts/
+│   │   │   ├── gobCL_Heavy.otf  (43.7K)
+│   │   │   ├── gobCL_Light.otf  (37.1K)
+│   │   │   ├── gobCL_Regular.otf  (35.7K)
+│   │   │   ├── MuseoSans_500.otf  (61K)
+│   │   │   ├── MuseoSans_700.otf  (62.1K)
+│   │   │   └── MuseoSans-300.otf  (61.5K)
+│   │   ├── arquitectura_general_slep_categoria_desempeno.html  (9.5K)
+│   │   ├── arquitectura_slep_categoria_desempeno.html  (17.7K)
+│   │   ├── documentacion_general_slep_categoria_desempeno.html  (7.65K)
+│   │   ├── documentacion_proyecto_slep_categoria_desempeno.html  (10.7K)
+│   │   └── suite_estilos.css  (21.7K)
 │   ├── traspasos/
 │   │   ├── .gitkeep  (0)
 │   │   ├── .Rhistory  (0)
@@ -100,7 +114,8 @@ slep_categoria_desempeno/
 │   │   ├── traspaso_cierre_v10.md  (27.9K)
 │   │   ├── traspaso_cierre_v11.md  (16.9K)
 │   │   ├── traspaso_cierre_v12.md  (22.7K)
-│   │   └── traspaso_cierre_v13.md  (23.5K)
+│   │   ├── traspaso_cierre_v13.md  (23.5K)
+│   │   └── traspaso_cierre_v14.md  (22.4K)
 │   └── .DS_Store  (6K)
 ├── docs/
 │   └── index.html  (2.68M)
@@ -108,32 +123,36 @@ slep_categoria_desempeno/
 │   ├── reportes/
 │   │   ├── 20260613_225301_auditoria_cifras.md  (1.97K)
 │   │   └── auditoria_cifras.md  (1.97K)
-│   ├── .DS_Store  (6K)
 │   ├── .gitkeep  (0)
 │   ├── auditar_cifras_helpers.R  (12.7K)
 │   ├── auditar_cifras.R  (9.27K)
-│   └── spot_check_publicado.R  (4.88K)
+│   └── spot_check_publicado.R  (6.75K)
 ├── .DS_Store  (14K)
 ├── .gitignore  (429)
 ├── 00_escanear_proyecto.R  (8.98K)
 ├── 00_run_all.R  (7.44K)
 ├── CLAUDE.md  (4.6K)
+├── documentar.R  (39K)
 ├── LICENSE  (1.75K)
-├── README.md  (3.4K)
+├── README.md  (4.18K)
 └── slep_categoria_desempeno.Rproj  (220)
 
 Conteo por extension:
-  md                 37
-  (sin extension)    17
-  r                  10
+  md                 38
+  (sin extension)    11
+  r                  11
   xlsx               10
   parquet            8
+  html               7
+  otf                6
   pdf                4
-  html               3
+  png                3
   txt                3
   js                 2
+  css                1
   csv                1
   doc                1
   docx               1
+  json               1
   rproj              1
   yml                1
