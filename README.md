@@ -50,6 +50,26 @@ Etapas (carpeta `30_procesamiento/`):
 El motor HTML requiere `10_utils/d3.min.js` y `10_utils/pako.min.js`
 (versionados en el repo).
 
+## Verificación de cifras antes de publicar
+
+Las cifras que muestra el motor se certifican por doble cálculo. Un set de
+scripts en `tests/` recalcula cada conteo de forma independiente del pipeline y
+lo contrasta contra lo que efectivamente viaja dentro del HTML publicado, de
+modo que ninguna cifra llegue a Pages sin haber sido verificada.
+
+Para certificar, corre:
+
+```r
+source(here::here("tests", "auditar_cifras.R"))
+source(here::here("tests", "spot_check_publicado.R"))
+```
+
+Conviene que los corras tras cada regeneración del motor (`run_all()` o
+`regenerar_motor()`) y antes de `git push`. Estos scripts **no** son parte de
+`run_all()` por diseño: la auditoría es un camino independiente del de
+producción, para que la verificación no dependa del mismo código que genera las
+cifras.
+
 ## Estructura
 
 Sigue la convención canónica de carpetas numeradas por flujo de ejecución
