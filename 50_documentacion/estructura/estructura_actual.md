@@ -1,8 +1,8 @@
 # Estructura actual — slep_categoria_desempeno
 
 - **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-13 22:33:25
-- **Totales:** 16 carpetas, 92 archivos
+- **Fecha:** 2026-06-13 23:07:02
+- **Totales:** 17 carpetas, 99 archivos
 - **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 ## Arbol
@@ -73,6 +73,7 @@ slep_categoria_desempeno/
 │   │   │   ├── 20260613_decision_granularidad_matricula.docx  (22.5K)
 │   │   │   └── 20260613_decision_procedencia_insumo_matricula.md  (4.94K)
 │   │   ├── .DS_Store  (6K)
+│   │   ├── backlog_consolidado_1-66.md  (35.5K)
 │   │   ├── gobernanza_datos.md  (3.04K)
 │   │   ├── P-matricula-actual_alcance.md  (3.08K)
 │   │   ├── P-matricula-grado_alcance.md  (4.85K)
@@ -82,12 +83,12 @@ slep_categoria_desempeno/
 │   │   ├── .DS_Store  (6K)
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260613_222451_estructura.md  (5.42K)
-│   │   ├── 20260613_222451_estructura.txt  (5.49K)
 │   │   ├── 20260613_222906_estructura.md  (5.42K)
 │   │   ├── 20260613_222906_estructura.txt  (5.49K)
-│   │   ├── estructura_actual.md  (5.42K)
-│   │   └── estructura_actual.txt  (5.49K)
+│   │   ├── 20260613_223325_estructura.md  (5.48K)
+│   │   ├── 20260613_223325_estructura.txt  (5.54K)
+│   │   ├── estructura_actual.md  (5.48K)
+│   │   └── estructura_actual.txt  (5.54K)
 │   ├── traspasos/
 │   │   ├── .gitkeep  (0)
 │   │   ├── .Rhistory  (0)
@@ -108,9 +109,16 @@ slep_categoria_desempeno/
 ├── docs/
 │   └── index.html  (2.68M)
 ├── tests/
-│   └── .gitkeep  (0)
+│   ├── reportes/
+│   │   ├── 20260613_225301_auditoria_cifras.md  (1.97K)
+│   │   └── auditoria_cifras.md  (1.97K)
+│   ├── .DS_Store  (6K)
+│   ├── .gitkeep  (0)
+│   ├── auditar_cifras_helpers.R  (12.7K)
+│   ├── auditar_cifras.R  (9.27K)
+│   └── spot_check_publicado.R  (4.88K)
 ├── .DS_Store  (14K)
-├── .gitignore  (362)
+├── .gitignore  (429)
 ├── 00_escanear_proyecto.R  (8.98K)
 ├── 00_run_all.R  (7.44K)
 ├── CLAUDE.md  (4.6K)
@@ -123,11 +131,11 @@ slep_categoria_desempeno/
 
 | Extension | Archivos |
 |---|---|
-| md | 34 |
-| (sin extension) | 16 |
+| md | 37 |
+| (sin extension) | 17 |
+| r | 10 |
 | xlsx | 10 |
 | parquet | 8 |
-| r | 7 |
 | pdf | 4 |
 | html | 3 |
 | txt | 3 |
