@@ -1,6 +1,6 @@
 ESCANEO DE ESTRUCTURA — slep_categoria_desempeno
 Raiz   : /Users/tomgc/Projects/slep_categoria_desempeno
-Fecha  : 2026-06-13 22:19:23
+Fecha  : 2026-06-13 22:29:06
 Totales: 16 carpetas, 91 archivos
 Nota   : todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
@@ -40,7 +40,7 @@ slep_categoria_desempeno/
 │   ├── .gitkeep  (0)
 │   ├── 30_construir_auxiliares.R  (12.7K)
 │   ├── 31_leer_normalizar.R  (11.9K)
-│   ├── 32_agregar_territorial.R  (13.8K)
+│   ├── 32_agregar_territorial.R  (14.8K)
 │   ├── 33_generar_html.R  (22.7K)
 │   └── 33_motor_template.html  (126K)
 ├── 40_salidas/
@@ -78,12 +78,12 @@ slep_categoria_desempeno/
 │   │   ├── .DS_Store  (6K)
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260613_162203_estructura.md  (5.27K)
-│   │   ├── 20260613_162203_estructura.txt  (5.33K)
-│   │   ├── 20260613_183531_estructura.md  (5.37K)
-│   │   ├── 20260613_183531_estructura.txt  (5.43K)
-│   │   ├── estructura_actual.md  (5.37K)
-│   │   └── estructura_actual.txt  (5.43K)
+│   │   ├── 20260613_221923_estructura.md  (5.42K)
+│   │   ├── 20260613_221923_estructura.txt  (5.49K)
+│   │   ├── 20260613_222451_estructura.md  (5.42K)
+│   │   ├── 20260613_222451_estructura.txt  (5.49K)
+│   │   ├── estructura_actual.md  (5.42K)
+│   │   └── estructura_actual.txt  (5.49K)
 │   ├── traspasos/
 │   │   ├── .gitkeep  (0)
 │   │   ├── .Rhistory  (0)
