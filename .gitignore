@@ -23,3 +23,6 @@ Thumbs.db
 # Configuracion local de Claude Code
 .claude/
 _archivo/
+
+# Reportes regenerables de la auditoria de cifras
+tests/reportes/
