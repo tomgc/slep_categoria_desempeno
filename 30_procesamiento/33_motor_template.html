@@ -1180,6 +1180,14 @@ code {
   font-weight: var(--fw-regular); color: var(--fg-3);
   margin-top: 2px; font-size: var(--fs-sm);
 }
+.ee-detail-ense-head {
+  display: flex; justify-content: space-between; gap: 12px;
+  margin-top: 6px; padding-bottom: 2px;
+  border-bottom: 1px solid var(--border-1);
+  font-size: var(--fs-xs); color: var(--fg-3); font-weight: var(--fw-regular);
+}
+.ee-detail-ense-col-nivel { flex: 1; }
+.ee-detail-ense-col-mat { flex-shrink: 0; text-align: right; }
 .ee-detail-ense-list { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
 .ee-ense-item {
   display: flex; flex-direction: column;
@@ -2250,11 +2258,17 @@ code {
                           {fmtInt(matNivel) + " matriculados en " + (CatData.NIVELES[ee.nivel] || ee.nivel)}
                         </div>}
                       {desglose.length > 0 && (
-                        <ul className="ee-detail-ense-list">
-                          {desglose.map((d, di) => (
-                            <EnseItem key={d.cod_ense2} d={d} di={di} />
-                          ))}
-                        </ul>
+                        <React.Fragment>
+                          <div className="ee-detail-ense-head">
+                            <span className="ee-detail-ense-col-nivel">Nivel</span>
+                            <span className="ee-detail-ense-col-mat">N° de estudiantes</span>
+                          </div>
+                          <ul className="ee-detail-ense-list">
+                            {desglose.map((d, di) => (
+                              <EnseItem key={d.cod_ense2} d={d} di={di} />
+                            ))}
+                          </ul>
+                        </React.Fragment>
                       )}
                       {totalEE != null && (
                         <div className="ee-detail-ense-total">
