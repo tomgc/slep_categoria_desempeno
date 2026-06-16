@@ -1,14 +1,12 @@
-# Estructura actual — slep_categoria_desempeno
+ESCANEO DE ESTRUCTURA — slep_categoria_desempeno
+Raiz   : /Users/tomgc/Projects/slep_categoria_desempeno
+Fecha  : 2026-06-14 14:36:52
+Totales: 21 carpetas, 113 archivos
+Nota   : todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
-- **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-14 13:39:03
-- **Totales:** 17 carpetas, 93 archivos
-- **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
-
-## Arbol
-
-```
 slep_categoria_desempeno/
+├── .claude/
+│   └── settings.local.json  (704)
 ├── .github/
 │   └── workflows/
 │       └── validacion_seguridad.yml  (2.61K)
@@ -58,6 +56,7 @@ slep_categoria_desempeno/
 ├── 50_documentacion/
 │   ├── activa/
 │   │   ├── decisiones/
+│   │   │   ├── .DS_Store  (6K)
 │   │   │   ├── 20260611_decision_nombres_establecimientos.md  (2K)
 │   │   │   ├── 20260611_decision_sin_gse.md  (2.25K)
 │   │   │   ├── 20260612_auditoria_migracion_github.md  (5.84K)
@@ -69,7 +68,8 @@ slep_categoria_desempeno/
 │   │   │   ├── 20260613_decision_cobertura_matricula_2025.md  (3.7K)
 │   │   │   ├── 20260613_decision_granularidad_matricula.docx  (22.5K)
 │   │   │   └── 20260613_decision_procedencia_insumo_matricula.md  (4.94K)
-│   │   ├── backlog_consolidado.md  (39.5K)
+│   │   ├── .DS_Store  (8K)
+│   │   ├── backlog_consolidado.md  (43.2K)
 │   │   ├── gobernanza_datos.md  (3.04K)
 │   │   ├── P-matricula-actual_alcance.md  (3.08K)
 │   │   ├── P-matricula-grado_alcance.md  (4.85K)
@@ -78,29 +78,48 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260613_223325_estructura.md  (5.48K)
-│   │   ├── 20260613_223325_estructura.txt  (5.54K)
-│   │   ├── 20260613_230702_estructura.md  (5.84K)
-│   │   ├── 20260613_230702_estructura.txt  (5.91K)
-│   │   ├── estructura_actual.md  (5.84K)
-│   │   └── estructura_actual.txt  (5.91K)
-│   └── traspasos/
-│       ├── .gitkeep  (0)
-│       ├── .Rhistory  (0)
-│       ├── traspaso_cierre_v01.md  (17.6K)
-│       ├── traspaso_cierre_v02.md  (18.3K)
-│       ├── traspaso_cierre_v03.md  (25K)
-│       ├── traspaso_cierre_v04.md  (25.1K)
-│       ├── traspaso_cierre_v05.md  (28.6K)
-│       ├── traspaso_cierre_v06.md  (24.2K)
-│       ├── traspaso_cierre_v07.md  (25.4K)
-│       ├── traspaso_cierre_v08.md  (29K)
-│       ├── traspaso_cierre_v09.md  (36.2K)
-│       ├── traspaso_cierre_v10.md  (27.9K)
-│       ├── traspaso_cierre_v11.md  (16.9K)
-│       ├── traspaso_cierre_v12.md  (22.7K)
-│       ├── traspaso_cierre_v13.md  (23.5K)
-│       └── traspaso_cierre_v14.md  (22.4K)
+│   │   ├── 20260614_133903_estructura.md  (5.63K)
+│   │   ├── 20260614_133903_estructura.txt  (5.69K)
+│   │   ├── 20260614_141327_estructura.md  (6.76K)
+│   │   ├── 20260614_141327_estructura.txt  (6.86K)
+│   │   ├── estructura_actual.md  (6.76K)
+│   │   └── estructura_actual.txt  (6.86K)
+│   ├── suite/
+│   │   ├── assets/
+│   │   │   ├── logo-color-stacked.png  (126K)
+│   │   │   ├── logo-mark-cc.png  (118K)
+│   │   │   └── logo-white-stacked.png  (143K)
+│   │   ├── fonts/
+│   │   │   ├── gobCL_Heavy.otf  (43.7K)
+│   │   │   ├── gobCL_Light.otf  (37.1K)
+│   │   │   ├── gobCL_Regular.otf  (35.7K)
+│   │   │   ├── MuseoSans_500.otf  (61K)
+│   │   │   ├── MuseoSans_700.otf  (62.1K)
+│   │   │   └── MuseoSans-300.otf  (61.5K)
+│   │   ├── arquitectura_general_slep_categoria_desempeno.html  (9.5K)
+│   │   ├── arquitectura_slep_categoria_desempeno.html  (17.7K)
+│   │   ├── documentacion_general_slep_categoria_desempeno.html  (7.65K)
+│   │   ├── documentacion_proyecto_slep_categoria_desempeno.html  (10.7K)
+│   │   └── suite_estilos.css  (21.7K)
+│   ├── traspasos/
+│   │   ├── .gitkeep  (0)
+│   │   ├── .Rhistory  (0)
+│   │   ├── traspaso_cierre_v01.md  (17.6K)
+│   │   ├── traspaso_cierre_v02.md  (18.3K)
+│   │   ├── traspaso_cierre_v03.md  (25K)
+│   │   ├── traspaso_cierre_v04.md  (25.1K)
+│   │   ├── traspaso_cierre_v05.md  (28.6K)
+│   │   ├── traspaso_cierre_v06.md  (24.2K)
+│   │   ├── traspaso_cierre_v07.md  (25.4K)
+│   │   ├── traspaso_cierre_v08.md  (29K)
+│   │   ├── traspaso_cierre_v09.md  (36.2K)
+│   │   ├── traspaso_cierre_v10.md  (27.9K)
+│   │   ├── traspaso_cierre_v11.md  (16.9K)
+│   │   ├── traspaso_cierre_v12.md  (22.7K)
+│   │   ├── traspaso_cierre_v13.md  (23.5K)
+│   │   ├── traspaso_cierre_v14.md  (22.4K)
+│   │   └── traspaso_cierre_v15.md  (23.3K)
+│   └── .DS_Store  (10K)
 ├── docs/
 │   └── index.html  (2.68M)
 ├── tests/
@@ -116,26 +135,27 @@ slep_categoria_desempeno/
 ├── 00_escanear_proyecto.R  (8.98K)
 ├── 00_run_all.R  (7.44K)
 ├── CLAUDE.md  (4.6K)
+├── documentar.R  (39K)
 ├── LICENSE  (1.75K)
-├── README.md  (3.4K)
+├── README.md  (4.18K)
 └── slep_categoria_desempeno.Rproj  (220)
-```
 
-## Conteo por extension
-
-| Extension | Archivos |
-|---|---|
-| md | 38 |
-| (sin extension) | 10 |
-| r | 10 |
-| xlsx | 10 |
-| parquet | 8 |
-| pdf | 4 |
-| html | 3 |
-| txt | 3 |
-| js | 2 |
-| csv | 1 |
-| doc | 1 |
-| docx | 1 |
-| rproj | 1 |
-| yml | 1 |
+Conteo por extension:
+  md                 39
+  (sin extension)    13
+  r                  11
+  xlsx               10
+  parquet            8
+  html               7
+  otf                6
+  pdf                4
+  png                3
+  txt                3
+  js                 2
+  css                1
+  csv                1
+  doc                1
+  docx               1
+  json               1
+  rproj              1
+  yml                1
