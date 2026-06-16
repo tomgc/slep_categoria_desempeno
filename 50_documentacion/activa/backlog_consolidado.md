@@ -91,31 +91,36 @@ primaria. Fuentes: registro de cada sesión.
 
 | Categoría | N | % | Descripción |
 |---|---|---|---|
-| Diseño UI — Motor base y diseño | 13 | 19 | Diseño de visualización (v01, c.11); motor HTML paso 33 base + iteraciones UI 1-4 (v03, c.17-21); publicación Pages en el generador (v04, c.26); tarjetas de modo territorio con estudiantes + % (v10, c.49); estandarización tipográfica por tokens (v10, c.54); convivencia año de matrícula (v12, c.59); desglose por grado en motor (v12, c.61); bloque narrativo territorial parcial (v12, c.62); D21 template regenerado desde referencia UI (v13, c.63) |
-| Scaffold e inicialización | 12 | 17 | Estructura, scaffold, utils, escáner, gitignore, rproj/readme, protocolo, decisiones, git (v01, c.1-9 salvo orquestación); auditoría seguridad, gobernanza, LICENSE, CI, README migración (v04, c.22-25,27) |
-| Diseño UI — Hoja comparativa | 9 | 12 | Comparativa, multi-selección, límites, lotes visuales (v05, c.28,30-35); botón limpiar (v07, c.41); N EE + tooltip de estudiantes/% (v10, c.50) |
-| Documentación de proyecto | 9 | 12 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73) |
-| Diseño UI — Modo establecimiento | 8 | 11 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53) |
+| Diseño UI — Motor base y diseño | 13 | 16 | Diseño de visualización (v01, c.11); motor HTML paso 33 base + iteraciones UI 1-4 (v03, c.17-21); publicación Pages en el generador (v04, c.26); tarjetas de modo territorio con estudiantes + % (v10, c.49); estandarización tipográfica por tokens (v10, c.54); convivencia año de matrícula (v12, c.59); desglose por grado en motor (v12, c.61); bloque narrativo territorial parcial (v12, c.62); D21 template regenerado desde referencia UI (v13, c.63) |
+| Scaffold e inicialización | 12 | 15 | Estructura, scaffold, utils, escáner, gitignore, rproj/readme, protocolo, decisiones, git (v01, c.1-9 salvo orquestación); auditoría seguridad, gobernanza, LICENSE, CI, README migración (v04, c.22-25,27) |
+| Diseño UI — Hoja comparativa | 9 | 11 | Comparativa, multi-selección, límites, lotes visuales (v05, c.28,30-35); botón limpiar (v07, c.41); N EE + tooltip de estudiantes/% (v10, c.50) |
+| Documentación de proyecto | 9 | 11 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73) |
+| Diseño UI — Modo establecimiento | 12 | 15 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53); eliminación del detalle por grado en la ficha (v16, c.74); rediseño D2 de la trayectoria a filas a todo el ancho (v16, c.75); encabezado de columnas por año (v16, c.77); eliminación del sufijo redundante "estudiantes" (v16, c.78) |
 | Datos y normalización | 6 | 8 | Inspección de datos (v01, c.10); esquema xlsx, normalización categoría (v02, c.12-13); insumo de matrícula por tipo de enseñanza (v09, c.45); ampliación cobertura 2016-2025 (v11, c.57); parquet de grado (v12, c.60) |
 | Pipeline R | 4 | 5 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58) |
 | Orquestación | 4 | 5 | Stub 00_build.R (v01, c.2); 00_run_all.R (v02, c.15); consolidación paso 33 + archivado de stub (v06, c.36); alias regenerar_motor (v13, c.65) |
-| Validación / integridad | 3 | 4 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68); spot-check parametrizado a múltiples celdas ancla, DT-spot-check-cobertura (v15, c.71) |
+| Validación / integridad | 4 | 5 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68); spot-check parametrizado a múltiples celdas ancla, DT-spot-check-cobertura (v15, c.71); certificación de ausencia simétrica en el spot-check, DT-spot-check-ausencia (v16, c.80) |
 | Documentación (en producto) | 2 | 3 | Panel de notas metodológicas (v05, c.29); alineación con fuente oficial (v08, c.43) |
-| Migración y publicación / DevOps | 2 | 3 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69) |
-| Calidad de código / pipeline | 1 | 1 | Warning de readLines silenciado de raíz (v13, c.64) |
+| Migración y publicación / DevOps | 3 | 4 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76) |
+| Calidad de código / pipeline | 2 | 3 | Warning de readLines silenciado de raíz (v13, c.64); retiro de código muerto de matrícula por grado en el motor (v16, c.79) |
 
-(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 73 entradas
-(1-73). La tabla temática suma 73, cuadrando con el cronológico, con asignación por
+(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 80 entradas
+(1-80). La tabla temática suma 80, cuadrando con el cronológico, con asignación por
 intención primaria verificada entrada por entrada. La categoría líder, "Diseño UI —
-Motor base y diseño", queda en 18% (13/73), bajo el umbral de subdivisión del 25%.
-El v15 suma cuatro entradas: "Documentación de proyecto" sube a 9 (consolidación y
-renombre del backlog c.70, nota de verificación en README c.72, suite de documentación
-con suitedoc c.73) y "Validación / integridad" a 3 (spot-check multi-celda, c.71). Sin
-categorías nuevas. Se mantienen los criterios de v14: "Scaffold inicial" (v10) y la
-inicialización de v04 unificadas bajo "Scaffold e inicialización" (12); las entradas de
-naturaleza de orquestación del scaffold (c.2, stub) imputadas a "Orquestación" por
-intención primaria. No se reescribe ni renumera ninguna entrada del detalle
-cronológico.)
+Motor base y diseño", queda en 16% (13/80), bajo el umbral de subdivisión del 25%.
+El v16 suma siete entradas: cuatro a "Diseño UI — Modo establecimiento" (8→12, es la
+ficha del EE: eliminación del grado c.74, rediseño D2 c.75, encabezado de columnas
+c.77, eliminación del sufijo redundante c.78), una a "Migración y publicación / DevOps"
+(2→3, snapshots del escáner c.76), una a "Calidad de código / pipeline" (1→2, retiro de
+código muerto del grado c.79) y una a "Validación / integridad" (3→4, ausencia simétrica
+en el spot-check c.80). Sin categorías nuevas: las entradas de UI de la ficha se imputan
+a "Modo establecimiento" (no a una categoría "Interfaz" nueva) y el retiro de código
+muerto a "Calidad de código / pipeline", reusando la taxonomía existente para no
+introducir categorías bajo el umbral de absorción del 2%. Se mantienen los criterios de
+v14: "Scaffold inicial" (v10) y la inicialización de v04 unificadas bajo "Scaffold e
+inicialización" (12); las entradas de naturaleza de orquestación del scaffold (c.2, stub)
+imputadas a "Orquestación" por intención primaria. No se reescribe ni renumera ninguna
+entrada del detalle cronológico.)
 
 ## Resumen estadístico por sesión
 
@@ -136,7 +141,8 @@ cronológico.)
 | 13 | v13 | 4 | Opus 4.8 | D21 resuelto (referencia UI) + warning + alias + check 6.5 |
 | 14 | v14 | 3 | Opus 4.8 | Backlog consolidado in extenso + auditoría de cifras (4.5) + higiene Git |
 | 15 | v15 | 4 | Opus 4.8 | Cierre P1-P3 (backlog 67-73 + spot-check multi-celda + nota README) + suite de documentación (suitedoc) |
-| **Total** | | **73** | | |
+| 16 | v16 | 7 | Opus 4.8 | Rediseño D2 de la ficha de establecimiento (sin grado, encabezado de columnas, sin redundancia) + retiro de código muerto + ausencia simétrica en spot-check |
+| **Total** | | **80** | | |
 
 ## Detalle cronológico
 
@@ -572,6 +578,74 @@ cronológico.)
     inexistentes en `decisiones/`. Verificación: genera sin abortar (verificar=TRUE),
     cero residuos, tildes UTF-8 correctas y `<meta charset>` presente. Commit `51b5159`.
 
+### Sesión 16 (cambios 74-80) — Rediseño D2 de la ficha + retiro de código muerto + ausencia en spot-check
+
+74. **Eliminación del detalle por grado en la ficha de establecimiento** —
+    `30_procesamiento/33_motor_template.html`: el componente `EnseItem` se simplificó a
+    una fila simple (etiqueta de enseñanza + matrícula), retirando el estado `abierto`
+    (`useState`), la invocación `CatData.matriculaPorGrado`, la variable `tieneGrado`, el
+    botón `ee-ense-toggle` y el `<ul ee-grado-list>` con sus filas de grado; el call site
+    queda sin las props `rbd`/`anio`. CSS de grado eliminado. Decisión del titular: el
+    detalle por grado (1°-8°) es un nivel de detalle que no corresponde a una vista de
+    categorías de desempeño (las categorías no son por curso). Verificación: JSX
+    transpila con Babel sin error; placeholders=3; sin `ee-grado`/`ee-ense-toggle` en el
+    template. Commit `0e74548`.
+75. **Rediseño D2 de la trayectoria por año a filas a todo el ancho** —
+    `33_motor_template.html`: el `<li>` por año de `EeRow` apila como hijos directos de
+    `.ee-detail-row` la cabecera (año + marca + categoría, sin dos puntos), el subtítulo
+    "N matriculados en {NIVEL}", la lista de enseñanza a todo el ancho y la fila "Total
+    establecimiento" destacada (condición independiente). CSS: se quitó el `margin-left:
+    100px` del subtítulo y se eliminaron `.ee-detail-ense` y `.ee-detail-ense-title` (el
+    wrapper y el mini-título "Matrícula por tipo de enseñanza" ya no se renderizan). La
+    organización en columna estrecha desaprovechaba el ancho; el modelo de filas escala a
+    establecimientos con 5+ tipos de enseñanza (donde un layout de columnas por enseñanza
+    no cabe). Verificación: JSX válido; placeholders=3; sin clases residuales; revisión
+    visual del titular aprobada (D25). Commit `1535110`.
+76. **Commit de snapshots del escáner (poda de retención 2)** —
+    `50_documentacion/estructura/`: se versionaron los snapshots generados durante la
+    sesión; la poda de retención=2 (política 7.4) eliminó el snapshot `133903` y conservó
+    `143652` + aliases (Git lo registró como rename). Se versiona aparte del rediseño de
+    UI (un cambio conceptual por commit). Commit `599b3df`.
+77. **Encabezado de columnas por año en la ficha** — `33_motor_template.html`: se agregó
+    un encabezado sutil, uno por bloque-año, entre el subtítulo y la lista de enseñanza:
+    "Nivel" (izquierda) y "N° de estudiantes" (derecha), bajo la condición
+    `desglose.length > 0`, con CSS nuevo `.ee-detail-ense-head` (flex `space-between`,
+    atenuado, borde inferior fino). Las filas de enseñanza quedaban sin rotular tras D2;
+    el encabezado da contexto a las dos columnas, por año porque cada año es un bloque
+    independiente. Token de tamaño `var(--fs-xs)` (no `--fs-overline`, reservado a
+    mayúsculas); sin `text-transform: uppercase`. Verificación: JSX válido;
+    placeholders=3; spot-check 6/6 OK; header presente en `docs/index.html`. Commit
+    `b4b5596`.
+78. **Eliminación del sufijo redundante "estudiantes" en la ficha** —
+    `33_motor_template.html`: la cifra de `EnseItem` dejó de llevar el sufijo condicional
+    del primer ítem (`{di === 0 ? " estudiantes" : ""}`); como `di` quedó sin uso, se
+    eliminó en cascada de la firma (`{ d, di }` → `{ d }`), del `map` y del call site.
+    Tras agregar el encabezado "N° de estudiantes" (c.77), la primera fila repetía la
+    palabra ("36 estudiantes"); el rótulo ya da el contexto. Verificación: JSX válido;
+    `di` ya no aparece en el archivo; placeholders=3. Commit `1ed0524`.
+79. **Retiro de código muerto de matrícula por grado en el motor** —
+    `33_motor_template.html`: se retiraron del motor el índice `MATG` y `MATG_IX` (con el
+    `for` que lo poblaba), la función `matriculaPorGrado` completa, la entrada
+    `matriculaPorGrado` del objeto `CatData` y `GRADO_LABELS` (cuya única referencia viva
+    estaba dentro de `matriculaPorGrado`). SOLO el motor: NO se tocó el pipeline ni el
+    JSON; `DATA.matricula_grado` sigue embebido y el motor solo deja de consumirlo (el
+    desacople del JSON es un cambio de pipeline aparte, queda como pendiente). Al eliminar
+    la expansión por grado (c.74) ese código quedó sin uso. Verificación: grep de control
+    vacío (`matriculaPorGrado|MATG|MATG_IX|ee-grado`); JSX válido; placeholders=3;
+    spot-check 6/6 OK. Commit `2d6e570`.
+80. **Certificación de ausencia simétrica en el spot-check (DT-spot-check-ausencia)** —
+    `tests/spot_check_publicado.R`: nueva lista `SPOT_AUSENCIAS` (combinaciones
+    tipo/nom/nivel/anio que la fuente no publica, sin `categoria`), dos funciones nuevas
+    (`spot_esperado_ausencia_slep` cuenta filas en crudo sin filtrar categoría;
+    `spot_publicado_ausencia_slep` cuenta filas en el territorial publicado sin filtrar
+    categoría y SIN `stop()` ante 0) y un Paso 1-bis que recorre `SPOT_AUSENCIAS` (PASS si
+    crudo==0 && pub==0; FALLA acumulada en el mismo vector `fallas`), con el veredicto
+    agregado ajustado a presencia + ausencia. El spot-check solo verificaba presencia y
+    reventaba ante una celda ausente (A24); el modo de ausencia cierra la verificación por
+    ambos lados y certifica como correcta la ausencia legítima (media/2016). Verificación:
+    ejecución real, 6 presencia OK + 1 ausencia OK, veredicto final OK; el script ya no
+    aborta ante media/2016. Commit `87c9a7c`.
+
 ## Delta del backlog
 
 **Consolidación v13 → documento in extenso (v14, cierre de DT-backlog-documental).**
@@ -598,3 +672,18 @@ proyecto"), 73 (suite de documentación con suitedoc, "Documentación de proyect
 categorías nuevas: "Documentación de proyecto" 6→9, "Validación / integridad" 2→3. La
 categoría líder baja a 18% (13/73), bajo el umbral de subdivisión. Tabla temática
 reverificada: suma 73, cuadra con el cronológico.
+
+**Delta v16 (73 → 80).** Siete entradas nuevas de la sesión 16: 74 (eliminación del
+detalle por grado, "Diseño UI — Modo establecimiento"), 75 (rediseño D2, "Diseño UI —
+Modo establecimiento"), 76 (snapshots del escáner, "Migración y publicación / DevOps"),
+77 (encabezado de columnas, "Diseño UI — Modo establecimiento"), 78 (eliminación del
+sufijo redundante, "Diseño UI — Modo establecimiento"), 79 (retiro de código muerto del
+grado, "Calidad de código / pipeline"), 80 (ausencia simétrica en el spot-check,
+"Validación / integridad"). Sin categorías nuevas: "Diseño UI — Modo establecimiento"
+8→12, "Validación / integridad" 3→4, "Migración y publicación / DevOps" 2→3, "Calidad de
+código / pipeline" 1→2. Las cuatro entradas de UI de la ficha se imputan a "Modo
+establecimiento" (no a una categoría "Interfaz" nueva) y el retiro de código muerto a
+"Calidad de código / pipeline", reusando la taxonomía existente para no introducir
+categorías bajo el umbral de absorción del 2%. La categoría líder baja a 16% (13/80),
+bajo el umbral de subdivisión; "Modo establecimiento" sube a 15% (12/80), también bajo el
+umbral. Tabla temática reverificada: suma 80, cuadra con el cronológico.
