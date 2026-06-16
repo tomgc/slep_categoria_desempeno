@@ -32,6 +32,14 @@
 #   - Cobertura 2016-2019; año vigente = 2019. Trayectoria sin hueco de
 #     pandemia (no ocurre en el rango). Ver decisiones/.
 #
+# Nota (sesión 17, desacople de grado): el motor dejó de consumir el desglose
+#   por grado en la sesión 16 (c.79, retiro de código muerto). Este generador
+#   ya no lee matricula_rbd_grado.parquet ni embebe matricula_grado/grado_labels
+#   en el JSON: era dato inerte que inflaba el peso. El parquet permanece en
+#   20_insumos/ (insumo externo de slep_analisis_matricula), simplemente no se
+#   consume aquí. Si se reintroduce el desglose por grado en la ficha, restaurar
+#   la carga, el bloque columnar, su validación y la clave en json_root.
+#
 # Uso:
 #   source(here::here("30_procesamiento", "33_generar_html.R"))
 # ----------------------------------------------------------------------------
@@ -99,28 +107,6 @@ ENSE2_A_NIVEL <- list(
   "7" = "media"
 )
 
-# Etiquetas de grado por tipo de ensenanza. El grado solo tiene glosa dentro de
-# su nivel: grado "1" es "1\u00b0 b\u00e1sico" en basica (2) y "1\u00b0 medio" en
-# media (5,7). La distincion HC/TP la da el cod_ense2 del item padre en la ficha
-# (ENSE2_LABELS), no la etiqueta de grado. El cliente arma la glosa como
-# GRADO_LABELS[cod_ense2][cod_grado].
-GRADO_LABELS <- list(
-  "2" = list(
-    "1" = "1\u00b0 b\u00e1sico", "2" = "2\u00b0 b\u00e1sico",
-    "3" = "3\u00b0 b\u00e1sico", "4" = "4\u00b0 b\u00e1sico",
-    "5" = "5\u00b0 b\u00e1sico", "6" = "6\u00b0 b\u00e1sico",
-    "7" = "7\u00b0 b\u00e1sico", "8" = "8\u00b0 b\u00e1sico"
-  ),
-  "5" = list(
-    "1" = "1\u00b0 medio", "2" = "2\u00b0 medio",
-    "3" = "3\u00b0 medio", "4" = "4\u00b0 medio"
-  ),
-  "7" = list(
-    "1" = "1\u00b0 medio", "2" = "2\u00b0 medio",
-    "3" = "3\u00b0 medio", "4" = "4\u00b0 medio"
-  )
-)
-
 # Redondeo de pct para el JSON (4 decimales: precisión suficiente para %).
 PCT_DIGITS <- 4
 
@@ -164,27 +150,6 @@ message(sprintf("    matricula_rbd_ense:    %d filas (%d RBD, anios %s)",
                 nrow(df_mat), dplyr::n_distinct(df_mat$rbd),
                 paste(sort(unique(df_mat$anio)), collapse = ",")))
 
-# Matricula por rbd x anio x cod_ense2 x cod_grado (grano mas fino que el de ense2;
-# insumo separado para el desglose por grado de la ficha). Solo basica (2) y media
-# (5,7) se desglosan en la ficha: se filtra aqui para no engrosar el JSON con
-# grados de niveles sin categoria (parvularia, especial, adultos).
-ruta_mat_grado <- here::here("20_insumos", "matricula_rbd_grado.parquet")
-if (!file.exists(ruta_mat_grado)) {
-  stop("Falta 20_insumos/matricula_rbd_grado.parquet. ",
-       "Generarlo en slep_analisis_matricula (04_generar_matricula_rbd_grado.R) y copiarlo aqui.")
-}
-df_mat_grado <- arrow::read_parquet(ruta_mat_grado) |>
-  dplyr::mutate(
-    rbd       = as.character(rbd),
-    cod_ense2 = as.character(cod_ense2),
-    cod_grado = as.character(cod_grado)
-  ) |>
-  dplyr::filter(cod_ense2 %in% c("2", "5", "7"))
-
-message(sprintf("    matricula_rbd_grado:   %d filas (%d RBD, ense2 2/5/7, anios %s)",
-                nrow(df_mat_grado), dplyr::n_distinct(df_mat_grado$rbd),
-                paste(sort(unique(df_mat_grado$anio)), collapse = ",")))
-
 
 # ============================================================================
 # Bloque 2 — Meta y catálogos
@@ -217,8 +182,7 @@ meta <- list(
   motivos    = MOTIVO_LABELS,
   depe_labels = DEPE_LABELS,
   ense2_labels = ENSE2_LABELS,
-  ense2_a_nivel = ENSE2_A_NIVEL,
-  grado_labels = GRADO_LABELS
+  ense2_a_nivel = ENSE2_A_NIVEL
 )
 
 # --- Catálogo de comunas ---
@@ -350,23 +314,6 @@ matricula_lst <- list(
   matricula_total_ee = as.integer(df_mat_ord$matricula_total_ee)
 )
 
-# --- Matrícula por establecimiento × año × tipo de enseñanza × grado ---
-# Grano más fino que matricula_lst: desglosa cada cod_ense2 por grado. Solo
-# básica (2) y media (5,7): el filtro ya se aplicó al cargar df_mat_grado. El
-# cliente lo cruza con matricula_lst (suma de grados de un rbd×anio×cod_ense2 ==
-# matrícula de ese cod_ense2); es detalle opcional de la ficha, colapsado.
-df_mat_grado_ord <- df_mat_grado |>
-  dplyr::arrange(rbd, anio, cod_ense2, cod_grado)
-
-matricula_grado_lst <- list(
-  rows      = nrow(df_mat_grado_ord),
-  rbd       = df_mat_grado_ord$rbd,
-  anio      = as.integer(df_mat_grado_ord$anio),
-  cod_ense2 = df_mat_grado_ord$cod_ense2,
-  cod_grado = df_mat_grado_ord$cod_grado,
-  matricula = as.integer(df_mat_grado_ord$matricula)
-)
-
 
 # ============================================================================
 # Bloque 4 — Validación de integridad del JSON (C.8)
@@ -403,30 +350,6 @@ chk_total_ee <- df_mat_ord |>
   dplyr::filter(n_tot > 1)
 stopifnot("matricula_total_ee no es constante dentro de rbd×anio" = nrow(chk_total_ee) == 0)
 
-# Control del bloque grado: filas calzan, dominio cod_ense2 restringido a 2/5/7,
-# y consistencia con el bloque de ense2 (suma de grados de un rbd×anio×cod_ense2
-# == matrícula de ese cod_ense2). Este es el invariante de P-matricula-grado.
-stopifnot(
-  "matricula_grado sin filas" = matricula_grado_lst$rows > 0,
-  "matricula_grado: filas no calzan con el parquet filtrado" =
-    matricula_grado_lst$rows == nrow(df_mat_grado),
-  "cod_ense2 de grado fuera de 2/5/7" =
-    all(unique(matricula_grado_lst$cod_ense2) %in% c("2", "5", "7"))
-)
-# La suma de grados debe cuadrar con la matrícula del cod_ense2 (solo 2/5/7, el
-# universo del bloque de grado). Cruce contra df_mat ya cargado en memoria.
-chk_grado <- df_mat_grado_ord |>
-  dplyr::summarise(m_grado = sum(matricula), .by = c(rbd, anio, cod_ense2)) |>
-  dplyr::inner_join(
-    df_mat_ord |> dplyr::select(rbd, anio, cod_ense2, m_ense = matricula),
-    by = c("rbd", "anio", "cod_ense2")
-  ) |>
-  dplyr::filter(m_grado != m_ense)
-stopifnot(
-  "suma de grados no calza con matricula por cod_ense2 (P-matricula-grado)" =
-    nrow(chk_grado) == 0
-)
-
 
 # ============================================================================
 # Bloque 5 — Serializar y comprimir
@@ -441,8 +364,7 @@ json_root <- list(
   territorial      = territorial_lst,
   sin_vigente      = sin_vigente_lst,
   rbd              = rbd_lst,
-  matricula        = matricula_lst,
-  matricula_grado  = matricula_grado_lst
+  matricula        = matricula_lst
 )
 
 json_str <- jsonlite::toJSON(
@@ -551,7 +473,6 @@ message(sprintf("  Sin vigente:   %d filas", sin_vigente_lst$rows))
 message(sprintf("  Por EE (rbd):  %d filas", rbd_lst$rows))
 message(sprintf("  Matricula:     %d filas (%d RBD)",
                 matricula_lst$rows, dplyr::n_distinct(matricula_lst$rbd)))
-message(sprintf("  Matric.grado:  %d filas (ense2 2/5/7)", matricula_grado_lst$rows))
 message(sprintf("  Comunas:       %d", nrow(comunas_lst)))
 message(sprintf("  Regiones:      %d", nrow(regiones_lst)))
 message(sprintf("  SLEPs:         %d (%d RBDs)",
