@@ -40,6 +40,16 @@ SPOT_CELDAS <- list(
 
 SPOT_CAT_REALES <- c("ALTO", "MEDIO", "MEDIO-BAJO", "INSUFICIENTE")
 
+# --- Celdas de AUSENCIA legitima (certificacion de ausencia simetrica) ------
+# Combinaciones tipo/nivel/anio que la fuente NO publica (p. ej. la educacion
+# media no tiene datos 2016). El spot-check certifica que esa ausencia es
+# simetrica: 0 filas en el crudo Y ninguna fila en el territorial publicado.
+# No llevan campo `categoria`: se verifica la ausencia del nivel/anio completo,
+# no de una categoria puntual.
+SPOT_AUSENCIAS <- list(
+  list(tipo = "slep", nom = "Costa Central", nivel = "media", anio = 2016L)
+)
+
 
 # ============================================================================
 # Paso 0 — Cargar insumos una sola vez (crudo + JSON publicado)
@@ -128,6 +138,39 @@ spot_publicado_slep <- function(celda) {
   )
 }
 
+# Filas esperadas en el crudo para una combinacion nivel/anio de un "slep", SIN
+# filtrar por categoria. Para una ausencia legitima debe ser 0.
+spot_esperado_ausencia_slep <- function(celda) {
+  n_filas <- df_cat |>
+    dplyr::inner_join(mapa_slep, by = "rbd") |>
+    dplyr::filter(
+      .data$nombre_slep == celda$nom,
+      .data$nivel == celda$nivel,
+      .data$anio == celda$anio
+    ) |>
+    nrow()
+  as.integer(n_filas)
+}
+
+# Filas presentes en el territorial publicado para una combinacion nivel/anio de
+# un "slep", SIN filtrar por categoria. NO hace stop() ante 0: 0 es justamente el
+# resultado esperado para una ausencia legitima. Solo cuenta y devuelve.
+spot_publicado_ausencia_slep <- function(celda) {
+  cod_objetivo <- mapa_slep |>
+    dplyr::filter(.data$nombre_slep == celda$nom) |>
+    dplyr::distinct(cod_slep) |>
+    dplyr::pull(cod_slep) |>
+    as.character()
+
+  idx <- which(
+    ter$tipo_entidad == celda$tipo &
+    ter$nivel == celda$nivel &
+    ter$anio == celda$anio
+  )
+  idx <- idx[ter$cod_entidad[idx] %in% cod_objetivo]
+  length(idx)
+}
+
 
 # ============================================================================
 # Paso 1 — Recorrer las celdas ancla
@@ -160,15 +203,39 @@ for (celda in SPOT_CELDAS) {
 
 
 # ============================================================================
+# Paso 1-bis — Recorrer las celdas de ausencia (certificacion simetrica)
+# ============================================================================
+
+message(sprintf("[1-bis] Verificando %d celdas de ausencia (crudo 0 + publicado sin fila)...",
+                length(SPOT_AUSENCIAS)))
+
+for (celda in SPOT_AUSENCIAS) {
+  etiqueta <- sprintf("%s/%s/%d (ausencia)", celda$nom, celda$nivel, celda$anio)
+
+  esp_aus <- spot_esperado_ausencia_slep(celda)   # n_filas en el crudo
+  pub_aus <- spot_publicado_ausencia_slep(celda)  # n_filas en el publicado
+
+  if (esp_aus == 0L && pub_aus == 0L) {
+    message(sprintf("    OK    %-45s ausente en crudo y publicado", etiqueta))
+  } else {
+    message(sprintf("    FALLA %-45s crudo=%d pub=%d (se esperaba 0/0)",
+                    etiqueta, esp_aus, pub_aus))
+    fallas <- c(fallas, etiqueta)
+  }
+}
+
+
+# ============================================================================
 # Paso 2 — Veredicto agregado
 # ============================================================================
 
 message("")
+n_total <- length(SPOT_CELDAS) + length(SPOT_AUSENCIAS)
 if (length(fallas) == 0) {
-  message(sprintf("=== SPOT-CHECK OK: las %d celdas publicadas coinciden con el crudo. ===",
-                  length(SPOT_CELDAS)))
+  message(sprintf("=== SPOT-CHECK OK: %d celdas de presencia + %d de ausencia verificadas. ===",
+                  length(SPOT_CELDAS), length(SPOT_AUSENCIAS)))
 } else {
   stop(sprintf("SPOT-CHECK FALLA: %d de %d celdas no coinciden -> %s",
-               length(fallas), length(SPOT_CELDAS),
+               length(fallas), n_total,
                paste(fallas, collapse = "; ")))
 }
