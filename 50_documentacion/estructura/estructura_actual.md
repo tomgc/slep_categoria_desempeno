@@ -1,8 +1,8 @@
 # Estructura actual — slep_categoria_desempeno
 
 - **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-14 14:36:52
-- **Totales:** 21 carpetas, 113 archivos
+- **Fecha:** 2026-06-16 13:02:36
+- **Totales:** 21 carpetas, 114 archivos
 - **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 ## Arbol
@@ -46,7 +46,7 @@ slep_categoria_desempeno/
 │   ├── 31_leer_normalizar.R  (11.9K)
 │   ├── 32_agregar_territorial.R  (14.8K)
 │   ├── 33_generar_html.R  (22.7K)
-│   └── 33_motor_template.html  (126K)
+│   └── 33_motor_template.html  (123K)
 ├── 40_salidas/
 │   ├── intermedios/
 │   │   ├── .gitkeep  (0)
@@ -56,7 +56,7 @@ slep_categoria_desempeno/
 │   │   ├── comunas_chile.parquet  (7.18K)
 │   │   ├── establecimientos_chile.parquet  (261K)
 │   │   └── sleps_chile.parquet  (58.7K)
-│   └── motor_categoria.html  (2.68M)
+│   └── motor_categoria.html  (2.67M)
 ├── 50_documentacion/
 │   ├── activa/
 │   │   ├── decisiones/
@@ -73,7 +73,7 @@ slep_categoria_desempeno/
 │   │   │   ├── 20260613_decision_granularidad_matricula.docx  (22.5K)
 │   │   │   └── 20260613_decision_procedencia_insumo_matricula.md  (4.94K)
 │   │   ├── .DS_Store  (8K)
-│   │   ├── backlog_consolidado.md  (43.2K)
+│   │   ├── backlog_consolidado.md  (51K)
 │   │   ├── gobernanza_datos.md  (3.04K)
 │   │   ├── P-matricula-actual_alcance.md  (3.08K)
 │   │   ├── P-matricula-grado_alcance.md  (4.85K)
@@ -82,12 +82,12 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260614_133903_estructura.md  (5.63K)
-│   │   ├── 20260614_133903_estructura.txt  (5.69K)
-│   │   ├── 20260614_141327_estructura.md  (6.76K)
-│   │   ├── 20260614_141327_estructura.txt  (6.86K)
-│   │   ├── estructura_actual.md  (6.76K)
-│   │   └── estructura_actual.txt  (6.86K)
+│   │   ├── 20260616_125659_estructura.md  (6.94K)
+│   │   ├── 20260616_125659_estructura.txt  (7.05K)
+│   │   ├── 20260616_130236_estructura.md  (6.94K)
+│   │   ├── 20260616_130236_estructura.txt  (7.04K)
+│   │   ├── estructura_actual.md  (6.94K)
+│   │   └── estructura_actual.txt  (7.04K)
 │   ├── suite/
 │   │   ├── assets/
 │   │   │   ├── logo-color-stacked.png  (126K)
@@ -122,10 +122,11 @@ slep_categoria_desempeno/
 │   │   ├── traspaso_cierre_v12.md  (22.7K)
 │   │   ├── traspaso_cierre_v13.md  (23.5K)
 │   │   ├── traspaso_cierre_v14.md  (22.4K)
-│   │   └── traspaso_cierre_v15.md  (23.3K)
+│   │   ├── traspaso_cierre_v15.md  (23.3K)
+│   │   └── traspaso_cierre_v16.md  (28.5K)
 │   └── .DS_Store  (10K)
 ├── docs/
-│   └── index.html  (2.68M)
+│   └── index.html  (2.67M)
 ├── tests/
 │   ├── reportes/
 │   │   ├── 20260613_225301_auditoria_cifras.md  (1.97K)
@@ -133,7 +134,7 @@ slep_categoria_desempeno/
 │   ├── .gitkeep  (0)
 │   ├── auditar_cifras_helpers.R  (12.7K)
 │   ├── auditar_cifras.R  (9.27K)
-│   └── spot_check_publicado.R  (6.75K)
+│   └── spot_check_publicado.R  (9.28K)
 ├── .DS_Store  (14K)
 ├── .gitignore  (429)
 ├── 00_escanear_proyecto.R  (8.98K)
@@ -149,7 +150,7 @@ slep_categoria_desempeno/
 
 | Extension | Archivos |
 |---|---|
-| md | 39 |
+| md | 40 |
 | (sin extension) | 13 |
 | r | 11 |
 | xlsx | 10 |
