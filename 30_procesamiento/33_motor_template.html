@@ -1558,7 +1558,6 @@ code {
       const DEPE_LABELS = M.depe_labels || {};
       const ENSE2_LABELS = M.ense2_labels || {};
       const ENSE2_A_NIVEL = M.ense2_a_nivel || {};
-      const GRADO_LABELS = M.grado_labels || {};   // {cod_ense2: {cod_grado: glosa}}
 
       // ---- Catálogos territoriales ----
       const COMUNA_BY_COD = new Map(DATA.comunas.map(c => [String(c.cod), c]));
@@ -1709,45 +1708,6 @@ code {
         return out.sort((a, b) => a.cod_ense2.localeCompare(b.cod_ense2));
       }
 
-      // ---- Índice de matrícula por grado: rbd -> anio -> cod_ense2 -> Map(grado->mat) ----
-      // Grano más fino que MAT_IX (añade el grado dentro del tipo de enseñanza).
-      // Solo contiene 2/5/7 (filtrado en R). Detalle opcional de la ficha.
-      const MATG = DATA.matricula_grado || null;
-      const MATG_IX = new Map();   // rbd -> Map(anio -> Map(cod_ense2 -> Map(grado->mat)))
-      if (MATG) {
-        for (let i = 0; i < MATG.rows; i++) {
-          const rbd = MATG.rbd[i], anio = MATG.anio[i], ense = MATG.cod_ense2[i];
-          if (!MATG_IX.has(rbd)) MATG_IX.set(rbd, new Map());
-          const porAnio = MATG_IX.get(rbd);
-          if (!porAnio.has(anio)) porAnio.set(anio, new Map());
-          const porEnse = porAnio.get(anio);
-          if (!porEnse.has(ense)) porEnse.set(ense, new Map());
-          porEnse.get(ense).set(MATG.cod_grado[i], MATG.matricula[i]);
-        }
-      }
-
-      // Desglose por grado de un rbd×año×cod_ense2, ordenado por grado numérico.
-      // Cada item: {cod_grado, label, matricula}. [] si no hay dato (un cod_ense2
-      // sin desglose ese año muestra solo su cifra agregada, sin sub-lista).
-      function matriculaPorGrado(rbd, cod_ense2, anio) {
-        const porAnio = MATG_IX.get(rbd);
-        if (!porAnio) return [];
-        const porEnse = porAnio.get(anio);
-        if (!porEnse) return [];
-        const g = porEnse.get(cod_ense2);
-        if (!g) return [];
-        const labels = GRADO_LABELS[cod_ense2] || {};
-        const out = [];
-        g.forEach((mat, grado) => {
-          out.push({
-            cod_grado: grado,
-            label: (labels[grado] || ("Grado " + grado)),
-            matricula: mat
-          });
-        });
-        return out.sort((a, b) => (+a.cod_grado) - (+b.cod_grado));
-      }
-
       // Serie de matrícula del nivel (básica|media) a lo largo de todos los años
       // disponibles, ascendente. Cada item: {anio, mat} (mat puede ser null si el EE
       // no tiene ese nivel ese año). Insumo para la evolución de tamaño en la ficha.
@@ -1830,7 +1790,7 @@ code {
         ENSE2_LABELS, ENSE2_A_NIVEL,
         REGIONES, SLEPS, COMUNA_BY_COD, ESTAB_CAT,
         getDistribucion, getSinVigente, getEstablecimientos, distribucionDesdeEE,
-        matriculaNivel, matriculaTotalEE, matriculaDesglose, matriculaSerieNivel, matriculaPorGrado,
+        matriculaNivel, matriculaTotalEE, matriculaDesglose, matriculaSerieNivel,
       };
     })();
 
