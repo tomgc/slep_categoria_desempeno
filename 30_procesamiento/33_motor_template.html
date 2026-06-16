@@ -1196,22 +1196,6 @@ code {
 .ee-ense-item.has-cat { color: var(--fg-1); font-weight: var(--fw-medium); }
 .ee-ense-label { flex: 1; display: flex; align-items: baseline; gap: 4px; }
 .ee-ense-mat { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-.ee-ense-toggle {
-  border: none; background: none; cursor: pointer; padding: 0;
-  font-size: var(--fs-xs); color: var(--fg-3); line-height: 1;
-  width: 12px; text-align: center;
-}
-.ee-grado-list {
-  list-style: none; margin: 2px 0 4px 0; padding: 0 0 0 16px;
-  display: flex; flex-direction: column; gap: 1px;
-  border-left: 1px solid var(--border-1);
-}
-.ee-grado-item {
-  display: flex; justify-content: space-between; gap: 12px;
-  font-size: var(--fs-xs); color: var(--fg-3); font-weight: var(--fw-regular);
-  padding-left: 8px;
-}
-.ee-grado-mat { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .ee-detail-ense-total {
   display: flex; justify-content: space-between; gap: 12px;
   font-size: var(--fs-xs); color: var(--fg-1); font-weight: var(--fw-bold);
@@ -2192,36 +2176,15 @@ code {
     // Item de un tipo de enseñanza en el desglose de la ficha. Si el tipo tiene
     // desglose por grado (básica 2, media 5/7), muestra un control colapsable con
     // el reparto por grado; colapsado por defecto. Si no hay grado, solo la cifra.
-    function EnseItem({ d, di, rbd, anio }) {
-      const [abierto, setAbierto] = React.useState(false);
-      const grados = CatData.matriculaPorGrado(rbd, d.cod_ense2, anio);
-      const tieneGrado = grados.length > 0;
+    function EnseItem({ d, di }) {
       return (
         <li className={"ee-ense-item" + (d.nivel ? " has-cat" : "")}>
           <div className="ee-ense-head">
-            <span className="ee-ense-label">
-              {tieneGrado && (
-                <button className="ee-ense-toggle" onClick={() => setAbierto(v => !v)}
-                        aria-expanded={abierto}>
-                  {abierto ? "▾" : "▸"}
-                </button>
-              )}
-              {d.label + ":"}
-            </span>
+            <span className="ee-ense-label">{d.label + ":"}</span>
             <span className="ee-ense-mat">
               {fmtInt(d.matricula)}{di === 0 ? " estudiantes" : ""}
             </span>
           </div>
-          {tieneGrado && abierto && (
-            <ul className="ee-grado-list">
-              {grados.map(g => (
-                <li key={g.cod_grado} className="ee-grado-item">
-                  <span className="ee-grado-label">{g.label}</span>
-                  <span className="ee-grado-mat">{fmtInt(g.matricula)}</span>
-                </li>
-              ))}
-            </ul>
-          )}
         </li>
       );
     }
@@ -2297,8 +2260,7 @@ code {
                           <span className="ee-detail-ense-title">Matrícula por tipo de enseñanza</span>
                           <ul className="ee-detail-ense-list">
                             {desglose.map((d, di) => (
-                              <EnseItem key={d.cod_ense2} d={d} di={di}
-                                        rbd={ee.rbd} anio={p.anio} />
+                              <EnseItem key={d.cod_ense2} d={d} di={di} />
                             ))}
                           </ul>
                           {totalEE != null && (
