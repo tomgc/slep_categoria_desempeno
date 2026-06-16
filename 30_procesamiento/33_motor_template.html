@@ -1178,15 +1178,9 @@ code {
 .ee-detail-cat { flex: 1; }
 .ee-detail-matnivel {
   font-weight: var(--fw-regular); color: var(--fg-3);
-  margin-left: 100px; margin-top: 2px; font-size: var(--fs-sm);
+  margin-top: 2px; font-size: var(--fs-sm);
 }
-.ee-detail-ense { margin-left: 100px; }
-.ee-detail-ense-title {
-  display: block; margin-bottom: 4px;
-  font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--fg-3);
-  text-transform: none;
-}
-.ee-detail-ense-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.ee-detail-ense-list { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
 .ee-ense-item {
   display: flex; flex-direction: column;
   font-size: var(--fs-xs); color: var(--fg-2);
@@ -2245,7 +2239,7 @@ code {
                   return (
                     <li key={p.anio} className={"ee-detail-row" + (esVigente ? " is-vigente" : "")}>
                       <div className="ee-detail-head">
-                        <span className="ee-detail-year">{p.anio}{esVigente ? " (vigente)" : ""}:</span>
+                        <span className="ee-detail-year">{p.anio}{esVigente ? " (vigente)" : ""}</span>
                         <span className="ee-detail-mark"
                           style={color ? { background: color } : null}
                           data-si={esSi ? "1" : null} />
@@ -2256,19 +2250,16 @@ code {
                           {fmtInt(matNivel) + " matriculados en " + (CatData.NIVELES[ee.nivel] || ee.nivel)}
                         </div>}
                       {desglose.length > 0 && (
-                        <div className="ee-detail-ense">
-                          <span className="ee-detail-ense-title">Matrícula por tipo de enseñanza</span>
-                          <ul className="ee-detail-ense-list">
-                            {desglose.map((d, di) => (
-                              <EnseItem key={d.cod_ense2} d={d} di={di} />
-                            ))}
-                          </ul>
-                          {totalEE != null && (
-                            <div className="ee-detail-ense-total">
-                              <span className="ee-ense-label">Total establecimiento:</span>
-                              <span className="ee-ense-mat">{fmtInt(totalEE)}</span>
-                            </div>
-                          )}
+                        <ul className="ee-detail-ense-list">
+                          {desglose.map((d, di) => (
+                            <EnseItem key={d.cod_ense2} d={d} di={di} />
+                          ))}
+                        </ul>
+                      )}
+                      {totalEE != null && (
+                        <div className="ee-detail-ense-total">
+                          <span className="ee-ense-label">Total establecimiento:</span>
+                          <span className="ee-ense-mat">{fmtInt(totalEE)}</span>
                         </div>
                       )}
                     </li>
