@@ -1507,16 +1507,21 @@ code {
   <div id="global-tooltip" class="tooltip" style="display:none"></div>
   <div id="tooltip-overlay" style="display:none;position:fixed;inset:0;z-index:9998;"></div>
 
-  <!-- React + Babel desde CDN — builds production + SRI (auditoría B4, s13).
-       Hashes sha384 calculados desde los tarballs oficiales de npm
-       (identicos a lo servido por unpkg para la version fijada). Si se
-       cambia la version, recalcular: openssl dgst -sha384 -binary | base64 -->
-  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"
-          integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z"
-          crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"
-          integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1"
-          crossorigin="anonymous"></script>
+  <!-- React 18.3.1 + ReactDOM 18.3.1 inline (builds production, internalizados
+       en s18 para cumplir política 5.5: web estática sin dependencias externas.
+       El motor ya no depende de unpkg para React/ReactDOM. SRI no aplica a
+       scripts inline: el integrity protege la descarga por red, que aquí no
+       ocurre. Versiones fijadas en 10_utils/react.production.min.js y
+       10_utils/react-dom.production.min.js. -->
+  <script>__REACT_INLINE__</script>
+  <script>__REACTDOM_INLINE__</script>
+
+  <!-- Babel standalone desde CDN — build production + SRI (auditoría B4, s13).
+       Se mantiene en CDN por su peso (~3 MB standalone): internalizarlo
+       deshacía la reducción de peso del motor (decisión de alcance, s18).
+       Hash sha384 calculado desde el tarball oficial de npm (idéntico a lo
+       servido por unpkg para la versión fijada). Si se cambia la versión,
+       recalcular: openssl dgst -sha384 -binary | base64 -->
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
           integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
           crossorigin="anonymous"></script>

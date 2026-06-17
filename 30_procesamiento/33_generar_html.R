@@ -23,7 +23,9 @@
 #   2. Construye el JSON: meta + catálogos + tres bloques columnares
 #      (territorial, sin_vigente, rbd).
 #   3. Comprime gzip + base64; el template descomprime en cliente con pako.
-#   4. Reemplaza placeholders __D3_INLINE__, __PAKO_INLINE__, __JSON_DATA__.
+#   4. Reemplaza placeholders __D3_INLINE__, __PAKO_INLINE__, __JSON_DATA__,
+#      __REACT_INLINE__, __REACTDOM_INLINE__ (React/ReactDOM internalizados en
+#      s18; Babel se mantiene en CDN por su peso).
 #   5. Escribe 40_salidas/motor_categoria.html (UTF-8) y lo copia a docs/index.html.
 #
 # Decisiones metodológicas (sesión 3):
@@ -393,11 +395,13 @@ message(sprintf("    JSON comprimido: %.2f MB (gzip+base64, %.1f%% del plano).",
 # Bloque 6 — Plantilla, D3 y pako
 # ============================================================================
 
-message("[3] Leyendo plantilla, D3 y pako...")
+message("[3] Leyendo plantilla, D3, pako, React y ReactDOM...")
 
 plantilla_path <- here::here("30_procesamiento", "33_motor_template.html")
 d3_path        <- here::here("10_utils", "d3.min.js")
 pako_path      <- here::here("10_utils", "pako.min.js")
+react_path     <- here::here("10_utils", "react.production.min.js")
+reactdom_path  <- here::here("10_utils", "react-dom.production.min.js")
 
 if (!file.exists(plantilla_path)) stop("No existe la plantilla: ", plantilla_path)
 if (!file.exists(d3_path)) {
@@ -409,14 +413,28 @@ if (!file.exists(pako_path)) {
        "\n  Descargar: curl -fsSL ",
        "https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js -o 10_utils/pako.min.js")
 }
+if (!file.exists(react_path)) {
+  stop("No existe react.production.min.js: ", react_path,
+       "\n  Descargar: curl -fsSL ",
+       "https://unpkg.com/react@18.3.1/umd/react.production.min.js -o 10_utils/react.production.min.js")
+}
+if (!file.exists(reactdom_path)) {
+  stop("No existe react-dom.production.min.js: ", reactdom_path,
+       "\n  Descargar: curl -fsSL ",
+       "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js -o 10_utils/react-dom.production.min.js")
+}
 
-plantilla <- paste(readLines(plantilla_path, encoding = "UTF-8", warn = FALSE), collapse = "\n")
-d3_code   <- paste(readLines(d3_path,        encoding = "UTF-8", warn = FALSE), collapse = "\n")
-pako_code <- paste(readLines(pako_path,      encoding = "UTF-8", warn = FALSE), collapse = "\n")
+plantilla    <- paste(readLines(plantilla_path, encoding = "UTF-8", warn = FALSE), collapse = "\n")
+d3_code      <- paste(readLines(d3_path,         encoding = "UTF-8", warn = FALSE), collapse = "\n")
+pako_code    <- paste(readLines(pako_path,       encoding = "UTF-8", warn = FALSE), collapse = "\n")
+react_code   <- paste(readLines(react_path,      encoding = "UTF-8", warn = FALSE), collapse = "\n")
+reactdom_code <- paste(readLines(reactdom_path,  encoding = "UTF-8", warn = FALSE), collapse = "\n")
 
 message(sprintf("    Plantilla: %d caracteres", nchar(plantilla)))
 message(sprintf("    D3:        %.0f KB", nchar(d3_code) / 1024))
 message(sprintf("    pako:      %.0f KB", nchar(pako_code) / 1024))
+message(sprintf("    React:     %.0f KB", nchar(react_code) / 1024))
+message(sprintf("    ReactDOM:  %.0f KB", nchar(reactdom_code) / 1024))
 
 
 # ============================================================================
@@ -425,16 +443,19 @@ message(sprintf("    pako:      %.0f KB", nchar(pako_code) / 1024))
 
 message("[4] Construyendo HTML final...")
 
-for (ph in c("__D3_INLINE__", "__PAKO_INLINE__", "__JSON_DATA__")) {
+for (ph in c("__D3_INLINE__", "__PAKO_INLINE__", "__JSON_DATA__",
+             "__REACT_INLINE__", "__REACTDOM_INLINE__")) {
   if (!grepl(ph, plantilla, fixed = TRUE)) {
     stop("La plantilla no contiene el placeholder ", ph, ".")
   }
 }
 
 # fixed=TRUE: evita interpretación regex (nombres con caracteres especiales).
-html <- sub("__D3_INLINE__",   d3_code,   plantilla, fixed = TRUE)
-html <- sub("__PAKO_INLINE__", pako_code, html,      fixed = TRUE)
-html <- sub("__JSON_DATA__",   json_b64,  html,      fixed = TRUE)
+html <- sub("__REACT_INLINE__",    react_code,    plantilla, fixed = TRUE)
+html <- sub("__REACTDOM_INLINE__", reactdom_code, html,      fixed = TRUE)
+html <- sub("__D3_INLINE__",       d3_code,       html,      fixed = TRUE)
+html <- sub("__PAKO_INLINE__",     pako_code,     html,      fixed = TRUE)
+html <- sub("__JSON_DATA__",       json_b64,      html,      fixed = TRUE)
 
 ruta_salida <- here::here("40_salidas", "motor_categoria.html")
 con <- file(ruta_salida, open = "wb", encoding = "UTF-8")
@@ -458,7 +479,7 @@ message(sprintf("    OK: %s (copia para GitHub Pages)",
                 fs::path_rel(ruta_pages, here::here())))
 
 # Liberar objetos grandes antes del GC (json_str/html pueden superar varios MB).
-rm(json_str, json_gzip, json_b64, html, d3_code, pako_code, plantilla)
+rm(json_str, json_gzip, json_b64, html, d3_code, pako_code, react_code, reactdom_code, plantilla)
 gc(verbose = FALSE)
 
 
