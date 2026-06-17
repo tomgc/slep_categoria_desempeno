@@ -1,8 +1,8 @@
 # Estructura actual — slep_categoria_desempeno
 
 - **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-17 08:17:08
-- **Totales:** 21 carpetas, 115 archivos
+- **Fecha:** 2026-06-17 08:21:34
+- **Totales:** 21 carpetas, 116 archivos
 - **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 ## Arbol
@@ -82,12 +82,12 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260616_125659_estructura.md  (6.94K)
-│   │   ├── 20260616_125659_estructura.txt  (7.05K)
 │   │   ├── 20260616_130236_estructura.md  (6.94K)
 │   │   ├── 20260616_130236_estructura.txt  (7.04K)
-│   │   ├── estructura_actual.md  (6.94K)
-│   │   └── estructura_actual.txt  (7.04K)
+│   │   ├── 20260617_081708_estructura.md  (7.01K)
+│   │   ├── 20260617_081708_estructura.txt  (7.11K)
+│   │   ├── estructura_actual.md  (7.01K)
+│   │   └── estructura_actual.txt  (7.11K)
 │   ├── suite/
 │   │   ├── assets/
 │   │   │   ├── logo-color-stacked.png  (126K)
@@ -123,7 +123,8 @@ slep_categoria_desempeno/
 │   │   ├── traspaso_cierre_v13.md  (23.5K)
 │   │   ├── traspaso_cierre_v14.md  (22.4K)
 │   │   ├── traspaso_cierre_v15.md  (23.3K)
-│   │   └── traspaso_cierre_v16.md  (28.5K)
+│   │   ├── traspaso_cierre_v16.md  (28.5K)
+│   │   └── traspaso_cierre_v17.md  (24.7K)
 │   └── .DS_Store  (10K)
 ├── docs/
 │   └── index.html  (1.68M)
@@ -151,7 +152,7 @@ slep_categoria_desempeno/
 
 | Extension | Archivos |
 |---|---|
-| md | 41 |
+| md | 42 |
 | (sin extension) | 13 |
 | r | 11 |
 | xlsx | 10 |
