@@ -97,17 +97,22 @@ primaria. Fuentes: registro de cada sesión.
 | Documentación de proyecto | 9 | 11 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73) |
 | Diseño UI — Modo establecimiento | 12 | 15 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53); eliminación del detalle por grado en la ficha (v16, c.74); rediseño D2 de la trayectoria a filas a todo el ancho (v16, c.75); encabezado de columnas por año (v16, c.77); eliminación del sufijo redundante "estudiantes" (v16, c.78) |
 | Datos y normalización | 6 | 8 | Inspección de datos (v01, c.10); esquema xlsx, normalización categoría (v02, c.12-13); insumo de matrícula por tipo de enseñanza (v09, c.45); ampliación cobertura 2016-2025 (v11, c.57); parquet de grado (v12, c.60) |
-| Pipeline R | 4 | 5 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58) |
+| Pipeline R | 5 | 6 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58); desacople de matrícula por grado del JSON embebido (v17, c.81) |
 | Orquestación | 4 | 5 | Stub 00_build.R (v01, c.2); 00_run_all.R (v02, c.15); consolidación paso 33 + archivado de stub (v06, c.36); alias regenerar_motor (v13, c.65) |
 | Validación / integridad | 4 | 5 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68); spot-check parametrizado a múltiples celdas ancla, DT-spot-check-cobertura (v15, c.71); certificación de ausencia simétrica en el spot-check, DT-spot-check-ausencia (v16, c.80) |
 | Documentación (en producto) | 2 | 3 | Panel de notas metodológicas (v05, c.29); alineación con fuente oficial (v08, c.43) |
-| Migración y publicación / DevOps | 3 | 4 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76) |
+| Migración y publicación / DevOps | 4 | 5 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82) |
 | Calidad de código / pipeline | 2 | 3 | Warning de readLines silenciado de raíz (v13, c.64); retiro de código muerto de matrícula por grado en el motor (v16, c.79) |
 
-(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 80 entradas
-(1-80). La tabla temática suma 80, cuadrando con el cronológico, con asignación por
+(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 82 entradas
+(1-82). La tabla temática suma 82, cuadrando con el cronológico, con asignación por
 intención primaria verificada entrada por entrada. La categoría líder, "Diseño UI —
-Motor base y diseño", queda en 16% (13/80), bajo el umbral de subdivisión del 25%.
+Motor base y diseño", queda en 16% (13/82), bajo el umbral de subdivisión del 25%.
+El v17 suma dos entradas: una a "Pipeline R" (4→5, desacople de matrícula por grado del
+JSON embebido c.81) y una a "Migración y publicación / DevOps" (3→4, snapshots del
+escáner c.82). La entrada 81 se imputa a "Pipeline R" por intención primaria (cambio del
+generador del producto y su serialización JSON), distinta de c.79 ("Calidad de código /
+pipeline", retiro de código muerto en el motor cliente). Sin categorías nuevas.
 El v16 suma siete entradas: cuatro a "Diseño UI — Modo establecimiento" (8→12, es la
 ficha del EE: eliminación del grado c.74, rediseño D2 c.75, encabezado de columnas
 c.77, eliminación del sufijo redundante c.78), una a "Migración y publicación / DevOps"
@@ -142,7 +147,8 @@ entrada del detalle cronológico.)
 | 14 | v14 | 3 | Opus 4.8 | Backlog consolidado in extenso + auditoría de cifras (4.5) + higiene Git |
 | 15 | v15 | 4 | Opus 4.8 | Cierre P1-P3 (backlog 67-73 + spot-check multi-celda + nota README) + suite de documentación (suitedoc) |
 | 16 | v16 | 7 | Opus 4.8 | Rediseño D2 de la ficha de establecimiento (sin grado, encabezado de columnas, sin redundancia) + retiro de código muerto + ausencia simétrica en spot-check |
-| **Total** | | **80** | | |
+| 17 | v17 | 2 | Opus 4.8 | Desacople de matrícula por grado del JSON embebido (2.80→1.72 MB) + snapshots del escáner |
+| **Total** | | **82** | | |
 
 ## Detalle cronológico
 
@@ -646,6 +652,32 @@ entrada del detalle cronológico.)
     ejecución real, 6 presencia OK + 1 ausencia OK, veredicto final OK; el script ya no
     aborta ante media/2016. Commit `87c9a7c`.
 
+### Sesión 17 (cambios 81-82) — Saneamiento de pendientes de pipeline y administrativos
+
+81. **Desacople de `matricula_grado` y `grado_labels` del JSON embebido** —
+    `30_procesamiento/33_generar_html.R`: se retiró todo lo que solo servía al desglose
+    por grado: la constante `GRADO_LABELS`, la carga de `matricula_rbd_grado.parquet`
+    (ruta + `stop` + `read_parquet` + filtro 2/5/7 + `message`), `meta$grado_labels`, el
+    bloque columnar `df_mat_grado_ord` + `matricula_grado_lst`, su validación de
+    integridad (`stopifnot` del bloque grado + el cruce `chk_grado` de suma de grados vs
+    ense2), la clave `matricula_grado` de `json_root` y el `message` "Matric.grado" del
+    resumen. El motor había dejado de consumir el desglose en el v16 (c.79, retiro de
+    código muerto), pero el generador lo seguía embebiendo: ~1 MB de dato inerte en el
+    HTML. Este desacople (cambio de pipeline) cierra el ciclo que c.79 dejó abierto. El
+    parquet permanece en `20_insumos/` como insumo externo de `slep_analisis_matricula`,
+    read-only; desacoplar significa dejar de leerlo y embeberlo, no borrarlo (A28,
+    inmutabilidad de la fuente 5.2.1). Verificación: grep de control sobre el template
+    vacío (`grado_labels|matricula_grado|GRADO_LABELS|matriculaPorGrado|MATG`);
+    `regenerar_motor()` OK; JSON sin comprimir 11.0 MB → motor 1.72 MB (era 2.80);
+    auditoría F1-F4 OK; spot-check 6/6 + 1 ausencia OK. Commits `22e317f` (generador) +
+    `1108c60` (motor regenerado).
+82. **Commit de snapshots del escáner (poda de retención 2)** —
+    `50_documentacion/estructura/`: se versionaron los snapshots generados durante la
+    sesión; la poda de retención=2 (política 7.4) conservó los 2 timestamps más recientes
+    + aliases y eliminó los anteriores (Git lo registró como rename). El escáner se corrió
+    al abrir y al cerrar; se versiona aparte del cambio de pipeline (un cambio conceptual
+    por commit). Commit `e0ee56e`.
+
 ## Delta del backlog
 
 **Consolidación v13 → documento in extenso (v14, cierre de DT-backlog-documental).**
@@ -687,3 +719,13 @@ establecimiento" (no a una categoría "Interfaz" nueva) y el retiro de código m
 categorías bajo el umbral de absorción del 2%. La categoría líder baja a 16% (13/80),
 bajo el umbral de subdivisión; "Modo establecimiento" sube a 15% (12/80), también bajo el
 umbral. Tabla temática reverificada: suma 80, cuadra con el cronológico.
+
+**Delta v17 (80 → 82).** Dos entradas nuevas de la sesión 17: 81 (desacople de
+`matricula_grado`/`grado_labels` del JSON embebido, "Pipeline R"), 82 (commit de
+snapshots del escáner con poda de retención 2, "Migración y publicación / DevOps"). Sin
+categorías nuevas: "Pipeline R" 4→5, "Migración y publicación / DevOps" 3→4. La entrada
+81 se imputa a "Pipeline R" (no a "Calidad de código / pipeline" donde quedó c.79, el
+retiro de código muerto en el motor): aquí la intención primaria es el cambio del
+generador del producto y su serialización JSON, no la limpieza de código del cliente. La
+categoría líder baja a 16% (13/82), bajo el umbral de subdivisión. Tabla temática
+reverificada: suma 82, cuadra con el cronológico.
