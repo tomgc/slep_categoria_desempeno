@@ -94,20 +94,25 @@ primaria. Fuentes: registro de cada sesión.
 | Diseño UI — Motor base y diseño | 13 | 16 | Diseño de visualización (v01, c.11); motor HTML paso 33 base + iteraciones UI 1-4 (v03, c.17-21); publicación Pages en el generador (v04, c.26); tarjetas de modo territorio con estudiantes + % (v10, c.49); estandarización tipográfica por tokens (v10, c.54); convivencia año de matrícula (v12, c.59); desglose por grado en motor (v12, c.61); bloque narrativo territorial parcial (v12, c.62); D21 template regenerado desde referencia UI (v13, c.63) |
 | Scaffold e inicialización | 12 | 15 | Estructura, scaffold, utils, escáner, gitignore, rproj/readme, protocolo, decisiones, git (v01, c.1-9 salvo orquestación); auditoría seguridad, gobernanza, LICENSE, CI, README migración (v04, c.22-25,27) |
 | Diseño UI — Hoja comparativa | 9 | 11 | Comparativa, multi-selección, límites, lotes visuales (v05, c.28,30-35); botón limpiar (v07, c.41); N EE + tooltip de estudiantes/% (v10, c.50) |
-| Documentación de proyecto | 9 | 11 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73) |
+| Documentación de proyecto | 10 | 12 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73); consolidación del backlog 81-82 sobre 82 (v18, c.84) |
 | Diseño UI — Modo establecimiento | 12 | 15 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53); eliminación del detalle por grado en la ficha (v16, c.74); rediseño D2 de la trayectoria a filas a todo el ancho (v16, c.75); encabezado de columnas por año (v16, c.77); eliminación del sufijo redundante "estudiantes" (v16, c.78) |
 | Datos y normalización | 6 | 8 | Inspección de datos (v01, c.10); esquema xlsx, normalización categoría (v02, c.12-13); insumo de matrícula por tipo de enseñanza (v09, c.45); ampliación cobertura 2016-2025 (v11, c.57); parquet de grado (v12, c.60) |
-| Pipeline R | 5 | 6 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58); desacople de matrícula por grado del JSON embebido (v17, c.81) |
+| Pipeline R | 6 | 7 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58); desacople de matrícula por grado del JSON embebido (v17, c.81); internalización de React/ReactDOM inline, alcance A (v18, c.83) |
 | Orquestación | 4 | 5 | Stub 00_build.R (v01, c.2); 00_run_all.R (v02, c.15); consolidación paso 33 + archivado de stub (v06, c.36); alias regenerar_motor (v13, c.65) |
 | Validación / integridad | 4 | 5 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68); spot-check parametrizado a múltiples celdas ancla, DT-spot-check-cobertura (v15, c.71); certificación de ausencia simétrica en el spot-check, DT-spot-check-ausencia (v16, c.80) |
 | Documentación (en producto) | 2 | 3 | Panel de notas metodológicas (v05, c.29); alineación con fuente oficial (v08, c.43) |
-| Migración y publicación / DevOps | 4 | 5 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82) |
+| Migración y publicación / DevOps | 5 | 6 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85) |
 | Calidad de código / pipeline | 2 | 3 | Warning de readLines silenciado de raíz (v13, c.64); retiro de código muerto de matrícula por grado en el motor (v16, c.79) |
 
-(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 82 entradas
-(1-82). La tabla temática suma 82, cuadrando con el cronológico, con asignación por
+(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 85 entradas
+(1-85). La tabla temática suma 85, cuadrando con el cronológico, con asignación por
 intención primaria verificada entrada por entrada. La categoría líder, "Diseño UI —
-Motor base y diseño", queda en 16% (13/82), bajo el umbral de subdivisión del 25%.
+Motor base y diseño", queda en 15% (13/85), bajo el umbral de subdivisión del 25%.
+El v18 suma tres entradas: una a "Pipeline R" (5→6, internalización de React/ReactDOM
+inline c.83), una a "Documentación de proyecto" (9→10, consolidación del backlog 81-82
+c.84) y una a "Migración y publicación / DevOps" (4→5, snapshots del escáner c.85). La
+entrada 83 se imputa a "Pipeline R" por intención primaria (cambio del paso 33 en lo que
+inyecta al producto), consistente con c.81. Sin categorías nuevas.
 El v17 suma dos entradas: una a "Pipeline R" (4→5, desacople de matrícula por grado del
 JSON embebido c.81) y una a "Migración y publicación / DevOps" (3→4, snapshots del
 escáner c.82). La entrada 81 se imputa a "Pipeline R" por intención primaria (cambio del
@@ -148,7 +153,8 @@ entrada del detalle cronológico.)
 | 15 | v15 | 4 | Opus 4.8 | Cierre P1-P3 (backlog 67-73 + spot-check multi-celda + nota README) + suite de documentación (suitedoc) |
 | 16 | v16 | 7 | Opus 4.8 | Rediseño D2 de la ficha de establecimiento (sin grado, encabezado de columnas, sin redundancia) + retiro de código muerto + ausencia simétrica en spot-check |
 | 17 | v17 | 2 | Opus 4.8 | Desacople de matrícula por grado del JSON embebido (2.80→1.72 MB) + snapshots del escáner |
-| **Total** | | **82** | | |
+| 18 | v18 | 3 | Opus 4.8 | Internalización de React/ReactDOM inline (alcance A; Babel queda en CDN, 1.72→1.82 MB) + consolidación backlog 81-82 + snapshots del escáner |
+| **Total** | | **85** | | |
 
 ## Detalle cronológico
 
@@ -678,6 +684,46 @@ entrada del detalle cronológico.)
     al abrir y al cerrar; se versiona aparte del cambio de pipeline (un cambio conceptual
     por commit). Commit `e0ee56e`.
 
+### Sesión 18 (cambios 83-85) — Internalización de dependencias (alcance A) y administrativos
+
+83. **Internalización de React y ReactDOM inline (alcance A; Babel queda en CDN)** —
+    `30_procesamiento/33_motor_template.html` + `33_generar_html.R` + `10_utils/`: en el
+    template, los dos `<script src>` de React y ReactDOM (unpkg, con SRI) se reemplazaron
+    por los placeholders `__REACT_INLINE__` y `__REACTDOM_INLINE__`; el bloque de Babel
+    quedó intacto (CDN + SRI). En el generador: rutas `react_path`/`reactdom_path` a
+    `10_utils/`, validación de existencia con instrucción curl en el `stop`, lectura del
+    código, los dos placeholders agregados al `for` de validación (ahora 5) y a la
+    inyección (5 `sub()`), y `react_code`/`reactdom_code` liberados en el `rm()`. Dos `.js`
+    nuevos bajados de unpkg a `10_utils/` (React 18.3.1, ReactDOM 18.3.1, versionados). El
+    motor cargaba React, ReactDOM y Babel desde unpkg en runtime (única violación viva de
+    5.5): internalizar React/ReactDOM elimina dos de las tres dependencias de red con costo
+    de peso marginal. Babel se dejó en CDN porque su build standalone (~3 MB) inflaría el
+    motor deshaciendo la ganancia del v17 (decisión de alcance A, D28; la eliminación de
+    Babel vía C3 queda diferida, D29). El SRI no se conserva en los inline (A30: protege la
+    descarga por red, que ya no ocurre). Verificación: template con 5 placeholders
+    presentes (grep); único `unpkg` en `<script src>` es Babel; `regenerar_motor()` OK
+    (React 10 KB, ReactDOM 129 KB; motor 1.72→1.82 MB); auditoría F1-F4 OK, 0
+    discrepancias; spot-check 6/6 + 1 ausencia OK; F4 sin drift. Cifras idénticas. Commits
+    `d935805` (template + generador + 2 .js) y `98b127c` (motor regenerado).
+84. **Consolidación del backlog 81-82 sobre 82** — `backlog_consolidado.md`: se agregaron
+    las entradas 81 (desacople `matricula_grado`, "Pipeline R") y 82 (snapshots escáner,
+    "Migración y publicación / DevOps") al detalle cronológico (nueva subsección "Sesión
+    17"); la fila de la sesión 17 (v17, N=2) a la tabla por sesión; las filas "Pipeline R"
+    (4→5) y "Migración y publicación / DevOps" (3→4) en la tabla temática; la nota de
+    conteo recalculada sobre 82; y un bloque "Delta v17 (80→82)". El v17 dejó la
+    consolidación 81-82 como pendiente administrativo explícito de la sesión 18; el backlog
+    es la fuente de verdad del conteo (política 2.2.5). Verificación: suma de la tabla
+    temática = 82; suma de la tabla por sesión = 82; última entrada del cronológico = 82
+    (A22: verificado contra el cronológico, no contra la tabla heredada). Commit `7a94b2d`.
+85. **Commit de snapshots del escáner (poda de retención 2)** —
+    `50_documentacion/estructura/`: el escáner se corrió al abrir (`082134`) y al cerrar
+    (`094448`); la poda de retención=2 conservó los 2 timestamps más recientes + aliases.
+    El commit `bdb9e3c` versionó el snapshot de apertura; el de cierre (`094448`) quedó
+    pendiente al cierre del chat y se commiteó al abrir la sesión 19 (orden natural: el
+    chat se cierra tras el último escáner). El escáner se versiona aparte del cambio de
+    código (un cambio conceptual por commit). Commit `bdb9e3c` (apertura) + el commit de
+    cierre del snapshot en la s19.
+
 ## Delta del backlog
 
 **Consolidación v13 → documento in extenso (v14, cierre de DT-backlog-documental).**
@@ -729,3 +775,14 @@ retiro de código muerto en el motor): aquí la intención primaria es el cambio
 generador del producto y su serialización JSON, no la limpieza de código del cliente. La
 categoría líder baja a 16% (13/82), bajo el umbral de subdivisión. Tabla temática
 reverificada: suma 82, cuadra con el cronológico.
+
+**Delta v18 (82 → 85).** Tres entradas nuevas de la sesión 18: 83 (internalización de
+React/ReactDOM inline, alcance A, "Pipeline R"), 84 (consolidación del backlog 81-82,
+"Documentación de proyecto"), 85 (snapshots del escáner, "Migración y publicación /
+DevOps"). Sin categorías nuevas: "Pipeline R" 5→6, "Documentación de proyecto" 9→10,
+"Migración y publicación / DevOps" 4→5. La entrada 83 se imputa a "Pipeline R" por
+intención primaria (cambio del paso 33 en lo que inyecta al producto), consistente con la
+imputación de c.81; el c.84 es el acto de consolidación propio de la s18 (no confundir con
+las entradas 81-82, que son contenido de la s17 que el c.84 absorbió). La categoría líder
+baja a 15% (13/85), bajo el umbral de subdivisión. Tabla temática reverificada: suma 85,
+cuadra con el cronológico.
