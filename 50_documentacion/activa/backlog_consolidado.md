@@ -93,8 +93,8 @@ primaria. Fuentes: registro de cada sesión.
 |---|---|---|---|
 | Diseño UI — Motor base y diseño | 13 | 16 | Diseño de visualización (v01, c.11); motor HTML paso 33 base + iteraciones UI 1-4 (v03, c.17-21); publicación Pages en el generador (v04, c.26); tarjetas de modo territorio con estudiantes + % (v10, c.49); estandarización tipográfica por tokens (v10, c.54); convivencia año de matrícula (v12, c.59); desglose por grado en motor (v12, c.61); bloque narrativo territorial parcial (v12, c.62); D21 template regenerado desde referencia UI (v13, c.63) |
 | Scaffold e inicialización | 12 | 15 | Estructura, scaffold, utils, escáner, gitignore, rproj/readme, protocolo, decisiones, git (v01, c.1-9 salvo orquestación); auditoría seguridad, gobernanza, LICENSE, CI, README migración (v04, c.22-25,27) |
-| Diseño UI — Hoja comparativa | 9 | 11 | Comparativa, multi-selección, límites, lotes visuales (v05, c.28,30-35); botón limpiar (v07, c.41); N EE + tooltip de estudiantes/% (v10, c.50) |
-| Documentación de proyecto | 10 | 12 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73); consolidación del backlog 81-82 sobre 82 (v18, c.84) |
+| Diseño UI — Hoja comparativa | 9 | 10 | Comparativa, multi-selección, límites, lotes visuales (v05, c.28,30-35); botón limpiar (v07, c.41); N EE + tooltip de estudiantes/% (v10, c.50) |
+| Documentación de proyecto | 11 | 13 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73); consolidación del backlog 81-82 sobre 82 (v18, c.84); actualización de la suite (stack runtime + terminología institucional) (v19, c.86) |
 | Diseño UI — Modo establecimiento | 12 | 15 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53); eliminación del detalle por grado en la ficha (v16, c.74); rediseño D2 de la trayectoria a filas a todo el ancho (v16, c.75); encabezado de columnas por año (v16, c.77); eliminación del sufijo redundante "estudiantes" (v16, c.78) |
 | Datos y normalización | 6 | 8 | Inspección de datos (v01, c.10); esquema xlsx, normalización categoría (v02, c.12-13); insumo de matrícula por tipo de enseñanza (v09, c.45); ampliación cobertura 2016-2025 (v11, c.57); parquet de grado (v12, c.60) |
 | Pipeline R | 6 | 7 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58); desacople de matrícula por grado del JSON embebido (v17, c.81); internalización de React/ReactDOM inline, alcance A (v18, c.83) |
@@ -104,10 +104,12 @@ primaria. Fuentes: registro de cada sesión.
 | Migración y publicación / DevOps | 5 | 6 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85) |
 | Calidad de código / pipeline | 2 | 3 | Warning de readLines silenciado de raíz (v13, c.64); retiro de código muerto de matrícula por grado en el motor (v16, c.79) |
 
-(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 85 entradas
-(1-85). La tabla temática suma 85, cuadrando con el cronológico, con asignación por
+(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 86 entradas
+(1-86). La tabla temática suma 86, cuadrando con el cronológico, con asignación por
 intención primaria verificada entrada por entrada. La categoría líder, "Diseño UI —
-Motor base y diseño", queda en 15% (13/85), bajo el umbral de subdivisión del 25%.
+Motor base y diseño", queda en 15% (13/86), bajo el umbral de subdivisión del 25%.
+El v19 suma una entrada: "Documentación de proyecto" (10→11, actualización de la suite
+de documentación c.86). Sin categorías nuevas.
 El v18 suma tres entradas: una a "Pipeline R" (5→6, internalización de React/ReactDOM
 inline c.83), una a "Documentación de proyecto" (9→10, consolidación del backlog 81-82
 c.84) y una a "Migración y publicación / DevOps" (4→5, snapshots del escáner c.85). La
@@ -154,7 +156,8 @@ entrada del detalle cronológico.)
 | 16 | v16 | 7 | Opus 4.8 | Rediseño D2 de la ficha de establecimiento (sin grado, encabezado de columnas, sin redundancia) + retiro de código muerto + ausencia simétrica en spot-check |
 | 17 | v17 | 2 | Opus 4.8 | Desacople de matrícula por grado del JSON embebido (2.80→1.72 MB) + snapshots del escáner |
 | 18 | v18 | 3 | Opus 4.8 | Internalización de React/ReactDOM inline (alcance A; Babel queda en CDN, 1.72→1.82 MB) + consolidación backlog 81-82 + snapshots del escáner |
-| **Total** | | **85** | | |
+| 19 | v19 | 1 | Opus 4.8 | Actualización de la suite de documentación (stack runtime real + terminología institucional) para revisión externa |
+| **Total** | | **86** | | |
 
 ## Detalle cronológico
 
@@ -724,6 +727,35 @@ entrada del detalle cronológico.)
     código (un cambio conceptual por commit). Commit `bdb9e3c` (apertura) + el commit de
     cierre del snapshot en la s19.
 
+### Sesión 19 (cambio 86) — Actualización de la suite de documentación para revisión externa
+
+86. **Actualización de la suite de documentación (stack runtime real + terminología
+    institucional)** — `documentar.R` + los 4 HTML de `50_documentacion/suite/` +
+    `README.md`: se reflejó el stack de runtime real del motor (React 18.3.1, ReactDOM
+    18.3.1, D3 v7 y pako inline en `10_utils/`, con Babel 7.29.0 como única dependencia de
+    red por CDN) en los dos documentos técnicos (etapa 5 del diagrama de arquitectura
+    técnica, `prosa$doc_pipeline` del manual y `pie_extra$arq_tec` con nota de que la
+    eliminación de Babel vía C3 está planificada); los generales no llevan stack. En
+    paralelo se reemplazó "colegio"/"colegios" por "establecimiento educacional"/
+    "establecimientos educacionales" como sustantivo genérico en toda la cfg (40
+    sustituciones), respetando las excepciones (voz coloquial del lector en FAQ, "Localiza
+    tu colegio" como nombre propio de la Agencia, notación técnica "EE"/"n_EE"). README
+    actualizado a la línea de runtime real. El titular envía el proyecto a revisión externa
+    y la documentación debía reflejar lo que está funcionando en Pages tras el v18 (el
+    README mencionaba solo d3/pako). Se actualizó el `documentar.R` vivo con un delta
+    acotado, preservando la prosa de comunidad ya afinada (D30), en vez de regenerar la cfg
+    desde cero. La terminología institucional quedó como regla 4.6.3.6 del protocolo
+    (trabajo de BIBLIOTECA, no contabilizado aquí); tras revisar los HTML se detectó que el
+    reemplazo estricto recargaba la prosa de comunidad y se afinó el criterio de "primera
+    mención completa por párrafo, luego abreviado" (A33, D31), sin regenerar la suite ya
+    publicada (D32: el ajuste de fluidez se aplicará en la próxima generación, para no
+    derrochar tokens). Verificación: Claude Code contrastó el stack contra el filesystem (4
+    .js en `10_utils/`, versiones correctas; 5 placeholders en el template; único `<script
+    src>` es Babel) sin discrepancias; `generar_suite(verificar = TRUE)` no abortó; 0
+    ocurrencias de "colegio" genérico en los 4 HTML; stack presente en arquitectura técnica
+    y en el manual, ausente en los generales; cobertura 2016-2019 intacta. Cero cambios de
+    pipeline, cálculo o motor. Commit `b36b960` (documentar.R + 4 HTML + README).
+
 ## Delta del backlog
 
 **Consolidación v13 → documento in extenso (v14, cierre de DT-backlog-documental).**
@@ -786,3 +818,14 @@ imputación de c.81; el c.84 es el acto de consolidación propio de la s18 (no c
 las entradas 81-82, que son contenido de la s17 que el c.84 absorbió). La categoría líder
 baja a 15% (13/85), bajo el umbral de subdivisión. Tabla temática reverificada: suma 85,
 cuadra con el cronológico.
+
+**Delta v19 (85 → 86).** Una entrada nueva de la sesión 19: 86 (actualización de la suite
+de documentación —stack runtime real + terminología institucional— para revisión externa,
+"Documentación de proyecto"). Sin categorías nuevas: "Documentación de proyecto" 10→11. El
+c.86 es un único cambio de proyecto distinguible del titular; la regla 4.6.3.6 de
+terminología es trabajo de protocolo (BIBLIOTECA) y no se contabiliza, y los
+administrativos de la sesión (commit del traspaso v18, consolidación 83-85, commits de
+snapshots, push) son acciones de implementación, no cambios. El único porcentaje que se
+mueve por el recálculo sobre 86 es "Diseño UI — Hoja comparativa" (11%→10%, sin cambio de
+N). La categoría líder baja a 15% (13/86), bajo el umbral de subdivisión. Tabla temática
+reverificada: suma 86, cuadra con el cronológico.
