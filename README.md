@@ -47,8 +47,9 @@ Etapas (carpeta `30_procesamiento/`):
 4. `33_generar_html.R` — construye `40_salidas/motor_categoria.html` y copia a
    `docs/index.html` para publicación.
 
-El motor HTML requiere `10_utils/d3.min.js` y `10_utils/pako.min.js`
-(versionados en el repo).
+El motor HTML embebe **inline** React 18.3.1, ReactDOM 18.3.1, D3 v7 y pako (los
+cuatro versionados en `10_utils/`). La única dependencia de red en runtime es
+Babel 7.29.0 (CDN unpkg, con SRI).
 
 ## Verificación de cifras antes de publicar
 

@@ -127,8 +127,8 @@ cfg <- list(
          norm=list()),
     list(n=5, titulo='Generación del motor', sub='30_procesamiento/',
          head='<span class="code">33_generar_html.R</span> <span class="bg bg--r">R</span> + <span class="code">33_motor_template.html</span> <span class="bg bg--html">HTML</span>',
-         d='Serializa <span class="code-sm">categoria_territorial</span> + <span class="code-sm">categoria_sin_vigente</span> + catálogos a <strong>JSON</strong> embebido (gzip + pako)<br>Embebe el JSON en el template React + D3 (claves ordenadas, indentación fija)<br>Escribe el HTML autocontenido &rarr; <strong>motor_categoria.html</strong><br>Copia el producto a <span class="code-sm">docs/index.html</span> para publicación en Pages',
-         flags=c('JSON embebido y comprimido (portabilidad total)','docs/index.html no se edita a mano'),
+         d='Serializa <span class="code-sm">categoria_territorial</span> + <span class="code-sm">categoria_sin_vigente</span> + catálogos a <strong>JSON</strong> embebido (gzip + pako)<br>Embebe el JSON (claves ordenadas, indentación fija) y el <strong>runtime inline</strong> en el template: <strong>React 18.3.1</strong>, <strong>ReactDOM 18.3.1</strong>, <strong>D3 v7</strong> y <strong>pako</strong> van versionados en <span class="code-sm">10_utils/</span> y viajan dentro del HTML; la única dependencia de red es <strong>Babel 7.29.0</strong> (CDN unpkg, con SRI)<br>Escribe el HTML autocontenido &rarr; <strong>motor_categoria.html</strong><br>Copia el producto a <span class="code-sm">docs/index.html</span> para publicación en Pages',
+         flags=c('JSON embebido y comprimido (portabilidad total)','Runtime inline salvo Babel (CDN); sin SRI en los inline','docs/index.html no se edita a mano'),
          norm=list())
   ),
 
@@ -207,12 +207,12 @@ cfg <- list(
     '<strong>Escritura atómica</strong> — Escribir a un archivo temporal y renombrar al final, para no dejar salidas a medias.'
   ),
   glosario_doc = c(
-    '<strong>Categoría de Desempeño</strong> — la etiqueta que la Agencia de Calidad asigna a cada colegio: Alto, Medio, Medio-Bajo o Insuficiente.',
-    '<strong>Trayectoria</strong> — la secuencia de categorías de un colegio a lo largo de los años.',
+    '<strong>Categoría de Desempeño</strong> — la etiqueta que la Agencia de Calidad asigna a cada establecimiento educacional: Alto, Medio, Medio-Bajo o Insuficiente.',
+    '<strong>Trayectoria</strong> — la secuencia de categorías de un establecimiento educacional a lo largo de los años.',
     '<strong>RBD</strong> — identificador único de establecimiento.',
     '<strong>SLEP</strong> — Servicio Local de Educación Pública.',
     '<strong>Básica / Media</strong> — los dos niveles de enseñanza, que siempre se muestran por separado.',
-    '<strong>Sin categoría vigente</strong> — colegios que en el último año no recibieron categoría.',
+    '<strong>Sin categoría vigente</strong> — establecimientos educacionales que en el último año no recibieron categoría.',
     '<strong>Pipeline</strong> — la secuencia de pasos automatizados que transforma las planillas crudas en el motor navegable.'
   ),
 
@@ -225,66 +225,66 @@ cfg <- list(
     list(ct='Establecimiento', cd='Un RBD individual, con su trayectoria histórica.')
   ),
   entidades_gen = list(
-    list(ct='Una comuna', cd='Todos sus colegios juntos.'),
+    list(ct='Una comuna', cd='Todos sus establecimientos educacionales juntos.'),
     list(ct='Un Servicio Local', cd='Las comunas de un SLEP.'),
     list(ct='Una región', cd='Todas las comunas de la región.'),
     list(ct='Todo el país', cd='El total nacional, “Chile”.'),
-    list(ct='Un colegio', cd='Un establecimiento en particular, con su historia de categorías.')
+    list(ct='Un establecimiento educacional', cd='Un establecimiento en particular, con su historia de categorías.')
   ),
 
   # ---- 1.9 Línea de producción ----------------------------------------------
   estaciones = list(
     list(icon='boxes', color='var(--ocean)', paso='Paso 1 · Insumo', titulo='Llegan las materias primas',
-         parrafos=c('Cada año, la Agencia de Calidad de la Educación publica la <strong>Categoría de Desempeño</strong> de cada establecimiento: una etiqueta —Alto, Medio, Medio-Bajo o Insuficiente— en planillas separadas por año y por nivel (básica y media). Son datos <strong>públicos</strong> y vienen organizados por colegio.',
+         parrafos=c('Cada año, la Agencia de Calidad de la Educación publica la <strong>Categoría de Desempeño</strong> de cada establecimiento: una etiqueta —Alto, Medio, Medio-Bajo o Insuficiente— en planillas separadas por año y por nivel (básica y media). Son datos <strong>públicos</strong> y vienen organizados por establecimiento educacional.',
                     'El problema es que están <strong>dispersos</strong> y el formato cambia de un año a otro: el orden de las columnas se mueve, una misma categoría aparece con etiquetas distintas. Tal cual llegan, no se pueden comparar.'),
          chip_in=list(ico='download', tx='Entra: planillas de categoría 2016–2019'), chip_out=NULL),
     list(icon='shield-check', color='var(--olive)', paso='Paso 2 · Preparación', titulo='Control de calidad y limpieza',
          parrafos=c('Antes de contar nada, cada planilla pasa por revisión. Se homologan las etiquetas de categoría, se unifican las distintas formas de “Sin Categoría” y se lee siempre por el nombre de la columna, nunca por su posición, para que todos los años hablen el mismo idioma.',
-                    'A cada colegio se le recupera además su <strong>comuna, región y dependencia</strong>, cruzando por su identificador contra el directorio oficial.'),
+                    'A cada establecimiento educacional se le recupera además su <strong>comuna, región y dependencia</strong>, cruzando por su identificador contra el directorio oficial.'),
          chip_in=list(ico='file-warning', tx='Datos crudos, con diferencias entre años'),
-         chip_out=list(ico='check', tx='Categorías homologadas por colegio')),
+         chip_out=list(ico='check', tx='Categorías homologadas por establecimiento educacional')),
     list(icon='layers', color='var(--coral)', paso='Paso 3 · Preparación', titulo='Ensamblaje y conteo',
-         parrafos=c('Con todo limpio, los colegios se <strong>agrupan por territorio</strong>: por comuna, por Servicio Local, por región y a nivel país. En cada territorio se <strong>cuentan</strong> cuántos establecimientos hay en cada categoría.',
-                    'No se promedia ni se pondera por matrícula: <strong>cada establecimiento cuenta como uno</strong>. La pregunta es cuántos colegios caen en cada categoría, y para eso lo correcto es contar.'),
-         chip_in=list(ico='check', tx='Categorías por colegio'),
-         chip_out=list(ico='hash', tx='Conteo de colegios por categoría')),
+         parrafos=c('Con todo limpio, los establecimientos educacionales se <strong>agrupan por territorio</strong>: por comuna, por Servicio Local, por región y a nivel país. En cada territorio se <strong>cuentan</strong> cuántos establecimientos hay en cada categoría.',
+                    'No se promedia ni se pondera por matrícula: <strong>cada establecimiento cuenta como uno</strong>. La pregunta es cuántos establecimientos educacionales caen en cada categoría, y para eso lo correcto es contar.'),
+         chip_in=list(ico='check', tx='Categorías por establecimiento educacional'),
+         chip_out=list(ico='hash', tx='Conteo de establecimientos educacionales por categoría')),
     list(icon='bar-chart-3', color='var(--plum-80)', paso='Paso 4 · Producto', titulo='Empaque: se arma el tablero',
-         parrafos=c('Los conteos ya calculados se empaquetan dentro de una <strong>interfaz interactiva</strong>: las cuatro columnas de categorías, las trayectorias de cada colegio, el buscador y los controles para elegir qué comparar. Todo queda dentro de un solo archivo.',
+         parrafos=c('Los conteos ya calculados se empaquetan dentro de una <strong>interfaz interactiva</strong>: las cuatro columnas de categorías, las trayectorias de cada establecimiento educacional, el buscador y los controles para elegir qué comparar. Todo queda dentro de un solo archivo.',
                     'Lo importante: ese archivo <strong>lleva los datos adentro</strong>. No necesita conexión ni programas especiales para funcionar.'),
          chip_in=list(ico='hash', tx='Conteos calculados'),
          chip_out=list(ico='file-code-2', tx='Un archivo navegable')),
     list(icon='monitor', color='var(--plum)', paso='Paso 5 · Producto terminado', titulo='La herramienta lista para usar',
-         parrafos=c('El resultado es un <strong>tablero que se abre en cualquier navegador</strong>, sin instalar nada. Permite elegir una comuna, un Servicio Local, una región o un colegio y ver la distribución de establecimientos por categoría, además de la trayectoria histórica de cada uno.',
+         parrafos=c('El resultado es un <strong>tablero que se abre en cualquier navegador</strong>, sin instalar nada. Permite elegir una comuna, un Servicio Local, una región o un establecimiento educacional y ver la distribución de establecimientos por categoría, además de la trayectoria histórica de cada uno.',
                     'Está publicado en línea para consulta, y se actualiza cada vez que llega un año nuevo: basta con repetir la línea de producción completa.'),
          chip_in=NULL, chip_out=list(ico='globe', tx='Tablero publicado y consultable'))
   ),
 
   # ---- 1.10 Garantías -------------------------------------------------------
   garantias = list(
-    list(icon='hash', titulo='Cada colegio cuenta como uno', d='Al juntar establecimientos se cuentan, no se promedian ni se ponderan por matrícula. La pregunta es cuántos colegios hay en cada categoría, y contar es la respuesta honesta.'),
-    list(icon='scale', titulo='La categoría ya considera el contexto', d='La Categoría de Desempeño integra el nivel socioeconómico del colegio en su propia construcción. Por eso no se segmenta por grupo socioeconómico: ya viene ajustada de origen.'),
+    list(icon='hash', titulo='Cada establecimiento educacional cuenta como uno', d='Al juntar establecimientos se cuentan, no se promedian ni se ponderan por matrícula. La pregunta es cuántos establecimientos educacionales hay en cada categoría, y contar es la respuesta honesta.'),
+    list(icon='scale', titulo='La categoría ya considera el contexto', d='La Categoría de Desempeño integra el nivel socioeconómico del establecimiento educacional en su propia construcción. Por eso no se segmenta por grupo socioeconómico: ya viene ajustada de origen.'),
     list(icon='shapes', titulo='No mezclamos básica con media', d='Educación básica y media se cuentan y se muestran siempre por separado. Mezclarlas daría una cifra sin sentido.'),
-    list(icon='git-commit', titulo='Mostramos la trayectoria completa', d='Para cada colegio se ve su categoría año a año, no solo la última. Así se distingue una mejora sostenida de un resultado puntual.'),
-    list(icon='inbox', titulo='Lo no clasificado va aparte', d='Los colegios sin categoría en el último año no se fuerzan dentro de las cuatro categorías: se muestran en una sección propia, para no distorsionar las proporciones.'),
+    list(icon='git-commit', titulo='Mostramos la trayectoria completa', d='Para cada establecimiento educacional se ve su categoría año a año, no solo la última. Así se distingue una mejora sostenida de un resultado puntual.'),
+    list(icon='inbox', titulo='Lo no clasificado va aparte', d='Los establecimientos educacionales sin categoría en el último año no se fuerzan dentro de las cuatro categorías: se muestran en una sección propia, para no distorsionar las proporciones.'),
     list(icon='info', titulo='Solo años con datos reales', d='Se muestran únicamente los años efectivamente publicados (2016–2019). No se inventan ni se imputan años faltantes.')
   ),
 
   # ---- 1.11 "En qué fijarte" ------------------------------------------------
   notas = list(
     list(icon='palette', tx='<strong>El color indica la categoría; el nombre y el borde indican el territorio.</strong> Cada categoría tiene siempre el mismo color en todas las vistas, en orden de Insuficiente a Alto, así que no hay que memorizar leyendas distintas.'),
-    list(icon='hash', tx='<strong>Lo que ves es un conteo de colegios, no un promedio.</strong> Cada columna dice cuántos establecimientos hay en esa categoría. Un colegio grande y uno pequeño pesan igual: cada uno es uno.'),
-    list(icon='scale', tx='<strong>No verás segmentación por grupo socioeconómico.</strong> No es un olvido: la Categoría de Desempeño ya incorpora el contexto socioeconómico del colegio en su construcción.'),
+    list(icon='hash', tx='<strong>Lo que ves es un conteo de establecimientos educacionales, no un promedio.</strong> Cada columna dice cuántos establecimientos hay en esa categoría. Un establecimiento educacional grande y uno pequeño pesan igual: cada uno es uno.'),
+    list(icon='scale', tx='<strong>No verás segmentación por grupo socioeconómico.</strong> No es un olvido: la Categoría de Desempeño ya incorpora el contexto socioeconómico del establecimiento educacional en su construcción.'),
     list(icon='shapes', tx='<strong>Básica y media se ven por separado.</strong> Son universos distintos; el motor nunca los suma en una sola cifra.'),
-    list(icon='git-commit', tx='<strong>Mira la trayectoria, no solo el último año.</strong> Los chips de color a la derecha de cada colegio muestran su categoría en cada año disponible. Ahí se lee si mejoró, se mantuvo o retrocedió.')
+    list(icon='git-commit', tx='<strong>Mira la trayectoria, no solo el último año.</strong> Los chips de color a la derecha de cada establecimiento educacional muestran su categoría en cada año disponible. Ahí se lee si mejoró, se mantuvo o retrocedió.')
   ),
 
   # ---- 1.12 Preguntas frecuentes --------------------------------------------
   faq = list(
-    list(q='¿Qué es la Categoría de Desempeño?', a='Es una clasificación que la Agencia de Calidad asigna a cada establecimiento en cuatro niveles: Alto, Medio, Medio-Bajo e Insuficiente. Resume el desempeño del colegio considerando varios indicadores, e incorpora el contexto socioeconómico de sus estudiantes dentro de su metodología.', abierta=TRUE),
-    list(q='¿Por qué se cuentan colegios en vez de promediar resultados?', a='Porque el dato de cada colegio es una etiqueta (su categoría), no un número que se pueda promediar. La pregunta que responde la herramienta es cuántos establecimientos hay en cada categoría dentro de un territorio, y para eso lo correcto es contar, no promediar ni ponderar por matrícula.', abierta=FALSE),
-    list(q='¿Por qué no se separa por grupo socioeconómico?', a='Porque la Categoría de Desempeño ya considera el contexto socioeconómico del colegio dentro de su propia construcción. Separar otra vez por grupo socioeconómico sería redundante y daría a entender, erróneamente, que la categoría se puede comparar “en bruto” entre grupos distintos.', abierta=FALSE),
+    list(q='¿Qué es la Categoría de Desempeño?', a='Es una clasificación que la Agencia de Calidad asigna a cada establecimiento en cuatro niveles: Alto, Medio, Medio-Bajo e Insuficiente. Resume el desempeño del establecimiento educacional considerando varios indicadores, e incorpora el contexto socioeconómico de sus estudiantes dentro de su metodología.', abierta=TRUE),
+    list(q='¿Por qué se cuentan establecimientos en vez de promediar resultados?', a='Porque el dato de cada establecimiento educacional es una etiqueta (su categoría), no un número que se pueda promediar. La pregunta que responde la herramienta es cuántos establecimientos hay en cada categoría dentro de un territorio, y para eso lo correcto es contar, no promediar ni ponderar por matrícula.', abierta=FALSE),
+    list(q='¿Por qué no se separa por grupo socioeconómico?', a='Porque la Categoría de Desempeño ya considera el contexto socioeconómico del establecimiento educacional dentro de su propia construcción. Separar otra vez por grupo socioeconómico sería redundante y daría a entender, erróneamente, que la categoría se puede comparar “en bruto” entre grupos distintos.', abierta=FALSE),
     list(q='¿Qué años cubre la herramienta?', a='Cubre 2016 a 2019. Educación básica tiene los cuatro años; educación media va de 2017 a 2019, porque la fuente no publica 2016 para media. El año vigente —el que manda en la vista por defecto— es el más reciente disponible: 2019.', abierta=FALSE),
-    list(q='¿Qué pasa con los colegios sin categoría?', a='Algunos colegios no reciben categoría en un año dado, por baja matrícula o por falta de información. No se fuerzan dentro de las cuatro categorías: aparecen en una sección aparte, “Sin categoría vigente”, para no distorsionar las proporciones.', abierta=FALSE),
+    list(q='¿Qué pasa con los establecimientos sin categoría?', a='Algunos establecimientos educacionales no reciben categoría en un año dado, por baja matrícula o por falta de información. No se fuerzan dentro de las cuatro categorías: aparecen en una sección aparte, “Sin categoría vigente”, para no distorsionar las proporciones.', abierta=FALSE),
     list(q='¿Necesito instalar algo para usarla?', a='No. Es un archivo que se abre en cualquier navegador y funciona sin conexión a internet. También está publicada en línea para consultarla directamente.', abierta=FALSE)
   ),
 
@@ -292,17 +292,17 @@ cfg <- list(
   prosa = list(
     doc_que = c(
       '<code class="inl">slep_categoria_desempeno</code> es una herramienta de análisis interno que permite <strong>comparar la Categoría de Desempeño de los establecimientos</strong> —la clasificación de la Agencia de Calidad en Alto, Medio, Medio-Bajo e Insuficiente— entre comunas, Servicios Locales, regiones y el nivel nacional, separando educación básica y media.',
-      'El problema que resuelve es concreto: la categoría se publica por establecimiento, año y nivel, en planillas dispersas y con formatos que cambian de un año a otro. Responder algo tan simple como “¿cómo se distribuyen los colegios de mi comuna entre las cuatro categorías, y cómo evolucionó cada uno?” exige consolidar varios años de planillas, homologar etiquetas que cambiaron y recuperar el territorio de cada colegio. Esta herramienta hace ese trabajo y entrega el resultado en un único archivo navegable.',
+      'El problema que resuelve es concreto: la categoría se publica por establecimiento, año y nivel, en planillas dispersas y con formatos que cambian de un año a otro. Responder algo tan simple como “¿cómo se distribuyen los establecimientos de mi comuna entre las cuatro categorías, y cómo evolucionó cada uno?” exige consolidar varios años de planillas, homologar etiquetas que cambiaron y recuperar el territorio de cada establecimiento educacional. Esta herramienta hace ese trabajo y entrega el resultado en un único archivo navegable.',
       'El producto final es un <strong>archivo HTML autónomo</strong> (<code class="inl">motor_categoria.html</code>): se abre en cualquier navegador, sin instalar nada, y permite explorar la distribución de categorías y la trayectoria de cada establecimiento. Está publicado para consulta en línea.'
     ),
     doc_pipeline = c(
-      'Detrás del archivo navegable hay un <strong>pipeline en R</strong> de cuatro etapas, orquestado por un único script (<code class="inl">00_run_all.R</code>). Cada etapa lee el resultado de la anterior y escribe el suyo, de modo que el proceso completo es reproducible de principio a fin. En prosa, las etapas son:'
+      'Detrás del archivo navegable hay un <strong>pipeline en R</strong> de cuatro etapas, orquestado por un único script (<code class="inl">00_run_all.R</code>). Cada etapa lee el resultado de la anterior y escribe el suyo, de modo que el proceso completo es reproducible de principio a fin. El motor resultante es un HTML autocontenido que embebe <em>inline</em> React 18.3.1, ReactDOM 18.3.1, D3 v7 y pako (versionados en <code class="inl">10_utils/</code>); su única dependencia de red es Babel 7.29.0 (CDN unpkg, con SRI). En prosa, las etapas son:'
     ),
     gen_porque = c(
-      'La Categoría de Desempeño se publica cada año en planillas separadas, con formatos que cambian y etiquetas que no siempre calzan entre un año y otro. Responder algo tan simple como <em>“¿cómo se reparten los colegios de mi comuna entre las categorías, y cómo cambió eso en el tiempo?”</em> normalmente exige horas de trabajo y conocimiento técnico.',
+      'La Categoría de Desempeño se publica cada año en planillas separadas, con formatos que cambian y etiquetas que no siempre calzan entre un año y otro. Responder algo tan simple como <em>“¿cómo se reparten los establecimientos de mi comuna entre las categorías, y cómo cambió eso en el tiempo?”</em> normalmente exige horas de trabajo y conocimiento técnico.',
       'Esta herramienta hace ese trabajo una sola vez, con reglas claras, y entrega la respuesta lista para mirar. El objetivo es que la conversación sea sobre <strong>qué dicen los datos</strong>, no sobre cómo armarlos.'
     ),
-    etapas_pipeline = '<h3>1 · Construir el mapa del territorio</h3><p>Se arman los catálogos que traducen un establecimiento (RBD) a su comuna, su SLEP y su región.</p><h3>2 · Leer y limpiar las planillas</h3><p>Se leen los 7 archivos por nombre de columna, se homologan las categorías, se unifican las marcas de “sin categoría” y se recupera el territorio de cada colegio.</p><h3>3 · Contar por territorio</h3><p>En cada comuna, SLEP, región y a nivel país se cuentan los establecimientos por categoría, <strong>sin ponderar por matrícula</strong>.</p><h3>4 · Generar el motor navegable</h3><p>Los conteos se empaquetan dentro de un archivo HTML autónomo y se copian a <code class="inl">docs/index.html</code> para publicarlos.</p>'
+    etapas_pipeline = '<h3>1 · Construir el mapa del territorio</h3><p>Se arman los catálogos que traducen un establecimiento (RBD) a su comuna, su SLEP y su región.</p><h3>2 · Leer y limpiar las planillas</h3><p>Se leen los 7 archivos por nombre de columna, se homologan las categorías, se unifican las marcas de “sin categoría” y se recupera el territorio de cada establecimiento educacional.</p><h3>3 · Contar por territorio</h3><p>En cada comuna, SLEP, región y a nivel país se cuentan los establecimientos por categoría, <strong>sin ponderar por matrícula</strong>.</p><h3>4 · Generar el motor navegable</h3><p>Los conteos se empaquetan dentro de un archivo HTML autónomo y se copian a <code class="inl">docs/index.html</code> para publicarlos.</p>'
   ),
 
   # ---- 1.14 Gobernanza ------------------------------------------------------
@@ -338,7 +338,7 @@ cfg <- list(
 
   # ---- 1.18 Pie por documento -----------------------------------------------
   pie_extra = list(
-    arq_tec = "Normalizaciones A1–A4 documentadas en 50_documentacion/activa/decisiones/",
+    arq_tec = "Normalizaciones A1–A4 documentadas en 50_documentacion/activa/decisiones/. Estado de dependencias de red vigente a esta versión: solo Babel (unpkg). La eliminación de Babel (reescritura de JSX a React.createElement) está planificada; ver traspaso v18 §11 (C3).",
     doc_tec = "",
     arq_gen = "¿Necesitas el detalle técnico? Abre arquitectura_slep_categoria_desempeno.html",
     doc_gen = ""
@@ -353,20 +353,20 @@ cfg <- list(
     anom_titulo      = 'Anomalías de origen A1–A4 (detalle)',
     anom_intro       = 'Particularidades de las planillas crudas que el pipeline resuelve de forma trazable <strong>antes</strong> de cualquier conteo. No son errores del proyecto.',
     doc_s2_intro     = 'El motor permite comparar la distribución de establecimientos por categoría entre distintas <strong>entidades</strong>:',
-    doc_s2_cierre    = 'Para cualquier entidad se muestra la <strong>distribución por categoría</strong> del último año, el conteo de establecimientos y, para cada colegio, su <strong>trayectoria histórica</strong> año a año. Todo dentro de un nivel fijo (básica o media).',
+    doc_s2_cierre    = 'Para cualquier entidad se muestra la <strong>distribución por categoría</strong> del último año, el conteo de establecimientos y, para cada establecimiento educacional, su <strong>trayectoria histórica</strong> año a año. Todo dentro de un nivel fijo (básica o media).',
     doc_dec_intro    = 'Reglas que gobiernan todo conteo del proyecto. Cada una corrige una forma específica de leer mal los datos.',
     doc_s5_intro     = 'Todos los datos provienen de la <strong>Agencia de Calidad de la Educación</strong> y son <strong>públicos</strong>. Las planillas crudas traen particularidades de origen que el pipeline normaliza antes de cualquier conteo:',
-    gen_hero         = 'Piensa en este proyecto como una <strong>pequeña fábrica de datos</strong>. Llegan materias primas —las planillas de Categoría de Desempeño—, pasan por una línea de producción que las limpia, las agrupa por territorio y las cuenta, y al final sale un <strong>producto terminado</strong>: una herramienta que cualquier persona puede abrir para ver cómo se distribuyen los colegios entre categorías.',
+    gen_hero         = 'Piensa en este proyecto como una <strong>pequeña fábrica de datos</strong>. Llegan materias primas —las planillas de Categoría de Desempeño—, pasan por una línea de producción que las limpia, las agrupa por territorio y las cuenta, y al final sale un <strong>producto terminado</strong>: una herramienta que cualquier persona puede abrir para ver cómo se distribuyen los establecimientos educacionales entre categorías.',
     gen_linea_titulo = 'La línea de producción',
     gen_guards_titulo= 'Las garantías de calidad de la fábrica',
     gen_guards_intro = 'Toda fábrica seria tiene reglas que nunca se saltan. Estas existen para que las comparaciones sean <strong>justas y honestas</strong>:',
     gen_frase_titulo = 'En una frase',
-    gen_frase        = 'Una línea de producción que toma varios años de planillas de Categoría de Desempeño dispersas, las limpia, las agrupa por territorio contando establecimientos y las convierte en un <strong>tablero navegable</strong> para mirar cómo se clasifican los colegios de Costa Central.',
-    doc_gen_hero          = 'Es una herramienta para <strong>ver cómo se distribuyen los colegios entre las cuatro categorías de desempeño</strong> —Alto, Medio, Medio-Bajo e Insuficiente— por comuna, por Servicio Local, por región, por colegio o a nivel país.',
+    gen_frase        = 'Una línea de producción que toma varios años de planillas de Categoría de Desempeño dispersas, las limpia, las agrupa por territorio contando establecimientos y las convierte en un <strong>tablero navegable</strong> para mirar cómo se clasifican los establecimientos educacionales de Costa Central.',
+    doc_gen_hero          = 'Es una herramienta para <strong>ver cómo se distribuyen los establecimientos educacionales entre las cuatro categorías de desempeño</strong> —Alto, Medio, Medio-Bajo e Insuficiente— por comuna, por Servicio Local, por región, por establecimiento educacional o a nivel país.',
     doc_gen_porque_titulo = 'Por qué existe',
     doc_gen_hacer_titulo  = 'Qué puedes hacer con ella',
-    doc_gen_hacer_intro   = 'Eliges <strong>qué quieres mirar</strong> y la herramienta te muestra cómo se reparten sus colegios entre categorías:',
-    doc_gen_hacer_cierre  = 'Para lo que elijas, verás las <strong>cuatro categorías con su número de colegios</strong> y, para cada establecimiento, su <strong>trayectoria año a año</strong>.',
+    doc_gen_hacer_intro   = 'Eliges <strong>qué quieres mirar</strong> y la herramienta te muestra cómo se reparten sus establecimientos educacionales entre categorías:',
+    doc_gen_hacer_cierre  = 'Para lo que elijas, verás las <strong>cuatro categorías con su número de establecimientos educacionales</strong> y, para cada establecimiento, su <strong>trayectoria año a año</strong>.',
     doc_gen_fijarte_titulo= 'En qué fijarte al leerla',
     doc_gen_fijarte_intro = 'Cinco claves para interpretar la herramienta sin malentendidos:',
     doc_gen_datos_titulo  = 'De dónde vienen los datos',
