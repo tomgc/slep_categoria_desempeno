@@ -1,8 +1,8 @@
 # Estructura actual — slep_categoria_desempeno
 
 - **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-18 18:32:40
-- **Totales:** 21 carpetas, 121 archivos
+- **Fecha:** 2026-06-18 19:16:15
+- **Totales:** 21 carpetas, 123 archivos
 - **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 ## Arbol
@@ -73,9 +73,10 @@ slep_categoria_desempeno/
 │   │   │   ├── 20260612_decision_visibilidad_repo.md  (1.97K)
 │   │   │   ├── 20260613_decision_cobertura_matricula_2025.md  (3.7K)
 │   │   │   ├── 20260613_decision_granularidad_matricula.docx  (22.5K)
-│   │   │   └── 20260613_decision_procedencia_insumo_matricula.md  (4.94K)
+│   │   │   ├── 20260613_decision_procedencia_insumo_matricula.md  (4.94K)
+│   │   │   └── 20260618_decision_plan_c3_eliminar_babel.md  (8.5K)
 │   │   ├── .DS_Store  (8K)
-│   │   ├── backlog_consolidado.md  (59.2K)
+│   │   ├── backlog_consolidado.md  (62.8K)
 │   │   ├── gobernanza_datos.md  (3.04K)
 │   │   ├── P-matricula-actual_alcance.md  (3.08K)
 │   │   ├── P-matricula-grado_alcance.md  (4.85K)
@@ -84,12 +85,12 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260617_095106_estructura.md  (7.28K)
-│   │   ├── 20260617_095106_estructura.txt  (7.38K)
-│   │   ├── 20260618_181821_estructura.md  (7.28K)
-│   │   ├── 20260618_181821_estructura.txt  (7.38K)
-│   │   ├── estructura_actual.md  (7.28K)
-│   │   └── estructura_actual.txt  (7.38K)
+│   │   ├── 20260618_183240_estructura.md  (7.33K)
+│   │   ├── 20260618_183240_estructura.txt  (7.44K)
+│   │   ├── 20260618_190922_estructura.md  (7.41K)
+│   │   ├── 20260618_190922_estructura.txt  (7.52K)
+│   │   ├── estructura_actual.md  (7.41K)
+│   │   └── estructura_actual.txt  (7.52K)
 │   ├── suite/
 │   │   ├── assets/
 │   │   │   ├── logo-color-stacked.png  (126K)
@@ -128,7 +129,8 @@ slep_categoria_desempeno/
 │   │   ├── traspaso_cierre_v16.md  (28.5K)
 │   │   ├── traspaso_cierre_v17.md  (24.7K)
 │   │   ├── traspaso_cierre_v18.md  (29.2K)
-│   │   └── traspaso_cierre_v19.md  (28.3K)
+│   │   ├── traspaso_cierre_v19.md  (28.3K)
+│   │   └── traspaso_cierre_v20.md  (20.9K)
 │   └── .DS_Store  (10K)
 ├── docs/
 │   └── index.html  (1.82M)
@@ -157,7 +159,7 @@ slep_categoria_desempeno/
 
 | Extension | Archivos |
 |---|---|
-| md | 45 |
+| md | 47 |
 | (sin extension) | 13 |
 | r | 11 |
 | xlsx | 10 |
