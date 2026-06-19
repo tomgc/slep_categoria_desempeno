@@ -1,7 +1,7 @@
 ESCANEO DE ESTRUCTURA — slep_categoria_desempeno
 Raiz   : /Users/tomgc/Projects/slep_categoria_desempeno
-Fecha  : 2026-06-18 19:16:15
-Totales: 21 carpetas, 123 archivos
+Fecha  : 2026-06-18 21:56:05
+Totales: 21 carpetas, 125 archivos
 Nota   : todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 slep_categoria_desempeno/
@@ -43,8 +43,8 @@ slep_categoria_desempeno/
 │   ├── 30_construir_auxiliares.R  (12.7K)
 │   ├── 31_leer_normalizar.R  (11.9K)
 │   ├── 32_agregar_territorial.R  (14.8K)
-│   ├── 33_generar_html.R  (20.7K)
-│   └── 33_motor_template.html  (123K)
+│   ├── 33_generar_html.R  (20.8K)
+│   └── 33_motor_template.html  (121K)
 ├── 40_salidas/
 │   ├── intermedios/
 │   │   ├── .gitkeep  (0)
@@ -54,7 +54,7 @@ slep_categoria_desempeno/
 │   │   ├── comunas_chile.parquet  (7.18K)
 │   │   ├── establecimientos_chile.parquet  (261K)
 │   │   └── sleps_chile.parquet  (58.7K)
-│   └── motor_categoria.html  (1.82M)
+│   └── motor_categoria.html  (1.81M)
 ├── 50_documentacion/
 │   ├── activa/
 │   │   ├── decisiones/
@@ -81,12 +81,12 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260618_183240_estructura.md  (7.33K)
-│   │   ├── 20260618_183240_estructura.txt  (7.44K)
-│   │   ├── 20260618_190922_estructura.md  (7.41K)
-│   │   ├── 20260618_190922_estructura.txt  (7.52K)
-│   │   ├── estructura_actual.md  (7.41K)
-│   │   └── estructura_actual.txt  (7.52K)
+│   │   ├── 20260618_191615_estructura.md  (7.46K)
+│   │   ├── 20260618_191615_estructura.txt  (7.57K)
+│   │   ├── 20260618_211742_estructura.md  (7.53K)
+│   │   ├── 20260618_211742_estructura.txt  (7.63K)
+│   │   ├── estructura_actual.md  (7.53K)
+│   │   └── estructura_actual.txt  (7.63K)
 │   ├── suite/
 │   │   ├── assets/
 │   │   │   ├── logo-color-stacked.png  (126K)
@@ -126,15 +126,17 @@ slep_categoria_desempeno/
 │   │   ├── traspaso_cierre_v17.md  (24.7K)
 │   │   ├── traspaso_cierre_v18.md  (29.2K)
 │   │   ├── traspaso_cierre_v19.md  (28.3K)
-│   │   └── traspaso_cierre_v20.md  (20.9K)
+│   │   ├── traspaso_cierre_v20.md  (20.9K)
+│   │   └── traspaso_cierre_v21.md  (24.4K)
 │   └── .DS_Store  (10K)
 ├── docs/
-│   └── index.html  (1.82M)
+│   └── index.html  (1.81M)
 ├── tests/
 │   ├── reportes/
 │   │   ├── 20260613_225301_auditoria_cifras.md  (1.97K)
 │   │   ├── 20260616_131340_auditoria_cifras.md  (1.97K)
 │   │   ├── 20260617_091115_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260618_202358_auditoria_cifras.md  (1.97K)
 │   │   └── auditoria_cifras.md  (1.97K)
 │   ├── .gitkeep  (0)
 │   ├── auditar_cifras_helpers.R  (12.7K)
@@ -151,7 +153,7 @@ slep_categoria_desempeno/
 └── slep_categoria_desempeno.Rproj  (220)
 
 Conteo por extension:
-  md                 47
+  md                 49
   (sin extension)    13
   r                  11
   xlsx               10
