@@ -25,7 +25,8 @@
 #   3. Comprime gzip + base64; el template descomprime en cliente con pako.
 #   4. Reemplaza placeholders __D3_INLINE__, __PAKO_INLINE__, __JSON_DATA__,
 #      __REACT_INLINE__, __REACTDOM_INLINE__ (React/ReactDOM internalizados en
-#      s18; Babel se mantiene en CDN por su peso).
+#      s18). El JSX se transpiló a React.createElement (s21, C3): el motor ya no
+#      depende de Babel ni de ninguna dependencia de red en runtime.
 #   5. Escribe 40_salidas/motor_categoria.html (UTF-8) y lo copia a docs/index.html.
 #
 # Decisiones metodológicas (sesión 3):
