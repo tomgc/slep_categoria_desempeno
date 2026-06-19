@@ -101,13 +101,16 @@ primaria. Fuentes: registro de cada sesión.
 | Orquestación | 4 | 5 | Stub 00_build.R (v01, c.2); 00_run_all.R (v02, c.15); consolidación paso 33 + archivado de stub (v06, c.36); alias regenerar_motor (v13, c.65) |
 | Validación / integridad | 4 | 5 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68); spot-check parametrizado a múltiples celdas ancla, DT-spot-check-cobertura (v15, c.71); certificación de ausencia simétrica en el spot-check, DT-spot-check-ausencia (v16, c.80) |
 | Documentación (en producto) | 2 | 2 | Panel de notas metodológicas (v05, c.29); alineación con fuente oficial (v08, c.43) |
-| Migración y publicación / DevOps | 5 | 6 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85) |
+| Migración y publicación / DevOps | 6 | 7 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85); eliminación de Babel del motor vía C3, motor sin dependencias de red (v21, c.87) |
 | Calidad de código / pipeline | 2 | 2 | Warning de readLines silenciado de raíz (v13, c.64); retiro de código muerto de matrícula por grado en el motor (v16, c.79) |
 
-(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 86 entradas
-(1-86). La tabla temática suma 86, cuadrando con el cronológico, con asignación por
+(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 87 entradas
+(1-87). La tabla temática suma 87, cuadrando con el cronológico, con asignación por
 intención primaria verificada entrada por entrada. La categoría líder, "Diseño UI —
-Motor base y diseño", queda en 15% (13/86), bajo el umbral de subdivisión del 25%.
+Motor base y diseño", queda en 15% (13/87), bajo el umbral de subdivisión del 25%.
+El v21 suma una entrada: "Migración y publicación / DevOps" (5→6, eliminación de Babel
+del motor vía C3 c.87). La sesión 20 no generó cambios de proyecto (solo administrativos
+y planificación de C3). Sin categorías nuevas.
 El v19 suma una entrada: "Documentación de proyecto" (10→11, actualización de la suite
 de documentación c.86). Sin categorías nuevas.
 El v18 suma tres entradas: una a "Pipeline R" (5→6, internalización de React/ReactDOM
@@ -157,7 +160,9 @@ entrada del detalle cronológico.)
 | 17 | v17 | 2 | Opus 4.8 | Desacople de matrícula por grado del JSON embebido (2.80→1.72 MB) + snapshots del escáner |
 | 18 | v18 | 3 | Opus 4.8 | Internalización de React/ReactDOM inline (alcance A; Babel queda en CDN, 1.72→1.82 MB) + consolidación backlog 81-82 + snapshots del escáner |
 | 19 | v19 | 1 | Opus 4.8 | Actualización de la suite de documentación (stack runtime real + terminología institucional) para revisión externa |
-| **Total** | | **86** | | |
+| 20 | v20 | 0 | Opus 4.8 | Planificación de C3 (plan de 4 fases versionado) + administrativos (consolidación backlog 86, snapshot, versionado traspaso v19); sin cambios de proyecto |
+| 21 | v21 | 1 | Opus 4.8 | Eliminación de Babel del motor vía C3 (JSX transpilado a React.createElement, runtime clásico; motor 100% autocontenido, cero dependencias de red) |
+| **Total** | | **87** | | |
 
 ## Detalle cronológico
 
@@ -756,6 +761,29 @@ entrada del detalle cronológico.)
     y en el manual, ausente en los generales; cobertura 2016-2019 intacta. Cero cambios de
     pipeline, cálculo o motor. Commit `b36b960` (documentar.R + 4 HTML + README).
 
+### Sesión 21 (cambio 87) — Eliminación de Babel del motor (C3)
+
+87. **Eliminación de Babel del motor vía C3 (motor 100% autocontenido)** —
+    `30_procesamiento/33_motor_template.html` + `30_procesamiento/33_generar_html.R` +
+    `docs/index.html`: se eliminó la única dependencia de red del motor (Babel 7.29.0 por
+    CDN). El cuerpo JSX del motor (~1417 líneas) se transpiló a `React.createElement` plano
+    con runtime clásico, usando Babel una sola vez como herramienta de migración desechable
+    (no en build ni en runtime); se retiró del template el bloque `<script src>` de
+    `@babel/standalone` (con su integrity/crossorigin) y se cambió el `<script
+    type="text/babel" data-presets="env,react">` por un `<script>` normal. El generador solo
+    cambió un comentario de cabecera (la validación y las 5 inyecciones de placeholders se
+    conservan intactas). El motor quedó con cuatro dependencias inline (React 18.3.1,
+    ReactDOM 18.3.1, D3 v7, pako) y CERO recursos de red. El titular verificó offline
+    (DevTools Network: 0/2 requests, 2328 kB todos inline; render idéntico; Console sin
+    errores). Auditoría F1-F4 en verde (0 discrepancias) y spot-check 6/6 presencia + 1
+    ausencia certificada (media/2016): el refactor no movió ninguna cifra. Un incidente de
+    transpilación se atajó antes de integrar: la primera corrida de Babel salió con runtime
+    automático (`_jsxDEV`), que el motor inline no puede resolver; se rehízo con `.babelrc`
+    forzando `runtime: "classic"` (regla A34). Babel en CDN era la única deuda técnica viva
+    del proyecto; con C3 el motor es HTML 100% autocontenido por primera vez desde la
+    migración a Pages. Commits `5f53259` (template sin Babel + JSX transpilado), `3303b31`
+    (comentario del generador), `d065dc1` (motor regenerado).
+
 ## Delta del backlog
 
 **Consolidación v13 → documento in extenso (v14, cierre de DT-backlog-documental).**
@@ -829,3 +857,14 @@ snapshots, push) son acciones de implementación, no cambios. El único porcenta
 mueve por el recálculo sobre 86 es "Diseño UI — Hoja comparativa" (11%→10%, sin cambio de
 N). La categoría líder baja a 15% (13/86), bajo el umbral de subdivisión. Tabla temática
 reverificada: suma 86, cuadra con el cronológico.
+
+**Delta v21 (86 → 87).** Una entrada nueva de la sesión 21: 87 (eliminación de Babel del
+motor vía C3, "Migración y publicación / DevOps"). Sin categorías nuevas: "Migración y
+publicación / DevOps" 5→6. La sesión 20 (planificación de C3 + administrativos) no generó
+cambios de proyecto, por lo que no aporta entradas; se registra con N=0 en la tabla por
+sesión por completitud del registro de sesiones. El c.87 es una solicitud distinguible del
+titular (eliminar la única dependencia de red del motor), implementada en múltiples fases
+técnicas que cuentan como UN cambio. El único porcentaje que se mueve por el recálculo
+sobre 87 es "Migración y publicación / DevOps" (6%→7%, por el cambio de N de 5 a 6). La
+categoría líder baja a 15% (13/87), bajo el umbral de subdivisión. Tabla temática
+reverificada: suma 87, cuadra con el cronológico.
