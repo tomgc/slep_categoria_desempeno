@@ -101,13 +101,16 @@ primaria. Fuentes: registro de cada sesión.
 | Orquestación | 4 | 5 | Stub 00_build.R (v01, c.2); 00_run_all.R (v02, c.15); consolidación paso 33 + archivado de stub (v06, c.36); alias regenerar_motor (v13, c.65) |
 | Validación / integridad | 4 | 5 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68); spot-check parametrizado a múltiples celdas ancla, DT-spot-check-cobertura (v15, c.71); certificación de ausencia simétrica en el spot-check, DT-spot-check-ausencia (v16, c.80) |
 | Documentación (en producto) | 2 | 2 | Panel de notas metodológicas (v05, c.29); alineación con fuente oficial (v08, c.43) |
-| Migración y publicación / DevOps | 6 | 7 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85); eliminación de Babel del motor vía C3, motor sin dependencias de red (v21, c.87) |
+| Migración y publicación / DevOps | 7 | 8 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85); eliminación de Babel del motor vía C3, motor sin dependencias de red (v21, c.87); reconstrucción y versionado de la fuente JSX del motor 33_app.jsx, recuperación de editabilidad post-C3 (v23, c.88) |
 | Calidad de código / pipeline | 2 | 2 | Warning de readLines silenciado de raíz (v13, c.64); retiro de código muerto de matrícula por grado en el motor (v16, c.79) |
 
-(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 87 entradas
-(1-87). La tabla temática suma 87, cuadrando con el cronológico, con asignación por
+(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 88 entradas
+(1-88). La tabla temática suma 88, cuadrando con el cronológico, con asignación por
 intención primaria verificada entrada por entrada. La categoría líder, "Diseño UI —
-Motor base y diseño", queda en 15% (13/87), bajo el umbral de subdivisión del 25%.
+Motor base y diseño", queda en 15% (13/88), bajo el umbral de subdivisión del 25%.
+El v23 suma una entrada: "Migración y publicación / DevOps" (6→7, reconstrucción de la
+fuente JSX del motor 33_app.jsx c.88). Las sesiones 22 y 20 no generaron cambios de
+proyecto (solo administrativos). Sin categorías nuevas.
 El v21 suma una entrada: "Migración y publicación / DevOps" (5→6, eliminación de Babel
 del motor vía C3 c.87). La sesión 20 no generó cambios de proyecto (solo administrativos
 y planificación de C3). Sin categorías nuevas.
@@ -163,7 +166,8 @@ entrada del detalle cronológico.)
 | 20 | v20 | 0 | Opus 4.8 | Planificación de C3 (plan de 4 fases versionado) + administrativos (consolidación backlog 86, snapshot, versionado traspaso v19); sin cambios de proyecto |
 | 21 | v21 | 1 | Opus 4.8 | Eliminación de Babel del motor vía C3 (JSX transpilado a React.createElement, runtime clásico; motor 100% autocontenido, cero dependencias de red) |
 | 22 | v22 | 0 | Opus 4.8 | Administrativos de apertura heredados (snapshots del escáner versionados, entrada 87 consolidada) + saneamiento A22 de la tabla temática (% stale desde v18) + versionado traspaso v21; sin cambios de proyecto |
-| **Total** | | **87** | | |
+| 23 | v23 | 1 | Opus 4.8 | Reconstrucción y versionado de la fuente JSX del motor (33_app.jsx) por transformación inversa verificada (A34) + suite de documentación post-C3 + reubicación de documentar.R + administrativos |
+| **Total** | | **88** | | |
 
 ## Detalle cronológico
 
@@ -785,6 +789,28 @@ entrada del detalle cronológico.)
     migración a Pages. Commits `5f53259` (template sin Babel + JSX transpilado), `3303b31`
     (comentario del generador), `d065dc1` (motor regenerado).
 
+### Sesión 23 (cambio 88) — Reconstrucción de la fuente JSX del motor + suite post-C3 + administrativos
+
+88. **Reconstrucción y versionado de la fuente JSX del motor (`33_app.jsx`)** —
+    `30_procesamiento/33_app.jsx` (nuevo) +
+    `50_documentacion/activa/decisiones/20260619_reconstruccion_app_jsx.md`: C3 (s21)
+    transpiló el JSX a `React.createElement` y eliminó Babel, pero no versionó la fuente
+    editable; el motor quedó sin fuente (deuda A34). En s23 se reconstruyó esa fuente por
+    transformación inversa: se extrajo el cuerpo de la app del template (1462 líneas, 195
+    nodos `React.createElement`), se revirtió a JSX con el plugin Babel
+    `babel-plugin-transform-react-createelement-to-jsx`, se formateó con Prettier y se
+    limpiaron las anotaciones `/*#__PURE__*/`. La fidelidad se verificó por AST (no por
+    texto): se retranspiló `33_app.jsx` con `runtime: "classic"` y se comparó contra el
+    `createElement` original normalizando fusión de text-nodes adyacentes, escapes Unicode
+    (`\xB7` == `·`) y literales numéricos (`0.10` == `0.1`) → equivalencia total. El motor
+    en producción NO cambia: `33_app.jsx` es fuente para ediciones futuras de UI, no se
+    inyecta. La transpilación JSX → `createElement` queda como paso de build manual externo
+    al producto (invariante C3 preservada). Commit `4fc78be`. (En la misma sesión, sin
+    contar como cambios: actualización de la suite de documentación post-C3 en sus 3 puntos
+    de stack, commit `4cb489e`; reubicación de `documentar.R` a `50_documentacion/suite/`
+    por política 4.6.3.5, commit `e8f2222`; y administrativos de apertura — snapshots,
+    traspaso v22, fila s22.)
+
 ## Delta del backlog
 
 **Consolidación v13 → documento in extenso (v14, cierre de DT-backlog-documental).**
@@ -880,3 +906,17 @@ según la nota metodológica. Se registra la sesión con N=0 en la tabla por ses
 completitud del registro de sesiones (paralelo a la s20). El cronológico no recibe
 entradas nuevas; la tabla temática y la nota de conteo permanecen sobre 87. Las tres
 vistas siguen cuadrando en 87.
+
+**Delta v23 (87 → 88).** Una entrada nueva de la sesión 23: 88 (reconstrucción y
+versionado de la fuente JSX del motor `33_app.jsx`, categoría "Migración y publicación /
+DevOps", 6→7). La actualización de la suite de documentación post-C3 (commit `4cb489e`) no
+cuenta como cambio nuevo: es mantenimiento de un artefacto de documentación ya existente,
+clasificado bajo la misma intención que su creación. La reubicación de `documentar.R` a
+`50_documentacion/suite/` (commit `e8f2222`) es higiene estructural sin solicitud
+distinguible de producto. Los administrativos de apertura (snapshots del escáner, versionado
+del traspaso v22, consolidación de la fila s22) tampoco cuentan. El cronológico cierra en 88,
+la tabla temática suma 88 y la tabla por sesión suma 88 (fila s23 N=1). Aprendizaje nuevo de
+la sesión: A37 (reconstrucción de fuente perdida por transpilación se verifica por
+equivalencia de AST, no de texto: las diferencias de formato, codificación Unicode y grafía
+numérica son inocuas y deben normalizarse antes de declarar fidelidad). Las tres vistas
+cuadran en 88.
