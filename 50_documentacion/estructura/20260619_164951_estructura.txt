@@ -1,13 +1,9 @@
-# Estructura actual — slep_categoria_desempeno
+ESCANEO DE ESTRUCTURA — slep_categoria_desempeno
+Raiz   : /Users/tomgc/Projects/slep_categoria_desempeno
+Fecha  : 2026-06-19 16:49:51
+Totales: 21 carpetas, 128 archivos
+Nota   : todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
-- **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-19 08:17:09
-- **Totales:** 21 carpetas, 126 archivos
-- **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
-
-## Arbol
-
-```
 slep_categoria_desempeno/
 ├── .claude/
 │   └── settings.local.json  (704)
@@ -47,6 +43,7 @@ slep_categoria_desempeno/
 │   ├── 30_construir_auxiliares.R  (12.7K)
 │   ├── 31_leer_normalizar.R  (11.9K)
 │   ├── 32_agregar_territorial.R  (14.8K)
+│   ├── 33_app.jsx  (68.9K)
 │   ├── 33_generar_html.R  (20.8K)
 │   └── 33_motor_template.html  (121K)
 ├── 40_salidas/
@@ -74,9 +71,10 @@ slep_categoria_desempeno/
 │   │   │   ├── 20260613_decision_cobertura_matricula_2025.md  (3.7K)
 │   │   │   ├── 20260613_decision_granularidad_matricula.docx  (22.5K)
 │   │   │   ├── 20260613_decision_procedencia_insumo_matricula.md  (4.94K)
-│   │   │   └── 20260618_decision_plan_c3_eliminar_babel.md  (8.5K)
+│   │   │   ├── 20260618_decision_plan_c3_eliminar_babel.md  (8.5K)
+│   │   │   └── 20260619_reconstruccion_app_jsx.md  (2.07K)
 │   │   ├── .DS_Store  (8K)
-│   │   ├── backlog_consolidado.md  (66.1K)
+│   │   ├── backlog_consolidado.md  (67.1K)
 │   │   ├── gobernanza_datos.md  (3.04K)
 │   │   ├── P-matricula-actual_alcance.md  (3.08K)
 │   │   ├── P-matricula-grado_alcance.md  (4.85K)
@@ -85,12 +83,12 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260618_211742_estructura.md  (7.53K)
-│   │   ├── 20260618_211742_estructura.txt  (7.63K)
-│   │   ├── 20260618_215605_estructura.md  (7.58K)
-│   │   ├── 20260618_215605_estructura.txt  (7.69K)
-│   │   ├── estructura_actual.md  (7.58K)
-│   │   └── estructura_actual.txt  (7.69K)
+│   │   ├── 20260619_081709_estructura.md  (7.63K)
+│   │   ├── 20260619_081709_estructura.txt  (7.74K)
+│   │   ├── 20260619_163723_estructura.md  (7.76K)
+│   │   ├── 20260619_163723_estructura.txt  (7.88K)
+│   │   ├── estructura_actual.md  (7.76K)
+│   │   └── estructura_actual.txt  (7.88K)
 │   ├── suite/
 │   │   ├── assets/
 │   │   │   ├── logo-color-stacked.png  (126K)
@@ -104,9 +102,10 @@ slep_categoria_desempeno/
 │   │   │   ├── MuseoSans_700.otf  (62.1K)
 │   │   │   └── MuseoSans-300.otf  (61.5K)
 │   │   ├── arquitectura_general_slep_categoria_desempeno.html  (9.83K)
-│   │   ├── arquitectura_slep_categoria_desempeno.html  (18.3K)
+│   │   ├── arquitectura_slep_categoria_desempeno.html  (18.5K)
 │   │   ├── documentacion_general_slep_categoria_desempeno.html  (7.95K)
-│   │   ├── documentacion_proyecto_slep_categoria_desempeno.html  (11.1K)
+│   │   ├── documentacion_proyecto_slep_categoria_desempeno.html  (11.2K)
+│   │   ├── documentar.R  (40.8K)
 │   │   └── suite_estilos.css  (21.7K)
 │   ├── traspasos/
 │   │   ├── .gitkeep  (0)
@@ -133,7 +132,7 @@ slep_categoria_desempeno/
 │   │   ├── traspaso_cierre_v20.md  (20.9K)
 │   │   ├── traspaso_cierre_v21.md  (24.4K)
 │   │   └── traspaso_cierre_v22.md  (21.9K)
-│   └── .DS_Store  (10K)
+│   └── .DS_Store  (14K)
 ├── docs/
 │   └── index.html  (1.81M)
 ├── tests/
@@ -152,31 +151,27 @@ slep_categoria_desempeno/
 ├── 00_escanear_proyecto.R  (8.98K)
 ├── 00_run_all.R  (7.44K)
 ├── CLAUDE.md  (4.6K)
-├── documentar.R  (40.5K)
 ├── LICENSE  (1.75K)
 ├── README.md  (4.27K)
 └── slep_categoria_desempeno.Rproj  (220)
-```
 
-## Conteo por extension
-
-| Extension | Archivos |
-|---|---|
-| md | 50 |
-| (sin extension) | 13 |
-| r | 11 |
-| xlsx | 10 |
-| parquet | 8 |
-| html | 7 |
-| otf | 6 |
-| js | 4 |
-| pdf | 4 |
-| png | 3 |
-| txt | 3 |
-| css | 1 |
-| csv | 1 |
-| doc | 1 |
-| docx | 1 |
-| json | 1 |
-| rproj | 1 |
-| yml | 1 |
+Conteo por extension:
+  md                 51
+  (sin extension)    13
+  r                  11
+  xlsx               10
+  parquet            8
+  html               7
+  otf                6
+  js                 4
+  pdf                4
+  png                3
+  txt                3
+  css                1
+  csv                1
+  doc                1
+  docx               1
+  json               1
+  jsx                1
+  rproj              1
+  yml                1
