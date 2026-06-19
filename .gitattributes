@@ -1,0 +1,57 @@
+# .gitattributes — slep_categoria_desempeno
+# ----------------------------------------------------------------------------
+# Normalizacion de fin de linea para portabilidad cross-OS (macOS <-> Windows).
+# Regla rectora: todo archivo de texto se almacena en el repositorio con LF.
+# Al hacer checkout en cualquier sistema operativo se materializa con LF, no
+# con CRLF. Esto evita:
+#   - diffs espurios al alternar entre maquinas (snapshots del escaner,
+#     reportes de auditoria escritos con writeLines/useBytes);
+#   - caracteres \r filtrandose al motor HTML ensamblado desde el template y
+#     los .js (33_generar_html.R lee el template y reescribe en binario);
+#   - CRLF en 33_app.jsx, que romperia la verificacion de fidelidad por AST
+#     (A37) al retranspilar la fuente del motor.
+#
+# Los formatos binarios (datos, fuentes, imagenes, ofimatica) se marcan
+# explicitamente para que Git NO intente normalizarlos.
+# ----------------------------------------------------------------------------
+
+# Default: detecta texto vs binario automaticamente; el texto se guarda con LF.
+* text=auto eol=lf
+
+# ---- Texto explicito (LF en repo y en checkout, en todo SO) ----
+*.R        text eol=lf
+*.Rproj    text eol=lf
+*.r        text eol=lf
+*.js       text eol=lf
+*.jsx      text eol=lf
+*.html     text eol=lf
+*.css      text eol=lf
+*.md       text eol=lf
+*.txt      text eol=lf
+*.json     text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+*.csv      text eol=lf
+*.gitignore   text eol=lf
+*.gitattributes text eol=lf
+.Renviron.example text eol=lf
+
+# ---- Binarios: Git no toca su contenido ----
+*.parquet  binary
+*.xlsx     binary
+*.xls      binary
+*.doc      binary
+*.docx     binary
+*.pdf      binary
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.webp     binary
+*.otf      binary
+*.ttf      binary
+*.woff     binary
+*.woff2    binary
+*.rds      binary
+*.feather  binary
+*.DS_Store binary
