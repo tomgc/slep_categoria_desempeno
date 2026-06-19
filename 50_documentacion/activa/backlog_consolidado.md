@@ -162,6 +162,7 @@ entrada del detalle cronológico.)
 | 19 | v19 | 1 | Opus 4.8 | Actualización de la suite de documentación (stack runtime real + terminología institucional) para revisión externa |
 | 20 | v20 | 0 | Opus 4.8 | Planificación de C3 (plan de 4 fases versionado) + administrativos (consolidación backlog 86, snapshot, versionado traspaso v19); sin cambios de proyecto |
 | 21 | v21 | 1 | Opus 4.8 | Eliminación de Babel del motor vía C3 (JSX transpilado a React.createElement, runtime clásico; motor 100% autocontenido, cero dependencias de red) |
+| 22 | v22 | 0 | Opus 4.8 | Administrativos de apertura heredados (snapshots del escáner versionados, entrada 87 consolidada) + saneamiento A22 de la tabla temática (% stale desde v18) + versionado traspaso v21; sin cambios de proyecto |
 | **Total** | | **87** | | |
 
 ## Detalle cronológico
@@ -868,3 +869,14 @@ técnicas que cuentan como UN cambio. El único porcentaje que se mueve por el r
 sobre 87 es "Migración y publicación / DevOps" (6%→7%, por el cambio de N de 5 a 6). La
 categoría líder baja a 15% (13/87), bajo el umbral de subdivisión. Tabla temática
 reverificada: suma 87, cuadra con el cronológico.
+
+**Delta v22 (sin cambios; total se mantiene en 87).** La sesión 22 no generó cambios de
+proyecto contabilizables: todos sus commits fueron administrativos (versionado de
+snapshots del escáner, consolidación de la entrada 87 al archivo, versionado del traspaso
+v21 untracked patrón A32) o corrección de un error preexistente de presentación (6 celdas
+de % de la tabla temática que arrastraban el denominador 82 desde el v18, saneadas a
+round(N/86) en commit aparte; patrón A22, sin tocar ningún N). Ninguno cuenta como cambio
+según la nota metodológica. Se registra la sesión con N=0 en la tabla por sesión por
+completitud del registro de sesiones (paralelo a la s20). El cronológico no recibe
+entradas nuevas; la tabla temática y la nota de conteo permanecen sobre 87. Las tres
+vistas siguen cuadrando en 87.
