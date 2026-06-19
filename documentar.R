@@ -127,8 +127,8 @@ cfg <- list(
          norm=list()),
     list(n=5, titulo='Generación del motor', sub='30_procesamiento/',
          head='<span class="code">33_generar_html.R</span> <span class="bg bg--r">R</span> + <span class="code">33_motor_template.html</span> <span class="bg bg--html">HTML</span>',
-         d='Serializa <span class="code-sm">categoria_territorial</span> + <span class="code-sm">categoria_sin_vigente</span> + catálogos a <strong>JSON</strong> embebido (gzip + pako)<br>Embebe el JSON (claves ordenadas, indentación fija) y el <strong>runtime inline</strong> en el template: <strong>React 18.3.1</strong>, <strong>ReactDOM 18.3.1</strong>, <strong>D3 v7</strong> y <strong>pako</strong> van versionados en <span class="code-sm">10_utils/</span> y viajan dentro del HTML; la única dependencia de red es <strong>Babel 7.29.0</strong> (CDN unpkg, con SRI)<br>Escribe el HTML autocontenido &rarr; <strong>motor_categoria.html</strong><br>Copia el producto a <span class="code-sm">docs/index.html</span> para publicación en Pages',
-         flags=c('JSON embebido y comprimido (portabilidad total)','Runtime inline salvo Babel (CDN); sin SRI en los inline','docs/index.html no se edita a mano'),
+         d='Serializa <span class="code-sm">categoria_territorial</span> + <span class="code-sm">categoria_sin_vigente</span> + catálogos a <strong>JSON</strong> embebido (gzip + pako)<br>Embebe el JSON (claves ordenadas, indentación fija) y el <strong>runtime inline</strong> en el template: <strong>React 18.3.1</strong>, <strong>ReactDOM 18.3.1</strong>, <strong>D3 v7</strong> y <strong>pako</strong> van versionados en <span class="code-sm">10_utils/</span> y viajan dentro del HTML; el cuerpo del motor está <strong>pre-transpilado a <span class="code-sm">React.createElement</span></strong> (runtime clásico), por lo que el HTML tiene <strong>cero dependencias de red</strong><br>Escribe el HTML autocontenido &rarr; <strong>motor_categoria.html</strong><br>Copia el producto a <span class="code-sm">docs/index.html</span> para publicación en Pages',
+         flags=c('JSON embebido y comprimido (portabilidad total)','Runtime 100% inline; JSX pre-transpilado a React.createElement, sin CDN','docs/index.html no se edita a mano'),
          norm=list())
   ),
 
@@ -296,7 +296,7 @@ cfg <- list(
       'El producto final es un <strong>archivo HTML autónomo</strong> (<code class="inl">motor_categoria.html</code>): se abre en cualquier navegador, sin instalar nada, y permite explorar la distribución de categorías y la trayectoria de cada establecimiento. Está publicado para consulta en línea.'
     ),
     doc_pipeline = c(
-      'Detrás del archivo navegable hay un <strong>pipeline en R</strong> de cuatro etapas, orquestado por un único script (<code class="inl">00_run_all.R</code>). Cada etapa lee el resultado de la anterior y escribe el suyo, de modo que el proceso completo es reproducible de principio a fin. El motor resultante es un HTML autocontenido que embebe <em>inline</em> React 18.3.1, ReactDOM 18.3.1, D3 v7 y pako (versionados en <code class="inl">10_utils/</code>); su única dependencia de red es Babel 7.29.0 (CDN unpkg, con SRI). En prosa, las etapas son:'
+      'Detrás del archivo navegable hay un <strong>pipeline en R</strong> de cuatro etapas, orquestado por un único script (<code class="inl">00_run_all.R</code>). Cada etapa lee el resultado de la anterior y escribe el suyo, de modo que el proceso completo es reproducible de principio a fin. El motor resultante es un HTML autocontenido que embebe <em>inline</em> React 18.3.1, ReactDOM 18.3.1, D3 v7 y pako (versionados en <code class="inl">10_utils/</code>); su cuerpo está pre-transpilado a <code class="inl">React.createElement</code> (runtime clásico), de modo que <strong>no tiene ninguna dependencia de red</strong>. En prosa, las etapas son:'
     ),
     gen_porque = c(
       'La Categoría de Desempeño se publica cada año en planillas separadas, con formatos que cambian y etiquetas que no siempre calzan entre un año y otro. Responder algo tan simple como <em>“¿cómo se reparten los establecimientos de mi comuna entre las categorías, y cómo cambió eso en el tiempo?”</em> normalmente exige horas de trabajo y conocimiento técnico.',
@@ -338,7 +338,7 @@ cfg <- list(
 
   # ---- 1.18 Pie por documento -----------------------------------------------
   pie_extra = list(
-    arq_tec = "Normalizaciones A1–A4 documentadas en 50_documentacion/activa/decisiones/. Estado de dependencias de red vigente a esta versión: solo Babel (unpkg). La eliminación de Babel (reescritura de JSX a React.createElement) está planificada; ver traspaso v18 §11 (C3).",
+    arq_tec = "Normalizaciones A1–A4 documentadas en 50_documentacion/activa/decisiones/. Estado de dependencias de red vigente a esta versión: ninguna. La eliminación de Babel (reescritura de JSX a React.createElement, runtime clásico) fue ejecutada vía C3; el motor es 100% autocontenido, sin recursos de red. Ver 50_documentacion/activa/decisiones/20260618_decision_plan_c3_eliminar_babel.md.",
     doc_tec = "",
     arq_gen = "¿Necesitas el detalle técnico? Abre arquitectura_slep_categoria_desempeno.html",
     doc_gen = ""
