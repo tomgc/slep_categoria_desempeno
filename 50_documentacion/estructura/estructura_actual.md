@@ -1,8 +1,8 @@
 # Estructura actual — slep_categoria_desempeno
 
 - **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-06-19 17:46:10
-- **Totales:** 21 carpetas, 129 archivos
+- **Fecha:** 2026-06-19 21:29:55
+- **Totales:** 21 carpetas, 132 archivos
 - **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 ## Arbol
@@ -76,6 +76,7 @@ slep_categoria_desempeno/
 │   │   │   ├── 20260613_decision_granularidad_matricula.docx  (22.5K)
 │   │   │   ├── 20260613_decision_procedencia_insumo_matricula.md  (4.94K)
 │   │   │   ├── 20260618_decision_plan_c3_eliminar_babel.md  (8.5K)
+│   │   │   ├── 20260619_decision_portabilidad_cross_os.md  (3.6K)
 │   │   │   └── 20260619_reconstruccion_app_jsx.md  (2.07K)
 │   │   ├── .DS_Store  (8K)
 │   │   ├── backlog_consolidado.md  (70.4K)
@@ -87,12 +88,12 @@ slep_categoria_desempeno/
 │   ├── andamios/
 │   │   └── .gitkeep  (0)
 │   ├── estructura/
-│   │   ├── 20260619_163723_estructura.md  (7.76K)
-│   │   ├── 20260619_163723_estructura.txt  (7.88K)
-│   │   ├── 20260619_164951_estructura.md  (7.76K)
-│   │   ├── 20260619_164951_estructura.txt  (7.88K)
-│   │   ├── estructura_actual.md  (7.76K)
-│   │   └── estructura_actual.txt  (7.88K)
+│   │   ├── 20260619_174610_estructura.md  (7.82K)
+│   │   ├── 20260619_174610_estructura.txt  (7.93K)
+│   │   ├── 20260619_202729_estructura.md  (7.93K)
+│   │   ├── 20260619_202729_estructura.txt  (8.04K)
+│   │   ├── estructura_actual.md  (7.93K)
+│   │   └── estructura_actual.txt  (8.04K)
 │   ├── suite/
 │   │   ├── assets/
 │   │   │   ├── logo-color-stacked.png  (126K)
@@ -106,10 +107,10 @@ slep_categoria_desempeno/
 │   │   │   ├── MuseoSans_700.otf  (62.1K)
 │   │   │   └── MuseoSans-300.otf  (61.5K)
 │   │   ├── arquitectura_general_slep_categoria_desempeno.html  (9.83K)
-│   │   ├── arquitectura_slep_categoria_desempeno.html  (18.5K)
+│   │   ├── arquitectura_slep_categoria_desempeno.html  (18.7K)
 │   │   ├── documentacion_general_slep_categoria_desempeno.html  (7.95K)
-│   │   ├── documentacion_proyecto_slep_categoria_desempeno.html  (11.2K)
-│   │   ├── documentar.R  (40.8K)
+│   │   ├── documentacion_proyecto_slep_categoria_desempeno.html  (12.3K)
+│   │   ├── documentar.R  (42.2K)
 │   │   └── suite_estilos.css  (21.7K)
 │   ├── traspasos/
 │   │   ├── .gitkeep  (0)
@@ -136,7 +137,8 @@ slep_categoria_desempeno/
 │   │   ├── traspaso_cierre_v20.md  (20.9K)
 │   │   ├── traspaso_cierre_v21.md  (24.4K)
 │   │   ├── traspaso_cierre_v22.md  (21.9K)
-│   │   └── traspaso_cierre_v23.md  (16.8K)
+│   │   ├── traspaso_cierre_v23.md  (16.8K)
+│   │   └── traspaso_cierre_v24.md  (17.2K)
 │   └── .DS_Store  (14K)
 ├── docs/
 │   └── index.html  (1.81M)
@@ -152,6 +154,7 @@ slep_categoria_desempeno/
 │   ├── auditar_cifras.R  (9.27K)
 │   └── spot_check_publicado.R  (9.28K)
 ├── .DS_Store  (14K)
+├── .gitattributes  (1.88K)
 ├── .gitignore  (429)
 ├── 00_escanear_proyecto.R  (8.98K)
 ├── 00_run_all.R  (7.44K)
@@ -165,8 +168,8 @@ slep_categoria_desempeno/
 
 | Extension | Archivos |
 |---|---|
-| md | 52 |
-| (sin extension) | 13 |
+| md | 54 |
+| (sin extension) | 14 |
 | r | 11 |
 | xlsx | 10 |
 | parquet | 8 |
