@@ -92,22 +92,24 @@ primaria. Fuentes: registro de cada sesión.
 | Categoría | N | % | Descripción |
 |---|---|---|---|
 | Diseño UI — Motor base y diseño | 13 | 15 | Diseño de visualización (v01, c.11); motor HTML paso 33 base + iteraciones UI 1-4 (v03, c.17-21); publicación Pages en el generador (v04, c.26); tarjetas de modo territorio con estudiantes + % (v10, c.49); estandarización tipográfica por tokens (v10, c.54); convivencia año de matrícula (v12, c.59); desglose por grado en motor (v12, c.61); bloque narrativo territorial parcial (v12, c.62); D21 template regenerado desde referencia UI (v13, c.63) |
-| Scaffold e inicialización | 12 | 14 | Estructura, scaffold, utils, escáner, gitignore, rproj/readme, protocolo, decisiones, git (v01, c.1-9 salvo orquestación); auditoría seguridad, gobernanza, LICENSE, CI, README migración (v04, c.22-25,27) |
+| Scaffold e inicialización | 12 | 13 | Estructura, scaffold, utils, escáner, gitignore, rproj/readme, protocolo, decisiones, git (v01, c.1-9 salvo orquestación); auditoría seguridad, gobernanza, LICENSE, CI, README migración (v04, c.22-25,27) |
 | Diseño UI — Hoja comparativa | 9 | 10 | Comparativa, multi-selección, límites, lotes visuales (v05, c.28,30-35); botón limpiar (v07, c.41); N EE + tooltip de estudiantes/% (v10, c.50) |
-| Documentación de proyecto | 11 | 13 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73); consolidación del backlog 81-82 sobre 82 (v18, c.84); actualización de la suite (stack runtime + terminología institucional) (v19, c.86) |
-| Diseño UI — Modo establecimiento | 12 | 14 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53); eliminación del detalle por grado en la ficha (v16, c.74); rediseño D2 de la trayectoria a filas a todo el ancho (v16, c.75); encabezado de columnas por año (v16, c.77); eliminación del sufijo redundante "estudiantes" (v16, c.78) |
+| Documentación de proyecto | 11 | 12 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73); consolidación del backlog 81-82 sobre 82 (v18, c.84); actualización de la suite (stack runtime + terminología institucional) (v19, c.86) |
+| Diseño UI — Modo establecimiento | 12 | 13 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53); eliminación del detalle por grado en la ficha (v16, c.74); rediseño D2 de la trayectoria a filas a todo el ancho (v16, c.75); encabezado de columnas por año (v16, c.77); eliminación del sufijo redundante "estudiantes" (v16, c.78) |
 | Datos y normalización | 6 | 7 | Inspección de datos (v01, c.10); esquema xlsx, normalización categoría (v02, c.12-13); insumo de matrícula por tipo de enseñanza (v09, c.45); ampliación cobertura 2016-2025 (v11, c.57); parquet de grado (v12, c.60) |
 | Pipeline R | 6 | 7 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58); desacople de matrícula por grado del JSON embebido (v17, c.81); internalización de React/ReactDOM inline, alcance A (v18, c.83) |
-| Orquestación | 4 | 5 | Stub 00_build.R (v01, c.2); 00_run_all.R (v02, c.15); consolidación paso 33 + archivado de stub (v06, c.36); alias regenerar_motor (v13, c.65) |
-| Validación / integridad | 4 | 5 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68); spot-check parametrizado a múltiples celdas ancla, DT-spot-check-cobertura (v15, c.71); certificación de ausencia simétrica en el spot-check, DT-spot-check-ausencia (v16, c.80) |
+| Orquestación | 4 | 4 | Stub 00_build.R (v01, c.2); 00_run_all.R (v02, c.15); consolidación paso 33 + archivado de stub (v06, c.36); alias regenerar_motor (v13, c.65) |
+| Validación / integridad | 4 | 4 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68); spot-check parametrizado a múltiples celdas ancla, DT-spot-check-cobertura (v15, c.71); certificación de ausencia simétrica en el spot-check, DT-spot-check-ausencia (v16, c.80) |
 | Documentación (en producto) | 2 | 2 | Panel de notas metodológicas (v05, c.29); alineación con fuente oficial (v08, c.43) |
-| Migración y publicación / DevOps | 7 | 8 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85); eliminación de Babel del motor vía C3, motor sin dependencias de red (v21, c.87); reconstrucción y versionado de la fuente JSX del motor 33_app.jsx, recuperación de editabilidad post-C3 (v23, c.88) |
+| Migración y publicación / DevOps | 8 | 9 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85); eliminación de Babel del motor vía C3, motor sin dependencias de red (v21, c.87); reconstrucción y versionado de la fuente JSX del motor 33_app.jsx, recuperación de editabilidad post-C3 (v23, c.88); portabilidad cross-OS del repositorio, .gitattributes con EOL LF (v24, c.89) |
 | Calidad de código / pipeline | 2 | 2 | Warning de readLines silenciado de raíz (v13, c.64); retiro de código muerto de matrícula por grado en el motor (v16, c.79) |
 
-(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 88 entradas
-(1-88). La tabla temática suma 88, cuadrando con el cronológico, con asignación por
+(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 89 entradas
+(1-89). La tabla temática suma 89, cuadrando con el cronológico, con asignación por
 intención primaria verificada entrada por entrada. La categoría líder, "Diseño UI —
-Motor base y diseño", queda en 15% (13/88), bajo el umbral de subdivisión del 25%.
+Motor base y diseño", queda en 15% (13/89), bajo el umbral de subdivisión del 25%.
+El v24 suma una entrada: "Migración y publicación / DevOps" (7→8, portabilidad cross-OS
+del repositorio, .gitattributes con EOL LF c.89). Sin categorías nuevas.
 El v23 suma una entrada: "Migración y publicación / DevOps" (6→7, reconstrucción de la
 fuente JSX del motor 33_app.jsx c.88). Las sesiones 22 y 20 no generaron cambios de
 proyecto (solo administrativos). Sin categorías nuevas.
@@ -167,7 +169,8 @@ entrada del detalle cronológico.)
 | 21 | v21 | 1 | Opus 4.8 | Eliminación de Babel del motor vía C3 (JSX transpilado a React.createElement, runtime clásico; motor 100% autocontenido, cero dependencias de red) |
 | 22 | v22 | 0 | Opus 4.8 | Administrativos de apertura heredados (snapshots del escáner versionados, entrada 87 consolidada) + saneamiento A22 de la tabla temática (% stale desde v18) + versionado traspaso v21; sin cambios de proyecto |
 | 23 | v23 | 1 | Opus 4.8 | Reconstrucción y versionado de la fuente JSX del motor (33_app.jsx) por transformación inversa verificada (A34) + suite de documentación post-C3 + reubicación de documentar.R + administrativos |
-| **Total** | | **88** | | |
+| 24 | v24 | 1 | Opus 4.8 | Portabilidad cross-OS y suite final |
+| **Total** | | **89** | | |
 
 ## Detalle cronológico
 
@@ -811,6 +814,25 @@ entrada del detalle cronológico.)
     por política 4.6.3.5, commit `e8f2222`; y administrativos de apertura — snapshots,
     traspaso v22, fila s22.)
 
+### Sesión 24 (cambio 89) — Portabilidad cross-OS del repositorio + suite final
+
+89. **Portabilidad cross-OS del repositorio (`.gitattributes`, EOL LF)** —
+    `.gitattributes` (nuevo) +
+    `50_documentacion/activa/decisiones/20260619_decision_portabilidad_cross_os.md`: se
+    auditó el código con `git grep` sobre los patrones sensibles de portabilidad (`setwd`,
+    separadores de ruta literales, rutas absolutas, `system`/`system2`/`shell`, `file.path`,
+    `readLines`/`writeLines`, lectores `read_*`, `fromJSON`/`toJSON`, `encoding`/
+    `fileEncoding`/`useBytes`/`enc2`/`iconv`) y se confirmó que el código ya era agnóstico al
+    sistema operativo, sin requerir cambios. El único hueco era estructural: la ausencia de
+    `.gitattributes` dejaba el manejo de fin de línea (EOL) a merced del `core.autocrlf` de
+    cada máquina, con riesgo de materializar CRLF en un clon Windows y ensuciar el motor
+    ensamblado, la verificación por AST del JSX y los snapshots escritos con `useBytes`. Se
+    creó `.gitattributes` con `* text=auto eol=lf` más declaración explícita por extensión
+    (texto/binario) y se renormalizó el repositorio. Decisión documentada en
+    `50_documentacion/activa/decisiones/20260619_decision_portabilidad_cross_os.md`. Commits
+    `a3f4ae7` (.gitattributes + decisión), `975bdb3` (decisión incorporada al cfg de la
+    suite) y `db9daec` (suite regenerada al estado final post-portabilidad).
+
 ## Delta del backlog
 
 **Consolidación v13 → documento in extenso (v14, cierre de DT-backlog-documental).**
@@ -920,3 +942,15 @@ la sesión: A37 (reconstrucción de fuente perdida por transpilación se verific
 equivalencia de AST, no de texto: las diferencias de formato, codificación Unicode y grafía
 numérica son inocuas y deben normalizarse antes de declarar fidelidad). Las tres vistas
 cuadran en 88.
+
+**Delta v24 (88 → 89).** Una entrada nueva de la sesión 24: 89 (portabilidad cross-OS del
+repositorio —auditoría de portabilidad con `git grep` + creación de `.gitattributes` con
+EOL LF y renormalización—, "Migración y publicación / DevOps", 7→8). Sin categorías nuevas;
+sin reclasificaciones. La regeneración de la suite de documentación para reflejar la decisión
+de portabilidad (commits `975bdb3`, `db9daec`) es mantenimiento de un artefacto existente y no
+cuenta como cambio nuevo (nota metodológica). Por el recálculo de porcentajes sobre 89 se
+mueven seis celdas de entero (sin cambio de N salvo DevOps): "Scaffold e inicialización"
+14→13, "Documentación de proyecto" 13→12, "Diseño UI — Modo establecimiento" 14→13,
+"Orquestación" 5→4, "Validación / integridad" 5→4, y "Migración y publicación / DevOps" 8→9
+(por N 7→8). La categoría líder se mantiene en 15% (13/89), bajo el umbral de subdivisión.
+Tabla temática reverificada: suma 89, cuadra con el cronológico.
