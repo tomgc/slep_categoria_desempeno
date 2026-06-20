@@ -176,7 +176,10 @@ cfg <- list(
          por_que='<strong>Por qué.</strong> El conteo y los porcentajes consideran solo las cuatro categorías reales. Si los s/i entraran en la mezcla, un territorio con muchos establecimientos sin clasificar diluiría las proporciones de las categorías reales y la lectura sería engañosa.'),
     list(id='', titulo='Establecimientos identificados por nombre (agregados públicos)',
          cuerpo='<p>El motor lista cada establecimiento con su <strong>nombre</strong>, no solo su RBD.</p>',
-         por_que='<strong>Por qué.</strong> La Categoría de Desempeño por establecimiento es información <strong>pública por diseño</strong>: la Agencia de Calidad la difunde nominalmente en su portal y en “Localiza tu colegio”. La restricción de las Condiciones de Uso protege datos por estudiante, no clasificaciones institucionales abiertas. Mismo criterio que el proyecto hermano.')
+         por_que='<strong>Por qué.</strong> La Categoría de Desempeño por establecimiento es información <strong>pública por diseño</strong>: la Agencia de Calidad la difunde nominalmente en su portal y en “Localiza tu colegio”. La restricción de las Condiciones de Uso protege datos por estudiante, no clasificaciones institucionales abiertas. Mismo criterio que el proyecto hermano.'),
+    list(id='', titulo='Portabilidad cross-OS (fin de línea normalizado)',
+         cuerpo='<p>El repositorio fija fin de línea <strong>LF</strong> para todo archivo de texto vía <span class="inl">.gitattributes</span> (<span class="code-sm">* text=auto eol=lf</span>), y marca como binarios los formatos de datos, fuentes e imágenes. El proyecto se clona y se ejecuta igual en <strong>macOS y Windows</strong>.</p>',
+         por_que='<strong>Por qué.</strong> El código ya era agnóstico al sistema operativo (rutas vía <span class="code-sm">here::here()</span> y <span class="code-sm">file.path()</span>, UTF-8 explícito en toda lectura y escritura, literales no-ASCII como <span class="code-sm">\\uXXXX</span> para no depender del locale, escritura binaria del HTML que evita la conversión de fin de línea). Faltaba blindar los fin de línea: sin <span class="inl">.gitattributes</span>, un clon en Windows podía materializar CRLF y ensuciar el motor ensamblado, romper la verificación por AST de la fuente JSX o generar diffs espurios en los snapshots versionados. La normalización a LF cierra ese único punto y completa la portabilidad.')
   ),
 
   # ---- 1.6 Anomalías de origen ----------------------------------------------
@@ -338,7 +341,7 @@ cfg <- list(
 
   # ---- 1.18 Pie por documento -----------------------------------------------
   pie_extra = list(
-    arq_tec = "Normalizaciones A1–A4 documentadas en 50_documentacion/activa/decisiones/. Estado de dependencias de red vigente a esta versión: ninguna. La eliminación de Babel (reescritura de JSX a React.createElement, runtime clásico) fue ejecutada vía C3; el motor es 100% autocontenido, sin recursos de red. Ver 50_documentacion/activa/decisiones/20260618_decision_plan_c3_eliminar_babel.md.",
+    arq_tec = "Normalizaciones A1–A4 documentadas en 50_documentacion/activa/decisiones/. Estado de dependencias de red vigente a esta versión: ninguna. La eliminación de Babel (reescritura de JSX a React.createElement, runtime clásico) fue ejecutada vía C3; el motor es 100% autocontenido, sin recursos de red. Ver 50_documentacion/activa/decisiones/20260618_decision_plan_c3_eliminar_babel.md. Portabilidad cross-OS: fin de línea normalizado a LF vía .gitattributes; el proyecto se clona y ejecuta igual en macOS y Windows. Ver 50_documentacion/activa/decisiones/20260619_decision_portabilidad_cross_os.md.",
     doc_tec = "",
     arq_gen = "¿Necesitas el detalle técnico? Abre arquitectura_slep_categoria_desempeno.html",
     doc_gen = ""
