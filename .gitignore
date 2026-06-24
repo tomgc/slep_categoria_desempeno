@@ -26,3 +26,9 @@ _archivo/
 
 # Reportes regenerables de la auditoria de cifras
 tests/reportes/
+
+# Tema de la suite de documentacion: con la suite en modo standalone, fuentes,
+# logos e iconos viajan embebidos en los *_standalone.html, asi que el tema en
+# disco ya no se versiona (SETTINGS 4.6.4).
+50_documentacion/suite/fonts/
+50_documentacion/suite/assets/

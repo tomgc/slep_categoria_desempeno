@@ -380,10 +380,14 @@ cfg <- list(
 
 # ---- Generación de los 4 HTML ---------------------------------------------
 # verificar = TRUE: aborta si quedara algún residuo del ejemplo de fábrica.
+# standalone = TRUE: embebe CSS, fuentes, logos e iconos; escribe los
+# *_standalone.html offline y limpia los enlazados (§4.6.4). Requiere npm + red
+# al generar (descarga lucide-static fijado); la suite resultante es 100% offline.
 suitedoc::generar_suite(
   cfg,
   salida_dir  = here::here("50_documentacion", "suite"),
   copiar_tema = TRUE,
   verificar   = TRUE,
+  standalone  = TRUE,
   verbose     = TRUE
 )
