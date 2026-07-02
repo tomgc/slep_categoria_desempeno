@@ -103,11 +103,22 @@ primaria. Fuentes: registro de cada sesión.
 | Documentación (en producto) | 2 | 2 | Panel de notas metodológicas (v05, c.29); alineación con fuente oficial (v08, c.43) |
 | Migración y publicación / DevOps | 8 | 9 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85); eliminación de Babel del motor vía C3, motor sin dependencias de red (v21, c.87); reconstrucción y versionado de la fuente JSX del motor 33_app.jsx, recuperación de editabilidad post-C3 (v23, c.88); portabilidad cross-OS del repositorio, .gitattributes con EOL LF (v24, c.89) |
 | Calidad de código / pipeline | 2 | 2 | Warning de readLines silenciado de raíz (v13, c.64); retiro de código muerto de matrícula por grado en el motor (v16, c.79) |
+| Gobernanza de datos | 1 | 1 | Auditoría y saneamiento de incidente PII en `directorio_oficial_ee.csv` (MRUN, RUT_SOSTENEDOR): depuración, repunte de pipeline, reescritura de historial con git-filter-repo, reclasificación de `gobernanza_datos.md` (v27, c.90) |
 
-(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 89 entradas
-(1-89). La tabla temática suma 89, cuadrando con el cronológico, con asignación por
+(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 90 entradas
+(1-90). La tabla temática suma 90, cuadrando con el cronológico, con asignación por
 intención primaria verificada entrada por entrada. La categoría líder, "Diseño UI —
-Motor base y diseño", queda en 15% (13/89), bajo el umbral de subdivisión del 25%.
+Motor base y diseño", queda en 14% (13/90), bajo el umbral de subdivisión del 25%.
+El v27 suma una entrada: categoría nueva "Gobernanza de datos" (0→1, incidente PII
+c.90). El c.90 es temáticamente distinto de "Migración y publicación / DevOps"
+(donde vive el precedente técnico de git-filter-repo en slep_idps): aquí la
+intención primaria es cumplimiento y exposición de datos personales, no
+infraestructura de repositorio. Categoría nueva bajo el umbral de absorción (2%)
+desde su creación; se mantiene por ser la primera entrada de un tipo de trabajo
+real y distinguible, sujeta a revisión de absorción si no crece en sesiones
+futuras. El v26 no sumó entradas: actualización de la suite de documentación,
+mantenimiento de artefacto existente (precedente v19/v23/v24). Sin más
+recategorizaciones.
 El v24 suma una entrada: "Migración y publicación / DevOps" (7→8, portabilidad cross-OS
 del repositorio, .gitattributes con EOL LF c.89). Sin categorías nuevas.
 El v23 suma una entrada: "Migración y publicación / DevOps" (6→7, reconstrucción de la
@@ -833,6 +844,38 @@ entrada del detalle cronológico.)
     `a3f4ae7` (.gitattributes + decisión), `975bdb3` (decisión incorporada al cfg de la
     suite) y `db9daec` (suite regenerada al estado final post-portabilidad).
 
+### Sesión 27 (cambio 90) — Incidente de gobernanza PII en `directorio_oficial_ee.csv`
+
+90. **Auditoría y saneamiento de incidente PII (MRUN, RUT_SOSTENEDOR)** —
+    `directorio_oficial_ee.csv` (purgado del historial),
+    `20_insumos/auxiliares/31_depurar_directorio_oficial.R` (nuevo),
+    `directorio_oficial_ee_publico.csv` (nuevo), `30_construir_auxiliares.R`,
+    `.gitignore`, `gobernanza_datos.md`: auditoría de solo lectura confirmó
+    `MRUN` y `RUT_SOSTENEDOR` pobladas en 16.768/16.768 filas del crudo,
+    trackeado sin regla `.gitignore` y publicado en `origin/main` desde el
+    commit `4751373` (2026-06-11, 20 días de exposición pública). Saneamiento:
+    depuración del CSV al patrón ya validado en `slep_idps`
+    (`31_depurar_directorio_oficial.R`, mismas columnas sensibles), repunte del
+    pipeline sobre `directorio_oficial_ee_publico.csv` (única referencia
+    funcional al crudo; `31_leer_normalizar.R` y `32_agregar_territorial.R`
+    consumen parquets, no el CSV), mismo conteo de establecimientos (10.945)
+    antes y después. Reescritura completa del historial con
+    `git-filter-repo --path <crudo> --invert-paths --force` sobre 117 commits
+    (116 resultantes, el commit de `rm --cached` quedó vacío y fue podado),
+    backup local pre-reescritura eliminado tras confirmación, push
+    `--force-with-lease` anclado al SHA remoto verificado. Verificación
+    independiente: `git log --all --full-history` vacío para el crudo (local y
+    remoto), blob original no alcanzable vía `rev-list --objects`. Se
+    reclasificó `gobernanza_datos.md`, derogando la clasificación previa "Rama
+    A, 100% público, ninguna base contiene RUT" (causa raíz del incidente: el
+    documento no distinguía crudo de depurado). Decisión de gate del titular:
+    exposición residual de 20 días como riesgo aceptado, sin gestión de GC del
+    lado servidor con soporte de GitHub. Commits finales `fdfd5d6` (remoto tras
+    force-with-lease). Aprendizaje nuevo: reglas de detención cuantitativas en
+    encargos de `filter-repo` deben expresarse en el criterio de éxito real
+    (log vacío para la ruta purgada), no en conteo de commits reescritos, que
+    varía según la profundidad del archivo en el historial.
+
 ## Delta del backlog
 
 **Consolidación v13 → documento in extenso (v14, cierre de DT-backlog-documental).**
@@ -954,3 +997,27 @@ mueven seis celdas de entero (sin cambio de N salvo DevOps): "Scaffold e inicial
 "Orquestación" 5→4, "Validación / integridad" 5→4, y "Migración y publicación / DevOps" 8→9
 (por N 7→8). La categoría líder se mantiene en 15% (13/89), bajo el umbral de subdivisión.
 Tabla temática reverificada: suma 89, cuadra con el cronológico.
+
+**Delta v26 (sin cambios; total se mantiene en 89).** La sesión 26 no generó cambios de
+proyecto contabilizables: la actualización de la suite de documentación (auditoría de
+terminología "entidad"→"territorio", verificación de standalone real, verificación de
+iconos y fuentes inline) es mantenimiento de un artefacto de documentación ya existente,
+consistente con el precedente v19/v23/v24 (nota metodológica). Se registra la sesión con
+N=0 en la tabla por sesión por completitud del registro de sesiones. El cronológico no
+recibe entradas nuevas; la tabla temática y la nota de conteo permanecen sobre 89.
+
+**Delta v27 (89 → 90).** Una entrada nueva de la sesión 27: 90 (auditoría y saneamiento de
+incidente de gobernanza PII en `directorio_oficial_ee.csv` —MRUN, RUT_SOSTENEDOR—: depuración
+del insumo, repunte del pipeline, reescritura completa del historial con `git-filter-repo`,
+reclasificación de `gobernanza_datos.md`). **Categoría nueva: "Gobernanza de datos"** (0→1).
+Se crea categoría nueva en lugar de absorber en "Migración y publicación / DevOps" (que ya
+tiene el precedente técnico de `git-filter-repo` vía `slep_idps`, c.89 de ese proyecto)
+porque la intención primaria del c.90 es cumplimiento y exposición de datos personales, no
+infraestructura de repositorio; ambos comparten herramienta pero no propósito. La categoría
+nace bajo el umbral de absorción del 2% (1/90); se mantiene explícitamente por tratarse del
+primer caso real y distinguible de este tipo de trabajo en el proyecto, sujeta a revisión de
+absorción si no crece en sesiones futuras. Por el recálculo de porcentajes sobre 90 se mueven
+las celdas de entero de las categorías existentes según los denominadores 13/90=14%,
+12/90=13%, 9/90=10%, 11/90=12%, 6/90=7%, 4/90=4%, 2/90=2%, 8/90=9% (ver tabla temática
+actualizada). La categoría líder baja a 14% (13/90), bajo el umbral de subdivisión. Tabla
+temática reverificada: suma 90, cuadra con el cronológico.
