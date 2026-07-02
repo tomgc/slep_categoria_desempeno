@@ -1,13 +1,9 @@
-# Estructura actual — slep_categoria_desempeno
+ESCANEO DE ESTRUCTURA — slep_categoria_desempeno
+Raiz   : /Users/tomgc/Projects/slep_categoria_desempeno
+Fecha  : 2026-07-02 00:03:31
+Totales: 23 carpetas, 146 archivos
+Nota   : todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
-- **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-07-01 18:19:58
-- **Totales:** 21 carpetas, 138 archivos
-- **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
-
-## Arbol
-
-```
 slep_categoria_desempeno/
 ├── .claude/
 │   └── settings.local.json  (704)
@@ -24,9 +20,11 @@ slep_categoria_desempeno/
 │   ├── auxiliares/
 │   │   ├── .gitkeep  (0)
 │   │   ├── 202602_Listado_SLEP_2026_vf.xlsx  (55.5K)
+│   │   ├── 31_depurar_directorio_oficial.R  (4.19K)
 │   │   ├── caracterizacion_establecimientos.xlsx  (16.5K)
 │   │   ├── condiciones_uso_bd.doc  (738K)
 │   │   ├── diccionario_territorios.xlsx  (16.8K)
+│   │   ├── directorio_oficial_ee_publico.csv  (3.42M)
 │   │   ├── directorio_oficial_ee.csv  (3.6M)
 │   │   ├── glosas_directorio_oficial_ee.pdf  (457K)
 │   │   ├── prompt_nuevo_proyecto_categoria_desempeno.md  (7.71K)
@@ -44,7 +42,7 @@ slep_categoria_desempeno/
 │   └── matricula_rbd_grado.parquet  (1.47M)
 ├── 30_procesamiento/
 │   ├── .gitkeep  (0)
-│   ├── 30_construir_auxiliares.R  (12.7K)
+│   ├── 30_construir_auxiliares.R  (12.8K)
 │   ├── 31_leer_normalizar.R  (11.9K)
 │   ├── 32_agregar_territorial.R  (14.8K)
 │   ├── 33_app.jsx  (68.9K)
@@ -78,25 +76,31 @@ slep_categoria_desempeno/
 │   │   │   ├── 20260618_decision_plan_c3_eliminar_babel.md  (8.5K)
 │   │   │   ├── 20260619_decision_portabilidad_cross_os.md  (3.6K)
 │   │   │   └── 20260619_reconstruccion_app_jsx.md  (2.07K)
-│   │   ├── .DS_Store  (8K)
-│   │   ├── backlog_acumulativo.md  (73.1K)
-│   │   ├── ESTADO.md  (1.6K)
-│   │   ├── gobernanza_datos.md  (3.04K)
+│   │   ├── encargos/
+│   │   │   ├── encargo_auditoria_pii_v1.md  (3.38K)
+│   │   │   └── encargo_saneamiento_pii_fase2_v1_retry.md  (8.21K)
+│   │   ├── .DS_Store  (10K)
+│   │   ├── backlog_acumulativo.md  (78.2K)
+│   │   ├── ESTADO.md  (1.11K)
+│   │   ├── gobernanza_datos.md  (6.01K)
 │   │   ├── P-matricula-actual_alcance.md  (3.08K)
 │   │   ├── P-matricula-grado_alcance.md  (4.85K)
-│   │   ├── POLITICA_PROYECTO.md  (33K)
+│   │   ├── POLITICA_PROYECTO.md  (34.6K)
 │   │   ├── resena_slep_categoria_desempeno.md  (8.14K)
-│   │   └── SETTINGS_Y_PROMPTS_OPERACIONALES.md  (46.7K)
+│   │   └── SETTINGS_Y_PROMPTS_OPERACIONALES.md  (57.3K)
 │   ├── andamios/
+│   │   ├── logs/
+│   │   │   └── 20260701_saneamiento_pii_directorio_log.md  (4.39K)
+│   │   ├── .DS_Store  (8K)
 │   │   ├── .gitkeep  (0)
 │   │   └── compass_artifact_wf-8008ae65-97ae-47c5-9444-499602db7290_text_markdown.md  (21.4K)
 │   ├── estructura/
-│   │   ├── 20260620_224819_estructura.md  (8.03K)
-│   │   ├── 20260620_224819_estructura.txt  (8.15K)
-│   │   ├── 20260701_080517_estructura.md  (8.31K)
-│   │   ├── 20260701_080517_estructura.txt  (8.43K)
-│   │   ├── estructura_actual.md  (8.31K)
-│   │   └── estructura_actual.txt  (8.43K)
+│   │   ├── 20260701_233136_estructura.md  (8.81K)
+│   │   ├── 20260701_233136_estructura.txt  (8.92K)
+│   │   ├── 20260701_233643_estructura.md  (8.86K)
+│   │   ├── 20260701_233643_estructura.txt  (8.98K)
+│   │   ├── estructura_actual.md  (8.86K)
+│   │   └── estructura_actual.txt  (8.98K)
 │   ├── suite/
 │   │   ├── assets/
 │   │   │   ├── logo-color-stacked.png  (126K)
@@ -144,7 +148,9 @@ slep_categoria_desempeno/
 │   │   ├── traspaso_cierre_v23.md  (16.8K)
 │   │   ├── traspaso_cierre_v24.md  (17.2K)
 │   │   ├── traspaso_cierre_v25.md  (14.3K)
-│   │   └── traspaso_cierre_v26.md  (18.1K)
+│   │   ├── traspaso_cierre_v26.md  (18.1K)
+│   │   ├── traspaso_cierre_v27.md  (12.2K)
+│   │   └── traspaso_cierre_v28.md  (10.4K)
 │   └── .DS_Store  (14K)
 ├── docs/
 │   └── index.html  (1.81M)
@@ -161,35 +167,31 @@ slep_categoria_desempeno/
 │   └── spot_check_publicado.R  (9.28K)
 ├── .DS_Store  (14K)
 ├── .gitattributes  (1.88K)
-├── .gitignore  (693)
+├── .gitignore  (1002)
 ├── 00_escanear_proyecto.R  (8.98K)
 ├── 00_run_all.R  (7.44K)
 ├── CLAUDE.md  (4.6K)
 ├── LICENSE  (1.75K)
 ├── README.md  (4.27K)
 └── slep_categoria_desempeno.Rproj  (220)
-```
 
-## Conteo por extension
-
-| Extension | Archivos |
-|---|---|
-| md | 59 |
-| (sin extension) | 15 |
-| r | 11 |
-| xlsx | 10 |
-| parquet | 8 |
-| html | 7 |
-| otf | 6 |
-| js | 4 |
-| pdf | 4 |
-| png | 3 |
-| txt | 3 |
-| css | 1 |
-| csv | 1 |
-| doc | 1 |
-| docx | 1 |
-| json | 1 |
-| jsx | 1 |
-| rproj | 1 |
-| yml | 1 |
+Conteo por extension:
+  md                 64
+  (sin extension)    16
+  r                  12
+  xlsx               10
+  parquet            8
+  html               7
+  otf                6
+  js                 4
+  pdf                4
+  png                3
+  txt                3
+  csv                2
+  css                1
+  doc                1
+  docx               1
+  json               1
+  jsx                1
+  rproj              1
+  yml                1
