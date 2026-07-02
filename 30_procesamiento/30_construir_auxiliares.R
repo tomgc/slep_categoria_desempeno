@@ -5,7 +5,7 @@
 # y el listado SLEP. Salidas en 40_salidas/intermedios/:
 #
 #   1. comunas_chile.parquet
-#        Desde directorio_oficial_ee.csv (establecimientos operativos con
+#        Desde directorio_oficial_ee_publico.csv (establecimientos operativos con
 #        matricula). Catalogo comuna -> region.
 #
 #   2. sleps_chile.parquet
@@ -13,7 +13,7 @@
 #        Una fila por SLEP x RBD. Incluye rama prospectiva (traspaso ANIO+1).
 #
 #   3. establecimientos_chile.parquet
-#        Desde directorio_oficial_ee.csv. Catalogo completo RBD -> comuna,
+#        Desde directorio_oficial_ee_publico.csv. Catalogo completo RBD -> comuna,
 #        region y dependencia agrupada. Es la fuente del cruce territorial
 #        de 31_leer_normalizar.R y del popup "ver establecimientos" del motor.
 #
@@ -50,10 +50,12 @@ ANIO_DATOS_VIGENTE <- 2025L
 # Bloque 1 — Carga del directorio oficial (CSV grande)
 # ============================================================================
 
-message("[1] Leyendo directorio_oficial_ee.csv...")
+message("[1] Leyendo directorio_oficial_ee_publico.csv...")
 
+# Version publica del directorio (sin MRUN ni RUT_SOSTENEDOR); el crudo esta en
+# .gitignore y se depura con 20_insumos/auxiliares/31_depurar_directorio_oficial.R.
 ruta_directorio <- here::here(
-  "20_insumos", "auxiliares", "directorio_oficial_ee.csv"
+  "20_insumos", "auxiliares", "directorio_oficial_ee_publico.csv"
 )
 
 # Separador `;`, decimal `,`, encoding UTF-8 (readr maneja BOM auto).
@@ -78,7 +80,7 @@ cols_csv_esperadas <- c(
 )
 faltan_csv <- setdiff(cols_csv_esperadas, names(df_dir_raw))
 stopifnot(
-  "Faltan columnas en directorio_oficial_ee.csv" = length(faltan_csv) == 0
+  "Faltan columnas en directorio_oficial_ee_publico.csv" = length(faltan_csv) == 0
 )
 
 message(sprintf(
@@ -303,7 +305,7 @@ message(sprintf(
 # Bloque 4 — establecimientos_chile.parquet
 # ============================================================================
 # Catalogo completo de establecimientos con nombre, comuna, region y
-# dependencia. Fuente: directorio_oficial_ee.csv (df_dir_raw, ya cargado).
+# dependencia. Fuente: directorio_oficial_ee_publico.csv (df_dir_raw, ya cargado).
 # Incluye todos los establecimientos operativos con matricula, independiente
 # de su dependencia. Es la fuente del cruce RBD -> territorio de
 # 31_leer_normalizar.R y del popup "ver establecimientos" del motor.

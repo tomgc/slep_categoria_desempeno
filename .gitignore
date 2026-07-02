@@ -32,3 +32,8 @@ tests/reportes/
 # disco ya no se versiona (SETTINGS 4.6.4).
 50_documentacion/suite/fonts/
 50_documentacion/suite/assets/
+
+# Datos personales identificables (MRUN, RUT_SOSTENEDOR) — nunca versionar. El
+# crudo del directorio oficial contiene PII; solo se versiona la version depurada
+# directorio_oficial_ee_publico.csv (ver 20_insumos/auxiliares/31_depurar_directorio_oficial.R).
+20_insumos/auxiliares/directorio_oficial_ee.csv
