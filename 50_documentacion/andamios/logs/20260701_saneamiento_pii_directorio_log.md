@@ -65,14 +65,16 @@ saneamiento por el titular.
 - **Notificar a colaboradores:** el historial fue reescrito; cualquier clon previo
   debe **re-clonarse** (los hashes anteriores ya no existen en `origin`). Los PR/
   branches abiertos basados en el historial viejo quedarán divergentes.
-- **Eliminar el backup** `..._BACKUP_PRE_FILTER_REPO` cuando el titular confirme el
-  saneamiento (contiene el crudo con PII).
+- **[HECHO — 2026-07-01] Backup eliminado.** Comando:
+  `rm -rf /Users/tomgc/Projects/slep_categoria_desempeno_BACKUP_PRE_FILTER_REPO`
+  (contenía el crudo con PII); confirmado con `ls` que la ruta ya no existe.
 - **Exposición residual (relevante):** el `RUT_SOSTENEDOR` estuvo **público** entre
   2026-06-11 y 2026-07-01; terceros pudieron clonar/scrapear el repo o forks en ese
   lapso. La reescritura de historial **no** revierte una exposición ya ocurrida.
   GitHub puede conservar objetos en caché (vistas de commit por SHA, forks, PRs)
-  hasta su GC; evaluar con el titular si contactar a soporte de GitHub para purga
-  del lado servidor. La rotación de un RUT no es posible; el titular debe evaluar el
-  impacto según el marco de Ley 21.719.
+  hasta su GC. **[DECISIÓN — 2026-07-01, titular] Riesgo aceptado: no se gestiona.**
+  No se contacta a soporte de GitHub para purga del lado servidor: repositorio
+  pequeño, sin evidencia de scraping ni de forks/clones de terceros. La rotación de
+  un RUT no es posible; se asume el impacto residual bajo el marco de Ley 21.719.
 - Untracked no relacionados (traspasos v25/v26, `encargos/`, `resena_*`, andamios)
   siguen sin versionar; decisión aparte.
