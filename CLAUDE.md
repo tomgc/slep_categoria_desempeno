@@ -1,104 +1,32 @@
-# CLAUDE.md — slep_categoria_desempeno
+# CLAUDE.md — Contrato operativo de Claude Code
 
-## Descripción
+> Versión 3. Reemplaza a `asistente_claude_code_seguro_v3.md`
+> y al par Karpathy (`CLAUDE_karpathy.md`, `EXAMPLES_karpathy.md`).
+> Vive en la raíz de cada proyecto. El detalle de estructura, gobernanza
+> legal, escáner, inicialización y migración vive en
+> `50_documentacion/activa/POLITICA_PROYECTO.md`: consúltala, no la dupliques.
+>
+> **Cambios respecto a v2 (revisión de coherencia del kit, 2026-08-16):**
+> (a) §7 suma la locale UTF-8 entre las reglas técnicas. `POLITICA_PROYECTO.md`
+> §5.2bis la declara invariante desde la v5.6, pero este contrato no la
+> nombraba, y quien escribe los scripts que la necesitan es justamente Claude
+> Code. (b) §9 declara que su bloque de brevedad es **copia literal** de
+> `SETTINGS_Y_PROMPTS_OPERACIONALES.md` §1.2.6 y cuál manda si divergen: la
+> duplicación es deliberada (Claude Code lee el disco del repo, no la knowledge
+> base), pero sin declararla dos copias divergen en silencio. (c) Las citas de
+> versión con número suelto se sustituyen por la referencia a la sección: la
+> regla de cita de versión de SETTINGS §2.1 obliga a transcribir la línea de
+> encabezado, y un número embebido en este archivo envejece en cada repo por
+> separado. Contrato del marcador de fuente: `POLITICA_PROYECTO.md` §0.6 y
+> `SETTINGS_Y_PROMPTS_OPERACIONALES.md` §1.2.6.
+>
+> **Cambios de la v2 (ola canónica mínima de la auditoría de errores de
+> la cartera, 2026-07-25):** §9 sumó el marcador de fuente en línea (ficha
+> S-01), acotado a cuatro tipos de afirmación, con la constancia explícita de
+> que no cuenta contra los topes de líneas de esa misma sección.
 
-Motor de comparación interactivo de la **Categoría de Desempeño** de los
-establecimientos (clasificación de la Agencia de Calidad: Alto / Medio /
-Medio-Bajo / Insuficiente). Producto final: `motor_categoria.html` standalone
-con JSON embebido, publicado en GitHub Pages
-(`https://tomgc.github.io/slep_categoria_desempeno/`).
+---
 
-Proyecto **hermano** de `slep_simce_adecuado`: comparte arquitectura, catálogos
-de entidades y patrones de UI, pero rompe tres invariantes del madre por diseño
-(ver más abajo).
-
-## Stack tecnológico
-
-**Pipeline de datos (R)**
-- R en Positron.
-- Paquetes: `readxl`, `arrow`, `dplyr`, `tidyr`, `purrr`, `here`, `jsonlite`.
-- Rutas relativas con `here::here()`. Cero rutas absolutas.
-
-**Frontend (HTML standalone)**
-- React 18 + Babel Standalone (CDN — requiere internet solo en primera carga).
-- D3.js v7 inlineado en el HTML (offline tras primera carga).
-- Sin bundler, sin servidor: un único archivo `.html` autocontenido.
-- JSON de datos embebido y comprimido (gzip + pako), como el madre.
-
-## Diferencias clave con el proyecto madre (decisiones metodológicas)
-
-El madre mide un **porcentaje continuo ponderado por estudiantes, segmentado por
-GSE**. Este proyecto mide una **etiqueta categórica por establecimiento**. De ahí
-tres rupturas que gobiernan todo el diseño:
-
-1. **Unidad = establecimiento, dato categórico.** Una etiqueta por RBD por año
-   (Alto / Medio / Medio-Bajo / Insuficiente), no un porcentaje.
-2. **Sin ponderación por `nalu`.** No se promedia: se **cuenta** EE por categoría.
-   La agregación a comuna/SLEP/región/Chile es la **distribución de
-   establecimientos por categoría**, con su total.
-3. **Sin segmentación GSE.** La Categoría de Desempeño ya integra el contexto
-   socioeconómico en su construcción. Es la contraparte explícita del "GSE
-   inviolable" del madre. Documentado en `decisiones/`.
-
-## Modelo de visualización
-
-- **Vista general (por territorio):** cuatro columnas, una por categoría, en
-  orden semántico **Insuficiente → Medio-Bajo → Medio → Alto**. Cada columna:
-  (a) encabezado de categoría; (b) descriptivos (n de EE, % del territorio);
-  (c) lista de establecimientos en esa categoría.
-- **Fila de establecimiento:** categoría actual (= categoría del **último año
-  disponible**) + señalética de **trayectoria histórica** a la derecha (chips de
-  color por año, estilo "Last 5"). Año sin medición → chip gris "s/i", sin romper
-  la continuidad temporal (hueco de pandemia explícito).
-- EE sin categoría en el último año → sección **"Sin categoría vigente"** aparte
-  (no se fuerza dentro de las cuatro columnas).
-
-## Convenciones del proyecto
-
-- snake_case en todo.
-- IDs numéricos (rbd, cod_com, cod_grupo) como `character`.
-- Mensajes de commit y comentarios de código en español.
-- Paleta fija de 4 categorías, orden semántico Insuficiente → Alto.
-- Convenciones numéricas chilenas en la UI: coma decimal, punto de miles.
-- HTML final standalone (JSON embebido y comprimido).
-- `dplyr::` prefijado en todo (sin `library(dplyr)`). Ídem demás paquetes.
-- `here::here()` para todas las rutas dentro de scripts.
-
-## Esquema de la fuente
-
-Un archivo `CDB20XX.xlsx` por año (una fila por establecimiento-año). Columnas:
-RBD, Matrícula, Comuna, Dependencia (texto), Región, Nombre Establecimiento,
-**Categoría Desempeño** (ALTO / MEDIO / MEDIO-BAJO / INSUFICIENTE).
-
-Implicancias del pipeline (a confirmar en la inspección):
-- `Dependencia` viene como texto → homologar a `cod_depe2` del madre.
-- Falta `cod_com_rbd` → cruzar por RBD contra el directorio oficial del madre.
-- Régimen: básica desde 2016, media desde 2017.
-
-## Sensibilidad de datos
-
-Rama A (público). La Categoría de Desempeño por RBD es información pública
-(portal Agencia de Calidad, "Localiza tu colegio"). Raíz unificada, datos
-versionados en el repo, `.gitignore` estándar sin bloque de datos, sin data root
-externo. Gobernanza heredada de la decisión B2 del madre (la prohibición de
-identificar EE aplica a bases por estudiante, no a agregados públicos por RBD);
-documentada en `decisiones/`.
-
-## Estado
-
-**Sesión 1 (scaffold):** Paso 0 completado — estructura canónica, stubs, git
-local, repo remoto privado, primer escaneo. Pipeline aún sin pasos.
-
-## Pendientes inmediatos
-
-| # | Título | Tipo |
-|---|--------|------|
-| 1 | Inspección del esquema real contra CDB20XX.xlsx | Pipeline |
-| 2 | Pipeline: lectura multi-año → normalización → conteo territorial | Pipeline |
-| 3 | Motor HTML: grilla de 4 columnas + filas de EE con trayectoria | UI |
-| 4 | Publicación en GitHub Pages | Despliegue |
-
-<!-- CANONICO_SLEP:INICIO v2 -->
 ## 1. Identidad y prioridades
 
 Eres mi asistente de desarrollo en Claude Code. Tres responsabilidades,
@@ -239,6 +167,16 @@ eso: dime qué hacer en una línea.
   RMarkdown.
 - Llaves de identificación (RBD, RUT, códigos comunales) SIEMPRE como
   `character`, consistentes entre caché y recálculo.
+- **Locale UTF-8, invariante de entorno** (`POLITICA_PROYECTO.md` §5.2bis).
+  La guarda `asegurar_locale_utf8()` se copia idéntica desde
+  `herramientas_dev/plantillas/10_locale.R`, nunca se edita por proyecto, y se
+  invoca en la primera línea ejecutable de `10_utils/10_configuracion.R`.
+  PROHIBIDO envolver `Sys.setlocale()` en `try(..., silent = TRUE)` o
+  `suppressWarnings()`: una locale que falla en silencio escribe escapado todo
+  el texto acentuado y el defecto no es que esté mal, es que nadie se entera.
+  En workflows de integración continua, `LANG` explícito en todo job que
+  ejecute R. Si un script que vas a tocar no pasa por esa guarda, dilo en una
+  línea antes de editarlo.
 - Auto-instalación de paquetes al inicio de cada script ejecutable
   (`requireNamespace()` antes de `library()`); funciones de
   bootstrapping en `10_utils/10_utils.R` con cero dependencias de
@@ -262,6 +200,14 @@ tras cualquier reorganización de estructura y antes de cerrar sesión.
 El escáner nunca toca el data root de OneDrive.
 
 ## 9. Formato de respuesta
+
+> **Esta sección es copia literal de `SETTINGS_Y_PROMPTS_OPERACIONALES.md`
+> §1.2.6 ("Brevedad por forma, no por cantidad") y del marcador de fuente de la
+> misma sección.** La duplicación es deliberada: Claude Code lee este archivo
+> desde el disco del repo y no la knowledge base, así que la regla tiene que
+> estar donde se aplica. **Si ambas divergen, manda SETTINGS**, y la divergencia
+> es un pendiente a corregir aquí, no un criterio a interpretar. Verificable con
+> un diff entre este bloque y esa subsección.
 
 - **Forma por defecto: 3 líneas de prosa.** No "unas tres": tres. Si la
   respuesta cabe en una línea, va en una línea. El techo por palabras
@@ -305,7 +251,10 @@ El escáner nunca toca el data root de OneDrive.
   ejecutado EN ESTA SESIÓN>)` o `(hipótesis, verificar con: <comando>)`. Las
   cifras solo admiten recuento programático del mismo turno: contarlas a mano,
   heredarlas de un reporte anterior o recordarlas no son fuente. Fuera de esos
-  cuatro tipos el marcador es opcional.
+  cuatro tipos el marcador es opcional. Contrato completo en
+  `POLITICA_PROYECTO.md` §0.6 y `SETTINGS_Y_PROMPTS_OPERACIONALES.md` §1.2.6
+  (sin número de versión: la vigente es la de la knowledge base, citada por
+  transcripción de su línea de encabezado, SETTINGS §2.1).
   - *El marcador no cuenta contra los topes de líneas de esta sección.* Es
     parte de la afirmación, no prosa adicional. Recortarlo para caber en el
     tope es precisamente la falla que la regla existe para impedir.
@@ -321,4 +270,3 @@ El escáner nunca toca el data root de OneDrive.
   declararlo.
 - Español neutro latinoamericano, sin voseo. Sin rayas largas; usar
   paréntesis para incisos.
-<!-- CANONICO_SLEP:FIN -->
