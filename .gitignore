@@ -37,3 +37,8 @@ tests/reportes/
 # crudo del directorio oficial contiene PII; solo se versiona la version depurada
 # directorio_oficial_ee_publico.csv (ver 20_insumos/auxiliares/31_depurar_directorio_oficial.R).
 20_insumos/auxiliares/directorio_oficial_ee.csv
+
+# Gobernanza: viven en la knowledge base del Project, no en el repositorio.
+POLITICA_PROYECTO.md
+SETTINGS_Y_PROMPTS_OPERACIONALES.md
+CLAUDE.md
