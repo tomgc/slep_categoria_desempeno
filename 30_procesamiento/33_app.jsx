@@ -999,7 +999,8 @@ function EnseItem({ d }) {
 }
 function EeRow({ ee }) {
   const [open, setOpen] = React.useState(false);
-  const serieAsc = ee.serie.slice().sort((a, b) => a.anio - b.anio); // a4-O2: mismo orden que la trayectoria
+  // a5: el detalle vertical va del vigente al más antiguo; la trayectoria horizontal (Trayectoria) sigue ascendente
+  const serieDesc = ee.serie.slice().sort((a, b) => b.anio - a.anio);
   return (
     <li className="ee-row-li">
       <div
@@ -1047,7 +1048,7 @@ function EeRow({ ee }) {
         <div className="ee-detail">
           <span className="ee-detail-title">Trayectoria y matrícula por año</span>
           <ul className="ee-detail-list">
-            {serieAsc.map((p) => {
+            {serieDesc.map((p) => {
               const sinMedicion = p.categoria == null;
               const esSi = sinMedicion || p.categoria === "s/i";
               const color = esSi ? null : CatData.CAT_COLORS[p.categoria];
