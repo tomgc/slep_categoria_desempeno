@@ -590,7 +590,23 @@ function Segmented({ value, options, onChange }) {
 // ============================================================
 // Selector de entidad (modal: comuna / SLEP / región / establecimiento)
 // ============================================================
-function EntityModal({ onSelect, onCancel, multiple = false, yaElegidas = [], limite = 10 }) {
+
+// a1-F03: enfocables visibles de la caja del modal, en orden de documento y
+// calculados en el momento (la lista cambia con la pestaña, la búsqueda y el tope).
+function enfocablesModal(m) {
+  return [...m.querySelectorAll("button, input, [tabindex]")].filter(
+    (el) => !el.disabled && el.tabIndex >= 0 && el.getClientRects().length > 0,
+  );
+}
+
+function EntityModal({
+  onSelect,
+  onCancel,
+  multiple = false,
+  yaElegidas = [],
+  limite = 10,
+  focoRespaldo = null,
+}) {
   const [tab, setTab] = React.useState("comuna");
   const [q, setQ] = React.useState("");
   const [sel, setSel] = React.useState([]); // selección acumulada (solo modo múltiple)
@@ -599,6 +615,78 @@ function EntityModal({ onSelect, onCancel, multiple = false, yaElegidas = [], li
   const yaSet = new Set(yaElegidas.map(claveDe));
   const selSet = new Set(sel.map(claveDe));
   const cupo = limite - yaElegidas.length; // cuántas más caben
+  const restante = cupo - sel.length; // a1-F07: cuántas más se pueden marcar ahora
+  const titulo = multiple ? "Agregar territorios" : "Seleccionar territorio";
+
+  // a1-F03: el origen (el botón que abrió el modal) se lee en el primer render,
+  // antes de que el autoFocus del buscador lo mueva.
+  const modalRef = React.useRef(null);
+  const [origen] = React.useState(() => document.activeElement);
+
+  // a1-F03: Escape equivale a Cancelar (descarta la selección local, como el fondo).
+  React.useEffect(() => {
+    const h = (e) => {
+      if (e.key === "Escape") onCancel();
+    };
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, [onCancel]);
+
+  // a1-F03: Tab y Shift+Tab giran dentro del modal; si el foco quedó fuera, vuelve a él.
+  React.useEffect(() => {
+    const h = (e) => {
+      if (e.key !== "Tab") return;
+      const m = modalRef.current;
+      if (!m) return;
+      const f = enfocablesModal(m);
+      if (!f.length) return;
+      const i = f.indexOf(document.activeElement);
+      if (i < 0) {
+        e.preventDefault();
+        (e.shiftKey ? f[f.length - 1] : f[0]).focus();
+        return;
+      }
+      if (e.shiftKey && i === 0) {
+        e.preventDefault();
+        f[f.length - 1].focus();
+      } else if (!e.shiftKey && i === f.length - 1) {
+        e.preventDefault();
+        f[0].focus();
+      }
+    };
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, []);
+
+  // a1-F03 / a1-F04: al cerrar, el foco vuelve al origen; si el origen ya no existe
+  // o quedó deshabilitado (tope del comparador), va al respaldo que declara quien
+  // abre el modal. Se descartan las repeticiones de Enter/Espacio sobre el destino
+  // hasta soltar una tecla, para que la tecla que cerró no reabra el modal.
+  React.useEffect(
+    () => () => {
+      const valido = (el) =>
+        el && el !== document.body && document.contains(el) && !el.disabled && el.focus;
+      let destino = origen;
+      if (!valido(destino)) {
+        destino = focoRespaldo ? focoRespaldo() : null;
+        if (!valido(destino)) return;
+      }
+      destino.focus();
+      const trago = (e) => {
+        if (e.repeat && (e.key === "Enter" || e.key === " ") && e.target === destino) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      };
+      const fin = () => {
+        window.removeEventListener("keydown", trago, true);
+        window.removeEventListener("keyup", fin, true);
+      };
+      window.addEventListener("keydown", trago, true);
+      window.addEventListener("keyup", fin, true);
+    },
+    [origen],
+  );
 
   const toggleSel = (item) => {
     const k = claveDe(item);
@@ -657,11 +745,26 @@ function EntityModal({ onSelect, onCancel, multiple = false, yaElegidas = [], li
   ];
   return (
     <div className="modal-backdrop" onClick={onCancel}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="modal"
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={titulo}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="modal-header">
-          <h2 className="modal-title">
-            {multiple ? "Agregar territorios" : "Seleccionar territorio"}
-          </h2>
+          <h2 className="modal-title">{titulo}</h2>
+          {/* a1-F05: cierre en el encabezado con nombre accesible; equivale a Cancelar */}
+          <button
+            type="button"
+            className="icon-btn"
+            aria-label="Cerrar"
+            title="Cerrar"
+            onClick={onCancel}
+          >
+            ✕
+          </button>
         </div>
         <div className="modal-tabs">
           {tabs.map(([k, lbl]) => (
@@ -696,14 +799,17 @@ function EntityModal({ onSelect, onCancel, multiple = false, yaElegidas = [], li
           />
           {multiple && (
             <div className="modal-hint-multi">
+              {/* a1-F07: el aviso cuenta lo que resta, no el cupo inicial */}
               {cupo <= 0
                 ? "Ya alcanzaste el máximo de " + limite + " territorios."
-                : "Selecciona hasta " +
-                  cupo +
-                  " " +
-                  (cupo === 1 ? "territorio más" : "territorios más") +
-                  " · marcados: " +
-                  sel.length}
+                : restante <= 0
+                  ? "Llegaste al máximo de " + limite + " territorios. Desmarca uno para elegir otro."
+                  : "Selecciona hasta " +
+                    restante +
+                    " " +
+                    (restante === 1 ? "territorio más" : "territorios más") +
+                    " · marcados: " +
+                    sel.length}
             </div>
           )}
           <div
@@ -724,7 +830,16 @@ function EntityModal({ onSelect, onCancel, multiple = false, yaElegidas = [], li
               const yaEsta = yaSet.has(k);
               const marcado = selSet.has(k);
               const bloqueado = !multiple ? false : yaEsta || (!marcado && sel.length >= cupo);
+              const activar = () => {
+                if (!multiple) {
+                  onSelect(item);
+                  return;
+                }
+                if (bloqueado) return;
+                toggleSel(item);
+              };
               return (
+                // a1-F02: filas operables con teclado (Tab; Enter o Espacio = clic)
                 <div
                   key={k}
                   className={
@@ -732,13 +847,16 @@ function EntityModal({ onSelect, onCancel, multiple = false, yaElegidas = [], li
                     (multiple && marcado ? " is-checked" : "") +
                     (bloqueado ? " is-disabled" : "")
                   }
-                  onClick={() => {
-                    if (!multiple) {
-                      onSelect(item);
-                      return;
+                  tabIndex={bloqueado ? -1 : 0}
+                  role={multiple ? "checkbox" : "button"}
+                  aria-checked={multiple ? marcado || yaEsta : undefined}
+                  aria-disabled={bloqueado || undefined}
+                  onClick={activar}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      activar();
                     }
-                    if (bloqueado) return;
-                    toggleSel(item);
                   }}
                 >
                   {multiple && (
@@ -1244,10 +1362,22 @@ function ComparativaSheet({ nivel, depActiva, onDepChange }) {
     });
     setPicker(false);
   };
+  // a1-F04: al quitar un chip, el foco pasa a la ✕ del chip que ocupa su lugar
+  // (o a "+ Agregar" si era el último), en vez de caer en BODY.
+  const focoTrasQuitar = React.useRef(null);
   const removeEntity = (item) => {
     const clave = (e) => e.kind + "|" + e.cod;
+    focoTrasQuitar.current = entidades.findIndex((e) => clave(e) === clave(item));
     setEntidades((prev) => prev.filter((e) => clave(e) !== clave(item)));
   };
+  React.useEffect(() => {
+    const i = focoTrasQuitar.current;
+    if (i === null) return;
+    focoTrasQuitar.current = null;
+    const xs = document.querySelectorAll(".cmp-chip-x");
+    const destino = xs[i] || document.querySelector(".cmp-add-btn");
+    if (destino) destino.focus();
+  }, [entidades]);
   const KIND_LBL = {
     comuna: "Comuna",
     slep: "SLEP",
@@ -1305,7 +1435,10 @@ function ComparativaSheet({ nivel, depActiva, onDepChange }) {
   return (
     <div className="cmp-sheet">
       <div className="cmp-picker">
-        <span className="cmp-picker-label">Territorios a comparar</span>
+        {/* a1-F04: rótulo enfocable por programa (no es parada de Tab): respaldo del foco */}
+        <span className="cmp-picker-label" tabIndex={-1}>
+          Territorios a comparar
+        </span>
         {entidades.map((e) => (
           <span key={e.kind + e.cod} className="cmp-chip">
             <span className="cmp-chip-kind">{KIND_LBL[e.kind] || e.kind}</span>
@@ -1475,6 +1608,7 @@ function ComparativaSheet({ nivel, depActiva, onDepChange }) {
           limite={LIMITE}
           onSelect={addEntity}
           onCancel={() => setPicker(false)}
+          focoRespaldo={() => document.querySelector(".cmp-picker-label")}
         />
       )}
     </div>
