@@ -45,9 +45,10 @@
   /* Semánticos */
   --fg-1: var(--ink);
   --fg-2: var(--ink-2);
-  --fg-3: var(--slate);
+  --fg-3: #5E5E5E; /* a3-P1: gris de texto secundario con 6,02:1 sobre crema (--slate no cambia) */
   --fg-on-dark: var(--cream);
   --fg-on-plum: var(--cream);
+  --fg-on-dark-muted: #A9B7BB; /* a3-P3: texto secundario sobre el encabezado oscuro (5,74:1) */
   --fg-link: var(--ocean);
   --bg-1: var(--cream);
   --bg-2: var(--paper);
@@ -59,7 +60,7 @@
   --warning: var(--mark-yellow);
   --danger: var(--mark-red);
   --border-1: var(--line);
-  --border-2: var(--line-strong);
+  --border-2: #8A7F68; /* a3-P2: borde de controles (≥ 3:1); --line-strong queda para líneas decorativas */
   --border-strong: var(--plum);
 
   /* Spacing */
@@ -156,8 +157,8 @@ body {
   color: var(--cream);
   opacity: 0.9;
 }
-.brand-eyebrow-muted { opacity: 0.55; font-weight: var(--fw-medium); }
-.brand-divider { color: var(--cream); opacity: 0.35; font-size: var(--fs-caption); }
+.brand-eyebrow-muted { color: var(--fg-on-dark-muted); opacity: 1; font-weight: var(--fw-medium); } /* a3-P3 */
+.brand-divider { color: var(--fg-on-dark-muted); opacity: 1; font-size: var(--fs-caption); } /* a3-P3 */
 .app-title {
   font-family: var(--font-display);
   font-weight: var(--fw-heavy);
@@ -235,6 +236,9 @@ body {
   font-weight: var(--fw-bold);
   box-shadow: var(--shadow-1);
 }
+/* a3-P9 (G5): estado activo en --ocean con texto claro, como los chips encendidos */
+.segmented-btn.is-active { background: var(--ocean); color: var(--paper); }
+.segmented-btn.is-active:hover { color: var(--paper); }
 .select, .input {
   font-family: var(--font-body);
   font-weight: var(--fw-medium);
@@ -953,7 +957,7 @@ code {
 /* Popup establecimientos */
 .estab-popup-btn {
   display: inline-flex; align-items: center; gap: 5px;
-  background: transparent; border: 1px solid var(--border-1);
+  background: transparent; border: 1px solid var(--border-2); /* a3-P10 */
   border-radius: var(--radius-1); padding: 3px 8px;
   font-size: var(--fs-overline); color: var(--fg-3); cursor: pointer;
   font-family: var(--font-body); font-weight: var(--fw-medium);
@@ -1085,9 +1089,9 @@ code {
   font-family: var(--font-display); font-weight: var(--fw-heavy); font-size: var(--fs-body-lg);
   letter-spacing: 0.01em;
 }
-.cat-col-stat { font-size: var(--fs-caption); font-weight: var(--fw-medium); opacity: 0.92; }
+.cat-col-stat { font-size: var(--fs-caption); font-weight: var(--fw-medium); } /* a3-P6: sin opacidad */
 .cat-col-stat strong { font-weight: var(--fw-heavy); }
-.cat-col-mat { font-size: var(--fs-caption); font-weight: var(--fw-medium); opacity: 0.82; }
+.cat-col-mat { font-size: var(--fs-caption); font-weight: var(--fw-medium); } /* a3-P6: sin opacidad */
 .cat-col-mat strong { font-weight: var(--fw-heavy); }
 /* a2-T2.1 (F11-B): tinta --ink en Insuficiente, Medio-Bajo y Medio; sin opacidad (bajaría
    el contraste medido); la jerarquía entre las tres líneas queda por tamaño y peso. */
@@ -1121,7 +1125,7 @@ code {
   display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
 }
 .ee-row-rbd { font-family: var(--font-mono); }
-.ee-row-sep { opacity: 0.5; }
+.ee-row-sep { opacity: 1; } /* a3-P1 (T4): separador en --fg-3 sin opacidad */
 
 /* Trayectoria: año (rótulo) arriba, marca de color abajo; reciente -> antiguo */
 .traj {
@@ -1142,7 +1146,7 @@ code {
 }
 .traj-mark.is-si {
   background: var(--cream-200);
-  border: 1px dashed var(--line-strong);
+  border: 1px dashed var(--border-2); /* a3-P2 (G2) */
 }
 .traj-mark.is-vigente {
   box-shadow: 0 0 0 2px var(--paper), 0 0 0 3.5px var(--ocean);
@@ -1191,7 +1195,7 @@ code {
   width: 12px; height: 12px; border-radius: var(--radius-1);
   border: 1px solid rgba(0,0,0,0.08); flex-shrink: 0;
 }
-.ee-detail-mark[data-si="1"] { background: var(--cream-200); border: 1px dashed var(--line-strong); }
+.ee-detail-mark[data-si="1"] { background: var(--cream-200); border: 1px dashed var(--border-2); } /* a3-P2 (G2) */
 .ee-detail-cat { flex: 1; }
 .ee-detail-matnivel {
   font-weight: var(--fw-regular); color: var(--fg-3);
@@ -1349,7 +1353,7 @@ code {
 .cmp-table-wrap {
   overflow-x: auto; margin-top: 8px;
   background: var(--paper);
-  border: 1px solid var(--border-2);
+  border: 1px solid var(--line-strong); /* a3-P2: línea decorativa (conserva su aspecto) */
   border-radius: var(--radius-3);
   box-shadow: var(--shadow-1);
   padding: 4px 4px 0;
@@ -1398,7 +1402,9 @@ code {
   font-size: var(--fs-body); color: var(--fg-2); font-weight: var(--fw-regular);
   margin-left: 5px; font-variant-numeric: tabular-nums;
 }
-.cmp-cell.is-max .cmp-cell-pct { color: var(--ocean); font-weight: var(--fw-bold); }
+/* a3-P8 (T10): el máximo de la fila se marca con tinta, peso y marco, no con azul sobre el tinte */
+.cmp-cell.is-max .cmp-cell-pct { color: var(--ink); font-weight: var(--fw-heavy); }
+.cmp-cell.is-max { outline: 2px solid var(--ink); outline-offset: -2px; }
 
 /* Resalte cruzado (hover): columna y fila activas, en gris.
    Se usa box-shadow inset (no background) para no pisar el heatmap inline. */
@@ -1436,7 +1442,7 @@ code {
 .cmp-empty {
   padding: 40px 18px; text-align: center; color: var(--fg-3);
   font-size: var(--fs-body-lg); background: var(--bg-2);
-  border: 1px dashed var(--border-2); border-radius: var(--radius-3);
+  border: 1px dashed var(--line-strong); border-radius: var(--radius-3); /* a3-P2: decorativa */
 }
 
 /* Leyenda de trayectoria (destacada) */
@@ -1461,7 +1467,7 @@ code {
   border: 1px solid rgba(0,0,0,0.08);
 }
 .traj-legend-sw.is-si {
-  background: var(--cream-200); border: 1px dashed var(--line-strong);
+  background: var(--cream-200); border: 1px dashed var(--border-2); /* a3-P2 (G2) */
 }
 
 /* Foco año en tabla */
