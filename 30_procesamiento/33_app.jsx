@@ -430,6 +430,22 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
 
   // Frase 1: cuántos EE categorizados.
   if (total === 0) {
+    // a2-T2.3 (D-03, frase 1): con un establecimiento como sujeto, el nivel es lo
+    // que está o no categorizado (no "N establecimientos" de sí mismo).
+    if (entity.kind === "establecimiento") {
+      return {
+        frases: [
+          [
+            sujetoPre,
+            bNom(entity.nom),
+            " no tiene " + nivelLbl + " categorizada al año ",
+            b(anioCat),
+            " para la selección actual.",
+          ],
+        ],
+        vacio: true,
+      };
+    }
     return {
       frases: [
         [
@@ -444,7 +460,14 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
     };
   }
   const eeLbl = total === 1 ? "establecimiento" : "establecimientos";
-  const frase1 = [
+  // a2-T2.3 (D-03, frase 1): variante para un establecimiento como sujeto.
+  const frase1 = entity.kind === "establecimiento" ? [
+    sujetoPre,
+    bNom(entity.nom),
+    " tiene " + nivelLbl + " categorizada al año ",
+    b(anioCat),
+    ", el año más reciente para el cual existe una clasificación.",
+  ] : [
     sujetoPre,
     bNom(entity.nom),
     " tiene ",
@@ -1138,6 +1161,10 @@ function EeRow({ ee }) {
 // ============================================================
 // Columna de categoría
 // ============================================================
+// a2-T2.1 (F11-B): cabeceras cuyo texto va en --ink (el blanco no alcanza 4,5:1 sobre
+// su relleno); Alto conserva el blanco. Insuficiente queda en ≈ 4,46:1, excepción
+// escrita en decisiones/20260925_decision_contraste_texto_categorias.md.
+const CAT_CABECERA_TINTA = new Set(["INSUFICIENTE", "MEDIO-BAJO", "MEDIO"]);
 function CatColumn({ categoria, stat, establecimientos, matTotal }) {
   const color = CatData.CAT_COLORS[categoria];
   const label = CatData.CAT_LABELS[categoria];
@@ -1154,7 +1181,7 @@ function CatColumn({ categoria, stat, establecimientos, matTotal }) {
   return (
     <div className="cat-col">
       <div
-        className="cat-col-head"
+        className={"cat-col-head" + (CAT_CABECERA_TINTA.has(categoria) ? " is-tinta" : "")}
         style={{
           background: color,
         }}
@@ -1586,7 +1613,9 @@ function ComparativaSheet({ nivel, depActiva, onDepChange }) {
                     fontStyle: "italic",
                   }}
                 >
-                  Sin categoría vigente
+                  {/* a2-T2.2 (F09-B): esta fila suma s/i y sin medición; su rótulo lo dice
+                      (la caja de la vista por territorio sigue siendo el conteo oficial). */}
+                  Sin categoría en {CatData.ANIO_VIGENTE} (incluye sin medición)
                 </td>
                 {cols.map((col, ci) => (
                   <td

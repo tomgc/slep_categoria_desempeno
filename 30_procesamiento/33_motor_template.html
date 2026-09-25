@@ -1089,6 +1089,10 @@ code {
 .cat-col-stat strong { font-weight: var(--fw-heavy); }
 .cat-col-mat { font-size: var(--fs-caption); font-weight: var(--fw-medium); opacity: 0.82; }
 .cat-col-mat strong { font-weight: var(--fw-heavy); }
+/* a2-T2.1 (F11-B): tinta --ink en Insuficiente, Medio-Bajo y Medio; sin opacidad (bajaría
+   el contraste medido); la jerarquía entre las tres líneas queda por tamaño y peso. */
+.cat-col-head.is-tinta { color: var(--ink); }
+.cat-col-head.is-tinta .cat-col-stat, .cat-col-head.is-tinta .cat-col-mat { opacity: 1; }
 .cat-col-bar {
   height: 4px; width: 100%; background: rgba(255,255,255,0.28);
 }
@@ -1930,13 +1934,22 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
 
   // Frase 1: cuántos EE categorizados.
   if (total === 0) {
+    // a2-T2.3 (D-03, frase 1): con un establecimiento como sujeto, el nivel es lo
+    // que está o no categorizado (no "N establecimientos" de sí mismo).
+    if (entity.kind === "establecimiento") {
+      return {
+        frases: [[sujetoPre, bNom(entity.nom), " no tiene " + nivelLbl + " categorizada al año ", b(anioCat), " para la selección actual."]],
+        vacio: true
+      };
+    }
     return {
       frases: [[sujetoPre, bNom(entity.nom), " no tiene establecimientos con " + nivelLbl + " categorizados al año ", b(anioCat), " para la selección actual."]],
       vacio: true
     };
   }
   const eeLbl = total === 1 ? "establecimiento" : "establecimientos";
-  const frase1 = [sujetoPre, bNom(entity.nom), " tiene ", b(fmtInt(total)), " " + eeLbl + " con " + nivelLbl + " " + (total === 1 ? "categorizado" : "categorizados") + " al año ", b(anioCat), ", el año más reciente para el cual existe una clasificación."];
+  // a2-T2.3 (D-03, frase 1): variante para un establecimiento como sujeto.
+  const frase1 = entity.kind === "establecimiento" ? [sujetoPre, bNom(entity.nom), " tiene " + nivelLbl + " categorizada al año ", b(anioCat), ", el año más reciente para el cual existe una clasificación."] : [sujetoPre, bNom(entity.nom), " tiene ", b(fmtInt(total)), " " + eeLbl + " con " + nivelLbl + " " + (total === 1 ? "categorizado" : "categorizados") + " al año ", b(anioCat), ", el año más reciente para el cual existe una clasificación."];
 
   // Frase 2: distribución por categoría, omitiendo las de 0 EE.
   // "Un X% de estos establecimientos está en nivel de desempeño Alto, un Y%
@@ -2469,6 +2482,10 @@ function EeRow({
 // ============================================================
 // Columna de categoría
 // ============================================================
+// a2-T2.1 (F11-B): cabeceras cuyo texto va en --ink (el blanco no alcanza 4,5:1 sobre
+// su relleno); Alto conserva el blanco. Insuficiente queda en ≈ 4,46:1, excepción
+// escrita en decisiones/20260925_decision_contraste_texto_categorias.md.
+const CAT_CABECERA_TINTA = new Set(["INSUFICIENTE", "MEDIO-BAJO", "MEDIO"]);
 function CatColumn({
   categoria,
   stat,
@@ -2490,7 +2507,7 @@ function CatColumn({
   return /*#__PURE__*/React.createElement("div", {
     className: "cat-col"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "cat-col-head",
+    className: "cat-col-head" + (CAT_CABECERA_TINTA.has(categoria) ? " is-tinta" : ""),
     style: {
       background: color
     }
@@ -2849,7 +2866,7 @@ function ComparativaSheet({
     style: {
       fontStyle: "italic"
     }
-  }, "Sin categoría vigente"), cols.map((col, ci) => /*#__PURE__*/React.createElement("td", {
+  }, "Sin categoría en ", CatData.ANIO_VIGENTE, " (incluye sin medición)"), cols.map((col, ci) => /*#__PURE__*/React.createElement("td", {
     key: col.entity.kind + col.entity.cod,
     className: clsCol(ci),
     onMouseEnter: () => setHl(h => ({
