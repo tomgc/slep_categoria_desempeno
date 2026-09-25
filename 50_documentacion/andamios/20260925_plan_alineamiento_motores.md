@@ -269,3 +269,41 @@ Se listan en §4.
 - **Motor sin red**, con React y ReactDOM en línea y JS ya transpilado, y la fuente JSX versionada con equivalencia verificada por AST (aunque este encargo mostró que la equivalencia debe re-medirse en cada encargo: la migración tipográfica de v29 la rompió).
 - **El nulo con motivo y en grupos separados** (s/i con motivo publicado; sin medición aparte; ambos fuera del denominador), visibles en la trayectoria (`title` con motivo), la ficha y la caja de sin categoría.
 - **Conteo de EE declarado como elección** en las notas, con la pregunta que responde y la que no.
+
+## 6. Resoluciones del titular y estado de implementación (a2)
+
+Encargo `encargo_claude_code_categoria_alineamiento_motores_a2.md`; LOG `50_documentacion/andamios/logs/20260925_alineamiento_motores_a2_log.md`. Resoluciones de la sesión 30 del chat (2026-09-25):
+
+| Duda del plan | Resolución | Efecto en a2 |
+|---|---|---|
+| D-M4 | Sí: sincronizar `33_app.jsx` con el template | T0 |
+| Q-PUSH (a1) | Sí; ejecutado por el titular (`3afd23a..51447ce`) | ninguno |
+| Q-F11 | B: `--ink` en las cabeceras de Insuficiente, Medio-Bajo y Medio; Insuficiente ≈ 4,46:1 como excepción escrita; % máximo, delta negativo y ✕ del chip quedan como están | T2.1 y `decisiones/20260925_decision_contraste_texto_categorias.md` |
+| Q-F09 | B: el comparador conserva su cifra; la fila pasa a "Sin categoría en {año vigente} (incluye sin medición)"; resuelve también D-13 | T2.2 |
+| Q-F18 | No: los nombres se muestran con las mayúsculas del dato | cerrada |
+| Q-D08 | Se mantiene la exclusión de la entidad nacional del modal (c.21) | cerrada |
+| Q-D22 | Abierta (depende de la Agencia) | ninguno |
+| D-03, frase 1 | Corregir la frase 1 cuando el sujeto es un establecimiento | T2.3 |
+
+Estado por ficha (mediciones del LOG a2: antes = M5 de FASE 0; después = verificación del grupo):
+
+| Ficha | Estado | Commit | Medición antes → después |
+|---|---|---|---|
+| D-M4 | implementada | `b19d0f0` | retranspilación vs template: render distinto en 5 pantallas con modal → render idéntico (9/9 AE=0 a 1280 y 390) |
+| F02 | implementada | `f46ed48` | filas con tabIndex 0/345 → 345/345; filas alcanzadas por Tab 0 → sí; Espacio/Enter marcan |
+| F03 | implementada | `f46ed48` | Tab sale del modal → 0 paradas fuera en 400 Tab; Escape no cierra → cierra; foco tras cerrar BODY → botón de origen |
+| F04 | implementada | `f46ed48` | tope → BODY → rótulo "Territorios a comparar"; quitar chip → BODY → ✕ siguiente o "+ Agregar" |
+| F05 | implementada | `f46ed48` | 0 botones en el encabezado → ✕ con nombre "Cerrar" |
+| F07 | implementada | `f46ed48` | aviso con 10 "Selecciona hasta 10 territorios más · marcados: 10" → "Llegaste al máximo de 10 territorios. Desmarca uno para elegir otro."; desmarcar con Espacio |
+| F08 | implementada | `a222203` | nombres partidos que cabrían con el secundario mínimo: 11 / 12 / 2 (1280 / 390 / 320) → 0 / 0 / 0; filas desbordadas a 320: 2 → 0 |
+| F14 | implementada | `a222203` | desborde con el EE de nombre más ancho: 539 / 469 px (320 / 390) → 0 / 0; muestra de 40: 18 / 8 → 0 / 0 |
+| F01 | implementada (ampliada al verbo "No entra/No entran" de la misma frase) | `c94971f` | "1 establecimientos sin categoría" en 93 pares → "1 establecimiento … No entra …"; "1 matriculados" → "1 matriculado"; "1 estudiantes" latente con ternario |
+| D-03 | implementada | `c94971f` | "Todos están…" con un EE → "Está en nivel de desempeño …" |
+| F12 | implementada | `26ca8cd` | anillo sobre rellenos de `--ocean`: 1,21 / 1,19 → 5,99 / 5,99; los siete controles ≥ 5,99 |
+| F11 (Q-F11 B) | implementada | `3848cfc` | cabeceras Insuficiente 4,11/3,67/3,16 → 4,46; Medio-Bajo 2,62/2,44/2,23 → 7,01; Medio 3,48/3,19/2,85 → 5,27; Alto sin cambio |
+| F09 y D-13 (Q-F09 B) | implementada | `3848cfc` | rótulo "Sin categoría vigente" → "Sin categoría en 2019 (incluye sin medición)"; cifras idénticas |
+| D-03 frase 1 | implementada | `3848cfc` | "El establecimiento … tiene 1 establecimiento con … categorizado…" → "El establecimiento … tiene Educación Básica categorizada al año 2019…" (y el caso vacío) |
+| F18 | cerrada (Q-F18 No) | — | sin cambio |
+| D-08 | cerrada (Q-D08: se mantiene c.21) | — | sin cambio |
+| D-22 | diferida (Q-D22 abierta) | — | sin cambio |
+| F19, D-24 | inspirarse (sin cambio) | — | sin cambio |
