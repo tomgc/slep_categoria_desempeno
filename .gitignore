@@ -42,3 +42,4 @@ tests/reportes/
 POLITICA_PROYECTO.md
 SETTINGS_Y_PROMPTS_OPERACIONALES.md
 CLAUDE.md
+40_salidas/*.parquet
