@@ -468,7 +468,12 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
   let frase2 = null;
   if (presentes.length === 1) {
     const c = presentes[0];
-    frase2 = ["Todos están en nivel de desempeño ", b(CatData.CAT_LABELS[c] || c), "."];
+    // a1-D-03: con un solo establecimiento categorizado, "Está en" (no "Todos están").
+    frase2 = [
+      total === 1 ? "Está en nivel de desempeño " : "Todos están en nivel de desempeño ",
+      b(CatData.CAT_LABELS[c] || c),
+      ".",
+    ];
   } else if (presentes.length > 1) {
     const segs = [];
     presentes.forEach((c, i) => {
@@ -1060,7 +1065,7 @@ function EeRow({ ee }) {
                   {matNivel != null && (
                     <div className="ee-detail-matnivel">
                       {fmtInt(matNivel) +
-                        " matriculados en " +
+                        (matNivel === 1 ? " matriculado en " : " matriculados en ") + // a1-F01
                         (CatData.NIVELES[ee.nivel] || ee.nivel)}
                     </div>
                   )}
@@ -1161,7 +1166,8 @@ function CatColumn({ categoria, stat, establecimientos, matTotal }) {
           {pct != null && " (" + fmtPct1(pct) + " del total del nivel para el territorio)"}
         </span>
         <span className="cat-col-mat">
-          <strong>{fmtInt(matNivel)}</strong> estudiantes
+          {/* a1-F01: plural concordante */}
+          <strong>{fmtInt(matNivel)}</strong> {matNivel === 1 ? "estudiante" : "estudiantes"}
           {matPct != null && " (" + fmtPct1(matPct) + " del total del nivel para el territorio)"}
         </span>
       </div>
@@ -1199,8 +1205,10 @@ function SinVigente({ sv, listaEE, listaSinMedicion }) {
     <div className="sin-vigente">
       <h3 className="sin-vigente-title">Sin categoría vigente</h3>
       <p className="sin-vigente-sub">
-        {fmtInt(total)} establecimientos sin categoría en {CatData.ANIO_VIGENTE} (conteo oficial).
-        No entran en la distribución de las cuatro categorías.
+        {/* a1-F01: plural concordante */}
+        {fmtInt(total)} {total === 1 ? "establecimiento" : "establecimientos"} sin categoría en{" "}
+        {CatData.ANIO_VIGENTE} (conteo oficial).{" "}
+        {total === 1 ? "No entra" : "No entran"} en la distribución de las cuatro categorías.
       </p>
       {motivos.length > 0 && (
         <div className="sin-vigente-motivos">

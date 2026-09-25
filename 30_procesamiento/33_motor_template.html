@@ -1939,7 +1939,8 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
   let frase2 = null;
   if (presentes.length === 1) {
     const c = presentes[0];
-    frase2 = ["Todos están en nivel de desempeño ", b(CatData.CAT_LABELS[c] || c), "."];
+    // a1-D-03: con un solo establecimiento categorizado, "Está en" (no "Todos están").
+    frase2 = [total === 1 ? "Está en nivel de desempeño " : "Todos están en nivel de desempeño ", b(CatData.CAT_LABELS[c] || c), "."];
   } else if (presentes.length > 1) {
     const segs = [];
     presentes.forEach((c, i) => {
@@ -2407,7 +2408,9 @@ function EeRow({
       className: "ee-detail-cat"
     }, txt)), matNivel != null && /*#__PURE__*/React.createElement("div", {
       className: "ee-detail-matnivel"
-    }, fmtInt(matNivel) + " matriculados en " + (CatData.NIVELES[ee.nivel] || ee.nivel)), desglose.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    }, fmtInt(matNivel) + (matNivel === 1 ? " matriculado en " : " matriculados en ") + (
+    // a1-F01
+    CatData.NIVELES[ee.nivel] || ee.nivel)), desglose.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
       className: "ee-detail-ense-head"
     }, /*#__PURE__*/React.createElement("span", {
       className: "ee-detail-ense-col-nivel"
@@ -2490,7 +2493,7 @@ function CatColumn({
     className: "cat-col-stat"
   }, /*#__PURE__*/React.createElement("strong", null, fmtInt(stat.n_ee)), " ", stat.n_ee === 1 ? "establecimiento" : "establecimientos", pct != null && " (" + fmtPct1(pct) + " del total del nivel para el territorio)"), /*#__PURE__*/React.createElement("span", {
     className: "cat-col-mat"
-  }, /*#__PURE__*/React.createElement("strong", null, fmtInt(matNivel)), " estudiantes", matPct != null && " (" + fmtPct1(matPct) + " del total del nivel para el territorio)")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("strong", null, fmtInt(matNivel)), " ", matNivel === 1 ? "estudiante" : "estudiantes", matPct != null && " (" + fmtPct1(matPct) + " del total del nivel para el territorio)")), /*#__PURE__*/React.createElement("div", {
     className: "cat-col-bar"
   }, /*#__PURE__*/React.createElement("div", {
     className: "cat-col-bar-fill",
@@ -2526,7 +2529,7 @@ function SinVigente({
     className: "sin-vigente-title"
   }, "Sin categoría vigente"), /*#__PURE__*/React.createElement("p", {
     className: "sin-vigente-sub"
-  }, fmtInt(total), " establecimientos sin categoría en ", CatData.ANIO_VIGENTE, " (conteo oficial). No entran en la distribución de las cuatro categorías."), motivos.length > 0 && /*#__PURE__*/React.createElement("div", {
+  }, fmtInt(total), " ", total === 1 ? "establecimiento" : "establecimientos", " sin categoría en", " ", CatData.ANIO_VIGENTE, " (conteo oficial).", " ", total === 1 ? "No entra" : "No entran", " en la distribución de las cuatro categorías."), motivos.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "sin-vigente-motivos"
   }, motivos.map(m => /*#__PURE__*/React.createElement("div", {
     key: m,
