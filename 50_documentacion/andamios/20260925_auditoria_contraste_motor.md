@@ -86,3 +86,34 @@ Los dos nuevos colores de categoría conservan el tono de los actuales (rojo y n
 ## 8. Verificación de la propuesta
 
 Simulada sobre el motor actual (variables inyectadas y `CatData.CAT_COLORS` sustituido en tiempo de ejecución) en los mismos 19 estados: **0 fallas de texto en controles activos y 0 fallas no textuales exigidas**. Quedan 4 pares, todos en controles deshabilitados. Capturas comparativas antes y después de la vista por territorio, del comparador y del modal múltiple entregadas en el chat de la sesión 30.
+
+## 9. Implementación (a3)
+
+Encargo `encargo_claude_code_categoria_contraste_a3.md`; LOG `50_documentacion/andamios/logs/20260925_contraste_a3_log.md`. Aprobado por el titular: opción A (P1 a P10) más la variante P11 (cabeceras con tono oscuro propio y texto blanco en las cuatro, maqueta `20260925_cabeceras_variante.png`). Decisión: `decisiones/20260925_decision_paleta_categorias_v2.md`.
+
+Medido con el instrumento de §7 del encargo (el mismo método de §1), en los mismos 19 estados, sobre los builds de cada tarea. Antes = motor del a2 (`91570b62…`), que el instrumento reprodujo exacto (19 pares, 2.103 de 13.725, 8 familias gráficas).
+
+| Falla | Antes | Después | Commit |
+|---|---|---|---|
+| T1 rótulos grises sobre crema | 4,34 | 6,02 | `b567586` (P1) |
+| T2 secundario de fila con cursor | 3,87 | 5,36 | `b567586` (P1) |
+| T3 secundario de fila marcada | 3,60 | 4,99 | `b567586` (P1) |
+| T4 separador "·" de las tarjetas | 1,95 | 6,48 | `b567586` (P1, sin opacidad) |
+| T5 separador del encabezado | 2,67 | 5,74 | `b567586` (P3) |
+| T6 "Motor de comparación" | 4,44 | 5,74 | `b567586` (P3) |
+| T7 cabecera de Insuficiente | 4,46 | 6,97 (texto blanco sobre `#B30F27`) | `2c48837` (P11) |
+| T8 delta negativo | 3,97 | 5,34 | `1ebe2c0` (P4, P7) |
+| T9 ✕ del chip con cursor | 4,11 | 5,53 | `1ebe2c0` (P4, P7) |
+| T10 % máximo del comparador | 2,07 a 3,51 | 5,49 a 8,39 | `b567586` (P8) y `1ebe2c0` (tintes con la paleta nueva) |
+| G1 marcas de Medio-Bajo | 2,62 (blanco) | 3,64 (blanco; 3,38 sobre crema por fórmula) | `1ebe2c0` (P5) |
+| G2 marcas de "sin categoría" (borde) | 1,87 | 3,95 | `b567586` (P2) |
+| G3 campo "Buscar…" | 1,87 | 3,95 | `b567586` (P2) |
+| G4 casilla sin marcar | 1,81 | 3,82 | `b567586` (P2) |
+| G5 segmentado activo | 1,21 | 5,34 (texto 6,45) | `b567586` (P9) |
+| G6 botón de territorio, Notas, Limpiar, Cancelar | 1,28 a 1,87 | 3,67 a 3,95 | `b567586` (P2, P10) |
+
+Cabeceras con P11 (título, conteo y matrícula, en básica y media): Insuficiente 6,97; Medio-Bajo 4,99; Medio 5,00; Alto 9,48.
+
+Resultado en los 19 estados: **0 pares de texto fallidos y 0 fallas gráficas exigidas en controles activos**; quedan 4 pares de texto y 1 gráfico en controles deshabilitados (exentos). Payload idéntico salvo `meta.cat_colors`; `tests/auditar_cifras.R` y `tests/spot_check_publicado.R` en verde; ningún texto visible cambió (19/19).
+
+Diferencia con §5 de esta auditoría: P4 y P5 ya no dejan `--ink` en las cabeceras de Insuficiente y Medio-Bajo (lo reemplaza P11), y el blanco de la ✕ del chip al pasar el cursor se escribe como `var(--paper)` (mismo color).

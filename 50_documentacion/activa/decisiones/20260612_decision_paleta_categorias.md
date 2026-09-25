@@ -3,7 +3,7 @@
 **Fecha:** 2026-06-12
 **Sesión:** 6 (documentación retroactiva de una decisión tomada en la sesión 3, v03)
 **Tipo:** decisión de diseño
-**Estado:** vigente
+**Estado:** reemplazada por 20260925_decision_paleta_categorias_v2.md
 
 ## Contexto
 

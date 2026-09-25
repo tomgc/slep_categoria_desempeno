@@ -3,7 +3,7 @@
 **Fecha:** 2026-09-25
 **Sesión:** 30 (resolución del titular a la duda Q-F11 del plan a1; ejecutada en el encargo a2)
 **Tipo:** decisión de presentación y accesibilidad. No afecta ninguna cifra ni la paleta.
-**Estado:** vigente
+**Estado:** reemplazada en su excepción por 20260925_decision_paleta_categorias_v2.md
 
 ## Contexto
 
