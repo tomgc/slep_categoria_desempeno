@@ -3,19 +3,23 @@ slug: slep_categoria_desempeno
 nombre_real: Motor de comparación interactivo de la Categoría de Desempeño de los establecimientos educacionales del país
 categoria: activo
 semaforo: activo
-sesion_actual: v29
+sesion_actual: v30
 ultima_actividad: 2026-09-25
 maneja_sensibles: true
-tipo_pendiente: deuda_heredada
+tipo_pendiente: bug
+sesion_abierta: false
+maquina: MacBook-Pro-de-Tomas.local
+commit_cierre: fd10074
+traspaso_vigente: traspaso_cierre_v30.md
+cierre_incompleto: no
+insumos_verificados: 2026-09-25
 ventana_insumos: ./20_insumos
 ---
 ## En que vamos
-Sesión v29: se cerró la migración de la escala tipográfica del motor a variables CSS con nomenclatura estándar `slep_*` (8 niveles, piso subido de 10px a 12px, 130 usos remapeados por rol contra el JSX real), con QA visual aprobada y motor regenerado. Se versionó la deuda de git heredada de v28 (log de saneamiento PII, rotación de snapshots del escáner, traspasos v27-v28). Repo sincronizado con origin, sin fallas funcionales.
+Sesión v30: el motor quedó alineado en usabilidad con los patrones de `slep_idps` (adaptados), con contraste WCAG 2.1 AA completo (paleta v2 y cabeceras oscuras con texto blanco), trayectoria cronológica y detalle con el vigente primero. Todo está desplegado en GitHub Pages y verificado contra el sitio publicado; cifras y payload sin cambio salvo `meta.cat_colors`.
 
 ## Proximo paso
-1. Re-clonar cualquier clon previo del repositorio, ya que el historial fue reescrito en v27 (acción manual del titular, una sola vez).
-2. Limpiar el CSS muerto heredado de `slep_simce_adecuado` (~7 bloques: `.supergrid`, `.tt-*`, `.data-table`, `.gse-filter`, sueltos); baja prioridad, encargo aparte a Claude Code.
-3. Decidir si la migración tipográfica amerita entrada nueva en `backlog_acumulativo.md` (baja prioridad).
+Corregir los defectos visibles de narrativa y UI anotados en los encargos a2 y a3 (frase 3 vacía, frase 3 con un establecimiento, espacio faltante en la nota, pestaña cortada a 390 px, botón de territorio a 320 px, foco tras "Limpiar").
 
 ## Bloqueantes
 Ninguno.
