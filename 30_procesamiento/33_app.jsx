@@ -1161,12 +1161,17 @@ function EeRow({ ee }) {
 // ============================================================
 // Columna de categoría
 // ============================================================
-// a2-T2.1 (F11-B): cabeceras cuyo texto va en --ink (el blanco no alcanza 4,5:1 sobre
-// su relleno); Alto conserva el blanco. Insuficiente queda en ≈ 4,46:1, excepción
-// escrita en decisiones/20260925_decision_contraste_texto_categorias.md.
-const CAT_CABECERA_TINTA = new Set(["INSUFICIENTE", "MEDIO-BAJO", "MEDIO"]);
+// a3-P11: fondo de cada cabecera de columna, un tono oscuro propio de su categoría,
+// con texto blanco en las cuatro (decisiones/20260925_decision_paleta_categorias_v2.md).
+// Las marcas, la leyenda, los puntos del comparador y el mapa de calor siguen leyendo
+// CatData.CAT_COLORS.
+const CAT_CABECERA_FONDO = {
+  INSUFICIENTE: "var(--cat-insuf-cab)",
+  "MEDIO-BAJO": "var(--cat-mbajo-cab)",
+  MEDIO: "var(--cat-medio-cab)",
+  ALTO: "var(--cat-alto-cab)",
+};
 function CatColumn({ categoria, stat, establecimientos, matTotal }) {
-  const color = CatData.CAT_COLORS[categoria];
   const label = CatData.CAT_LABELS[categoria];
   // pct autoritativo desde el territorial (n_ee/n_categorizados ya calculado en R).
   const pct = stat.pct != null ? stat.pct : stat.total > 0 ? stat.n_ee / stat.total : 0;
@@ -1181,9 +1186,9 @@ function CatColumn({ categoria, stat, establecimientos, matTotal }) {
   return (
     <div className="cat-col">
       <div
-        className={"cat-col-head" + (CAT_CABECERA_TINTA.has(categoria) ? " is-tinta" : "")}
+        className="cat-col-head"
         style={{
-          background: color,
+          background: CAT_CABECERA_FONDO[categoria],
         }}
       >
         <span className="cat-col-title">{label}</span>
