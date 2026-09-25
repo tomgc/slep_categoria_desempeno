@@ -411,6 +411,13 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
       {txt}
     </span>
   ); // dato dinámico
+  // a1-F14: variante para nombres: puede partirse de línea (las cifras no), para
+  // que un nombre largo no desplace la página hacia el lado en móvil.
+  const bNom = (txt) => (
+    <span key={"b" + kk++} className="dato-destacado dato-nombre">
+      {txt}
+    </span>
+  );
 
   // Sujeto según tipo de entidad (el nombre va en negrita).
   const sujetoPre = (function () {
@@ -427,7 +434,7 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
       frases: [
         [
           sujetoPre,
-          b(entity.nom),
+          bNom(entity.nom),
           " no tiene establecimientos con " + nivelLbl + " categorizados al año ",
           b(anioCat),
           " para la selección actual.",
@@ -439,7 +446,7 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
   const eeLbl = total === 1 ? "establecimiento" : "establecimientos";
   const frase1 = [
     sujetoPre,
-    b(entity.nom),
+    bNom(entity.nom),
     " tiene ",
     b(fmtInt(total)),
     " " +

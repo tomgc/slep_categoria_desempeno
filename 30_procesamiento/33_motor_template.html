@@ -910,8 +910,9 @@ body {
 /* a1-F02: fila del modal enfocada con teclado (anillo --ocean hacia adentro; ≈ 4,97:1 sobre --ocean-20) */
 .check-row:focus-visible { outline: 2px solid var(--ocean); outline-offset: -2px; }
 .multiselect-hint { display: block; font-size: var(--fs-caption); color: var(--fg-3); margin: 2px 0 4px; }
-.check-name { font-size: var(--fs-body); font-weight: var(--fw-medium); color: var(--fg-1); flex: 1; }
-.check-region { font-size: var(--fs-caption); color: var(--fg-3); }
+/* a1-F08: el nombre ocupa lo que necesita y el secundario cede ancho (la fila nunca supera la lista) */
+.check-name { font-size: var(--fs-body); font-weight: var(--fw-medium); color: var(--fg-1); flex: 0 1 auto; min-width: 0; }
+.check-region { font-size: var(--fs-caption); color: var(--fg-3); flex: 1 1 0; text-align: right; }
 .check-box {
   display: inline-flex; align-items: center; justify-content: center;
   width: 18px; height: 18px; flex-shrink: 0;
@@ -1047,6 +1048,8 @@ code {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+/* a1-F14: el nombre de la entidad en la narrativa puede partirse; las cifras siguen enteras */
+.dato-destacado.dato-nombre { white-space: normal; overflow-wrap: anywhere; }
 .terr-pill {
   display: inline-flex; align-items: center; gap: 5px;
   font-size: var(--fs-caption); font-weight: var(--fw-medium); color: var(--fg-3);
@@ -1902,6 +1905,12 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
     key: "b" + kk++,
     className: "dato-destacado"
   }, txt); // dato dinámico
+  // a1-F14: variante para nombres: puede partirse de línea (las cifras no), para
+  // que un nombre largo no desplace la página hacia el lado en móvil.
+  const bNom = txt => /*#__PURE__*/React.createElement("span", {
+    key: "b" + kk++,
+    className: "dato-destacado dato-nombre"
+  }, txt);
 
   // Sujeto según tipo de entidad (el nombre va en negrita).
   const sujetoPre = function () {
@@ -1915,12 +1924,12 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
   // Frase 1: cuántos EE categorizados.
   if (total === 0) {
     return {
-      frases: [[sujetoPre, b(entity.nom), " no tiene establecimientos con " + nivelLbl + " categorizados al año ", b(anioCat), " para la selección actual."]],
+      frases: [[sujetoPre, bNom(entity.nom), " no tiene establecimientos con " + nivelLbl + " categorizados al año ", b(anioCat), " para la selección actual."]],
       vacio: true
     };
   }
   const eeLbl = total === 1 ? "establecimiento" : "establecimientos";
-  const frase1 = [sujetoPre, b(entity.nom), " tiene ", b(fmtInt(total)), " " + eeLbl + " con " + nivelLbl + " " + (total === 1 ? "categorizado" : "categorizados") + " al año ", b(anioCat), ", el año más reciente para el cual existe una clasificación."];
+  const frase1 = [sujetoPre, bNom(entity.nom), " tiene ", b(fmtInt(total)), " " + eeLbl + " con " + nivelLbl + " " + (total === 1 ? "categorizado" : "categorizados") + " al año ", b(anioCat), ", el año más reciente para el cual existe una clasificación."];
 
   // Frase 2: distribución por categoría, omitiendo las de 0 EE.
   // "Un X% de estos establecimientos está en nivel de desempeño Alto, un Y%
