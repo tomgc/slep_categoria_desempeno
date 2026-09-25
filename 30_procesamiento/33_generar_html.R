@@ -57,11 +57,12 @@ library(here)
 # Orden semántico de categorías: Insuficiente -> Alto (gobierna columnas y paleta).
 CAT_ORDEN <- c("INSUFICIENTE", "MEDIO-BAJO", "MEDIO", "ALTO")
 
-# Paleta fija de categorías (decisión sesión 3, validada AA sobre cream).
-# Reutiliza tokens del head del template (mark-red, coral, mark-blue, olive).
+# Paleta fija de categorías (decisión sesión 3). Recalibrada por contraste el
+# 2026-09-25 (encargo a3): Insuficiente y Medio-Bajo pasan a tonos más oscuros
+# para llegar a 3:1 como marca; ver decisiones/20260925_decision_paleta_categorias_v2.md.
 CAT_COLORS <- list(
-  "INSUFICIENTE" = "#EE2D49",  # mark-red
-  "MEDIO-BAJO"   = "#E88663",  # coral
+  "INSUFICIENTE" = "#D0112D",  # rojo recalibrado (antes mark-red)
+  "MEDIO-BAJO"   = "#E05D2F",  # naranjo recalibrado (antes coral)
   "MEDIO"        = "#2A8FD9",  # mark-blue (azul claro)
   "ALTO"         = "#0062A0"   # ocean (azul institucional)
 )

@@ -49,6 +49,7 @@
   --fg-on-dark: var(--cream);
   --fg-on-plum: var(--cream);
   --fg-on-dark-muted: #A9B7BB; /* a3-P3: texto secundario sobre el encabezado oscuro (5,74:1) */
+  --cat-insuf: #D0112D; /* a3-P4: Insuficiente recalibrado (igual a CAT_COLORS en 33_generar_html.R) */
   --fg-link: var(--ocean);
   --bg-1: var(--cream);
   --bg-2: var(--paper);
@@ -1250,7 +1251,7 @@ code {
   color: var(--fg-2);
 }
 .ee-detail-evol-delta.is-up { color: var(--ocean); }
-.ee-detail-evol-delta.is-down { color: var(--cat-insuf, #EE2D49); }
+.ee-detail-evol-delta.is-down { color: var(--cat-insuf, #D0112D); }
 
 /* Lista de EE dentro del bloque sin categoría vigente */
 .sin-vigente-lista { margin-top: 16px; }
@@ -1332,7 +1333,7 @@ code {
   font-size: var(--fs-body); line-height: 1; cursor: pointer;
   transition: background 120ms, color 120ms;
 }
-.cmp-chip-x:hover { background: var(--cat-insuf, #EE2D49); color: #fff; }
+.cmp-chip-x:hover { background: var(--cat-insuf, #D0112D); color: var(--paper); } /* a3-P7: blanco como token (misma tinta; evita un literal fuera de la lista en la línea tocada) */
 .cmp-add-btn {
   background: var(--ocean); border: 1px solid var(--ocean);
   border-radius: var(--radius-full); padding: 5px 14px;
