@@ -1993,7 +1993,10 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
   const matInsuf = sumaMat(["INSUFICIENTE"]);
   const matTotalNivel = sumaMat(["ALTO", "MEDIO", "MEDIO-BAJO", "INSUFICIENTE"]);
   let frase3 = null;
-  if (matTotalNivel > 0) {
+  if (matTotalNivel > 0 && entity.kind === "establecimiento") {
+    // a6-C2: variante para un establecimiento como sujeto (como a2-T2.3 en la frase 1)
+    frase3 = ["Considerando la matrícula ", b(anioMat), ", el establecimiento tiene ", b(fmtInt(matTotalNivel)), " " + (matTotalNivel === 1 ? "estudiante" : "estudiantes") + " en el nivel."];
+  } else if (matTotalNivel > 0) {
     const segs = ["Considerando la matrícula ", b(anioMat), ", "];
     const tramos = [];
     if (matMedioAlto > 0) {
@@ -2007,7 +2010,8 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
       t.forEach(x => segs.push(x));
     });
     segs.push(".");
-    frase3 = segs;
+    // a6-C1: sin matrícula en Medio/Alto ni en Insuficiente, la frase 3 se omite
+    frase3 = tramos.length === 0 ? null : segs;
   }
 
   // Frase de cierre (transición a la tabla); formato normal.
@@ -2965,7 +2969,7 @@ function NotasMetodologicas() {
     className: "note"
   }, /*#__PURE__*/React.createElement("h4", null, "Categoría vigente"), /*#__PURE__*/React.createElement("p", null, "La categoría que se muestra para cada establecimiento es la de su", /*#__PURE__*/React.createElement("b", null, " último año disponible"), " (", CatData.ANIO_VIGENTE, "). La trayectoria histórica a la derecha de cada fila muestra la categoría año a año."), /*#__PURE__*/React.createElement("p", null, "Los establecimientos ", /*#__PURE__*/React.createElement("b", null, "sin categoría en el último año"), " (por ejemplo, los que no rindieron las evaluaciones requeridas ese año) se reportan aparte y", " ", /*#__PURE__*/React.createElement("b", null, "no entran en el denominador"), " de la distribución. Por eso cada territorio informa, junto a su total categorizado, el número de establecimientos sin categoría vigente.")), /*#__PURE__*/React.createElement("div", {
     className: "note"
-  }, /*#__PURE__*/React.createElement("h4", null, "Cobertura temporal"), /*#__PURE__*/React.createElement("p", null, "La serie cubre ", /*#__PURE__*/React.createElement("b", null, "2016 a 2019"), ". La Categoría de Desempeño en enseñanza básica está disponible desde 2016 y en enseñanza media desde 2017. La enseñanza básica y la media ", /*#__PURE__*/React.createElement("b", null, "nunca se combinan"), " en una misma cifra: el selector de nivel gobierna toda la vista."), /*#__PURE__*/React.createElement("p", null, "El ", /*#__PURE__*/React.createElement("b", null, "Simce 2019"), " se aplicó sin condiciones óptimas (estallido social) y se mantuvo la última categoría sin consecuencias. En", " ", /*#__PURE__*/React.createElement("b", null, "2020 y 2021 no hubo categorización"), " por la suspensión del Simce durante la pandemia, y el", /*#__PURE__*/React.createElement("b", null, "Simce 2022"), ", aunque se aplicó, no se usó para ordenar. La próxima categorización se realizará con los ", /*#__PURE__*/React.createElement("b", null, "resultados del Simce 2025"), ", una vez que la Agencia de Calidad los procese y publique."))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h4", null, "Cobertura temporal"), /*#__PURE__*/React.createElement("p", null, "La serie cubre ", /*#__PURE__*/React.createElement("b", null, "2016 a 2019"), ". La Categoría de Desempeño en enseñanza básica está disponible desde 2016 y en enseñanza media desde 2017. La enseñanza básica y la media ", /*#__PURE__*/React.createElement("b", null, "nunca se combinan"), " en una misma cifra: el selector de nivel gobierna toda la vista."), /*#__PURE__*/React.createElement("p", null, "El ", /*#__PURE__*/React.createElement("b", null, "Simce 2019"), " se aplicó sin condiciones óptimas (estallido social) y se mantuvo la última categoría sin consecuencias. En", " ", /*#__PURE__*/React.createElement("b", null, "2020 y 2021 no hubo categorización"), " por la suspensión del Simce durante la pandemia, y el", " ", /*#__PURE__*/React.createElement("b", null, "Simce 2022"), ", aunque se aplicó, no se usó para ordenar. La próxima categorización se realizará con los ", /*#__PURE__*/React.createElement("b", null, "resultados del Simce 2025"), ", una vez que la Agencia de Calidad los procese y publique."))), /*#__PURE__*/React.createElement("div", {
     className: "notes-sources"
   }, "Fuente: Agencia de Calidad de la Educación, Categoría de Desempeño por establecimiento (enseñanza básica y media), 2016–2019. Información pública disponible en el portal de la Agencia.")));
 }

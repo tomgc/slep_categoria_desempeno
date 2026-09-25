@@ -525,7 +525,16 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
   const matInsuf = sumaMat(["INSUFICIENTE"]);
   const matTotalNivel = sumaMat(["ALTO", "MEDIO", "MEDIO-BAJO", "INSUFICIENTE"]);
   let frase3 = null;
-  if (matTotalNivel > 0) {
+  if (matTotalNivel > 0 && entity.kind === "establecimiento") {
+    // a6-C2: variante para un establecimiento como sujeto (como a2-T2.3 en la frase 1)
+    frase3 = [
+      "Considerando la matrícula ",
+      b(anioMat),
+      ", el establecimiento tiene ",
+      b(fmtInt(matTotalNivel)),
+      " " + (matTotalNivel === 1 ? "estudiante" : "estudiantes") + " en el nivel.",
+    ];
+  } else if (matTotalNivel > 0) {
     const segs = ["Considerando la matrícula ", b(anioMat), ", "];
     const tramos = [];
     if (matMedioAlto > 0) {
@@ -551,7 +560,8 @@ function narrativaTerritorial(entity, nivel, dist, porCat) {
       t.forEach((x) => segs.push(x));
     });
     segs.push(".");
-    frase3 = segs;
+    // a6-C1: sin matrícula en Medio/Alto ni en Insuficiente, la frase 3 se omite
+    frase3 = tramos.length === 0 ? null : segs;
   }
 
   // Frase de cierre (transición a la tabla); formato normal.
@@ -1823,7 +1833,7 @@ function NotasMetodologicas() {
                 El <b>Simce 2019</b> se aplicó sin condiciones óptimas (estallido social) y se
                 mantuvo la última categoría sin consecuencias. En{" "}
                 <b>2020 y 2021 no hubo categorización</b> por la suspensión del Simce durante la
-                pandemia, y el<b>Simce 2022</b>, aunque se aplicó, no se usó para ordenar. La
+                pandemia, y el{" "}<b>Simce 2022</b>, aunque se aplicó, no se usó para ordenar. La
                 próxima categorización se realizará con los <b>resultados del Simce 2025</b>, una
                 vez que la Agencia de Calidad los procese y publique.
               </p>
