@@ -941,11 +941,11 @@ function EntityModal({
 }
 
 // ============================================================
-// Trayectoria (año arriba, marca de color abajo; reciente -> antiguo)
+// Trayectoria (año arriba, marca de color abajo; antiguo -> reciente)
 // ============================================================
 function Trayectoria({ serie }) {
-  // Orden descendente: el año más reciente primero.
-  const ordenada = serie.slice().sort((a, b) => b.anio - a.anio);
+  // a4-O1: orden cronológico ascendente: el año más antiguo primero, el vigente al final.
+  const ordenada = serie.slice().sort((a, b) => a.anio - b.anio);
   return (
     <span className="traj">
       {ordenada.map((p, idx) => {
@@ -999,7 +999,7 @@ function EnseItem({ d }) {
 }
 function EeRow({ ee }) {
   const [open, setOpen] = React.useState(false);
-  const serieDesc = ee.serie.slice().sort((a, b) => b.anio - a.anio);
+  const serieAsc = ee.serie.slice().sort((a, b) => a.anio - b.anio); // a4-O2: mismo orden que la trayectoria
   return (
     <li className="ee-row-li">
       <div
@@ -1047,7 +1047,7 @@ function EeRow({ ee }) {
         <div className="ee-detail">
           <span className="ee-detail-title">Trayectoria y matrícula por año</span>
           <ul className="ee-detail-list">
-            {serieDesc.map((p) => {
+            {serieAsc.map((p) => {
               const sinMedicion = p.categoria == null;
               const esSi = sinMedicion || p.categoria === "s/i";
               const color = esSi ? null : CatData.CAT_COLORS[p.categoria];
