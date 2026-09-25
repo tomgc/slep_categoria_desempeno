@@ -91,24 +91,25 @@ primaria. Fuentes: registro de cada sesión.
 
 | Categoría | N | % | Descripción |
 |---|---|---|---|
-| Diseño UI — Motor base y diseño | 13 | 15 | Diseño de visualización (v01, c.11); motor HTML paso 33 base + iteraciones UI 1-4 (v03, c.17-21); publicación Pages en el generador (v04, c.26); tarjetas de modo territorio con estudiantes + % (v10, c.49); estandarización tipográfica por tokens (v10, c.54); convivencia año de matrícula (v12, c.59); desglose por grado en motor (v12, c.61); bloque narrativo territorial parcial (v12, c.62); D21 template regenerado desde referencia UI (v13, c.63) |
-| Scaffold e inicialización | 12 | 13 | Estructura, scaffold, utils, escáner, gitignore, rproj/readme, protocolo, decisiones, git (v01, c.1-9 salvo orquestación); auditoría seguridad, gobernanza, LICENSE, CI, README migración (v04, c.22-25,27) |
-| Diseño UI — Hoja comparativa | 9 | 10 | Comparativa, multi-selección, límites, lotes visuales (v05, c.28,30-35); botón limpiar (v07, c.41); N EE + tooltip de estudiantes/% (v10, c.50) |
-| Documentación de proyecto | 11 | 12 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73); consolidación del backlog 81-82 sobre 82 (v18, c.84); actualización de la suite (stack runtime + terminología institucional) (v19, c.86) |
-| Diseño UI — Modo establecimiento | 12 | 13 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53); eliminación del detalle por grado en la ficha (v16, c.74); rediseño D2 de la trayectoria a filas a todo el ancho (v16, c.75); encabezado de columnas por año (v16, c.77); eliminación del sufijo redundante "estudiantes" (v16, c.78) |
-| Datos y normalización | 6 | 7 | Inspección de datos (v01, c.10); esquema xlsx, normalización categoría (v02, c.12-13); insumo de matrícula por tipo de enseñanza (v09, c.45); ampliación cobertura 2016-2025 (v11, c.57); parquet de grado (v12, c.60) |
-| Pipeline R | 6 | 7 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58); desacople de matrícula por grado del JSON embebido (v17, c.81); internalización de React/ReactDOM inline, alcance A (v18, c.83) |
+| Diseño UI — Motor base y diseño | 16 | 16 | Diseño de visualización (v01, c.11); motor HTML paso 33 base + iteraciones UI 1-4 (v03, c.17-21); publicación Pages en el generador (v04, c.26); tarjetas de modo territorio con estudiantes + % (v10, c.49); estandarización tipográfica por tokens (v10, c.54); convivencia año de matrícula (v12, c.59); desglose por grado en motor (v12, c.61); bloque narrativo territorial parcial (v12, c.62); D21 template regenerado desde referencia UI (v13, c.63) |
+| Scaffold e inicialización | 12 | 12 | Estructura, scaffold, utils, escáner, gitignore, rproj/readme, protocolo, decisiones, git (v01, c.1-9 salvo orquestación); auditoría seguridad, gobernanza, LICENSE, CI, README migración (v04, c.22-25,27) |
+| Diseño UI — Hoja comparativa | 9 | 9 | Comparativa, multi-selección, límites, lotes visuales (v05, c.28,30-35); botón limpiar (v07, c.41); N EE + tooltip de estudiantes/% (v10, c.50) |
+| Documentación de proyecto | 11 | 11 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73); consolidación del backlog 81-82 sobre 82 (v18, c.84); actualización de la suite (stack runtime + terminología institucional) (v19, c.86) |
+| Diseño UI — Modo establecimiento | 13 | 13 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53); eliminación del detalle por grado en la ficha (v16, c.74); rediseño D2 de la trayectoria a filas a todo el ancho (v16, c.75); encabezado de columnas por año (v16, c.77); eliminación del sufijo redundante "estudiantes" (v16, c.78) |
+| Datos y normalización | 6 | 6 | Inspección de datos (v01, c.10); esquema xlsx, normalización categoría (v02, c.12-13); insumo de matrícula por tipo de enseñanza (v09, c.45); ampliación cobertura 2016-2025 (v11, c.57); parquet de grado (v12, c.60) |
+| Pipeline R | 6 | 6 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58); desacople de matrícula por grado del JSON embebido (v17, c.81); internalización de React/ReactDOM inline, alcance A (v18, c.83) |
 | Orquestación | 4 | 4 | Stub 00_build.R (v01, c.2); 00_run_all.R (v02, c.15); consolidación paso 33 + archivado de stub (v06, c.36); alias regenerar_motor (v13, c.65) |
 | Validación / integridad | 4 | 4 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68); spot-check parametrizado a múltiples celdas ancla, DT-spot-check-cobertura (v15, c.71); certificación de ausencia simétrica en el spot-check, DT-spot-check-ausencia (v16, c.80) |
 | Documentación (en producto) | 2 | 2 | Panel de notas metodológicas (v05, c.29); alineación con fuente oficial (v08, c.43) |
-| Migración y publicación / DevOps | 8 | 9 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85); eliminación de Babel del motor vía C3, motor sin dependencias de red (v21, c.87); reconstrucción y versionado de la fuente JSX del motor 33_app.jsx, recuperación de editabilidad post-C3 (v23, c.88); portabilidad cross-OS del repositorio, .gitattributes con EOL LF (v24, c.89) |
+| Migración y publicación / DevOps | 9 | 9 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85); eliminación de Babel del motor vía C3, motor sin dependencias de red (v21, c.87); reconstrucción y versionado de la fuente JSX del motor 33_app.jsx, recuperación de editabilidad post-C3 (v23, c.88); portabilidad cross-OS del repositorio, .gitattributes con EOL LF (v24, c.89) |
 | Calidad de código / pipeline | 2 | 2 | Warning de readLines silenciado de raíz (v13, c.64); retiro de código muerto de matrícula por grado en el motor (v16, c.79) |
 | Gobernanza de datos | 1 | 1 | Auditoría y saneamiento de incidente PII en `directorio_oficial_ee.csv` (MRUN, RUT_SOSTENEDOR): depuración, repunte de pipeline, reescritura de historial con git-filter-repo, reclasificación de `gobernanza_datos.md` (v27, c.90) |
+| Accesibilidad y usabilidad | 2 | 2 | operación con teclado, foco, contraste figura-fondo y legibilidad del motor, medidos contra WCAG 2.1 AA (ej.: modales operables con teclado y contraste completo de la sesión 30, c.92 y c.93) |
 
-(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 90 entradas
-(1-90). La tabla temática suma 90, cuadrando con el cronológico, con asignación por
+(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 97 entradas
+(1-97). La tabla temática suma 97, cuadrando con el cronológico, con asignación por
 intención primaria verificada entrada por entrada. La categoría líder, "Diseño UI —
-Motor base y diseño", queda en 14% (13/90), bajo el umbral de subdivisión del 25%.
+Motor base y diseño", queda en 16% (16/97), bajo el umbral de subdivisión del 25%.
 El v27 suma una entrada: categoría nueva "Gobernanza de datos" (0→1, incidente PII
 c.90). El c.90 es temáticamente distinto de "Migración y publicación / DevOps"
 (donde vive el precedente técnico de git-filter-repo en slep_idps): aquí la
@@ -186,7 +187,8 @@ entrada del detalle cronológico.)
 | 27 | v27 | 1 | no registrado | Incidente de gobernanza PII en `directorio_oficial_ee.csv` (auditoría, saneamiento y reescritura de historial) |
 | 28 | v28 | 0 | Sonnet 5 | Pendientes administrativos heredados de v27 (versionado, backlog, verificación 4b/depe4); sin cambios de proyecto |
 | 29 | v29 | 0 | Sonnet 5 | Migración tipográfica del motor, registrada tarde como c.91 en la sesión 30, + versionado de deuda de git; fila completada en la sesión 30 |
-| **Total** | | **90** | | |
+| 30 | v30 | 7 | no registrado | Alineamiento de usabilidad con slep_idps (adaptado), contraste AA completo con paleta v2, trayectoria cronológica y despliegue |
+| **Total** | | **97** | | |
 
 ## Detalle cronológico
 
@@ -881,6 +883,67 @@ entrada del detalle cronológico.)
     (log vacío para la ruta purgada), no en conteo de commits reescritos, que
     varía según la profundidad del archivo en el historial.
 
+### Sesión 30 (cambios 91-97) — Alineamiento de usabilidad con slep_idps (adaptado), contraste AA completo con paleta v2, trayectoria cronológica y despliegue
+
+91. **Registro tardío (sesión 29): migración de la escala tipográfica del motor a nomenclatura estándar `slep_*`**:
+    `30_procesamiento/33_motor_template.html`, `docs/index.html`: la escala de 8 variables
+    del patrón anterior pasó a la nomenclatura común de la familia `slep_*`
+    (`--fs-display` a `--fs-overline`), con piso de 12 px (antes 10 px) y 130 usos
+    remapeados por rol contra el JSX, más `.entity-name` a `--fs-body-lg`. Commits de la
+    sesión 29: `91ff8ed` (fuente) y `77f72ff` (motor regenerado). Se registra en la sesión
+    30 porque el cierre v29 no la incluyó (pendiente #3 del traspaso v29). Nota: esa
+    edición tocó el bloque transpilado sin la fuente JSX; el desfase se corrigió en la
+    c.92 (a2 T0).
+92. **Alineamiento de usabilidad con los patrones de `slep_idps`, adaptado a la lógica propia**:
+    `50_documentacion/andamios/20260925_plan_alineamiento_motores.md`,
+    `30_procesamiento/33_app.jsx`, `30_procesamiento/33_motor_template.html`,
+    `50_documentacion/activa/decisiones/20260925_decision_contraste_texto_categorias.md`:
+    plan de 18 fichas (2 adoptar, 8 adaptar, 2 inspirarse, 6 diferir) sobre la matriz de
+    20 patrones medida en `slep_idps`, con medición propia de cada hueco (encargo a1).
+    Implementación (encargo a2): sincronización de `33_app.jsx` con el template
+    (`--fs-base` → `--fs-body`); modales operables con teclado (filas, ciclo de foco,
+    Escape y ✕ equivalentes a Cancelar, respaldo de foco, aviso de cupo); ancho de filas
+    y nombres largos en la narrativa; plurales y "Está en nivel…"; anillo de foco;
+    resoluciones del titular: rótulo "Sin categoría en {año vigente} (incluye sin
+    medición)" en el comparador y frase 1 de la narrativa con un establecimiento como
+    sujeto. Cerradas sin cambio: nombres en mayúsculas del dato y exclusión de la entidad
+    nacional (c.21). Payload y cifras sin cambio. Commits `9d4e120`…`51447ce` (a1) y
+    `cc0bced`…`2238930` (a2).
+93. **Contraste figura-fondo completo del motor (WCAG 2.1 AA)**:
+    `50_documentacion/andamios/20260925_auditoria_contraste_motor.md`,
+    `30_procesamiento/33_motor_template.html`, `30_procesamiento/33_generar_html.R`
+    (bloque `CAT_COLORS`),
+    `50_documentacion/activa/decisiones/20260925_decision_paleta_categorias_v2.md`:
+    auditoría en 19 estados (13.725 mediciones de texto y 3.009 de gráficos y controles)
+    que halló 19 pares de texto y 8 familias gráficas bajo el umbral; corrección con gris
+    de texto #5E5E5E, borde de controles #8A7F68, tinta clara del encabezado #A9B7BB,
+    Insuficiente #D0112D y Medio-Bajo #E05D2F, % máximo del comparador con tinta y marco,
+    segmentado activo en azul. Resultado: 0 fallas en controles activos. El payload cambia
+    solo en `meta.cat_colors`. Encargo a3, commits `cb2e6a9`…`118cf25`.
+94. **Cabeceras de columna oscuras con texto blanco uniforme**:
+    `30_procesamiento/33_app.jsx`, `30_procesamiento/33_motor_template.html`: variante
+    pedida por el titular sobre la propuesta de contraste: cada cabecera con un tono oscuro
+    de su categoría (#B30F27, #C1481D, #2074B2, #004976) y texto blanco en las cuatro
+    (6,97 / 4,99 / 5,00 / 9,48:1), en lugar de tinta oscura en tres; marcas, leyenda y
+    mapa de calor conservan los colores de categoría. Se retiró `CAT_CABECERA_TINTA`.
+    Encargo a3 T3, commit `2c48837`.
+95. **Trayectoria en orden cronológico, de izquierda a derecha**:
+    `30_procesamiento/33_app.jsx`: las marcas de trayectoria pasan de 2019 → 2016 a
+    2016 → 2019, con el anillo del año vigente a la derecha, coherente con el título
+    "Trayectoria 2016–2019". Deja sin efecto, solo para la trayectoria, el "orden reciente →
+    antiguo" de la c.20. Encargo a4, commit `787ed9c`.
+96. **Detalle por año del establecimiento con el vigente primero**:
+    `30_procesamiento/33_app.jsx`: el detalle "Trayectoria y matrícula por año", que el
+    a4 había invertido junto con la trayectoria, vuelve a 2019 → 2016 porque en una lista
+    vertical larga el vigente al final obliga a hacer scroll; "Evolución de la matrícula"
+    sigue ascendente. Encargo a5 T1, commit `22826e9`; desplegado junto con c.92 a c.95 en
+    `56f6629`.
+97. **Parquet del contrato de categoría fuera del control de versiones**:
+    `.gitignore`: se agrega `40_salidas/*.parquet`, que cubre
+    `40_salidas/categoria_rbd_contrato.parquet` (salida de
+    `34_exportar_contrato_categoria.R`, contrato v1) y deja el árbol limpio. Commit
+    `f532d94`.
+
 ## Delta del backlog
 
 **Consolidación v13 → documento in extenso (v14, cierre de DT-backlog-documental).**
@@ -1026,3 +1089,19 @@ las celdas de entero de las categorías existentes según los denominadores 13/9
 12/90=13%, 9/90=10%, 11/90=12%, 6/90=7%, 4/90=4%, 2/90=2%, 8/90=9% (ver tabla temática
 actualizada). La categoría líder baja a 14% (13/90), bajo el umbral de subdivisión. Tabla
 temática reverificada: suma 90, cuadra con el cronológico.
+
+**Delta v30 (90 → 97).** Entradas nuevas de la sesión 30: 91 a 97. Foco: Alineamiento de
+usabilidad con slep_idps (adaptado), contraste AA completo con paleta v2, trayectoria
+cronológica y despliegue. Reparto: 91 → Diseño UI — Motor base y diseño; 92 →
+Accesibilidad y usabilidad; 93 → Accesibilidad y usabilidad; 94 → Diseño UI — Motor base y
+diseño; 95 → Diseño UI — Motor base y diseño; 96 → Diseño UI — Modo establecimiento; 97 →
+Migración y publicación / DevOps. **Categoría nueva: "Accesibilidad y usabilidad"** (0→2):
+operación con teclado, foco, contraste figura-fondo y legibilidad del motor, medidos
+contra WCAG 2.1 AA (ej.: modales operables con teclado y contraste completo de la sesión
+30, c.92 y c.93). Reclasificaciones: ninguna. N por categoría: "Diseño UI — Motor base y
+diseño" 13→16, "Accesibilidad y usabilidad" 0→2, "Diseño UI — Modo establecimiento" 12→13,
+"Migración y publicación / DevOps" 8→9. La categoría líder queda en 16% (16/97), bajo el
+umbral de subdivisión. La sesión abre una categoría nueva de trabajo real (accesibilidad y
+usabilidad medidas contra norma) y vuelve a cargar "Motor base y diseño", que sigue bajo
+el umbral de subdivisión. La c.91 es un registro tardío de la sesión 29, no trabajo nuevo.
+Tabla temática reverificada: suma 97, cuadra con el cronológico.
