@@ -691,7 +691,7 @@ function EntityModal({ onSelect, onCancel, multiple = false, yaElegidas = [], li
               border: "1px solid var(--border-2)",
               borderRadius: "var(--radius-2)",
               fontFamily: "var(--font-body)",
-              fontSize: "var(--fs-base)",
+              fontSize: "var(--fs-body)",
             }}
           />
           {multiple && (
