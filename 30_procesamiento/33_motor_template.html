@@ -257,6 +257,13 @@ body {
   outline-offset: 1px;
   border-color: var(--ocean);
 }
+/* a1-F12: anillo propio para todo control con foco de teclado, separado 2 px del
+   control para que quede sobre el fondo (≈ 6:1 sobre crema) y no sobre rellenos de
+   --ocean. Va antes de .check-row:focus-visible, que lo redefine hacia adentro. */
+button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--ocean);
+  outline-offset: 2px;
+}
 .input {
   background-image: none; padding-right: 10px;
   cursor: text; min-width: 0; width: 100%;
