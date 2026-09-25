@@ -887,6 +887,8 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
   color: var(--plum); font-weight: var(--fw-bold);
   border-bottom-color: var(--ocean);
 }
+/* a8-C4: las pestañas pasan a una segunda fila solo cuando no caben */
+@media (max-width: 560px) { .modal-tabs { padding: 0 16px; flex-wrap: wrap; } .modal-tab { margin-right: 8px; } }
 .modal-body { padding: 22px; overflow-y: auto; flex: 1; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .field { display: flex; flex-direction: column; gap: 6px; }
