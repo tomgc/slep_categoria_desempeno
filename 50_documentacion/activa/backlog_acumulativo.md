@@ -181,7 +181,12 @@ entrada del detalle cronológico.)
 | 22 | v22 | 0 | Opus 4.8 | Administrativos de apertura heredados (snapshots del escáner versionados, entrada 87 consolidada) + saneamiento A22 de la tabla temática (% stale desde v18) + versionado traspaso v21; sin cambios de proyecto |
 | 23 | v23 | 1 | Opus 4.8 | Reconstrucción y versionado de la fuente JSX del motor (33_app.jsx) por transformación inversa verificada (A34) + suite de documentación post-C3 + reubicación de documentar.R + administrativos |
 | 24 | v24 | 1 | Opus 4.8 | Portabilidad cross-OS y suite final |
-| **Total** | | **89** | | |
+| 25 | v25 | 0 | Opus 4.8 | Administrativos de apertura (entrada 89 consolidada, versionado del traspaso v24); sin cambios de proyecto |
+| 26 | v26 | 0 | Opus 4.8 | Suite de documentación en modo standalone offline; sin entradas (mantenimiento de artefacto existente, precedente v19/v23/v24) |
+| 27 | v27 | 1 | no registrado | Incidente de gobernanza PII en `directorio_oficial_ee.csv` (auditoría, saneamiento y reescritura de historial) |
+| 28 | v28 | 0 | Sonnet 5 | Pendientes administrativos heredados de v27 (versionado, backlog, verificación 4b/depe4); sin cambios de proyecto |
+| 29 | v29 | 0 | Sonnet 5 | Migración tipográfica del motor, registrada tarde como c.91 en la sesión 30, + versionado de deuda de git; fila completada en la sesión 30 |
+| **Total** | | **90** | | |
 
 ## Detalle cronológico
 
