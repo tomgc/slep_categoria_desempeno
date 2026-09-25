@@ -210,6 +210,8 @@ body {
   position: sticky; top: 0; z-index: 50;
 }
 .control-group { display: flex; align-items: center; gap: 12px; }
+/* a7-C5: el grupo del botón de territorio puede angostarse (sin esto, un nombre largo desborda la barra) */
+.controls-bar .control-group { min-width: 0; max-width: 100%; }
 .control-label {
   font-family: var(--font-display);
   font-weight: var(--fw-bold);
@@ -1270,13 +1272,16 @@ code {
 
 /* Selector de entidad (botón principal) */
 .entity-select-btn {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; gap: 4px; /* a7-C5: 4 px devuelve el ancho del espacio que había antes del ▾ */
   background: var(--bg-2); border: 1px solid var(--border-2);
   border-radius: var(--radius-2); padding: 8px 14px;
   font-family: var(--font-body); font-weight: var(--fw-medium); font-size: var(--fs-body);
   color: var(--plum); cursor: pointer;
+  max-width: 100%; min-width: 0; /* a7-C5: el botón no supera el ancho disponible */
 }
 .entity-select-btn:hover { border-color: var(--plum); }
+/* a7-C5: un nombre largo se corta con puntos suspensivos en una sola línea (el nombre completo va en title) */
+.entity-select-nom { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 
 /* Filtros de chips (comuna, dependencia) */
 .chip-filter {
@@ -3088,8 +3093,11 @@ function App() {
     className: "control-label"
   }, "Territorio"), /*#__PURE__*/React.createElement("button", {
     className: "entity-select-btn",
+    title: entity.nom,
     onClick: () => setModal(true)
-  }, entity.nom, " ▾")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "entity-select-nom"
+  }, entity.nom), " ▾")), /*#__PURE__*/React.createElement("div", {
     className: "control-group"
   }, /*#__PURE__*/React.createElement("span", {
     className: "control-label"

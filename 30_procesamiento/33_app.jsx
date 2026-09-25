@@ -1977,8 +1977,9 @@ function App() {
         {hoja === "territorio" && (
           <div className="control-group">
             <span className="control-label">Territorio</span>
-            <button className="entity-select-btn" onClick={() => setModal(true)}>
-              {entity.nom} ▾
+            {/* a7-C5: nombre en su propio span (se corta con puntos suspensivos); el completo va en title */}
+            <button className="entity-select-btn" title={entity.nom} onClick={() => setModal(true)}>
+              <span className="entity-select-nom">{entity.nom}</span> ▾
             </button>
           </div>
         )}
