@@ -1514,7 +1514,14 @@ function ComparativaSheet({ nivel, depActiva, onDepChange }) {
           + Agregar
         </button>
         {entidades.length > 0 && (
-          <button className="cmp-clear-btn" onClick={() => setEntidades([])}>
+          <button
+            className="cmp-clear-btn"
+            onClick={() => {
+              // a6-C6: tras Limpiar, el foco pasa a "+ Agregar"
+              focoTrasQuitar.current = entidades.length;
+              setEntidades([]);
+            }}
+          >
             Limpiar
           </button>
         )}

@@ -2811,7 +2811,11 @@ function ComparativaSheet({
     onClick: () => setPicker(true)
   }, "+ Agregar"), entidades.length > 0 && /*#__PURE__*/React.createElement("button", {
     className: "cmp-clear-btn",
-    onClick: () => setEntidades([])
+    onClick: () => {
+      // a6-C6: tras Limpiar, el foco pasa a "+ Agregar"
+      focoTrasQuitar.current = entidades.length;
+      setEntidades([]);
+    }
   }, "Limpiar"), /*#__PURE__*/React.createElement("span", {
     className: "cmp-hint"
   }, entidades.length >= LIMITE ? "Máximo " + LIMITE + " territorios (favorece la comparabilidad)" : "Hasta " + LIMITE + " · mezcla comuna, SLEP y región")), /*#__PURE__*/React.createElement(CmpDepFilter, {
