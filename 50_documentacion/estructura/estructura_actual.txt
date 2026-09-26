@@ -1,7 +1,7 @@
 ESCANEO DE ESTRUCTURA — slep_categoria_desempeno
 Raiz   : slep_categoria_desempeno
-Fecha  : 2026-09-25 23:23:43
-Totales: 24 carpetas, 222 archivos
+Fecha  : 2026-09-26 10:03:31
+Totales: 24 carpetas, 228 archivos
 Nota   : todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
 slep_categoria_desempeno/
@@ -85,6 +85,7 @@ slep_categoria_desempeno/
 │   │   │   ├── encargo_claude_code_categoria_alineamiento_motores_a1.md  (21.2K)
 │   │   │   ├── encargo_claude_code_categoria_alineamiento_motores_a2.md  (25.3K)
 │   │   │   ├── encargo_claude_code_categoria_ancho_y_despliegue_a7.md  (16.1K)
+│   │   │   ├── encargo_claude_code_categoria_autorizacion_datos_y_pr_a11b.md  (30.4K)
 │   │   │   ├── encargo_claude_code_categoria_contraste_a3.md  (28.4K)
 │   │   │   ├── encargo_claude_code_categoria_css_muerto_a10.md  (15.6K)
 │   │   │   ├── encargo_claude_code_categoria_defectos_narrativa_ui_a6.md  (18.6K)
@@ -94,6 +95,8 @@ slep_categoria_desempeno/
 │   │   │   ├── encargo_claude_code_categoria_pestanas_modal_a8.md  (11.1K)
 │   │   │   ├── encargo_claude_code_categoria_suite_documentacion_a9.md  (15K)
 │   │   │   └── encargo_saneamiento_pii_fase2_v1_retry.md  (8.21K)
+│   │   ├── 50_datos_versionados_autorizados.md  (4.41K)
+│   │   ├── 50_ordenacion_repositorio.md  (4.35K)
 │   │   ├── 50_resena_slep_categoria_desempeno.md  (8.14K)
 │   │   ├── backlog_acumulativo.md  (89.9K)
 │   │   ├── contrato_categoria_desempeno_v1.md  (2.85K)
@@ -112,24 +115,25 @@ slep_categoria_desempeno/
 │   │   │   ├── 20260925_defectos_narrativa_ui_a6_log.md  (43.9K)
 │   │   │   ├── 20260925_detalle_y_despliegue_a5_log.md  (13.7K)
 │   │   │   ├── 20260925_orden_trayectoria_a4_log.md  (14.5K)
-│   │   │   ├── 20260925_ordenacion_repositorio_a11_log.md  (14.2K)
+│   │   │   ├── 20260925_ordenacion_repositorio_a11_log.md  (37.3K)
 │   │   │   ├── 20260925_pestanas_modal_a8_log.md  (24.2K)
 │   │   │   ├── 20260925_suite_documentacion_a9_log.md  (28.6K)
+│   │   │   ├── 20260926_autorizacion_datos_y_pr_a11b_log.md  (16.5K)
 │   │   │   └── cierres_log.md  (11.2K)
 │   │   ├── .gitkeep  (0)
 │   │   ├── 20260925_auditoria_contraste_motor.md  (12.1K)
 │   │   ├── 20260925_cabeceras_variante.png  (234K)
 │   │   ├── 20260925_errores_asistente_sesion31.md  (5.2K)
-│   │   ├── 20260925_errores_asistente_sesion32.md  (3.85K)
+│   │   ├── 20260925_errores_asistente_sesion32.md  (5.88K)
 │   │   ├── 20260925_plan_alineamiento_motores.md  (33.6K)
 │   │   └── compass_artifact_wf-8008ae65-97ae-47c5-9444-499602db7290_text_markdown.md  (21.4K)
 │   ├── estructura/
-│   │   ├── 20260925_185058_estructura.md  (11.5K)
-│   │   ├── 20260925_185058_estructura.txt  (11.6K)
 │   │   ├── 20260925_214612_estructura.md  (14.2K)
 │   │   ├── 20260925_214612_estructura.txt  (14.3K)
-│   │   ├── estructura_actual.md  (14.2K)
-│   │   └── estructura_actual.txt  (14.3K)
+│   │   ├── 20260925_232343_estructura.md  (14.3K)
+│   │   ├── 20260925_232343_estructura.txt  (14.5K)
+│   │   ├── estructura_actual.md  (14.3K)
+│   │   └── estructura_actual.txt  (14.5K)
 │   ├── suite/
 │   │   ├── assets/
 │   │   │   ├── logo-color-stacked.png  (126K)
@@ -233,6 +237,8 @@ slep_categoria_desempeno/
 │   │   ├── 20260925_212407_auditoria_cifras.md  (1.97K)
 │   │   ├── 20260925_231359_auditoria_cifras.md  (1.97K)
 │   │   ├── 20260925_231713_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_232709_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260926_100008_auditoria_cifras.md  (1.97K)
 │   │   └── auditoria_cifras.md  (1.97K)
 │   ├── .gitkeep  (0)
 │   ├── auditar_cifras_helpers.R  (12.7K)
@@ -253,7 +259,7 @@ slep_categoria_desempeno/
 └── slep_categoria_desempeno.Rproj  (220)
 
 Conteo por extension:
-  md                 136
+  md                 142
   (sin extension)    14
   r                  14
   xlsx               10
