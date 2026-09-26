@@ -578,8 +578,10 @@ code {
   color: var(--fg-3); letter-spacing: -0.01em;
 }
 .traj-year-lbl.is-vigente { color: var(--ocean); font-weight: var(--fw-heavy); }
+/* a14-B: contenedor de altura fija; la marca se apoya abajo y su altura codifica la categoria (25 = TRAJ_ALTURA_BASE + 3 x TRAJ_ALTURA_PASO en 33_app.jsx) */
+.traj-bar { height: 25px; display: inline-flex; align-items: flex-end; }
 .traj-mark {
-  width: 18px; height: 18px; border-radius: var(--radius-1);
+  width: 16px; border-radius: var(--radius-1);
   border: 1px solid rgba(0,0,0,0.08);
 }
 .traj-mark.is-si {
@@ -904,7 +906,7 @@ code {
   font-size: var(--fs-body); font-weight: var(--fw-medium); color: var(--fg-2);
 }
 .traj-legend-sw {
-  width: 16px; height: 16px; border-radius: var(--radius-1);
+  width: 14px; border-radius: var(--radius-1);
   border: 1px solid rgba(0,0,0,0.08);
 }
 .traj-legend-sw.is-si {
@@ -2009,6 +2011,14 @@ function EntityModal({
 // ============================================================
 // Trayectoria (año arriba, marca de color abajo; antiguo -> reciente)
 // ============================================================
+// a14-B: segunda señal. La altura de la marca codifica la categoría, en el orden de
+// CatData.CATEGORIAS (Insuficiente -> Alto); «sin categoría» usa la altura base.
+const TRAJ_ALTURA_BASE = 7; // px: Insuficiente y «sin categoría»
+const TRAJ_ALTURA_PASO = 6; // px entre categorías consecutivas
+function alturaTrayectoria(categoria) {
+  const i = CatData.CATEGORIAS.indexOf(categoria);
+  return TRAJ_ALTURA_BASE + (i < 0 ? 0 : i) * TRAJ_ALTURA_PASO;
+}
 function Trayectoria({
   serie
 }) {
@@ -2026,12 +2036,17 @@ function Trayectoria({
     }, /*#__PURE__*/React.createElement("span", {
       className: "traj-year-lbl" + (esVigente ? " is-vigente" : "")
     }, p.anio), /*#__PURE__*/React.createElement("span", {
+      className: "traj-bar"
+    }, /*#__PURE__*/React.createElement("span", {
       className: "traj-mark" + (esSi ? " is-si" : "") + (esVigente ? " is-vigente" : ""),
-      style: esSi ? null : {
-        background: color
+      style: esSi ? {
+        height: alturaTrayectoria(null)
+      } : {
+        background: color,
+        height: alturaTrayectoria(p.categoria)
       },
       title: p.anio + ": " + (esSi ? "Sin categoría" + (p.motivo ? " — " + (CatData.MOTIVOS[p.motivo] || p.motivo) : "") : CatData.CAT_LABELS[p.categoria]) + (esVigente ? " (vigente)" : "")
-    }));
+    })));
   }));
 }
 
@@ -2813,15 +2828,23 @@ function App() {
     key: c,
     className: "traj-legend-item"
   }, /*#__PURE__*/React.createElement("span", {
+    className: "traj-bar"
+  }, /*#__PURE__*/React.createElement("span", {
     className: "traj-legend-sw",
     style: {
-      background: CatData.CAT_COLORS[c]
+      background: CatData.CAT_COLORS[c],
+      height: alturaTrayectoria(c)
     }
-  }), CatData.CAT_LABELS[c])), /*#__PURE__*/React.createElement("span", {
+  })), CatData.CAT_LABELS[c])), /*#__PURE__*/React.createElement("span", {
     className: "traj-legend-item"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "traj-legend-sw is-si"
-  }), "Sin categoría"))), /*#__PURE__*/React.createElement("div", {
+    className: "traj-bar"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "traj-legend-sw is-si",
+    style: {
+      height: alturaTrayectoria(null)
+    }
+  })), "Sin categoría"))), /*#__PURE__*/React.createElement("div", {
     className: "cat-grid"
   }, CatData.CATEGORIAS.map(c => /*#__PURE__*/React.createElement(CatColumn, {
     key: c,
