@@ -42,7 +42,7 @@ EXCLUIR_ARCHIVO <- TRUE
 # tiene valor historico acumulativo como los traspasos.
 RETENER_SNAPSHOTS <- 2L
 
-DIRS_EXCLUIR <- c(".git", "renv", ".Rproj.user")
+DIRS_EXCLUIR <- c(".git", "renv", ".Rproj.user", "node_modules", "packrat", "venv")
 if (EXCLUIR_ARCHIVO) DIRS_EXCLUIR <- c(DIRS_EXCLUIR, "_archivo")
 
 # Nota: en este proyecto todos los datos son publicos (Agencia de Calidad de
@@ -182,7 +182,7 @@ lineas_ext      <- sprintf("  %-18s %d", names(tabla_ext), as.integer(tabla_ext)
 # Contenido .txt (plano, historico navegable).
 contenido_txt <- c(
   paste0("ESCANEO DE ESTRUCTURA \u2014 ", nombre_proyecto),
-  paste0("Raiz   : ", ruta_raiz),
+  paste0("Raiz   : ", nombre_proyecto),
   paste0("Fecha  : ", fecha_legible),
   paste0("Totales: ", n_carpetas, " carpetas, ", n_archivos, " archivos"),
   "Nota   : todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.",
@@ -197,7 +197,7 @@ contenido_txt <- c(
 contenido_md <- c(
   paste0("# Estructura actual \u2014 ", nombre_proyecto),
   "",
-  paste0("- **Raiz:** `", ruta_raiz, "`"),
+  paste0("- **Raiz:** `", nombre_proyecto, "`"),
   paste0("- **Fecha:** ", fecha_legible),
   paste0("- **Totales:** ", n_carpetas, " carpetas, ", n_archivos, " archivos"),
   "- **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.",
