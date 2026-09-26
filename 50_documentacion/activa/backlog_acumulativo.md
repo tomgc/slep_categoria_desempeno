@@ -91,25 +91,25 @@ primaria. Fuentes: registro de cada sesión.
 
 | Categoría | N | % | Descripción |
 |---|---|---|---|
-| Diseño UI — Motor base y diseño | 16 | 16 | Diseño de visualización (v01, c.11); motor HTML paso 33 base + iteraciones UI 1-4 (v03, c.17-21); publicación Pages en el generador (v04, c.26); tarjetas de modo territorio con estudiantes + % (v10, c.49); estandarización tipográfica por tokens (v10, c.54); convivencia año de matrícula (v12, c.59); desglose por grado en motor (v12, c.61); bloque narrativo territorial parcial (v12, c.62); D21 template regenerado desde referencia UI (v13, c.63) |
+| Diseño UI — Motor base y diseño | 17 | 17 | Diseño de visualización (v01, c.11); motor HTML paso 33 base + iteraciones UI 1-4 (v03, c.17-21); publicación Pages en el generador (v04, c.26); tarjetas de modo territorio con estudiantes + % (v10, c.49); estandarización tipográfica por tokens (v10, c.54); convivencia año de matrícula (v12, c.59); desglose por grado en motor (v12, c.61); bloque narrativo territorial parcial (v12, c.62); D21 template regenerado desde referencia UI (v13, c.63) |
 | Scaffold e inicialización | 12 | 12 | Estructura, scaffold, utils, escáner, gitignore, rproj/readme, protocolo, decisiones, git (v01, c.1-9 salvo orquestación); auditoría seguridad, gobernanza, LICENSE, CI, README migración (v04, c.22-25,27) |
 | Diseño UI — Hoja comparativa | 9 | 9 | Comparativa, multi-selección, límites, lotes visuales (v05, c.28,30-35); botón limpiar (v07, c.41); N EE + tooltip de estudiantes/% (v10, c.50) |
-| Documentación de proyecto | 11 | 11 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73); consolidación del backlog 81-82 sobre 82 (v18, c.84); actualización de la suite (stack runtime + terminología institucional) (v19, c.86) |
+| Documentación de proyecto | 12 | 12 | Decisiones (v01, c.8); 5 archivos de decisión (v06, c.37); reconciliación de taxonomía (v07, c.42); decisión taxonomía-meta (v08, c.44); materialización del backlog v10 (v11, c.56); backlog consolidado in extenso 1-66 (v14, c.67); consolidación 67-69 + renombre del backlog sin rango (v15, c.70); nota de verificación de cifras en README, D23 (v15, c.72); suite de documentación con suitedoc, 4 HTML + documentar.R (v15, c.73); consolidación del backlog 81-82 sobre 82 (v18, c.84); actualización de la suite (stack runtime + terminología institucional) (v19, c.86) |
 | Diseño UI — Modo establecimiento | 13 | 13 | Trayectoria EE detallada + lista sin-vigente (v06, c.38); bucket sin-medición (v07, c.39-40); cifra de matrícula vigente y panel expandido enriquecido (v09, c.47-48); evolución de matrícula, panel a dos líneas, aclaración de texto (v10, c.51-53); eliminación del detalle por grado en la ficha (v16, c.74); rediseño D2 de la trayectoria a filas a todo el ancho (v16, c.75); encabezado de columnas por año (v16, c.77); eliminación del sufijo redundante "estudiantes" (v16, c.78) |
 | Datos y normalización | 6 | 6 | Inspección de datos (v01, c.10); esquema xlsx, normalización categoría (v02, c.12-13); insumo de matrícula por tipo de enseñanza (v09, c.45); ampliación cobertura 2016-2025 (v11, c.57); parquet de grado (v12, c.60) |
 | Pipeline R | 6 | 6 | Agregación territorial (v02, c.14); generador del producto (v03, c.16); integración de matrícula al generador (v09, c.46); regeneración con insumo 2016-2025 (v11, c.58); desacople de matrícula por grado del JSON embebido (v17, c.81); internalización de React/ReactDOM inline, alcance A (v18, c.83) |
 | Orquestación | 4 | 4 | Stub 00_build.R (v01, c.2); 00_run_all.R (v02, c.15); consolidación paso 33 + archivado de stub (v06, c.36); alias regenerar_motor (v13, c.65) |
 | Validación / integridad | 4 | 4 | Check 6.5 de partición territorial (v13, c.66); auditoría de cifras publicadas por doble cálculo, protocolo 4.5 (v14, c.68); spot-check parametrizado a múltiples celdas ancla, DT-spot-check-cobertura (v15, c.71); certificación de ausencia simétrica en el spot-check, DT-spot-check-ausencia (v16, c.80) |
 | Documentación (en producto) | 2 | 2 | Panel de notas metodológicas (v05, c.29); alineación con fuente oficial (v08, c.43) |
-| Migración y publicación / DevOps | 9 | 9 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85); eliminación de Babel del motor vía C3, motor sin dependencias de red (v21, c.87); reconstrucción y versionado de la fuente JSX del motor 33_app.jsx, recuperación de editabilidad post-C3 (v23, c.88); portabilidad cross-OS del repositorio, .gitattributes con EOL LF (v24, c.89) |
-| Calidad de código / pipeline | 2 | 2 | Warning de readLines silenciado de raíz (v13, c.64); retiro de código muerto de matrícula por grado en el motor (v16, c.79) |
+| Migración y publicación / DevOps | 10 | 10 | Recuperación de la sesión 10 en Git (v11, c.55); higiene de Git, ignore de reporte regenerable + snapshot del escáner (v14, c.69); commit de snapshots del escáner con poda de retención 2 (v16, c.76); commit de snapshots del escáner con poda de retención 2 (v17, c.82); commit de snapshots del escáner con poda de retención 2 (v18, c.85); eliminación de Babel del motor vía C3, motor sin dependencias de red (v21, c.87); reconstrucción y versionado de la fuente JSX del motor 33_app.jsx, recuperación de editabilidad post-C3 (v23, c.88); portabilidad cross-OS del repositorio, .gitattributes con EOL LF (v24, c.89) |
+| Calidad de código / pipeline | 3 | 3 | Warning de readLines silenciado de raíz (v13, c.64); retiro de código muerto de matrícula por grado en el motor (v16, c.79) |
 | Gobernanza de datos | 1 | 1 | Auditoría y saneamiento de incidente PII en `directorio_oficial_ee.csv` (MRUN, RUT_SOSTENEDOR): depuración, repunte de pipeline, reescritura de historial con git-filter-repo, reclasificación de `gobernanza_datos.md` (v27, c.90) |
-| Accesibilidad y usabilidad | 2 | 2 | operación con teclado, foco, contraste figura-fondo y legibilidad del motor, medidos contra WCAG 2.1 AA (ej.: modales operables con teclado y contraste completo de la sesión 30, c.92 y c.93) |
+| Accesibilidad y usabilidad | 4 | 4 | operación con teclado, foco, contraste figura-fondo y legibilidad del motor, medidos contra WCAG 2.1 AA (ej.: modales operables con teclado y contraste completo de la sesión 30, c.92 y c.93) |
 
-(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 97 entradas
-(1-97). La tabla temática suma 97, cuadrando con el cronológico, con asignación por
+(Nota de conteo: el detalle cronológico es la fuente de verdad y tiene 103 entradas
+(1-103). La tabla temática suma 103, cuadrando con el cronológico, con asignación por
 intención primaria verificada entrada por entrada. La categoría líder, "Diseño UI —
-Motor base y diseño", queda en 16% (16/97), bajo el umbral de subdivisión del 25%.
+Motor base y diseño", queda en 17% (17/103), bajo el umbral de subdivisión del 25%.
 El v27 suma una entrada: categoría nueva "Gobernanza de datos" (0→1, incidente PII
 c.90). El c.90 es temáticamente distinto de "Migración y publicación / DevOps"
 (donde vive el precedente técnico de git-filter-repo en slep_idps): aquí la
@@ -188,7 +188,8 @@ entrada del detalle cronológico.)
 | 28 | v28 | 0 | Sonnet 5 | Pendientes administrativos heredados de v27 (versionado, backlog, verificación 4b/depe4); sin cambios de proyecto |
 | 29 | v29 | 0 | Sonnet 5 | Migración tipográfica del motor, registrada tarde como c.91 en la sesión 30, + versionado de deuda de git; fila completada en la sesión 30 |
 | 30 | v30 | 7 | no registrado | Alineamiento de usabilidad con slep_idps (adaptado), contraste AA completo con paleta v2, trayectoria cronológica y despliegue |
-| **Total** | | **97** | | |
+| 31 | v31 | 6 | Opus 5.5 | Seis defectos visibles del motor corregidos y publicados, suite al día con renv limpio, y CSS muerto retirado |
+| **Total** | | **103** | | |
 
 ## Detalle cronológico
 
@@ -944,6 +945,50 @@ entrada del detalle cronológico.)
     `34_exportar_contrato_categoria.R`, contrato v1) y deja el árbol limpio. Commit
     `f532d94`.
 
+### Sesión 31 (cambios 98-103) — Seis defectos visibles del motor corregidos y publicados, suite al día con renv limpio, y CSS muerto retirado
+
+98. **Frase 3 de la narrativa sin vacío ni autorreferencia, y espacio en la nota de cobertura**:
+    `30_procesamiento/33_app.jsx`: con un establecimiento como sujeto, la frase 3 pasa a
+    "Considerando la matrícula 2025, el establecimiento tiene N estudiantes en el nivel.",
+    en lugar de hablar de sí mismo como "uno de desempeño…"; cuando la matrícula del nivel
+    no está en Medio/Alto ni en Insuficiente (solo Medio-Bajo), la frase se omite en vez
+    de quedar vacía ("Considerando la matrícula 2025, ."); la nota de cobertura temporal
+    recupera el espacio en "el Simce 2022". Resuelve tres defectos del pendiente #1 del
+    traspaso v30. Encargo a6 T1, commit `3bc0c57`; desplegado en `1d9b9d9`.
+99. **Botón de territorio y pestañas del modal en pantallas angostas**:
+    `30_procesamiento/33_app.jsx`, `30_procesamiento/33_motor_template.html`: el botón de
+    territorio de la barra fija muestra un nombre largo en una línea con puntos
+    suspensivos (nombre completo en `title`, `gap` de 4 px), en vez de ocupar 9 líneas a
+    320 px; las pestañas del modal de territorio pasan a una segunda fila cuando no caben
+    (margen de 8 px), en vez de cortar "Establecimiento" a 390 px y menos. Resuelve dos
+    defectos del pendiente #1 del traspaso v30. Encargos a7 T2 (commit `2c779fb`,
+    desplegado en `1d9b9d9`) y a8 T1 (commit `59946c8`, desplegado en `69c32b4`).
+100. **Foco en "+ Agregar" tras "Limpiar" en el comparador**:
+    `30_procesamiento/33_app.jsx`: al vaciar el comparador, el foco deja de caer en el
+    cuerpo de la página y pasa a "+ Agregar", reutilizando el efecto de foco de a1-F04.
+    Resuelve el sexto defecto del pendiente #1 del traspaso v30. Encargo a6 T3, commit
+    `eabf8ad`; desplegado en `1d9b9d9`.
+101. **Suite de documentación fuera del análisis de dependencias de renv**:
+    `.renvignore`: se excluye `50_documentacion/suite/`, cuyo `documentar.R` usa
+    `suitedoc` desde la biblioteca del sistema; `renv::status()` pasa de "out-of-sync" a
+    "No issues found" y desaparece el aviso al abrir R. El motor sigue construyendo con
+    renv. Cierra la duda de renv del traspaso v30. Encargo a9 T1, commit `a730fdb`.
+102. **Suite de documentación con la paleta v2 y el orden temporal**:
+    `50_documentacion/suite/documentar.R`,
+    `50_documentacion/suite/documentacion_proyecto_slep_categoria_desempeno_standalone.html`:
+    dos decisiones nuevas en la sección de decisiones metodológicas ("Paleta de
+    categorías con contraste WCAG 2.1 AA" y "Orden temporal según la forma de la vista");
+    suite regenerada sin renv con `suitedoc` 0.3.0, offline y con los otros tres
+    documentos idénticos. Resuelve el pendiente #2 del traspaso v30, con el criterio
+    corregido. Encargo a9 T2, commit `961538b`.
+103. **CSS muerto del motor retirado**:
+    `30_procesamiento/33_motor_template.html`: se borran 196 reglas de 157 clases que no
+    usa el motor (heredadas de `slep_simce_adecuado`: supergrid, tablas, tooltips,
+    mapa de calor, popup, entidades), un `@media` que quedó vacío y el selector `.select`
+    de dos listas; render idéntico en 30 estados y motor 23.385 bytes más liviano.
+    Resuelve el pendiente #3 del traspaso v30 (y el #2 de v29). Encargo a10, commits
+    `596d1fb` y `812aab1`.
+
 ## Delta del backlog
 
 **Consolidación v13 → documento in extenso (v14, cierre de DT-backlog-documental).**
@@ -1105,3 +1150,16 @@ umbral de subdivisión. La sesión abre una categoría nueva de trabajo real (ac
 usabilidad medidas contra norma) y vuelve a cargar "Motor base y diseño", que sigue bajo
 el umbral de subdivisión. La c.91 es un registro tardío de la sesión 29, no trabajo nuevo.
 Tabla temática reverificada: suma 97, cuadra con el cronológico.
+
+**Delta v31 (97 → 103).** Entradas nuevas de la sesión 31: 98 a 103. Foco: Seis defectos
+visibles del motor corregidos y publicados, suite al día con renv limpio, y CSS muerto
+retirado. Reparto: 98 → Diseño UI — Motor base y diseño; 99 → Accesibilidad y usabilidad;
+100 → Accesibilidad y usabilidad; 101 → Migración y publicación / DevOps; 102 →
+Documentación de proyecto; 103 → Calidad de código / pipeline. Categorías nuevas: ninguna.
+Reclasificaciones: ninguna. N por categoría: "Diseño UI — Motor base y diseño" 16→17,
+"Accesibilidad y usabilidad" 2→4, "Migración y publicación / DevOps" 9→10, "Documentación
+de proyecto" 11→12, "Calidad de código / pipeline" 2→3. La categoría líder queda en 17%
+(17/103), bajo el umbral de subdivisión. Sesión de cierre de deuda visible: la categoría
+"Accesibilidad y usabilidad", nacida en la sesión 30, suma dos entradas más (ancho en
+pantallas angostas y foco); "Calidad de código / pipeline" crece con el retiro del CSS
+muerto heredado. Tabla temática reverificada: suma 103, cuadra con el cronológico.
