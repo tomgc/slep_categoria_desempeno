@@ -3,23 +3,23 @@ slug: slep_categoria_desempeno
 nombre_real: Motor de comparación interactivo de la Categoría de Desempeño de los establecimientos educacionales del país
 categoria: activo
 semaforo: activo
-sesion_actual: v31
-ultima_actividad: 2026-09-25
+sesion_actual: v32
+ultima_actividad: 2026-09-26
 maneja_sensibles: true
 tipo_pendiente: deuda_heredada
-sesion_abierta: true
+sesion_abierta: false
 maquina: MacBook-Pro-de-Tomas.local
-commit_cierre: 740d01d
-traspaso_vigente: traspaso_cierre_v31.md
+commit_cierre: e5cccde
+traspaso_vigente: traspaso_cierre_v32.md
 cierre_incompleto: no
-insumos_verificados: 2026-09-25
+insumos_verificados: 2026-09-26
 ventana_insumos: ./20_insumos
 ---
 ## En que vamos
-Sesión v31: quedaron corregidos y publicados los seis defectos visibles de narrativa y UI del pendiente #1, la suite de documentación está al día con la paleta v2 y el orden temporal, renv quedó sin avisos y el motor no tiene CSS muerto. El sitio publicado coincide con `docs/index.html`; cifras y payload sin cambio.
+Sesión v32: el repositorio quedó ordenado según la política v5.5 (PR #3 integrado) y con los datos públicos versionados autorizados ruta por ruta, la guarda de locale UTF-8 está instalada en el arranque del pipeline, y la trayectoria publicada codifica la categoría también por altura. Cifras y payload sin cambio.
 
 ## Proximo paso
-Ordenación del repositorio según la política v5.5 (pendiente #4), incluidos los comentarios huérfanos del CSS.
+Re-clonar los clones previos a la reescritura de historial de v27 (pendiente #6, tarea del titular) y revisar a ojo la segunda señal en iPhone y escritorio.
 
 ## Bloqueantes
 Ninguno.
