@@ -1,13 +1,9 @@
-# Estructura actual — slep_categoria_desempeno
+ESCANEO DE ESTRUCTURA — slep_categoria_desempeno
+Raiz   : slep_categoria_desempeno
+Fecha  : 2026-09-26 10:03:31
+Totales: 24 carpetas, 228 archivos
+Nota   : todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
 
-- **Raiz:** `/Users/tomgc/Projects/slep_categoria_desempeno`
-- **Fecha:** 2026-09-25 18:50:58
-- **Totales:** 23 carpetas, 183 archivos
-- **Nota:** todos los datos son publicos (Agencia de Calidad) y se versionan en el repo.
-
-## Arbol
-
-```
 slep_categoria_desempeno/
 ├── .claude/
 │   └── settings.local.json  (704)
@@ -32,7 +28,6 @@ slep_categoria_desempeno/
 │   │   ├── directorio_oficial_ee_publico.csv  (3.42M)
 │   │   ├── directorio_oficial_ee.csv  (3.6M)
 │   │   ├── glosas_directorio_oficial_ee.pdf  (457K)
-│   │   ├── prompt_nuevo_proyecto_categoria_desempeno.md  (7.71K)
 │   │   ├── rex_1440.pdf  (995K)
 │   │   ├── rex_1459.pdf  (3.16M)
 │   │   └── rex_589.pdf  (2.68M)
@@ -51,9 +46,9 @@ slep_categoria_desempeno/
 │   ├── 30_construir_auxiliares.R  (12.8K)
 │   ├── 31_leer_normalizar.R  (11.9K)
 │   ├── 32_agregar_territorial.R  (14.8K)
-│   ├── 33_app.jsx  (76K)
+│   ├── 33_app.jsx  (76.9K)
 │   ├── 33_generar_html.R  (21K)
-│   ├── 33_motor_template.html  (130K)
+│   ├── 33_motor_template.html  (109K)
 │   └── 34_exportar_contrato_categoria.R  (4.58K)
 ├── 40_salidas/
 │   ├── intermedios/
@@ -65,7 +60,7 @@ slep_categoria_desempeno/
 │   │   ├── establecimientos_chile.parquet  (261K)
 │   │   └── sleps_chile.parquet  (58.7K)
 │   ├── categoria_rbd_contrato.parquet  (134K)
-│   └── motor_categoria.html  (1.82M)
+│   └── motor_categoria.html  (1.8M)
 ├── 50_documentacion/
 │   ├── activa/
 │   │   ├── decisiones/
@@ -89,38 +84,56 @@ slep_categoria_desempeno/
 │   │   │   ├── encargo_auditoria_pii_v1.md  (3.38K)
 │   │   │   ├── encargo_claude_code_categoria_alineamiento_motores_a1.md  (21.2K)
 │   │   │   ├── encargo_claude_code_categoria_alineamiento_motores_a2.md  (25.3K)
+│   │   │   ├── encargo_claude_code_categoria_ancho_y_despliegue_a7.md  (16.1K)
+│   │   │   ├── encargo_claude_code_categoria_autorizacion_datos_y_pr_a11b.md  (30.4K)
 │   │   │   ├── encargo_claude_code_categoria_contraste_a3.md  (28.4K)
+│   │   │   ├── encargo_claude_code_categoria_css_muerto_a10.md  (15.6K)
+│   │   │   ├── encargo_claude_code_categoria_defectos_narrativa_ui_a6.md  (18.6K)
 │   │   │   ├── encargo_claude_code_categoria_detalle_y_despliegue_a5.md  (12.4K)
 │   │   │   ├── encargo_claude_code_categoria_orden_trayectoria_a4.md  (12.3K)
+│   │   │   ├── encargo_claude_code_categoria_ordenacion_repositorio_a11.md  (29.4K)
+│   │   │   ├── encargo_claude_code_categoria_pestanas_modal_a8.md  (11.1K)
+│   │   │   ├── encargo_claude_code_categoria_suite_documentacion_a9.md  (15K)
 │   │   │   └── encargo_saneamiento_pii_fase2_v1_retry.md  (8.21K)
-│   │   ├── backlog_acumulativo.md  (79K)
+│   │   ├── 50_datos_versionados_autorizados.md  (4.41K)
+│   │   ├── 50_ordenacion_repositorio.md  (4.35K)
+│   │   ├── 50_resena_slep_categoria_desempeno.md  (8.14K)
+│   │   ├── backlog_acumulativo.md  (89.9K)
 │   │   ├── contrato_categoria_desempeno_v1.md  (2.85K)
-│   │   ├── ESTADO.md  (1.23K)
+│   │   ├── ESTADO.md  (1003)
 │   │   ├── gobernanza_datos.md  (6.01K)
-│   │   ├── P-matricula-actual_alcance.md  (3.08K)
-│   │   ├── P-matricula-grado_alcance.md  (4.85K)
-│   │   └── resena_slep_categoria_desempeno.md  (8.14K)
+│   │   ├── POLITICA_PROYECTO.md  (42.8K)
+│   │   └── SETTINGS_Y_PROMPTS_OPERACIONALES.md  (120K)
 │   ├── andamios/
 │   │   ├── logs/
 │   │   │   ├── 20260701_saneamiento_pii_directorio_log.md  (4.39K)
 │   │   │   ├── 20260925_alineamiento_motores_a1_log.md  (27K)
 │   │   │   ├── 20260925_alineamiento_motores_a2_log.md  (40.9K)
+│   │   │   ├── 20260925_ancho_y_despliegue_a7_log.md  (35.7K)
 │   │   │   ├── 20260925_contraste_a3_log.md  (31.2K)
+│   │   │   ├── 20260925_css_muerto_a10_log.md  (25.8K)
+│   │   │   ├── 20260925_defectos_narrativa_ui_a6_log.md  (43.9K)
 │   │   │   ├── 20260925_detalle_y_despliegue_a5_log.md  (13.7K)
-│   │   │   └── 20260925_orden_trayectoria_a4_log.md  (14.5K)
+│   │   │   ├── 20260925_orden_trayectoria_a4_log.md  (14.5K)
+│   │   │   ├── 20260925_ordenacion_repositorio_a11_log.md  (37.3K)
+│   │   │   ├── 20260925_pestanas_modal_a8_log.md  (24.2K)
+│   │   │   ├── 20260925_suite_documentacion_a9_log.md  (28.6K)
+│   │   │   ├── 20260926_autorizacion_datos_y_pr_a11b_log.md  (16.5K)
+│   │   │   └── cierres_log.md  (11.2K)
 │   │   ├── .gitkeep  (0)
 │   │   ├── 20260925_auditoria_contraste_motor.md  (12.1K)
 │   │   ├── 20260925_cabeceras_variante.png  (234K)
+│   │   ├── 20260925_errores_asistente_sesion31.md  (5.2K)
+│   │   ├── 20260925_errores_asistente_sesion32.md  (5.88K)
 │   │   ├── 20260925_plan_alineamiento_motores.md  (33.6K)
-│   │   ├── compass_artifact_wf-8008ae65-97ae-47c5-9444-499602db7290_text_markdown.md  (21.4K)
-│   │   └── paquete_cierre_v30.md  (33.2K)
+│   │   └── compass_artifact_wf-8008ae65-97ae-47c5-9444-499602db7290_text_markdown.md  (21.4K)
 │   ├── estructura/
-│   │   ├── 20260702_000331_estructura.md  (8.92K)
-│   │   ├── 20260702_000331_estructura.txt  (9.03K)
-│   │   ├── 20260925_143436_estructura.md  (9.13K)
-│   │   ├── 20260925_143436_estructura.txt  (9.26K)
-│   │   ├── estructura_actual.md  (9.13K)
-│   │   └── estructura_actual.txt  (9.26K)
+│   │   ├── 20260925_214612_estructura.md  (14.2K)
+│   │   ├── 20260925_214612_estructura.txt  (14.3K)
+│   │   ├── 20260925_232343_estructura.md  (14.3K)
+│   │   ├── 20260925_232343_estructura.txt  (14.5K)
+│   │   ├── estructura_actual.md  (14.3K)
+│   │   └── estructura_actual.txt  (14.5K)
 │   ├── suite/
 │   │   ├── assets/
 │   │   │   ├── logo-color-stacked.png  (126K)
@@ -136,44 +149,46 @@ slep_categoria_desempeno/
 │   │   ├── arquitectura_general_slep_categoria_desempeno_standalone.html  (440K)
 │   │   ├── arquitectura_slep_categoria_desempeno_standalone.html  (442K)
 │   │   ├── documentacion_general_slep_categoria_desempeno_standalone.html  (433K)
-│   │   ├── documentacion_proyecto_slep_categoria_desempeno_standalone.html  (435K)
-│   │   ├── documentar.R  (42.4K)
+│   │   ├── documentacion_proyecto_slep_categoria_desempeno_standalone.html  (437K)
+│   │   ├── documentar.R  (44.1K)
 │   │   └── suite_estilos.css  (21.7K)
 │   ├── traspasos/
+│   │   ├── archivo/
+│   │   │   ├── traspaso_cierre_v01.md  (17.6K)
+│   │   │   ├── traspaso_cierre_v02.md  (18.3K)
+│   │   │   ├── traspaso_cierre_v03.md  (25K)
+│   │   │   ├── traspaso_cierre_v04.md  (25.1K)
+│   │   │   ├── traspaso_cierre_v05.md  (28.6K)
+│   │   │   ├── traspaso_cierre_v06.md  (24.2K)
+│   │   │   ├── traspaso_cierre_v07.md  (25.4K)
+│   │   │   ├── traspaso_cierre_v08.md  (29K)
+│   │   │   ├── traspaso_cierre_v09.md  (36.2K)
+│   │   │   ├── traspaso_cierre_v10.md  (27.9K)
+│   │   │   ├── traspaso_cierre_v11.md  (16.9K)
+│   │   │   ├── traspaso_cierre_v12.md  (22.7K)
+│   │   │   ├── traspaso_cierre_v13.md  (23.5K)
+│   │   │   ├── traspaso_cierre_v14.md  (22.4K)
+│   │   │   ├── traspaso_cierre_v15.md  (23.3K)
+│   │   │   ├── traspaso_cierre_v16.md  (28.5K)
+│   │   │   ├── traspaso_cierre_v17.md  (24.7K)
+│   │   │   ├── traspaso_cierre_v18.md  (29.2K)
+│   │   │   ├── traspaso_cierre_v19.md  (28.3K)
+│   │   │   ├── traspaso_cierre_v20.md  (20.9K)
+│   │   │   ├── traspaso_cierre_v21.md  (24.4K)
+│   │   │   ├── traspaso_cierre_v22.md  (21.9K)
+│   │   │   ├── traspaso_cierre_v23.md  (16.8K)
+│   │   │   ├── traspaso_cierre_v24.md  (17.2K)
+│   │   │   ├── traspaso_cierre_v25.md  (14.3K)
+│   │   │   ├── traspaso_cierre_v26.md  (18.1K)
+│   │   │   ├── traspaso_cierre_v27.md  (12.2K)
+│   │   │   ├── traspaso_cierre_v28.md  (10.4K)
+│   │   │   ├── traspaso_cierre_v29.md  (16.4K)
+│   │   │   └── traspaso_cierre_v30.md  (25.7K)
 │   │   ├── .gitkeep  (0)
-│   │   ├── .Rhistory  (0)
-│   │   ├── traspaso_cierre_v01.md  (17.6K)
-│   │   ├── traspaso_cierre_v02.md  (18.3K)
-│   │   ├── traspaso_cierre_v03.md  (25K)
-│   │   ├── traspaso_cierre_v04.md  (25.1K)
-│   │   ├── traspaso_cierre_v05.md  (28.6K)
-│   │   ├── traspaso_cierre_v06.md  (24.2K)
-│   │   ├── traspaso_cierre_v07.md  (25.4K)
-│   │   ├── traspaso_cierre_v08.md  (29K)
-│   │   ├── traspaso_cierre_v09.md  (36.2K)
-│   │   ├── traspaso_cierre_v10.md  (27.9K)
-│   │   ├── traspaso_cierre_v11.md  (16.9K)
-│   │   ├── traspaso_cierre_v12.md  (22.7K)
-│   │   ├── traspaso_cierre_v13.md  (23.5K)
-│   │   ├── traspaso_cierre_v14.md  (22.4K)
-│   │   ├── traspaso_cierre_v15.md  (23.3K)
-│   │   ├── traspaso_cierre_v16.md  (28.5K)
-│   │   ├── traspaso_cierre_v17.md  (24.7K)
-│   │   ├── traspaso_cierre_v18.md  (29.2K)
-│   │   ├── traspaso_cierre_v19.md  (28.3K)
-│   │   ├── traspaso_cierre_v20.md  (20.9K)
-│   │   ├── traspaso_cierre_v21.md  (24.4K)
-│   │   ├── traspaso_cierre_v22.md  (21.9K)
-│   │   ├── traspaso_cierre_v23.md  (16.8K)
-│   │   ├── traspaso_cierre_v24.md  (17.2K)
-│   │   ├── traspaso_cierre_v25.md  (14.3K)
-│   │   ├── traspaso_cierre_v26.md  (18.1K)
-│   │   ├── traspaso_cierre_v27.md  (12.2K)
-│   │   ├── traspaso_cierre_v28.md  (10.4K)
-│   │   └── traspaso_cierre_v29.md  (16.4K)
+│   │   └── traspaso_cierre_v31.md  (27.4K)
 │   └── .DS_Store  (10K)
 ├── docs/
-│   └── index.html  (1.82M)
+│   └── index.html  (1.8M)
 ├── tests/
 │   ├── reportes/
 │   │   ├── 20260613_225301_auditoria_cifras.md  (1.97K)
@@ -199,6 +214,31 @@ slep_categoria_desempeno/
 │   │   ├── 20260925_183140_auditoria_cifras.md  (1.97K)
 │   │   ├── 20260925_183253_auditoria_cifras.md  (1.97K)
 │   │   ├── 20260925_183403_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_190613_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_191032_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_191815_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_192831_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_193224_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_194953_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_195338_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_195643_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_195913_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_200208_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_201135_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_201402_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_201537_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_201956_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_203247_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_203713_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_211301_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_211317_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_211801_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_211927_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_212407_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_231359_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_231713_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260925_232709_auditoria_cifras.md  (1.97K)
+│   │   ├── 20260926_100008_auditoria_cifras.md  (1.97K)
 │   │   └── auditoria_cifras.md  (1.97K)
 │   ├── .gitkeep  (0)
 │   ├── auditar_cifras_helpers.R  (12.7K)
@@ -207,38 +247,36 @@ slep_categoria_desempeno/
 ├── .DS_Store  (8K)
 ├── .gitattributes  (1.88K)
 ├── .gitignore  (1.14K)
+├── .renvignore  (24)
 ├── .Renviron.example  (1.92K)
 ├── .Rprofile  (26)
-├── 00_escanear_proyecto.R  (8.98K)
+├── 00_escanear_proyecto.R  (9.03K)
 ├── 00_run_all.R  (7.44K)
+├── CLAUDE.md  (2.58K)
 ├── LICENSE  (1.75K)
 ├── README.md  (6.5K)
 ├── renv.lock  (85K)
 └── slep_categoria_desempeno.Rproj  (220)
-```
 
-## Conteo por extension
-
-| Extension | Archivos |
-|---|---|
-| md | 97 |
-| (sin extension) | 14 |
-| r | 14 |
-| xlsx | 10 |
-| parquet | 9 |
-| html | 7 |
-| otf | 6 |
-| js | 4 |
-| pdf | 4 |
-| png | 4 |
-| txt | 3 |
-| csv | 2 |
-| css | 1 |
-| doc | 1 |
-| docx | 1 |
-| example | 1 |
-| json | 1 |
-| jsx | 1 |
-| lock | 1 |
-| rproj | 1 |
-| yml | 1 |
+Conteo por extension:
+  md                 142
+  (sin extension)    14
+  r                  14
+  xlsx               10
+  parquet            9
+  html               7
+  otf                6
+  js                 4
+  pdf                4
+  png                4
+  txt                3
+  csv                2
+  css                1
+  doc                1
+  docx               1
+  example            1
+  json               1
+  jsx                1
+  lock               1
+  rproj              1
+  yml                1
