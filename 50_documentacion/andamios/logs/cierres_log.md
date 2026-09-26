@@ -200,3 +200,93 @@ I1 pasa · I2 pasa · I2bis pasa · I3 pasa · I4 pasa · I5 advierte · I6 pasa
 - hash de trabajo: ninguno (árbol limpio al abrir el cierre)
 - hash de documentación: `0493919` (traspaso v31, archivado de v30 en `traspasos/archivo/`, backlog, snapshots del escáner con poda de 2)
 - push: por publicar
+
+## v32 — 2026-09-26
+
+Instrumento: cierre_sesion_autonomo_cc_v15.md | kit 63b3233
+
+kit: sincronizado (fetch + merge --ff-only, sin divergencia)
+normativos: al día (POLITICA_PROYECTO.md v5.8, SETTINGS_Y_PROMPTS_OPERACIONALES.md v38, iguales en kit y `activa/`)
+
+### Tabla de severidades
+
+| condicion | severidad | resultado |
+|---|---|---|
+| F0.0 kit sincronizado (fetch + merge --ff-only) | BLOQUEA | pasa |
+| F0.0 normativos del proyecto al día respecto del kit | REPARA | pasa (sin diferencia, no requirió copia) |
+| F0.1 guardia de repo (`raiz_proyecto` = `pwd`) | BLOQUEA | pasa |
+| F0.4 correlativo triple (`traspaso_nuevo` = nombre del paquete = máx(vNN)+1) | BLOQUEA | pasa |
+| F0.5 `n` = `backlog_entradas_nuevas` (5 = 5) | BLOQUEA | pasa |
+| F0.5 numeración provisional contigua ascendente (104-108) | BLOQUEA | pasa |
+| F0.5 desplazamiento `k` | REPARA | pasa (k = 0, sin renumeración) |
+| F0.5bis reparto contra disco (5 categorías, control positivo) | BLOQUEA | pasa |
+| F0.6 `settings_version` = encabezado del kit sincronizado | BLOQUEA | pasa |
+| F0.6 `compuerta_dudas` (4 registradas = 4 filas del traspaso) | BLOQUEA | pasa |
+| F0.7 árbol limpio en traspasos/, backlog, ESTADO y log | BLOQUEA | pasa |
+| F0.8 marcadores `<<EJECUTOR>>` en ESTADO | BLOQUEA | pasa |
+| F2 encabezados estructurales únicos (Detalle cronológico, Resumen, Delta, Clasificación temática) | BLOQUEA | pasa |
+| F3 catálogo aplicable (R6, R10, R12, R13) | ADVIERTE | pasa (los cuatro dispararon) |
+| F3 cifras sin rótulo en zonas declarativas | ADVIERTE | pasa (ninguna nueva) |
+| F4 I1 numeración 1→108 contigua sin huecos ni duplicados | BLOQUEA | pasa |
+| F4 I2 cuadratura del resumen (suma 108) | BLOQUEA | pasa |
+| F4 I2bis cuadratura temática (columna N suma 108) | BLOQUEA | pasa |
+| F4 I3 filas del resumen (31→32) | BLOQUEA | pasa |
+| F4 I4 magnitudes viejas sobrevivientes | ADVIERTE | pasa (apariciones históricas legítimas, listadas abajo) |
+| F4 I5 autorreferencias de cifras | ADVIERTE | pasa (sin autorreferencia nueva) |
+| F4 I6 gobernanza (RUT, rutas absolutas, credenciales) | BLOQUEA | pasa |
+| F4 I7 exactamente 1 traspaso vigente | BLOQUEA | pasa |
+| F7.1 staging sin rutas excluidas ni disparos de I6 | BLOQUEA | pasa |
+| F8 diff de distribución vacío (TRASPASO, ESTADO, BACKLOG_ENTRADAS) | BLOQUEA | pasa |
+| árbol de trabajo: carpeta `Claude outputs/` (duplicado del paquete, fuera de todo destino del cierre) | ADVIERTE | advertencia: detectada en la raíz del repo antes de F1; no es contenido del proyecto ni uno de los tres destinos; excluida del commit y eliminada por decisión explícita del titular, no por regla del instrumento |
+
+renumeracion: sin desplazamiento (104→108, k = 0)
+
+patron de entrada: `^[0-9]+\. \*\*`
+
+### Rótulos
+
+| ID | disparos |
+|---|---|
+| R6 (total del resumen) | 1 |
+| R10 (nota de conteo: "tiene N entradas (1-N)") | 1 |
+| R12 (tabla temática: N y % de 14 filas; categoría líder en la nota de conteo) | 15 |
+| R13 (nota de conteo: "la tabla temática suma N") | 1 |
+
+catalogo no aplicable: R1, R2, R3, R4, R5, R7, R8, R9, R11 (9 de 13), sin disparos
+
+catalogo aplicable (del cierre v31): R6, R10, R12, R13; los cuatro dispararon.
+
+### Invariantes
+
+I1 pasa · I2 pasa · I2bis pasa (columna N suma 108 exacto; % suma 104 de 100, dentro del redondeo de 14 categorías independientes) · I3 pasa · I4 advierte · I5 advierte · I6 pasa · I7 pasa
+
+### Clasificación temática resultante (sobre 108)
+
+| Categoría | N | % |
+|---|---|---|
+| Diseño UI — Motor base y diseño | 17 | 16 |
+| Scaffold e inicialización | 12 | 12 |
+| Diseño UI — Hoja comparativa | 9 | 9 |
+| Documentación de proyecto | 12 | 11 |
+| Diseño UI — Modo establecimiento | 13 | 12 |
+| Datos y normalización | 6 | 6 |
+| Pipeline R | 6 | 6 |
+| Orquestación | 4 | 4 |
+| Validación / integridad | 5 | 5 |
+| Documentación (en producto) | 2 | 2 |
+| Migración y publicación / DevOps | 11 | 10 |
+| Calidad de código / pipeline | 4 | 4 |
+| Gobernanza de datos | 2 | 2 |
+| Accesibilidad y usabilidad | 5 | 5 |
+
+### Apariciones de I4 (backlog tras el cierre)
+
+- línea 949: encabezado "Sesión 31 (cambios 98-103)", histórica
+- línea 1011: "retiro de CSS muerto de la sesión 31" en la entrada 106, referencia histórica a la sesión previa
+- líneas 1190-1201: Delta v31 (97 → 103), nota fechada anterior a este cierre
+
+### Commits
+
+- hash de trabajo: `8070240` (1 ruta: `50_documentacion/andamios/20260925_errores_asistente_sesion32.md`)
+- hash de documentación: `51ef746` (traspaso v32, archivado de v31 en `traspasos/archivo/`, backlog, snapshots del escáner con poda de 2)
+- push: por publicar
