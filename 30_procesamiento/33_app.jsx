@@ -953,6 +953,14 @@ function EntityModal({
 // ============================================================
 // Trayectoria (año arriba, marca de color abajo; antiguo -> reciente)
 // ============================================================
+// a14-B: segunda señal. La altura de la marca codifica la categoría, en el orden de
+// CatData.CATEGORIAS (Insuficiente -> Alto); «sin categoría» usa la altura base.
+const TRAJ_ALTURA_BASE = 7; // px: Insuficiente y «sin categoría»
+const TRAJ_ALTURA_PASO = 6; // px entre categorías consecutivas
+function alturaTrayectoria(categoria) {
+  const i = CatData.CATEGORIAS.indexOf(categoria);
+  return TRAJ_ALTURA_BASE + (i < 0 ? 0 : i) * TRAJ_ALTURA_PASO;
+}
 function Trayectoria({ serie }) {
   // a4-O1: orden cronológico ascendente: el año más antiguo primero, el vigente al final.
   const ordenada = serie.slice().sort((a, b) => a.anio - b.anio);
@@ -965,25 +973,28 @@ function Trayectoria({ serie }) {
         return (
           <span key={p.anio} className="traj-year">
             <span className={"traj-year-lbl" + (esVigente ? " is-vigente" : "")}>{p.anio}</span>
-            <span
-              className={"traj-mark" + (esSi ? " is-si" : "") + (esVigente ? " is-vigente" : "")}
-              style={
-                esSi
-                  ? null
-                  : {
-                      background: color,
-                    }
-              }
-              title={
-                p.anio +
-                ": " +
-                (esSi
-                  ? "Sin categoría" +
-                    (p.motivo ? " — " + (CatData.MOTIVOS[p.motivo] || p.motivo) : "")
-                  : CatData.CAT_LABELS[p.categoria]) +
-                (esVigente ? " (vigente)" : "")
-              }
-            />
+            <span className="traj-bar">
+              <span
+                className={"traj-mark" + (esSi ? " is-si" : "") + (esVigente ? " is-vigente" : "")}
+                style={
+                  esSi
+                    ? { height: alturaTrayectoria(null) }
+                    : {
+                        background: color,
+                        height: alturaTrayectoria(p.categoria),
+                      }
+                }
+                title={
+                  p.anio +
+                  ": " +
+                  (esSi
+                    ? "Sin categoría" +
+                      (p.motivo ? " — " + (CatData.MOTIVOS[p.motivo] || p.motivo) : "")
+                    : CatData.CAT_LABELS[p.categoria]) +
+                  (esVigente ? " (vigente)" : "")
+                }
+              />
+            </span>
           </span>
         );
       })}
@@ -2017,17 +2028,22 @@ function App() {
             <div className="traj-legend-items">
               {CatData.CATEGORIAS.map((c) => (
                 <span key={c} className="traj-legend-item">
-                  <span
-                    className="traj-legend-sw"
-                    style={{
-                      background: CatData.CAT_COLORS[c],
-                    }}
-                  />
+                  <span className="traj-bar">
+                    <span
+                      className="traj-legend-sw"
+                      style={{
+                        background: CatData.CAT_COLORS[c],
+                        height: alturaTrayectoria(c),
+                      }}
+                    />
+                  </span>
                   {CatData.CAT_LABELS[c]}
                 </span>
               ))}
               <span className="traj-legend-item">
-                <span className="traj-legend-sw is-si" />
+                <span className="traj-bar">
+                  <span className="traj-legend-sw is-si" style={{ height: alturaTrayectoria(null) }} />
+                </span>
                 Sin categoría
               </span>
             </div>
