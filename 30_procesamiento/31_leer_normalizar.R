@@ -35,6 +35,7 @@
 # ----------------------------------------------------------------------------
 
 library(here)
+source(here::here("10_utils", "10_configuracion.R"))  # guarda de locale UTF-8 (POLITICA 5.2bis)
 library(fs)
 
 

@@ -38,6 +38,9 @@ instalar_si_falta(c(
   "dplyr", "tidyr", "purrr", "tibble", "stringr", "arrow"
 ))
 
+# ---- Configuracion: guarda de locale UTF-8 (POLITICA 5.2bis) ---------------
+source(file.path(raiz, "10_utils", "10_configuracion.R"))
+
 
 # ============================================================================
 # Definicion de pasos
